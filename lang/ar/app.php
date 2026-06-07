@@ -1,0 +1,32 @@
+<?php
+
+return [
+    'Dashboard' => 'الرئيسية',
+    'User management' => 'إدارة المستخدمين',
+    'Intros' => 'المقدمات',
+    'Categories' => 'التصنيفات',
+    'Products' => 'المنتجات',
+    'Sizes' => 'المقاسات',
+    'Colors' => 'الألوان',
+    'Engravings' => 'النقوش',
+    'FeaturedWorks' => 'الأعمال المميزة',
+    'Stores' => 'المتاجر',
+    'Subscription' => 'الاشتراكات',
+    'Contact' => 'التواصل',
+    'Ads' => 'الإعلانات',
+    'Statistics' => 'الإحصائيات',
+    'Features' => 'الميزات',
+    'Notification' => 'الإشعارات',
+    'Payment_Methods' => 'طرق الدفع',
+    'Settings' => 'الإعدادات',
+    'Merchants' => 'التجار',
+    'Users' => 'المستخدمين',
+    'Overview' => 'نظرة عامة على الحساب',
+    'Account' => 'الحساب',
+    'update_to_merchant' => 'طلبات الترقية لتاجر',
+    'ProductManagement' => 'إدارة المنتجات',
+    'AddProduct' => 'إضافة منتج',
+    'EditProduct' => 'تعديل المنتج',
+    'Copons' => 'أكواد الخصم',
+
+];

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="49" height="49" viewBox="0 0 49 49">
+  <defs>
+    <pattern id="pattern" preserveAspectRatio="xMidYMid slice" width="100%" height="100%" viewBox="0 0 37 37">
+      <image width="37" height="37" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACUAAAAlBAMAAAA3sD0wAAAAJFBMVEXMzMyWlpaxsbGqqqq+vr7FxcWcnJy3t7elpaW/v7+bm5udnZ2i8ubNAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAARUlEQVQokWNgGAU0AUxGyqkMygpAAgFYwhgUTFsTGBSQxFiF2APCJiqwByCJhQYyM0RNFWBGNo/ZiInBdLMCEy3dPEwBAPNfB/RlHinjAAAAAElFTkSuQmCC"/>
+    </pattern>
+  </defs>
+  <rect id="placeholder" width="49" height="49" rx="24.5" fill="url(#pattern)"/>
+</svg>

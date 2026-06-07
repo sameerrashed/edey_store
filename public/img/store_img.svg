@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="89.326" height="89.329" viewBox="0 0 89.326 89.329">
+  <defs>
+    <pattern id="pattern" preserveAspectRatio="xMidYMid slice" width="100%" height="100%" viewBox="0 0 89 89">
+      <image width="89" height="89" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFkAAABZBAMAAACnJZWcAAAAG1BMVEXMzMyWlpaqqqqcnJzFxcWxsbG+vr63t7ejo6MOE0S9AAAACXBIWXMAAA7EAAAOxAGVKw4bAAAA8UlEQVRIie3PsW6DMBDG8Y9g7IxYJdDREpG6WlDajkbJwAhF7I7yApAsHaGtlDx20zzASd063E+ydMPflg9gjDHG2N/khUP+eh9X5fZ2RiJeVb2Jqs7fLw4F+iEl6tDLOPDK/M4vOCDFiapbZWtIO7nQVDiLGEeillqPtZM2nDt30JlIyFpp7cNtE8tsg0mnKPYL9ZPvZo70o8Vi8ba/otNfRB04YfHxZDG1SLCD+jwTdQ3EApFBmdw2DODwTr09Slv79aiSAhmOIsWFqKNN364vOXbt5LqhwvVkiRp9AbE8o3PhHJUGzYOjasYYY+w/+QE/0SRbZ/jX1AAAAABJRU5ErkJggg=="/>
+    </pattern>
+  </defs>
+  <g id="placeholder" stroke="#fff" stroke-width="4" fill="url(#pattern)">
+    <rect width="89.326" height="89.329" rx="44.663" stroke="none"/>
+    <rect x="2" y="2" width="85.326" height="85.329" rx="42.663" fill="none"/>
+  </g>
+</svg>
