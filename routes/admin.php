@@ -96,7 +96,6 @@ Route::prefix('admin')->group(function () {
         Route::resource('/intros', IntroController::class)->names([
             'index' => 'admin.Intros.index',
             'create' => 'admin.Intros.create',
-            //        "store" => "admin.Intros.store",
             'edit' => 'admin.Intros.edit',
             'update' => 'admin.Intros.update',
             'destroy' => 'admin.Intros.destroy',

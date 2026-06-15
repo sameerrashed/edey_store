@@ -166,7 +166,8 @@
                                             </div>
                                         </div>
                                         <div class="col-md-4">
-                                            <form class="form_copon" action="#">
+                                            <form class="form_copon" id="copon_form" action="{{ route('products.cart', auth()->id()) }}"
+                                                method="post" enctype="multipart/form-data">
                                                 <input type="text" class="form-control" placeholder="كود الخصم">
                                                 <button type="submit" class="btn btn_copon">تأكيد</button>
                                             </form>
