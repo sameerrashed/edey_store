@@ -209,7 +209,13 @@
                                                     </div>
                                                     <div class="itm_rw_bill d-flex align-items-center">
                                                         <h3>قيمة الكوبون</h3>
-                                                        <p class="mr-auto">0</p>
+                                                        <p class="mr-auto">
+                                                            @if (session('discount_percentage'))
+                                                                <p>{{ session('discount_percentage') }}%</p>
+                                                            @else
+                                                            <p>0%</p>
+                                                        @endif
+                                                        </p>
                                                     </div>
                                                 </div>
                                                 <div class="bill_ft">
