@@ -5,6 +5,7 @@ namespace App\Http\Controllers\website;
 use App\Http\Controllers\Controller;
 use App\Models\cart;
 use App\Models\category;
+use App\Models\copon;
 use App\Models\favorite;
 use App\Models\product;
 use App\Models\store;
@@ -16,7 +17,7 @@ class CartController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index($id)
+    public function index($id, Request $request)
     {
         $data['title'] = 'ايدي ستور';
         $data['product'] = favorite::where('user_id', $id)->get()->groupBy(function ($item) {
@@ -47,6 +48,26 @@ class CartController extends Controller
         $data['categories'] = category::with(['products' => function ($q) {
             $q->latest();
         }])->get();
+
+        // return $cart->cart_products;
+
+        if (isset($request->copon_code)) {
+            $copon_store = copon::where('code', $request->copon_code)->first();
+            $copons = copon::all();
+            $val = 0;
+            foreach ($copons as $copon) {
+                if ($copon->code == $request->copon_code) {
+                    $val = 1;
+
+                    return redirect()->back()->with('discount_percentage', $copon->discount_percentage);
+                }
+            }
+
+            if ($val == 0) {
+                return 'الكود غير صحيح او غير موجود';
+            }
+
+        }
 
         return view('website.cart', $data);
     }

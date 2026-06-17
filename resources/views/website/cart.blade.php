@@ -167,9 +167,13 @@
                                         </div>
                                         <div class="col-md-4">
                                             <form class="form_copon" id="copon_form" action="{{ route('products.cart', auth()->id()) }}"
-                                                method="post" enctype="multipart/form-data">
-                                                <input type="text" class="form-control" placeholder="كود الخصم">
-                                                <button type="submit" class="btn btn_copon">تأكيد</button>
+                                                method="get" enctype="multipart/form-data">
+                                                @csrf
+                                                <input type="text" name="copon_code" class="form-control" placeholder="كود الخصم">
+                                                <input type="number" name="store_id"
+                                                    value="{{ $products->first()->product->user->store->id }}" class="form-control"
+                                                    hidden>
+                                                <input type="submit" value="تأكيد" class="btn btn_copon">
                                             </form>
                                             <div class="box_bill">
                                                 <label class="fr_label">اختر طريقة الدفع</label>
