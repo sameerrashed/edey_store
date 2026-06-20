@@ -210,11 +210,14 @@
                                                     <div class="itm_rw_bill d-flex align-items-center">
                                                         <h3>قيمة الكوبون</h3>
                                                         <p class="mr-auto">
-                                                            @if (session('discount_percentage'))
-                                                                <p>{{ session('discount_percentage') }}%</p>
+                                                            @if ($products->first()->product->user->store->id == session('store_id'))
+                                                                @if (session('discount_percentage'))
+                                                                    <p class="coupon-value">{{ session('discount_percentage') }}%</p>
+                                                                @endif
                                                             @else
                                                             <p>0%</p>
                                                         @endif
+
                                                         </p>
                                                     </div>
                                                 </div>
@@ -339,16 +342,45 @@
         $(document).off('click', '.jsQuantityIncrease');
         $(document).off('click', '.jsQuantityDecrease');
 
+        function getNumber(value) {
+            value = value.toString();
+
+            value = value
+                .replace('ر.س', '')
+                .replace('%', '')
+                .replace(',', '')
+                .trim();
+
+            return parseFloat(value) || 0;
+        }
+
         function updateStoreTotal(storeBox) {
             let storeTotal = 0;
 
+            // جمع إجمالي المنتجات داخل نفس المتجر فقط
             storeBox.find('.total-price').each(function () {
-                let itemTotal = parseFloat($(this).text()) || 0;
+                let itemTotal = getNumber($(this).text());
                 storeTotal += itemTotal;
             });
 
-            storeBox.find('.store-subtotal').html(storeTotal);
-            storeBox.find('.checkout-total').html(storeTotal + ' <span>ر.س</span>');
+            // جلب نسبة الكوبون
+            let couponPercent = getNumber(storeBox.find('.coupon-value').text());
+
+            // حساب قيمة الخصم
+            let discountValue = (storeTotal * couponPercent) / 100;
+
+            // الإجمالي بعد الخصم
+            let finalTotal = storeTotal - discountValue;
+
+            if (finalTotal < 0) {
+                finalTotal = 0;
+            }
+
+            // عرض السعر قبل الخصم
+            storeBox.find('.store-subtotal').html(storeTotal.toFixed(2));
+
+            // عرض الإجمالي النهائي بعد الخصم
+            storeBox.find('.checkout-total').html(finalTotal.toFixed(2) + ' <span>ر.س</span>');
         }
 
         $(document).on('click', '.jsQuantityIncrease', function () {
@@ -358,7 +390,7 @@
             let input = row.find('.jsQuantity');
             let quantity = parseInt(input.val()) || 1;
 
-            let price = parseFloat(row.find('.product-price').text()) || 0;
+            let price = getNumber(row.find('.product-price').text());
 
             quantity++;
 
@@ -366,7 +398,7 @@
 
             let total = quantity * price;
 
-            row.find('.total-price').html(total + ' <span>ر.س</span>');
+            row.find('.total-price').html(total.toFixed(2) + ' <span>ر.س</span>');
 
             updateStoreTotal(storeBox);
         });
@@ -378,7 +410,7 @@
             let input = row.find('.jsQuantity');
             let quantity = parseInt(input.val()) || 1;
 
-            let price = parseFloat(row.find('.product-price').text()) || 0;
+            let price = getNumber(row.find('.product-price').text());
 
             if (quantity > 1) {
                 quantity--;
@@ -388,26 +420,33 @@
 
             let total = quantity * price;
 
-            row.find('.total-price').html(total + ' <span>ر.س</span>');
+            row.find('.total-price').html(total.toFixed(2) + ' <span>ر.س</span>');
 
             updateStoreTotal(storeBox);
+        });
+
+        // عند فتح الصفحة يحسب الإجمالي لكل متجر مباشرة
+        $(document).ready(function () {
+            $('.store-box').each(function () {
+                updateStoreTotal($(this));
+            });
         });
     </script>
     <script>
         @if (session('success'))
-            Swal.fire({
-                text: "{{ session('success') }}",
-                icon: "success",
-                confirmButtonText: "حسناً"
-            });
+        Swal.fire({
+            text: "{{ session('success') }}",
+            icon: "success",
+            confirmButtonText: "حسناً"
+        });
         @endif
 
         @if (session('error'))
-            Swal.fire({
-                text: "{{ session('error') }}",
-                icon: "error",
-                confirmButtonText: "حسناً"
-            });
+        Swal.fire({
+            text: "{{ session('error') }}",
+            icon: "error",
+            confirmButtonText: "حسناً"
+        });
         @endif
     </script>
 </body>

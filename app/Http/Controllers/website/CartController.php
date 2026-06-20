@@ -49,8 +49,6 @@ class CartController extends Controller
             $q->latest();
         }])->get();
 
-        // return $cart->cart_products;
-
         if (isset($request->copon_code)) {
             $copon_store = copon::where('code', $request->copon_code)->first();
             $copons = copon::all();
@@ -59,7 +57,9 @@ class CartController extends Controller
                 if ($copon->code == $request->copon_code) {
                     $val = 1;
 
-                    return redirect()->back()->with('discount_percentage', $copon->discount_percentage);
+                    return redirect()->back()->with([
+                        'discount_percentage' => $copon->discount_percentage,
+                        'store_id' => $copon->store_id]);
                 }
             }
 
