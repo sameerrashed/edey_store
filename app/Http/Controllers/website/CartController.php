@@ -64,12 +64,32 @@ class CartController extends Controller
             }
 
             if ($val == 0) {
-                return 'الكود غير صحيح او غير موجود';
+                return back()->with('error', 'الكود لهذا المتجر غير صحيح او غير موجود');
             }
 
         }
 
         return view('website.cart', $data);
+    }
+
+    public function updateQuantity(Request $request)
+    {
+        $request->validate([
+            'id' => 'required|exists:cart_products,id',
+            'quantity' => 'required|integer|min:1',
+        ]);
+
+        $cartProduct = DB::table('cart_products')->firstOrFail($request->id);
+
+        $cartProduct->update([
+            'quantity' => $request->quantity,
+        ]);
+
+        return response()->json([
+            'status' => true,
+            'message' => 'تم تحديث الكمية',
+            'quantity' => $cartProduct->quantity,
+        ]);
     }
 
     /**

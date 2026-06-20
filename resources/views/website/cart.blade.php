@@ -101,7 +101,7 @@
                                                                     </div>
                                                                     <div class="hid_lg">
                                                                         <div class="quantity_remove_mo">
-                                                                            <div class="quantity">
+                                                                            <div class="quantity" data-id="{{ $record->id }}">
                                                                                 <input type="text" name="quantity"
                                                                                     value="{{ $record->quantity }}"
                                                                                     class="jsQuantity count-quat">
@@ -192,7 +192,6 @@
                                                                             <img src="{{ asset('img/' . $paymentMethod->image) }}" alt="">
                                                                         </div>
                                                                     </div>
-
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -339,6 +338,122 @@
     <script src="{{ asset('js/lg-fullscreen.min.js') }}"></script>
     <script src="{{ asset('js/script.js') }}"></script>
     <script>
+        $(document).ready(function () {
+
+            $(document).off('click', '.jsQuantityIncrease');
+            $(document).off('click', '.jsQuantityDecrease');
+
+            function updateQuantityAjax(id, quantity) {
+                $.ajax({
+                    url: "{{ route('cart.updateQuantity') }}",
+                    type: "POST",
+                    data: {
+                        id: id,
+                        quantity: quantity,
+                        _token: "{{ csrf_token() }}"
+                    },
+                    success: function (response) {
+                        console.log('تم تحديث الكمية:', response);
+                    },
+                    error: function (xhr) {
+                        console.log(xhr.responseText);
+                        alert('حدث خطأ أثناء تحديث الكمية');
+                    }
+                });
+            }
+
+            function getNumber(value) {
+                value = value.toString()
+                    .replace('ر.س', '')
+                    .replace('%', '')
+                    .replace(',', '')
+                    .trim();
+
+                return parseFloat(value) || 0;
+            }
+
+            function updateStoreTotal(storeBox) {
+                let storeTotal = 0;
+
+                storeBox.find('.total-price').each(function () {
+                    storeTotal += getNumber($(this).text());
+                });
+
+                let couponPercent = getNumber(storeBox.find('.coupon-value').text());
+
+                let discountValue = (storeTotal * couponPercent) / 100;
+                let finalTotal = storeTotal - discountValue;
+
+                if (finalTotal < 0) {
+                    finalTotal = 0;
+                }
+
+                storeBox.find('.store-subtotal').html(storeTotal.toFixed(2));
+                storeBox.find('.checkout-total').html(finalTotal.toFixed(2) + ' <span>ر.س</span>');
+            }
+
+            $(document).on('click', '.jsQuantityIncrease', function () {
+                let quantityBox = $(this).closest('.quantity');
+                let row = $(this).closest('tr');
+                let storeBox = $(this).closest('.store-box');
+
+                let id = quantityBox.data('id');
+
+                let input = quantityBox.find('.jsQuantity');
+                let quantity = parseInt(input.val()) || 1;
+
+                quantity++;
+
+                input.val(quantity);
+
+                quantityBox.find('.jsQuantityDecrease').removeClass('disabled');
+
+                let price = getNumber(row.find('.product-price').text());
+                let total = price * quantity;
+
+                row.find('.total-price').html(total.toFixed(2) + ' <span>ر.س</span>');
+
+                updateStoreTotal(storeBox);
+
+                updateQuantityAjax(id, quantity);
+            });
+
+            $(document).on('click', '.jsQuantityDecrease', function () {
+                let quantityBox = $(this).closest('.quantity');
+                let row = $(this).closest('tr');
+                let storeBox = $(this).closest('.store-box');
+
+                let id = quantityBox.data('id');
+
+                let input = quantityBox.find('.jsQuantity');
+                let quantity = parseInt(input.val()) || 1;
+
+                if (quantity <= 1) {
+                    $(this).addClass('disabled');
+                    return;
+                }
+
+                quantity--;
+
+                input.val(quantity);
+
+                if (quantity <= 1) {
+                    $(this).addClass('disabled');
+                }
+
+                let price = getNumber(row.find('.product-price').text());
+                let total = price * quantity;
+
+                row.find('.total-price').html(total.toFixed(2) + ' <span>ر.س</span>');
+
+                updateStoreTotal(storeBox);
+
+                updateQuantityAjax(id, quantity);
+            });
+
+        });
+    </script>
+    <script>
         $(document).off('click', '.jsQuantityIncrease');
         $(document).off('click', '.jsQuantityDecrease');
 
@@ -434,19 +549,19 @@
     </script>
     <script>
         @if (session('success'))
-        Swal.fire({
-            text: "{{ session('success') }}",
-            icon: "success",
-            confirmButtonText: "حسناً"
-        });
+            Swal.fire({
+                text: "{{ session('success') }}",
+                icon: "success",
+                confirmButtonText: "حسناً"
+            });
         @endif
 
         @if (session('error'))
-        Swal.fire({
-            text: "{{ session('error') }}",
-            icon: "error",
-            confirmButtonText: "حسناً"
-        });
+            Swal.fire({
+                text: "{{ session('error') }}",
+                icon: "error",
+                confirmButtonText: "حسناً"
+            });
         @endif
     </script>
 </body>
