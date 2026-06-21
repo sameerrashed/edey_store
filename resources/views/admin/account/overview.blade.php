@@ -93,6 +93,7 @@
                                 </a>
                                 <a href="#" class="d-flex align-items-center text-gray-400 text-hover-primary mb-2">
                                     <!--begin::Svg Icon | path: icons/duotune/communication/com011.svg-->
+                                   
                                     <span class="svg-icon svg-icon-4 me-1">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                              viewBox="0 0 24 24" fill="none">
