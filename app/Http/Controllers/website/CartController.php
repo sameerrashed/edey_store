@@ -79,16 +79,15 @@ class CartController extends Controller
             'quantity' => 'required|integer|min:1',
         ]);
 
-        $cartProduct = DB::table('cart_products')->firstOrFail($request->id);
-
-        $cartProduct->update([
+        $cartProduct = DB::table('cart_products')
+        ->where('id', $request->id)
+        ->update([
             'quantity' => $request->quantity,
         ]);
 
         return response()->json([
             'status' => true,
             'message' => 'تم تحديث الكمية',
-            'quantity' => $cartProduct->quantity,
         ]);
     }
 

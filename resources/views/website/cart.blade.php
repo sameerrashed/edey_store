@@ -134,7 +134,7 @@
 
                                                                 <td class="hide_xs">
 
-                                                                    <div class="quantity">
+                                                                    <div class="quantity" data-id="{{ $record->id }}">
 
                                                                         <input type="text" value="{{ $record->quantity }}"
                                                                             class="jsQuantity count-quat">
