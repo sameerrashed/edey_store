@@ -208,6 +208,7 @@ class CartController extends Controller
     public function checkout(Request $request)
     {
         $data['title'] = 'إتمام عملية الدفع';
+        $data['page'] = 1;
 
         return view('website.checkout', $data);
     }
@@ -215,14 +216,15 @@ class CartController extends Controller
     public function checkout1(Request $request)
     {
         $data['title'] = 'إتمام عملية الدفع';
-
+        $data['page'] = 2;
         return view('website.checkout1', $data);
     }
 
     public function checkout2(Request $request)
     {
         $data['title'] = 'إتمام عملية الدفع';
-
+        $data['page'] = 3
+;
         return view('website.checkout2', $data);
     }
 

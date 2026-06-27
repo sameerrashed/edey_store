@@ -22,42 +22,8 @@
 	    </div>
 	</div>
     <div class="main-wrapper checkout">
-		<header id="header">
-            <div class="middle_header">
-				<div class="container">
-					<div class="d-flex align-items-center states_mo">
-						<div class="logo_site">
-							<a href="index.html"><img src="img/logo.png" alt="إيدي ستور"></a>
-						</div>
-                        <div class="steps clearfix">
-                            <ul role="tablist">
-                                <li role="tab" class="first  done">
-                                    <a id="steps-uid-0-t-0" href="#steps-uid-0-h-0">
-                                        <span class="number"></span>
-                                        <span class="step-order">معلومات الشحن</span>
-                                    </a>
-                                </li>
-                                <li role="tab" class="done">
-                                    <a id="steps-uid-0-t-1" href="#steps-uid-0-h-1">
-                                        <span class="number"></span>
-                                        <span class="step-order">معلومات الدفع</span>
-                                    </a>
-                                </li>
-                                <li role="tab" class="current last">
-                                    <a id="steps-uid-0-t-3" href="#steps-uid-0-h-3">
-                                        <span class="number"></span>
-                                        <span class="step-order">مراجعة الطلب</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="safe_pay mr-auto">
-                              <h4><img src="img/lock.svg" alt=""> دفع آمن ومحمي </h4>
-                        </div>
-					</div>
-				</div>
-			</div>
-        </header>
+        @include('website.partial.sections.checkout_header')
+
 
 
         <div class="content_innerPage pay_laststep">
