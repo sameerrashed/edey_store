@@ -28,18 +28,19 @@
 			<div class="container">
                 <h2 class="title_page">أدخل عنوان الشحن الخاص بك</h2>
                 <div class="block_cn_pay">
-                    <form class="form_st1" action="#">
+                    <form class="form_st1" action="{{ route('cart.checkout1') }}" method="GET">
+                        @csrf
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="fr_label">البريد الالكتروني</label>
-                                    <input type="email" class="form-control " >
+                                    <input type="email" class="form-control " required>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="fr_label">تأكيد البريد الالكتروني</label>
-                                    <input type="email" class="form-control " >
+                                    <input type="email" class="form-control " required>
                                 </div>
                             </div>
                         </div>
@@ -47,8 +48,8 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label class="fr_label">الدولة</label>
-                                    <select class="form-control js-select " data-placeholder="المملكة العربية السعودية" >
-                                        <option ></option>
+                                    <select class="form-control js-select " data-placeholder="المملكة العربية السعودية" required>
+                                        <option></option>
                                         <option>المملكة العربية السعودية</option>
                                         <option>المملكة العربية السعودية</option>
                                         <option>المملكة العربية السعودية</option>
@@ -60,7 +61,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label class="fr_label">الاسم كاملاً</label>
-                                    <input type="text" class="form-control" placeholder="اسم صاحب الحساب">
+                                    <input type="text" class="form-control" placeholder="اسم صاحب الحساب" required>
                                 </div>
                             </div>
                         </div>
@@ -68,7 +69,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label class="fr_label">عنوان الشارع</label>
-                                    <input type="text" class="form-control" placeholder="اسم صاحب الحساب">
+                                    <input type="text" class="form-control" placeholder="عنوان الشارع" required>
                                 </div>
                             </div>
                         </div>
@@ -76,7 +77,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="fr_label">المحافظة</label>
-                                    <select class="form-control js-select " data-placeholder="الرياض" >
+                                    <select class="form-control js-select " data-placeholder="الرياض" required>
                                         <option ></option>
                                         <option>الرياض</option>
                                         <option>الرياض</option>
@@ -87,7 +88,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="fr_label">المدينة</label>
-                                    <select class="form-control js-select " data-placeholder="اسم المدينة" >
+                                    <select class="form-control js-select " data-placeholder="اسم المدينة" required>
                                         <option ></option>
                                         <option>اسم المدينة</option>
                                         <option>اسم المدينة</option>
@@ -99,7 +100,7 @@
 
                         <div class="row">
                             <div class="col-lg-4 col-md-6">
-                                <a  href="{{ route('cart.checkout1') }}" class="btn btn-block btn_prim">تابع للدفع</a>
+                                <input type="submit" class="btn btn-block btn_prim" value="تابع للدفع">
                             </div>
                         </div>
                     </form>
@@ -111,7 +112,7 @@
 				<div class="pay_footer">
 					<div class="container d-flex justify-content-center">
 						<div class="copy_right">
-							<p>جميع الحقوق محفوظة لمتجر إيدي © 2020</p>
+							<p>جميع الحقوق محفوظة لمتجر إيدي © 2026</p>
 						</div>
 						<div class="footer_nav ">
                             <ul>
