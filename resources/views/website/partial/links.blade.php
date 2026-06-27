@@ -8,6 +8,7 @@
 <link href="{{asset('css/style.css')}}" rel="stylesheet">
 <link href="{{asset('css/lightslider.css')}}" rel="stylesheet">
 <link href="{{asset('css/lightslider.min.css')}}" rel="stylesheet">
+<link href="{{ asset('css/select2.css') }}" rel="stylesheet">
 <link href="{{asset('css/lightgallery.css')}}" rel="stylesheet">
 <!-- Responsive -->
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
