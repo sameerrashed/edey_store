@@ -266,7 +266,7 @@
                     <h2 class="modal_title">متابعة إلى الدفع</h2>
                 </div>
                 <div class="modal_body">
-                    <a href="checkout.html" type="submit" class="btn btn_prim btn_dt">إتمام الطلب كزائر</a>
+                    <a href="{{ route('cart.checkout') }}" type="submit" class="btn btn_prim btn_dt">إتمام الطلب كزائر</a>
                     <h2>أو تسجيل الدخول</h2>
                     <form class="form_st1" action="#">
                         <div class="form-group">
@@ -287,7 +287,7 @@
                                 <span class="fr_icon show_pass"><i class="fas fa-eye"></i></span>
                             </div>
                         </div>
-                        <a href="checkout.html" type="submit" class="btn btn_main btn_dt">متابعة</a>
+                        <a href="{{ route('cart.checkout') }}" type="submit" class="btn btn_main btn_dt">متابعة</a>
                         <a href="Register.html" type="submit" class="btn btn_main_prim btn_dt">تسجيل حساب جديد</a>
                     </form>
                 </div>

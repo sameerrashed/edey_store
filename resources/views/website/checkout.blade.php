@@ -135,7 +135,7 @@
 
                         <div class="row">
                             <div class="col-lg-4 col-md-6">
-                                <a  href="checkout1.html" class="btn btn-block btn_prim">تابع للدفع</a>
+                                <a  href="{{ route('cart.checkout1') }}" class="btn btn-block btn_prim">تابع للدفع</a>
                             </div>
                         </div>
                     </form>
@@ -164,7 +164,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script src="js/select2.full.min.js"></script>
-	<script src="js/script.js"></script>
+    <script src="{{ asset('js/select2.full.min.js') }}"></script>
+	<script src="{{ asset('js/script.js') }}"></script>
 </body>
 </html>	 

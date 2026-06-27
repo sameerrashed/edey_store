@@ -32,4 +32,12 @@ Route::middleware('user')->group(function () {
     Route::post('/account/upgrade/post', [AccountController::class, 'updateToMerchantPost'])->name('account.upgrade.post');
     Route::post('/cart/update-quantity', [CartController::class, 'updateQuantity'])
         ->name('cart.updateQuantity');
+    Route::get('/checkout', [CartController::class, 'checkout'])
+        ->name('cart.checkout');
+
+        Route::get('/checkout1', [CartController::class, 'checkout1'])
+        ->name('cart.checkout1');
+
+        Route::get('/checkout2', [CartController::class, 'checkout2'])
+        ->name('cart.checkout2');
 });

@@ -205,6 +205,27 @@ class CartController extends Controller
         //
     }
 
+    public function checkout(Request $request)
+    {
+        $data['title'] = 'إتمام عملية الدفع';
+
+        return view('website.checkout', $data);
+    }
+
+    public function checkout1(Request $request)
+    {
+        $data['title'] = 'إتمام عملية الدفع';
+
+        return view('website.checkout1', $data);
+    }
+
+    public function checkout2(Request $request)
+    {
+        $data['title'] = 'إتمام عملية الدفع';
+
+        return view('website.checkout2', $data);
+    }
+
     /**
      * Remove the specified resource from storage.
      */
