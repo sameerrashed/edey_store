@@ -288,7 +288,7 @@
                             </div>
                         </div>
                         <a href="{{ route('cart.checkout') }}" type="submit" class="btn btn_main btn_dt">متابعة</a>
-                        <a href="Register.html" type="submit" class="btn btn_main_prim btn_dt">تسجيل حساب جديد</a>
+                        <a href="{{ route('signup') }}" type="submit" class="btn btn_main_prim btn_dt">تسجيل حساب جديد</a>
                     </form>
                 </div>
             </div>
