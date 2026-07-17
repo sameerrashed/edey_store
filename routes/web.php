@@ -7,6 +7,7 @@ use App\Http\Controllers\website\AccountController;
 use App\Http\Controllers\website\AuthController;
 use App\Http\Controllers\website\CartController;
 use App\Http\Controllers\website\HomeController;
+use App\Http\Controllers\website\LocationController;
 use App\Http\Controllers\website\ProductController;
 use Illuminate\Support\Facades\Route;
 
@@ -32,12 +33,14 @@ Route::middleware('user')->group(function () {
     Route::post('/account/upgrade/post', [AccountController::class, 'updateToMerchantPost'])->name('account.upgrade.post');
     Route::post('/cart/update-quantity', [CartController::class, 'updateQuantity'])
         ->name('cart.updateQuantity');
+    Route::get('/locations/{country}', [LocationController::class, 'getLocations'])
+        ->name('locations.get');
     Route::get('/checkout', [CartController::class, 'checkout'])
         ->name('cart.checkout');
 
-        Route::get('/checkout1', [CartController::class, 'checkout1'])
+    Route::get('/checkout1', [CartController::class, 'checkout1'])
         ->name('cart.checkout1');
 
-        Route::get('/checkout2', [CartController::class, 'checkout2'])
+    Route::get('/checkout2', [CartController::class, 'checkout2'])
         ->name('cart.checkout2');
 });

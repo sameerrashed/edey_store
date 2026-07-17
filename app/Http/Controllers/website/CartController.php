@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\cart;
 use App\Models\category;
 use App\Models\copon;
+use App\Models\country;
 use App\Models\favorite;
 use App\Models\product;
 use App\Models\store;
@@ -80,10 +81,10 @@ class CartController extends Controller
         ]);
 
         $cartProduct = DB::table('cart_products')
-        ->where('id', $request->id)
-        ->update([
-            'quantity' => $request->quantity,
-        ]);
+            ->where('id', $request->id)
+            ->update([
+                'quantity' => $request->quantity,
+            ]);
 
         return response()->json([
             'status' => true,
@@ -208,6 +209,7 @@ class CartController extends Controller
     public function checkout(Request $request)
     {
         $data['title'] = 'إتمام عملية الدفع';
+        $data['countries'] = country::orderBy('name')->get();
         $data['page'] = 1;
 
         return view('website.checkout', $data);
@@ -217,14 +219,25 @@ class CartController extends Controller
     {
         $data['title'] = 'إتمام عملية الدفع';
         $data['page'] = 2;
+
+        DB::table('shipping_addresses')->insert([
+            'email' => $request->email,
+            'full_name' => $request->full_name,
+            'country' => $request->country_id,
+            'province' => $request->province_id,
+            'city' => $request->city_id,
+            'street_address' => $request->street_address,
+            'user_id' => auth()->user()->id,
+        ]);
+
         return view('website.checkout1', $data);
     }
 
     public function checkout2(Request $request)
     {
         $data['title'] = 'إتمام عملية الدفع';
-        $data['page'] = 3
-;
+        $data['page'] = 3;
+
         return view('website.checkout2', $data);
     }
 
