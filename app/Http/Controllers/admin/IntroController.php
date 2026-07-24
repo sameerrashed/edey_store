@@ -14,9 +14,17 @@ class IntroController extends Controller
      */
     public function index()
     {
-        $data['title'] = "Intros";
+        $data['title'] = 'Intros';
         $data['records'] = intro::all();
-        $data['categories'] = category::all();
+        $data['availableCategories'] = category::leftJoin(
+            'intros',
+            'categories.id',
+            '=',
+            'intros.category_id'
+        )
+            ->whereNull('intros.category_id')
+            ->select('categories.*')
+            ->get();
 
         return view('admin.intros.index', $data);
     }
@@ -38,7 +46,8 @@ class IntroController extends Controller
             'category_id' => 'required',
         ]);
 
-        $record = ManageController::save($request, new intro());
+        $record = ManageController::save($request, new intro);
+
         return $record;
     }
 
