@@ -21,6 +21,7 @@ class CartController extends Controller
     public function index($id, Request $request)
     {
         $data['title'] = 'ايدي ستور';
+        $data['breadcrumb_title'] = 'سلة المشتريات';
         $data['product'] = favorite::where('user_id', $id)->get()->groupBy(function ($item) {
 
             return $item->product->user_id;
@@ -70,7 +71,12 @@ class CartController extends Controller
 
         }
 
-        return view('website.cart', $data);
+        if (! $cart) {
+            return view('website.empty_cart', $data);
+        } else {
+            return view('website.cart', $data);
+        }
+
     }
 
     public function updateQuantity(Request $request)
@@ -244,8 +250,12 @@ class CartController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(cart $cart)
+    public function destroy($id)
     {
-        //
+        $data['title'] = 'ايدي ستور';
+        $data['product'] = cart::findOrFail($id)->delete();
+        $data['cart'] = cart::where('user_id', auth()->user()->id);
+
+        return back()->with('success', 'تم الحذف الى المفضلة بنجاح');
     }
 }

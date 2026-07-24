@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
-
     public function login()
     {
         return view('website.auth.login');
@@ -27,7 +26,7 @@ class AuthController extends Controller
             'first_name' => 'required',
             'last_name' => 'required',
             'email' => 'required|email',
-            'password' => 'required'
+            'password' => 'required',
         ]);
 
         User::create([
@@ -44,14 +43,13 @@ class AuthController extends Controller
     {
         request()->validate([
             'email' => 'required|email',
-            'password' => 'required'
+            'password' => 'required',
         ]);
 
         request()->validate([
             'email' => 'required',
-            'password' => 'required'
+            'password' => 'required',
         ]);
-
 
         $credentials = $request->only('email', 'password');
         if (auth()->attempt($credentials)) {
@@ -64,7 +62,7 @@ class AuthController extends Controller
     public function logout()
     {
         auth()->logout();
-        return redirect(url('/'));
-    }
 
+        return redirect()->route('website.login');
+    }
 }
