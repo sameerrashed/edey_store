@@ -16,9 +16,11 @@ class HomeController extends Controller
     {
         $data['title'] = 'إيدي ستور';
         $data['features'] = feature::all();
-        $data['categories'] = category::with(['products' => function ($q) {
-            $q->latest();
+
+        $data['product_category'] = category::with(['products' => function ($q) {
+            $q->latest()->where('user_id', '!=', auth()->id());
         }])->get();
+
         $category_id = DB::table('product_category')
             ->where('category_id', 1)
             ->pluck('product_id');

@@ -47,7 +47,7 @@
                 <div class="sec_services">
                     @include('website.partial.sections.features_section')
                 </div>
-                @foreach($categories as $category)
+                @foreach($product_category as $category)
                     @if($category->products->count() > 0)
                         <div class="sec_block_products">
                             <div class="container">

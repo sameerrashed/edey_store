@@ -9,8 +9,8 @@
 <link href="{{asset('css/lightslider.css')}}" rel="stylesheet">
 <link href="{{asset('css/lightslider.min.css')}}" rel="stylesheet">
 <link href="{{ asset('css/select2.css') }}" rel="stylesheet">
+<link rel="shortcut icon" href="{{asset('img/logo.png')}}" />
 <link href="{{asset('css/lightgallery.css')}}" rel="stylesheet">
-<!-- Responsive -->
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="{{asset('css/responsive.css')}}" rel="stylesheet">
