@@ -55,7 +55,7 @@ class AuthController extends Controller
         if (auth()->attempt($credentials)) {
             return redirect(url('/'));
         } else {
-            return redirect()->route('website.login')->with('error', __('app.login_error'));
+            return redirect()->route('website.login')->with('error', 'هناك خطأ في اسم المستخدم او كلمة المرور');
         }
     }
 

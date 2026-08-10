@@ -11,10 +11,9 @@ class AuthController extends Controller
     public function index()
     {
         $data['title'] = 'ايدي ستور';
+
         return view('admin.auth.login', $data);
     }
-
-
 
     public function create(Request $request)
     {
@@ -22,7 +21,7 @@ class AuthController extends Controller
             'first_name' => 'required',
             'last_name' => 'required',
             'email' => 'required|email',
-            'password' => 'required'
+            'password' => 'required',
         ]);
 
         User::create([
@@ -35,24 +34,20 @@ class AuthController extends Controller
         return redirect('/admin');
     }
 
-    public function logout()
-    {
-
-    }
+    public function logout() {}
 
     public function loginCheck(Request $request)
     {
         request()->validate([
             'email' => 'required',
-            'password' => 'required'
+            'password' => 'required',
         ]);
-
 
         $credentials = $request->only('email', 'password');
         if (auth()->attempt($credentials)) {
             return redirect(url('/admin/dashboard'));
         } else {
-            return redirect()->route('admin.login')->with('error', __('app.login_error'));
+            return redirect()->route('admin.login')->with('error', 'هناك خطأ في اسم المستخدم او كلمة المرور');
         }
     }
 }
