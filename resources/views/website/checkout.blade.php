@@ -37,14 +37,16 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="fr_label">البريد الالكتروني</label>
-                                    <input name="email" type="email" class="form-control " required>
+                                    <input name="email" id="email" type="email" class="form-control " required>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="fr_label">تأكيد البريد الالكتروني</label>
-                                    <input type="email" class="form-control " required>
+                                    <input type="email_confirmation" id="email_confirmation" class="form-control "
+                                        required>
                                 </div>
+                                <div id="emailMatchMessage" class="mt-2"></div>
                             </div>
                         </div>
                         <div class="row">
@@ -236,6 +238,57 @@
                 });
             });
         });
+    </script>
+    <script>
+        const email = document.getElementById('email');
+        const emailConfirmation = document.getElementById('email_confirmation');
+        const message = document.getElementById('emailMatchMessage');
+
+        // التحقق عند أي تغيير في أي من الحقلين
+        email.addEventListener('input', checkEmail);
+        emailConfirmation.addEventListener('input', checkEmail);
+
+        function checkEmail() {
+
+            // لا نظهر رسالة قبل أن يبدأ المستخدم بكتابة التأكيد
+            if (emailConfirmation.value.trim() === '') {
+                message.innerHTML = '';
+
+                emailConfirmation.classList.remove(
+                    'border-danger',
+                    'border-success'
+                );
+
+                return;
+            }
+
+            // البريدان متطابقان
+            if (email.value.trim() === emailConfirmation.value.trim()) {
+
+                message.innerHTML = `
+                <span class="text-success fw-semibold">
+                    ✓ البريد الإلكتروني متطابق
+                </span>
+            `;
+
+                emailConfirmation.classList.remove('border-danger');
+                emailConfirmation.classList.add('border-success');
+
+            }
+
+            // البريدان غير متطابقين
+            else {
+
+                message.innerHTML = `
+                <span class="text-danger fw-semibold">
+                    البريد الإلكتروني غير متطابق
+                </span>
+            `;
+
+                emailConfirmation.classList.remove('border-success');
+                emailConfirmation.classList.add('border-danger');
+            }
+        }
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"

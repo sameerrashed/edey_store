@@ -184,7 +184,7 @@ class AccountController extends Controller
                     'store_id' => $store_id,
                 ]);
 
-                return back()->with('success', 'تم إرسال طلبك بنجاح');
+                return redirect()->route('account.index')->with('success', 'تم إرسال طلبك بنجاح');
             } else {
                 return redirect('/account/upgrade')->with('error', 'يجب ان تكون مستخدم لإرسال الطلب');
             }

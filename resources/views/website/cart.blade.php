@@ -243,7 +243,6 @@
                                                     <a href="#login" data-toggle="modal" class="btn btn-block btn_prim btn-lg">إدفع
                                                         الآن</a>
                                                 @endif
-
                                             </div>
                                         </div>
                                     </div>

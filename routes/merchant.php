@@ -43,6 +43,7 @@ Route::prefix('merchant')->group(function () {
         Route::post('/products/store', [ProductController::class, 'store'])->name('merchant.Products.store');
         Route::get('/products/edit/{id}', [ProductController::class, 'edit'])->name('merchant.Products.edit');
         // Route::post('/products/update/{id}', [ProductController::class, 'update'])->name('merchant.Products.update');
+        Route::get('/products/delete/{id}', [ProductController::class, 'destroy'])->name('merchant.Products.delete');
 
         Route::resource('/AddProduct', ProductController::class)->names([
             'index' => 'merchant.AddProduct.index',

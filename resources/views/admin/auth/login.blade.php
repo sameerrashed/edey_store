@@ -69,26 +69,13 @@
 
                     <form method="post" action="{{route('checkLogin')}}" class="form w-100" id="kt_sign_in_form">
                         @csrf
-
-                        <!--begin::Heading-->
                         <div class="text-center mb-10">
                             <!--begin::Title-->
                             <h1 class="text-dark mb-3">
                                 تسجيل الدخول إلى لوحة تحكم الآدمن
                             </h1>
-                            <!--end::Title-->
-
-                            <!--begin::Link-->
-                            <div class="text-gray-400 fw-bold fs-4">
-                                جديد هنا
-
-                                <a href="{{route('signup')}}" class="link-primary fw-bolder">
-                                    إنشاء حساب جديد
-                                </a>
-                            </div>
                         </div>
 
-                        <!--begin::Input group-->
                         <div class="fv-row mb-10">
                             <!--begin::Label-->
                             <label class="form-label fs-6 fw-bolder text-dark">الإيميل</label>
