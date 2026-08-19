@@ -128,6 +128,62 @@ class ProductController extends Controller
         return back()->with('success', 'تم إضافة المنتج بنجاح');
     }
 
+    public function getFeatureValues($feature_id)
+    {
+        // نجيب السمة نفسها أولاً
+        $feature = DB::table('productfeatures')
+            ->where('id', $feature_id)
+            ->first();
+
+        if (! $feature) {
+            return response()->json([
+                'status' => false,
+                'message' => 'السمة غير موجودة',
+            ], 404);
+        }
+
+        // تحديد الجدول حسب السمة
+        switch ($feature->name) {
+
+            case 'اللون':
+
+                $values = DB::table('colors')
+                    ->select('id', 'name', 'color')
+                    ->get();
+
+                break;
+
+            case 'المقاس':
+
+                $values = DB::table('sizes')
+                    ->select('id', 'name')
+                    ->get();
+
+                break;
+
+            case 'النقش':
+
+                $values = DB::table('engravings')
+                    ->select('id', 'name', 'avatar')
+                    ->get();
+
+                break;
+
+            default:
+
+                $values = collect();
+
+                break;
+        }
+
+        return response()->json([
+            'status' => true,
+            'feature_id' => $feature->id,
+            'feature_name' => $feature->name,
+            'values' => $values,
+        ]);
+    }
+
     /**
      * Display the specified resource.
      */

@@ -499,36 +499,32 @@
                                                     <!--begin::Image input-->
                                                     <div class="mb-10">
                                                         <div class="row align-items-center">
-
-                                                            <!-- السمات -->
                                                             <div class="col-md-1">
                                                                 <label class="required form-label mb-0">
                                                                     السمات :
                                                                 </label>
                                                             </div>
-
-                                                            <!-- Select -->
                                                             <div class="col-md-8">
                                                                 <select class="form-select"
-                                                                    id="kt_ecommerce_add_product_store_template"
+                                                                    id="kt_ecommerce_add_features_store_template"
                                                                     name="features">
-                                                                    <option value="1" selected>منتج بسيط</option>
-                                                                    <option value="2">منتج متعدد</option>
+                                                                    <option></option>
+                                                                    @foreach ($features as $record)
+                                                                        <option value="{{ $record->id }}">{{ $record->name }}
+                                                                        </option>
+                                                                    @endforeach
                                                                 </select>
                                                             </div>
-
-                                                            <!-- زر الإضافة -->
                                                             <div class="col-md-3">
-                                                                <button type="button" class="btn btn-primary">
+                                                                <button type="button" class="btn btn-primary"
+                                                                    id="add_feature_btn">
                                                                     إضافة
                                                                 </button>
                                                             </div>
-
                                                         </div>
                                                     </div>
-                                                    <!--end::Description-->
+                                                    <div id="selected_features_container"></div>
                                                 </div>
-                                                <!--end::Card body-->
                                             </div>
                                         </div>
                                     </div>
@@ -956,15 +952,15 @@
                         item.style.position = 'relative';
 
                         item.innerHTML = `
-                                                                                                                                                                                                                                                                                                                                                                                        <img src="${e.target.result}"
-                                                                                                                                                                                                                                                                                                                                                                                             style="
-                                                                                                                                                                                                                                                                                                                                                                                                width:100px;
-                                                                                                                                                                                                                                                                                                                                                                                                height:100px;
-                                                                                                                                                                                                                                                                                                                                                                                                object-fit:cover;
-                                                                                                                                                                                                                                                                                                                                                                                                border-radius:8px;
-                                                                                                                                                                                                                                                                                                                                                                                                border:1px solid #e4e6ef;
-                                                                                                                                                                                                                                                                                                                                                                                             ">
-                                                                                                                                                                                                                                                                                                                                                                                    `;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <img src="${e.target.result}"
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     style="
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        width:100px;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        height:100px;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        object-fit:cover;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        border-radius:8px;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        border:1px solid #e4e6ef;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     ">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            `;
 
                         preview.appendChild(item);
                     };
@@ -1079,44 +1075,35 @@
     </script>
     <script>
         $(document).ready(function () {
-
             const relatedSelect = $('#related_select');
-
-            // منع التعارض إذا كان Select2 يعمل مسبقاً
             if (relatedSelect.hasClass('select2-hidden-accessible')) {
                 relatedSelect.select2('destroy');
             }
-
             function formatProduct(product) {
-
-                // في حالة الـ placeholder
                 if (!product.id) {
                     return product.text;
                 }
-
                 let image = $(product.element).attr('data-image');
-
-                // إذا لم توجد صورة
                 if (!image) {
                     return product.text;
                 }
 
                 return $(`
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <div class="d-flex align-items-center gap-3">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <div class="d-flex align-items-center gap-3">
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <img src="${image}"
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                             style="
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                width: 45px;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                height: 45px;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                object-fit: cover;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                border-radius: 6px;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                border: 1px solid #e4e6ef;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                             ">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <img src="${image}"
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     style="
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        width: 45px;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        height: 45px;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        object-fit: cover;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        border-radius: 6px;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        border: 1px solid #e4e6ef;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     ">
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <span>${product.text}</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <span>${product.text}</span>
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                `);
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        `);
             }
 
 
@@ -1140,6 +1127,316 @@
 
             });
 
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const addButton = document.getElementById('add_feature_btn');
+            const featureSelect = document.getElementById(
+                'kt_ecommerce_add_features_store_template'
+            );
+            const container = document.getElementById(
+                'selected_features_container'
+            );
+            const originalFeatures = [];
+            Array.from(featureSelect.options).forEach(function (option) {
+                if (option.value !== '') {
+                    originalFeatures.push({
+                        id: option.value,
+                        name: option.text.trim()
+                    });
+                }
+            });
+            function refreshFeatureSelect() {
+                const usedFeatureIds = [];
+                container
+                    .querySelectorAll('.feature-item')
+                    .forEach(function (row) {
+                        usedFeatureIds.push(
+                            String(row.dataset.featureId)
+                        );
+                    });
+                if ($(featureSelect).hasClass('select2-hidden-accessible')) {
+                    $(featureSelect).select2('destroy');
+                }
+                featureSelect.innerHTML = '';
+                const emptyOption = document.createElement('option');
+                emptyOption.value = '';
+                emptyOption.textContent = '';
+                featureSelect.appendChild(emptyOption);
+                originalFeatures.forEach(function (feature) {
+                    if (!usedFeatureIds.includes(String(feature.id))) {
+                        const option = document.createElement('option');
+                        option.value = feature.id;
+                        option.textContent = feature.name;
+                        featureSelect.appendChild(option);
+                    }
+                });
+                $(featureSelect).select2({
+                    placeholder: 'اختر السمة',
+                    width: '100%',
+                    dir: 'rtl',
+                    allowClear: true
+                });
+            }
+            addButton.addEventListener('click', function () {
+                const featureId = featureSelect.value;
+                if (!featureId) {
+                    alert('اختر سمة أولاً');
+                    return;
+                }
+                const selectedFeature = originalFeatures.find(
+                    function (feature) {
+                        return String(feature.id) === String(featureId);
+                    }
+                );
+                if (!selectedFeature) {
+                    return;
+                }
+                $.ajax({
+                    url: "{{ route('merchant.products.feature-values', ':id') }}"
+                        .replace(':id', featureId),
+                    type: "GET",
+                    success: function (response) {
+                        if (!response.status) {
+                            alert('لم يتم العثور على قيم السمة');
+                            return;
+                        }
+                        let options = `
+                            <option value="">
+                                اختر القيمة
+                            </option>
+                        `;
+
+                        response.values.forEach(function (item) {
+
+                            let extraData = '';
+
+                            // اللون
+                            if (response.feature_name === 'اللون') {
+                                extraData = `data-color="${item.color ?? ''}"`;
+                            }
+
+                            // النقش
+                            if (response.feature_name === 'النقش') {
+                                extraData = `data-avatar="${item.avatar ?? ''}"`;
+                            }
+
+                            options += `
+                                <option
+                                    value="${item.id}"
+                                    ${extraData}
+                                >
+                                    ${item.name}
+                                </option>
+                            `;
+                        });
+                        const featureRow =
+                            document.createElement('div');
+                        featureRow.id =
+                            'feature_row_' + featureId;
+                        featureRow.className =
+                            'feature-item border-top py-5';
+                        featureRow.dataset.featureId =
+                            featureId;
+                        featureRow.innerHTML = `
+                                                                <div class="row align-items-center">
+                                                                    <div class="col-md-2">
+                                                                        <label class="form-label mb-0">
+                                                                            السمة:
+                                                                            <strong>
+                                                                                ${selectedFeature.name}
+                                                                            </strong>
+                                                                        </label>
+                                                                        <input
+                                                                            type="hidden"
+                                                                            name="feature_ids[]"
+                                                                            value="${featureId}"
+                                                                        >
+                                                                    </div>
+                                                                    <div class="col-md-7">
+                                                                        <select
+                                                                            class="form-select feature-values-select"
+                                                                            name="feature_values[${featureId}]"
+                                                                        >
+                                                                            ${options}
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="col-md-3">
+                                                                        <button
+                                                                            type="button"
+                                                                            class="btn btn-danger remove-feature"
+                                                                        >
+                                                                            إزالة
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            `;
+                        container.appendChild(featureRow);
+                        const valueSelect = $(featureRow)
+                            .find('.feature-values-select');
+                        valueSelect.select2({
+                            placeholder: 'اختر القيمة',
+                            width: '100%',
+                            dir: 'rtl',
+                            allowClear: true,
+                            templateResult: function (state) {
+                                if (!state.id) {
+                                    return state.text;
+                                }
+                                const option = state.element;
+                                const color = option.dataset.color;
+                                const avatar = option.dataset.avatar;
+                                if (color) {
+                                    return $(`
+                                    <div
+                                        style="
+                                            display:flex;
+                                            align-items:center;
+                                            gap:10px;
+                                            direction:rtl;
+                                        "
+                                    >
+                                        <span
+                                            style="
+                                                width:18px;
+                                                height:18px;
+                                                border-radius:50%;
+                                                background:${color};
+                                                border:1px solid #ddd;
+                                                display:inline-block;
+                                                flex-shrink:0;
+                                            "
+                                        ></span>
+                                        <span>
+                                            ${state.text}
+                                        </span>
+                                    </div>
+                                `);
+                                }
+                                if (avatar) {
+
+                                    return $(`
+                                    <div
+                                        style="
+                                            display:flex;
+                                            align-items:center;
+                                            gap:10px;
+                                            direction:rtl;
+                                        "
+                                    >
+                                        <img
+                                            src="{{ asset('img/${avatar}') }}"
+                                            style="
+                                                width:30px;
+                                                height:30px;
+                                                border-radius:5px;
+                                                object-fit:cover;
+                                            "
+                                        >
+                                        <span>
+                                            ${state.text}
+                                        </span>
+                                    </div>
+                                `);
+                                }
+                                return state.text;
+                            },
+                            templateSelection: function (state) {
+                                if (!state.id) {
+                                    return state.text;
+                                }
+                                const option = state.element;
+                                const color = option.dataset.color;
+                                const avatar = option.dataset.avatar;
+                                if (color) {
+                                    return $(`
+                                    <div
+                                        style="
+                                            display:flex;
+                                            align-items:center;
+                                            gap:8px;
+                                            direction:rtl;
+                                        "
+                                    >
+                                        <span
+                                            style="
+                                                width:15px;
+                                                height:15px;
+                                                border-radius:50%;
+                                                background:${color};
+                                                border:1px solid #ddd;
+                                                display:inline-block;
+                                            "
+                                        ></span>
+                                        <span>
+                                            ${state.text}
+                                        </span>
+                                    </div>
+                                `);
+                                }
+                                if (avatar) {
+                                    return $(`
+                                    <div
+                                        style="
+                                            display:flex;
+                                            align-items:center;
+                                            gap:8px;
+                                            direction:rtl;
+                                        "
+                                    >
+                                        <img
+                                            src="{{ asset('img/${avatar}') }}"
+                                            style="
+                                                width:25px;
+                                                height:25px;
+                                                border-radius:4px;
+                                                object-fit:cover;
+                                            "
+                                        >
+                                        <span>
+                                            ${state.text}
+                                        </span>
+                                    </div>
+                                `);
+                                }
+                                return state.text;
+                            },
+                            escapeMarkup: function (markup) {
+                                return markup;
+                            }
+                        });
+                        refreshFeatureSelect();
+                    },
+                    error: function (xhr) {
+                        console.log(xhr.responseText);
+                        alert('حدث خطأ أثناء جلب قيم السمة');
+                    }
+                });
+            });
+            container.addEventListener('click', function (e) {
+                const button =
+                    e.target.closest('.remove-feature');
+                if (!button) {
+                    return;
+                }
+                const row =
+                    button.closest('.feature-item');
+                if (!row) {
+                    return;
+                }
+                const valueSelect =
+                    row.querySelector('.feature-values-select');
+                if (
+                    valueSelect &&
+                    $(valueSelect).hasClass('select2-hidden-accessible')
+                ) {
+                    $(valueSelect).select2('destroy');
+                }
+                row.remove();
+                refreshFeatureSelect();
+            });
+            refreshFeatureSelect();
         });
     </script>
 @endsection

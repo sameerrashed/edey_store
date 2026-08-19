@@ -13,6 +13,7 @@ use App\Models\category;
 use App\Models\color;
 use App\Models\engraving;
 use App\Models\product;
+use App\Models\productfeature;
 use App\Models\size;
 use Illuminate\Support\Facades\Route;
 
@@ -107,6 +108,7 @@ Route::get('/add', function () {
     $data['records'] = product::where('user_id', auth()->user()->id)->get();
     $data['fields'] = product::get_Fields();
     $data['categories'] = category::all();
+    $data['features'] = productfeature::all();
     $data['colors'] = color::all();
     $data['sizes'] = size::all();
     $data['engravings'] = engraving::all();
@@ -114,3 +116,7 @@ Route::get('/add', function () {
 
     return view('merchant.products.add_', $data);
 });
+
+Route::get('/merchant/products/feature-values/{feature_id}',
+    [ProductController::class, 'getFeatureValues']
+)->name('merchant.products.feature-values');
