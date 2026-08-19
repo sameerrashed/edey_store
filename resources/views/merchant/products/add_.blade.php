@@ -541,96 +541,25 @@
                                                 <div class="card-header">
                                                     <!--begin::Card title-->
                                                     <div class="card-title">
-                                                        <h2>صورة مصغرة</h2>
+                                                        <h2>الأنواع</h2>
                                                     </div>
                                                     <!--end::Card title-->
                                                 </div>
                                                 <!--end::Card header-->
                                                 <!--begin::Card body-->
                                                 <div class="card-body text-center pt-0">
-                                                    <!--begin::Image input-->
-                                                    <div class="image-input image-input-empty image-input-outline mb-3"
-                                                        data-kt-image-input="true"
-                                                        style="background-image: url({{ asset('img/blank-image.svg') }})">
-                                                        <!--begin::Preview existing avatar-->
-                                                        <div class="image-input-wrapper w-150px h-150px"></div>
-                                                        <!--end::Preview existing avatar-->
-                                                        <!--begin::Label-->
-                                                        <label
-                                                            class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-                                                            data-kt-image-input-action="change" data-bs-toggle="tooltip"
-                                                            title="إختيار صورة">
-                                                            <i class="bi bi-pencil-fill fs-7"></i>
-                                                            <!--begin::Inputs-->
-                                                            <input type="file" name="avatar" accept=".png, .jpg, .jpeg" />
-                                                            <input type="hidden" name="avatar_remove" />
-                                                            <!--end::Inputs-->
-                                                        </label>
-                                                        <!--end::Label-->
-                                                        <!--begin::Cancel-->
-                                                        <span
-                                                            class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-                                                            data-kt-image-input-action="cancel" data-bs-toggle="tooltip"
-                                                            title="إلغاء الصورة">
-                                                            <i class="bi bi-x fs-2"></i>
-                                                        </span>
-                                                        <!--end::Cancel-->
-                                                        <!--begin::Remove-->
-                                                        <span
-                                                            class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-                                                            data-kt-image-input-action="remove" data-bs-toggle="tooltip"
-                                                            title="Remove avatar">
-                                                            <i class="bi bi-x fs-2"></i>
-                                                        </span>
-                                                        <!--end::Remove-->
-                                                    </div>
-                                                    <!--end::Image input-->
-                                                    <!--begin::Description-->
-                                                    <div class="text-muted fs-7">قم بتعيين صورة مصغرة للمنتج. يُقبل فقط
-                                                        ملفات الصور بصيغة
-                                                        *.png و *.jpg و *.jpeg</div>
-                                                    <!--end::Description-->
-                                                </div>
-                                                <!--end::Card body-->
-                                            </div>
-                                        </div>
-
-                                        <div class="card-body pt-0">
-
-                                            <div class="fv-row mb-2">
-
-                                                <div id="product_media_area" class="dropzone" style="cursor:pointer;">
-
-                                                    <input type="file" id="product_images" name="images[]"
-                                                        accept="image/jpeg,image/png,image/jpg,image/webp" multiple hidden>
-
-                                                    <div class="dz-message needsclick">
-
-                                                        <i class="bi bi-file-earmark-arrow-up text-primary fs-3x"></i>
-
-                                                        <div class="ms-4">
-                                                            <h3 class="fs-5 fw-bolder text-gray-900 mb-1">
-                                                                أسقط الملفات هنا أو انقر للتحميل.
-                                                            </h3>
-
-                                                            <span class="fs-7 fw-bold text-gray-400">
-                                                                حمّل ما يصل إلى 10 صور
-                                                            </span>
+                                                    <div id="variants_features_wrapper" style="display:none;">
+                                                        <div class="mb-7">
+                                                            <label class="form-label fw-bold fs-6 mb-4">
+                                                                اختر السمات المستخدمة في الأنواع
+                                                            </label>
+                                                            <div id="variants_checkboxes" class="d-flex flex-wrap gap-4">
+                                                            </div>
                                                         </div>
-
                                                     </div>
-
+                                                    <div id="variants_container"></div>
                                                 </div>
-
-                                                <div id="images_preview" class="d-flex flex-wrap gap-3 mt-5">
-                                                </div>
-
                                             </div>
-
-                                            <div class="text-muted fs-7">
-                                                قم بإعداد معرض صور المنتج.
-                                            </div>
-
                                         </div>
                                     </div>
                                 </div>
@@ -752,8 +681,6 @@
                                             generalTab.show();
 
                                         } else if (generalPane) {
-
-                                            // حل احتياطي
                                             generalPane.classList.add('show');
                                             generalPane.classList.add('active');
 
@@ -952,15 +879,15 @@
                         item.style.position = 'relative';
 
                         item.innerHTML = `
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <img src="${e.target.result}"
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     style="
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        width:100px;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        height:100px;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        object-fit:cover;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        border-radius:8px;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        border:1px solid #e4e6ef;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     ">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            `;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <img src="${e.target.result}"
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         style="
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            width:100px;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            height:100px;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            object-fit:cover;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            border-radius:8px;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            border:1px solid #e4e6ef;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         ">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                `;
 
                         preview.appendChild(item);
                     };
@@ -1089,21 +1016,21 @@
                 }
 
                 return $(`
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <div class="d-flex align-items-center gap-3">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <div class="d-flex align-items-center gap-3">
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <img src="${image}"
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     style="
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        width: 45px;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        height: 45px;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        object-fit: cover;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        border-radius: 6px;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        border: 1px solid #e4e6ef;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     ">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <img src="${image}"
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         style="
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            width: 45px;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            height: 45px;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            object-fit: cover;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            border-radius: 6px;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            border: 1px solid #e4e6ef;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         ">
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <span>${product.text}</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <span>${product.text}</span>
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        `);
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            `);
             }
 
 
@@ -1203,10 +1130,10 @@
                             return;
                         }
                         let options = `
-                            <option value="">
-                                اختر القيمة
-                            </option>
-                        `;
+                                                                                                                <option value="">
+                                                                                                                    اختر القيمة
+                                                                                                                </option>
+                                                                                                            `;
 
                         response.values.forEach(function (item) {
 
@@ -1223,13 +1150,13 @@
                             }
 
                             options += `
-                                <option
-                                    value="${item.id}"
-                                    ${extraData}
-                                >
-                                    ${item.name}
-                                </option>
-                            `;
+                                                                                                                    <option
+                                                                                                                        value="${item.id}"
+                                                                                                                        ${extraData}
+                                                                                                                    >
+                                                                                                                        ${item.name}
+                                                                                                                    </option>
+                                                                                                                `;
                         });
                         const featureRow =
                             document.createElement('div');
@@ -1240,38 +1167,38 @@
                         featureRow.dataset.featureId =
                             featureId;
                         featureRow.innerHTML = `
-                                                                <div class="row align-items-center">
-                                                                    <div class="col-md-2">
-                                                                        <label class="form-label mb-0">
-                                                                            السمة:
-                                                                            <strong>
-                                                                                ${selectedFeature.name}
-                                                                            </strong>
-                                                                        </label>
-                                                                        <input
-                                                                            type="hidden"
-                                                                            name="feature_ids[]"
-                                                                            value="${featureId}"
-                                                                        >
-                                                                    </div>
-                                                                    <div class="col-md-7">
-                                                                        <select
-                                                                            class="form-select feature-values-select"
-                                                                            name="feature_values[${featureId}]"
-                                                                        >
-                                                                            ${options}
-                                                                        </select>
-                                                                    </div>
-                                                                    <div class="col-md-3">
-                                                                        <button
-                                                                            type="button"
-                                                                            class="btn btn-danger remove-feature"
-                                                                        >
-                                                                            إزالة
-                                                                        </button>
-                                                                    </div>
-                                                                </div>
-                                                            `;
+                                                                                                                                                    <div class="row align-items-center">
+                                                                                                                                                        <div class="col-md-2">
+                                                                                                                                                            <label class="form-label mb-0">
+                                                                                                                                                                السمة:
+                                                                                                                                                                <strong>
+                                                                                                                                                                    ${selectedFeature.name}
+                                                                                                                                                                </strong>
+                                                                                                                                                            </label>
+                                                                                                                                                            <input
+                                                                                                                                                                type="hidden"
+                                                                                                                                                                name="feature_ids[]"
+                                                                                                                                                                value="${featureId}"
+                                                                                                                                                            >
+                                                                                                                                                        </div>
+                                                                                                                                                        <div class="col-md-7">
+                                                                                                                                                            <select
+                                                                                                                                                                class="form-select feature-values-select"
+                                                                                                                                                                name="feature_values[${featureId}]"
+                                                                                                                                                            >
+                                                                                                                                                                ${options}
+                                                                                                                                                            </select>
+                                                                                                                                                        </div>
+                                                                                                                                                        <div class="col-md-3">
+                                                                                                                                                            <button
+                                                                                                                                                                type="button"
+                                                                                                                                                                class="btn btn-danger remove-feature"
+                                                                                                                                                            >
+                                                                                                                                                                إزالة
+                                                                                                                                                            </button>
+                                                                                                                                                        </div>
+                                                                                                                                                    </div>
+                                                                                                                                                `;
                         container.appendChild(featureRow);
                         const valueSelect = $(featureRow)
                             .find('.feature-values-select');
@@ -1289,56 +1216,56 @@
                                 const avatar = option.dataset.avatar;
                                 if (color) {
                                     return $(`
-                                    <div
-                                        style="
-                                            display:flex;
-                                            align-items:center;
-                                            gap:10px;
-                                            direction:rtl;
-                                        "
-                                    >
-                                        <span
-                                            style="
-                                                width:18px;
-                                                height:18px;
-                                                border-radius:50%;
-                                                background:${color};
-                                                border:1px solid #ddd;
-                                                display:inline-block;
-                                                flex-shrink:0;
-                                            "
-                                        ></span>
-                                        <span>
-                                            ${state.text}
-                                        </span>
-                                    </div>
-                                `);
+                                                                                                                        <div
+                                                                                                                            style="
+                                                                                                                                display:flex;
+                                                                                                                                align-items:center;
+                                                                                                                                gap:10px;
+                                                                                                                                direction:rtl;
+                                                                                                                            "
+                                                                                                                        >
+                                                                                                                            <span
+                                                                                                                                style="
+                                                                                                                                    width:18px;
+                                                                                                                                    height:18px;
+                                                                                                                                    border-radius:50%;
+                                                                                                                                    background:${color};
+                                                                                                                                    border:1px solid #ddd;
+                                                                                                                                    display:inline-block;
+                                                                                                                                    flex-shrink:0;
+                                                                                                                                "
+                                                                                                                            ></span>
+                                                                                                                            <span>
+                                                                                                                                ${state.text}
+                                                                                                                            </span>
+                                                                                                                        </div>
+                                                                                                                    `);
                                 }
                                 if (avatar) {
 
                                     return $(`
-                                    <div
-                                        style="
-                                            display:flex;
-                                            align-items:center;
-                                            gap:10px;
-                                            direction:rtl;
-                                        "
-                                    >
-                                        <img
-                                            src="{{ asset('img/${avatar}') }}"
-                                            style="
-                                                width:30px;
-                                                height:30px;
-                                                border-radius:5px;
-                                                object-fit:cover;
-                                            "
-                                        >
-                                        <span>
-                                            ${state.text}
-                                        </span>
-                                    </div>
-                                `);
+                                                                                                                        <div
+                                                                                                                            style="
+                                                                                                                                display:flex;
+                                                                                                                                align-items:center;
+                                                                                                                                gap:10px;
+                                                                                                                                direction:rtl;
+                                                                                                                            "
+                                                                                                                        >
+                                                                                                                            <img
+                                                                                                                                src="{{ asset('img/${avatar}') }}"
+                                                                                                                                style="
+                                                                                                                                    width:30px;
+                                                                                                                                    height:30px;
+                                                                                                                                    border-radius:5px;
+                                                                                                                                    object-fit:cover;
+                                                                                                                                "
+                                                                                                                            >
+                                                                                                                            <span>
+                                                                                                                                ${state.text}
+                                                                                                                            </span>
+                                                                                                                        </div>
+                                                                                                                    `);
                                 }
                                 return state.text;
                             },
@@ -1351,54 +1278,54 @@
                                 const avatar = option.dataset.avatar;
                                 if (color) {
                                     return $(`
-                                    <div
-                                        style="
-                                            display:flex;
-                                            align-items:center;
-                                            gap:8px;
-                                            direction:rtl;
-                                        "
-                                    >
-                                        <span
-                                            style="
-                                                width:15px;
-                                                height:15px;
-                                                border-radius:50%;
-                                                background:${color};
-                                                border:1px solid #ddd;
-                                                display:inline-block;
-                                            "
-                                        ></span>
-                                        <span>
-                                            ${state.text}
-                                        </span>
-                                    </div>
-                                `);
+                                                                                                                        <div
+                                                                                                                            style="
+                                                                                                                                display:flex;
+                                                                                                                                align-items:center;
+                                                                                                                                gap:8px;
+                                                                                                                                direction:rtl;
+                                                                                                                            "
+                                                                                                                        >
+                                                                                                                            <span
+                                                                                                                                style="
+                                                                                                                                    width:15px;
+                                                                                                                                    height:15px;
+                                                                                                                                    border-radius:50%;
+                                                                                                                                    background:${color};
+                                                                                                                                    border:1px solid #ddd;
+                                                                                                                                    display:inline-block;
+                                                                                                                                "
+                                                                                                                            ></span>
+                                                                                                                            <span>
+                                                                                                                                ${state.text}
+                                                                                                                            </span>
+                                                                                                                        </div>
+                                                                                                                    `);
                                 }
                                 if (avatar) {
                                     return $(`
-                                    <div
-                                        style="
-                                            display:flex;
-                                            align-items:center;
-                                            gap:8px;
-                                            direction:rtl;
-                                        "
-                                    >
-                                        <img
-                                            src="{{ asset('img/${avatar}') }}"
-                                            style="
-                                                width:25px;
-                                                height:25px;
-                                                border-radius:4px;
-                                                object-fit:cover;
-                                            "
-                                        >
-                                        <span>
-                                            ${state.text}
-                                        </span>
-                                    </div>
-                                `);
+                                                                                                                        <div
+                                                                                                                            style="
+                                                                                                                                display:flex;
+                                                                                                                                align-items:center;
+                                                                                                                                gap:8px;
+                                                                                                                                direction:rtl;
+                                                                                                                            "
+                                                                                                                        >
+                                                                                                                            <img
+                                                                                                                                src="{{ asset('img/${avatar}') }}"
+                                                                                                                                style="
+                                                                                                                                    width:25px;
+                                                                                                                                    height:25px;
+                                                                                                                                    border-radius:4px;
+                                                                                                                                    object-fit:cover;
+                                                                                                                                "
+                                                                                                                            >
+                                                                                                                            <span>
+                                                                                                                                ${state.text}
+                                                                                                                            </span>
+                                                                                                                        </div>
+                                                                                                                    `);
                                 }
                                 return state.text;
                             },
@@ -1437,6 +1364,1785 @@
                 refreshFeatureSelect();
             });
             refreshFeatureSelect();
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+
+            const featuresContainer =
+                document.getElementById('selected_features_container');
+
+            const variantsWrapper =
+                document.getElementById('variants_features_wrapper');
+
+            const variantsCheckboxes =
+                document.getElementById('variants_checkboxes');
+
+
+            if (
+                !featuresContainer ||
+                !variantsWrapper ||
+                !variantsCheckboxes
+            ) {
+                return;
+            }
+            function refreshVariants() {
+                variantsCheckboxes.innerHTML = '';
+                const features = [];
+                featuresContainer
+                    .querySelectorAll('.feature-item')
+                    .forEach(function (row) {
+                        const select =
+                            row.querySelector(
+                                '.feature-values-select'
+                            );
+                        if (!select) {
+                            return;
+                        }
+                        const featureNameElement =
+                            row.querySelector(
+                                'label strong'
+                            );
+                        const featureName =
+                            featureNameElement
+                                ? featureNameElement.textContent.trim()
+                                : '';
+                        let selectedOptions = [];
+                        if (select.multiple) {
+                            selectedOptions =
+                                Array.from(
+                                    select.selectedOptions
+                                );
+                        } else {
+                            const selectedOption =
+                                select.options[
+                                select.selectedIndex
+                                ];
+                            if (
+                                selectedOption &&
+                                selectedOption.value
+                            ) {
+                                selectedOptions.push(
+                                    selectedOption
+                                );
+                            }
+                        }
+                        if (!selectedOptions.length) {
+                            return;
+                        }
+                        const values =
+                            selectedOptions.map(function (option) {
+                                return {
+                                    id: option.value,
+                                    name:
+                                        option.textContent.trim(),
+                                    color:
+                                        option.dataset.color || '',
+                                    avatar:
+                                        option.dataset.avatar || ''
+                                };
+                            });
+                        features.push({
+
+                            id: row.dataset.featureId,
+
+                            name: featureName,
+
+                            values: values
+
+                        });
+
+                    });
+                if (!features.length) {
+
+                    variantsWrapper.style.display =
+                        'none';
+                    return;
+                }
+                variantsWrapper.style.display =
+                    'block';
+                const combinations =
+                    createCombinations(features);
+
+
+                /*
+                |--------------------------------------------------------------------------
+                | إنشاء Checkboxes
+                |--------------------------------------------------------------------------
+                */
+
+                combinations.forEach(
+                    function (combination, index) {
+
+                        const checkboxItem =
+                            document.createElement('div');
+
+                        checkboxItem.className =
+                            'variant-checkbox-item';
+
+
+                        const names =
+                            combination.map(
+                                item => item.value.name
+                            );
+
+
+                        const ids =
+                            combination.map(
+                                item => {
+                                    return {
+                                        feature_id:
+                                            item.feature.id,
+
+                                        value_id:
+                                            item.value.id
+                                    };
+                                }
+                            );
+
+
+                        checkboxItem.innerHTML = `
+
+                                                                                <label
+                                                                                    class="
+                                                                                        d-flex
+                                                                                        align-items-center
+                                                                                        gap-3
+                                                                                        border
+                                                                                        border-gray-300
+                                                                                        rounded
+                                                                                        px-4
+                                                                                        py-3
+                                                                                        cursor-pointer
+                                                                                    "
+                                                                                >
+
+                                                                                    <input
+                                                                                        class="
+                                                                                            form-check-input
+                                                                                            variant-checkbox
+                                                                                        "
+                                                                                        type="checkbox"
+
+                                                                                        name="selected_variants[]"
+
+                                                                                        value="${index}"
+
+                                                                                        data-variant='${JSON.stringify(ids)}'
+                                                                                    >
+
+
+                                                                                    <div
+                                                                                        class="
+                                                                                            d-flex
+                                                                                            align-items-center
+                                                                                            gap-2
+                                                                                            flex-wrap
+                                                                                        "
+                                                                                    >
+
+                                                                                        ${createVariantPreview(
+                            combination
+                        )}
+
+                                                                                        <span
+                                                                                            class="
+                                                                                                fw-semibold
+                                                                                                text-gray-800
+                                                                                            "
+                                                                                        >
+                                                                                            ${names.join(' - ')}
+                                                                                        </span>
+
+                                                                                    </div>
+
+                                                                                </label>
+
+                                                                            `;
+
+
+                        variantsCheckboxes
+                            .appendChild(
+                                checkboxItem
+                            );
+
+                    });
+
+            }
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | عمل جميع التركيبات
+            |--------------------------------------------------------------------------
+            */
+
+            function createCombinations(features) {
+
+                let result = [[]];
+
+
+                features.forEach(
+                    function (feature) {
+
+                        const temp = [];
+
+
+                        result.forEach(
+                            function (current) {
+
+                                feature.values.forEach(
+                                    function (value) {
+
+                                        temp.push([
+
+                                            ...current,
+
+                                            {
+                                                feature:
+                                                    feature,
+
+                                                value:
+                                                    value
+                                            }
+
+                                        ]);
+
+                                    }
+                                );
+
+                            }
+                        );
+
+
+                        result = temp;
+
+                    }
+                );
+
+
+                return result;
+
+            }
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | اللون / الصورة بجانب النوع
+            |--------------------------------------------------------------------------
+            */
+
+            function createVariantPreview(
+                combination
+            ) {
+
+                let html = '';
+
+
+                combination.forEach(
+                    function (item) {
+
+                        /*
+                        |--------------------------------------------------------------------------
+                        | اللون
+                        |--------------------------------------------------------------------------
+                        */
+
+                        if (item.value.color) {
+
+                            html += `
+
+                                                                                    <span
+                                                                                        title="${item.value.name}"
+                                                                                        style="
+                                                                                            width:18px;
+                                                                                            height:18px;
+                                                                                            border-radius:50%;
+                                                                                            background:${item.value.color};
+                                                                                            border:1px solid #ddd;
+                                                                                            display:inline-block;
+                                                                                            flex-shrink:0;
+                                                                                        "
+                                                                                    ></span>
+
+                                                                                `;
+
+                        }
+
+
+                        /*
+                        |--------------------------------------------------------------------------
+                        | صورة النقش
+                        |--------------------------------------------------------------------------
+                        */
+
+                        if (item.value.avatar) {
+
+                            html += `
+
+                                                                                    <img
+                                                                                        src="${item.value.avatar}"
+                                                                                        title="${item.value.name}"
+                                                                                        style="
+                                                                                            width:28px;
+                                                                                            height:28px;
+                                                                                            border-radius:5px;
+                                                                                            object-fit:cover;
+                                                                                            border:1px solid #e4e6ef;
+                                                                                        "
+                                                                                    >
+
+                                                                                `;
+
+                        }
+
+                    }
+                );
+
+
+                return html;
+
+            }
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | عند تغيير قيمة أي سمة
+            |--------------------------------------------------------------------------
+            */
+
+            $(document).on(
+                'change',
+                '.feature-values-select',
+                function () {
+
+                    refreshVariants();
+
+                }
+            );
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | عند حذف سمة
+            |--------------------------------------------------------------------------
+            */
+
+            document.addEventListener(
+                'click',
+                function (e) {
+
+                    if (
+                        e.target.closest(
+                            '.remove-feature'
+                        )
+                    ) {
+
+                        setTimeout(
+                            function () {
+
+                                refreshVariants();
+
+                            },
+                            50
+                        );
+
+                    }
+
+                }
+            );
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | أول تشغيل
+            |--------------------------------------------------------------------------
+            */
+
+            refreshVariants();
+
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+
+            const featuresContainer =
+                document.getElementById('selected_features_container');
+
+            const variantsWrapper =
+                document.getElementById('variants_features_wrapper');
+
+            const variantsCheckboxes =
+                document.getElementById('variants_checkboxes');
+
+            // مكان ظهور الأنواع
+            let variantsContainer =
+                document.getElementById('variants_container');
+
+
+            if (!variantsContainer && variantsWrapper) {
+
+                variantsContainer =
+                    document.createElement('div');
+
+                variantsContainer.id =
+                    'variants_container';
+
+                variantsContainer.className =
+                    'mt-7';
+
+                variantsWrapper.parentNode.appendChild(
+                    variantsContainer
+                );
+            }
+
+
+            if (
+                !featuresContainer ||
+                !variantsWrapper ||
+                !variantsCheckboxes ||
+                !variantsContainer
+            ) {
+                return;
+            }
+
+            let enabledFeatures = [];
+
+            function refreshFeatureCheckboxes() {
+
+                variantsCheckboxes.innerHTML = '';
+
+                const featureRows =
+                    featuresContainer.querySelectorAll(
+                        '.feature-item'
+                    );
+                if (!featureRows.length) {
+
+                    variantsWrapper.style.display =
+                        'none';
+
+                    variantsContainer.innerHTML =
+                        '';
+
+                    enabledFeatures = [];
+
+                    return;
+                }
+                const availableFeatures = [];
+
+
+                featureRows.forEach(function (row) {
+
+                    const featureId =
+                        String(row.dataset.featureId);
+
+
+                    const nameElement =
+                        row.querySelector(
+                            'label strong'
+                        );
+
+
+                    const featureName =
+                        nameElement
+                            ? nameElement.textContent.trim()
+                            : '';
+
+
+                    const select =
+                        row.querySelector(
+                            '.feature-values-select'
+                        );
+
+                    if (!select) {
+                        return;
+                    }
+
+                    const selectedOptions =
+                        Array.from(
+                            select.selectedOptions
+                        ).filter(function (option) {
+
+                            return option.value !== '';
+
+                        });
+
+                    if (!selectedOptions.length) {
+                        return;
+                    }
+
+
+                    const values =
+                        selectedOptions.map(
+                            function (option) {
+
+                                return {
+
+                                    id:
+                                        String(
+                                            option.value
+                                        ),
+
+                                    name:
+                                        option.textContent.trim(),
+
+                                    color:
+                                        option.dataset.color || '',
+
+                                    avatar:
+                                        option.dataset.avatar || ''
+
+                                };
+
+                            }
+                        );
+
+
+                    availableFeatures.push({
+
+                        id:
+                            featureId,
+
+                        name:
+                            featureName,
+
+                        values:
+                            values
+
+                    });
+
+                });
+
+                if (!availableFeatures.length) {
+
+                    variantsWrapper.style.display =
+                        'none';
+
+                    variantsContainer.innerHTML =
+                        '';
+
+                    enabledFeatures = [];
+
+                    return;
+                }
+
+                variantsWrapper.style.display =
+                    'block';
+
+                enabledFeatures =
+                    enabledFeatures.filter(
+                        function (id) {
+
+                            return availableFeatures.some(
+                                function (feature) {
+
+                                    return String(
+                                        feature.id
+                                    ) === String(id);
+
+                                }
+                            );
+
+                        }
+                    );
+
+                availableFeatures.forEach(
+                    function (feature) {
+
+                        const wrapper =
+                            document.createElement('div');
+
+
+                        wrapper.className =
+                            'form-check form-check-custom form-check-solid me-5 mb-3';
+
+
+                        const checked =
+                            enabledFeatures.includes(
+                                String(feature.id)
+                            );
+
+
+                        wrapper.innerHTML = `
+
+                                    <input
+                                        class="
+                                            form-check-input
+                                            variant-feature-checkbox
+                                        "
+                                        type="checkbox"
+                                        value="${feature.id}"
+                                        id="variant_feature_${feature.id}"
+                                        ${checked ? 'checked' : ''}
+                                    >
+
+                                    <label
+                                        class="
+                                            form-check-label
+                                            fw-semibold
+                                            text-gray-800
+                                        "
+                                        for="variant_feature_${feature.id}"
+                                    >
+                                        ${feature.name}
+                                    </label>
+
+                                `;
+
+
+                        variantsCheckboxes.appendChild(
+                            wrapper
+                        );
+
+                    }
+                );
+
+                buildVariants(
+                    availableFeatures
+                );
+
+            }
+            variantsCheckboxes.addEventListener(
+                'change',
+                function (e) {
+
+                    if (
+                        !e.target.classList.contains(
+                            'variant-feature-checkbox'
+                        )
+                    ) {
+                        return;
+                    }
+
+
+                    const featureId =
+                        String(e.target.value);
+
+
+                    if (e.target.checked) {
+
+                        if (
+                            !enabledFeatures.includes(
+                                featureId
+                            )
+                        ) {
+
+                            enabledFeatures.push(
+                                featureId
+                            );
+
+                        }
+
+                    } else {
+
+                        enabledFeatures =
+                            enabledFeatures.filter(
+                                function (id) {
+
+                                    return String(id) !==
+                                        featureId;
+
+                                }
+                            );
+
+                    }
+
+
+                    refreshFeatureCheckboxes();
+
+                }
+            );
+
+            function buildVariants(
+                availableFeatures
+            ) {
+
+
+                const oldValues =
+                    collectExistingVariantValues();
+
+
+                variantsContainer.innerHTML =
+                    '';
+
+                if (!enabledFeatures.length) {
+
+                    return;
+
+                }
+                const selectedFeatures =
+                    availableFeatures.filter(
+                        function (feature) {
+
+                            return enabledFeatures.includes(
+                                String(feature.id)
+                            );
+
+                        }
+                    );
+
+
+                if (!selectedFeatures.length) {
+
+                    return;
+
+                }
+                const combinations =
+                    createCombinations(
+                        selectedFeatures
+                    );
+
+
+                combinations.forEach(
+                    function (
+                        combination,
+                        index
+                    ) {
+
+                        createVariantCard(
+                            combination,
+                            index,
+                            oldValues
+                        );
+
+                    }
+                );
+
+            }
+            function createCombinations(
+                features
+            ) {
+
+                let result = [[]];
+
+
+                features.forEach(
+                    function (feature) {
+
+                        const temp = [];
+
+
+                        result.forEach(
+                            function (
+                                currentCombination
+                            ) {
+
+                                feature.values.forEach(
+                                    function (value) {
+
+                                        temp.push([
+
+                                            ...currentCombination,
+
+                                            {
+
+                                                feature:
+                                                    feature,
+
+                                                value:
+                                                    value
+
+                                            }
+
+                                        ]);
+
+                                    }
+                                );
+
+                            }
+                        );
+
+
+                        result = temp;
+
+                    }
+                );
+
+
+                return result;
+
+            }
+            function getVariantKey(
+                combination
+            ) {
+
+                return combination
+                    .map(
+                        function (item) {
+
+                            return (
+                                item.feature.id +
+                                ':' +
+                                item.value.id
+                            );
+
+                        }
+                    )
+                    .sort()
+                    .join('|');
+
+            }
+            function createVariantCard(
+                combination,
+                index,
+                oldValues
+            ) {
+
+                const key =
+                    getVariantKey(
+                        combination
+                    );
+
+
+                const title =
+                    combination
+                        .map(
+                            function (item) {
+
+                                return item.value.name;
+
+                            }
+                        )
+                        .join(' - ');
+                const valuesData =
+                    combination.map(
+                        function (item) {
+                            return {
+                                feature_id:
+                                    item.feature.id,
+                                value_id:
+                                    item.value.id
+                            };
+                        }
+                    );
+                const previous =
+                    oldValues[key] || {};
+                const card =
+                    document.createElement('div');
+                card.className =
+                    'variant-card mb-5';
+                card.dataset.variantKey =
+                    key;
+                card.innerHTML = `
+
+                            <!-- ========================================================= -->
+                            <!-- Header -->
+                            <!-- ========================================================= -->
+
+                            <div
+                                class="
+                                    variant-header
+                                    d-flex
+                                    align-items-center
+                                    justify-content-between
+                                    px-6
+                                    py-4
+                                    cursor-pointer
+                                "
+                                style="
+                                    background:#6258c9;
+                                    color:#fff;
+                                    min-height:54px;
+                                    border-radius:6px;
+                                "
+                            >
+
+                                <div
+                                    class="
+                                        d-flex
+                                        align-items-center
+                                        gap-3
+                                    "
+                                >
+
+                                    <span
+                                        class="fs-2"
+                                    >
+                                        📋
+                                    </span>
+
+                                    <span
+                                        class="
+                                            fw-bold
+                                            fs-5
+                                        "
+                                    >
+
+                                        النوع : ${title}
+
+                                    </span>
+
+                                    ${createVariantPreview(
+                    combination
+                )}
+
+                                </div>
+
+
+                                <span
+                                    class="
+                                        variant-arrow
+                                        fw-bold
+                                        fs-4
+                                    "
+                                >
+                                    ▾
+                                </span>
+
+                            </div>
+
+
+                            <!-- ========================================================= -->
+                            <!-- Body -->
+                            <!-- ========================================================= -->
+
+                            <div
+                                class="
+                                    variant-body
+                                    border
+                                    border-top-0
+                                    rounded-bottom
+                                "
+                                style="display:none;"
+                            >
+
+                                <input
+                                    type="hidden"
+                                    name="variants[${index}][key]"
+                                    value="${key}"
+                                >
+
+
+                                ${createHiddenFeatureValues(
+                    combination,
+                    index
+                )}
+
+
+                                <!-- ========================== -->
+                                <!-- السعر -->
+                                <!-- ========================== -->
+
+                                <div
+                                    class="
+                                        row
+                                        align-items-center
+                                        py-4
+                                        border-bottom
+                                        px-6
+                                    "
+                                >
+
+                                    <div
+                                        class="
+                                            col-md-2
+                                            text-end
+                                        "
+                                    >
+
+                                        <label
+                                            class="
+                                                form-label
+                                                fw-bold
+                                                mb-0
+                                            "
+                                        >
+                                            السعر:
+                                        </label>
+
+                                    </div>
+
+
+                                    <div class="col-md-5">
+
+                                        <input
+                                            type="number"
+                                            step="0.01"
+                                            min="0"
+                                            class="form-control"
+                                            name="variants[${index}][price]"
+                                            value="${escapeValue(previous.price)}"
+                                            placeholder="السعر"
+                                        >
+
+                                    </div>
+
+                                </div>
+
+
+                                <!-- ========================== -->
+                                <!-- السعر بعد الخصم -->
+                                <!-- ========================== -->
+
+                                <div
+                                    class="
+                                        row
+                                        align-items-center
+                                        py-4
+                                        border-bottom
+                                        px-6
+                                    "
+                                >
+
+                                    <div
+                                        class="
+                                            col-md-2
+                                            text-end
+                                        "
+                                    >
+
+                                        <label
+                                            class="
+                                                form-label
+                                                fw-bold
+                                                mb-0
+                                            "
+                                        >
+                                            السعر بعد الخصم:
+                                        </label>
+
+                                    </div>
+
+
+                                    <div class="col-md-5">
+
+                                        <input
+                                            type="number"
+                                            step="0.01"
+                                            min="0"
+                                            class="form-control"
+                                            name="variants[${index}][price_after]"
+                                            value="${escapeValue(previous.price_after)}"
+                                            placeholder="السعر بعد الخصم"
+                                        >
+
+                                    </div>
+
+
+                                    <div class="col-md-3">
+
+                                        <button
+                                            type="button"
+                                            class="
+                                                btn
+                                                btn-link
+                                                p-0
+                                                me-5
+                                            "
+                                        >
+                                            جدولة
+                                        </button>
+
+
+                                        <button
+                                            type="button"
+                                            class="
+                                                btn
+                                                btn-link
+                                                p-0
+                                            "
+                                        >
+                                            إلغاء الجدولة
+                                        </button>
+
+                                    </div>
+
+                                </div>
+
+
+                                <!-- ========================== -->
+                                <!-- سعر التكلفة -->
+                                <!-- ========================== -->
+
+                                <div
+                                    class="
+                                        row
+                                        align-items-center
+                                        py-4
+                                        border-bottom
+                                        px-6
+                                    "
+                                >
+
+                                    <div
+                                        class="
+                                            col-md-2
+                                            text-end
+                                        "
+                                    >
+
+                                        <label
+                                            class="
+                                                form-label
+                                                fw-bold
+                                                mb-0
+                                            "
+                                        >
+                                            سعر التكلفة:
+                                        </label>
+
+                                    </div>
+
+
+                                    <div class="col-md-5">
+
+                                        <input
+                                            type="number"
+                                            step="0.01"
+                                            min="0"
+                                            class="form-control"
+                                            name="variants[${index}][cost_price]"
+                                            value="${escapeValue(previous.cost_price)}"
+                                            placeholder="سعر التكلفة"
+                                        >
+
+                                    </div>
+
+                                </div>
+
+
+                                <!-- ========================== -->
+                                <!-- حالة المخزون -->
+                                <!-- ========================== -->
+
+                                <div
+                                    class="
+                                        row
+                                        align-items-center
+                                        py-4
+                                        border-bottom
+                                        px-6
+                                    "
+                                >
+
+                                    <div
+                                        class="
+                                            col-md-2
+                                            text-end
+                                        "
+                                    >
+
+                                        <label
+                                            class="
+                                                form-label
+                                                fw-bold
+                                                mb-0
+                                            "
+                                        >
+                                            حالة المخزون:
+                                        </label>
+
+                                    </div>
+
+
+                                    <div class="col-md-5">
+
+                                        <select
+                                            class="form-select"
+                                            name="variants[${index}][stock_status]"
+                                        >
+
+                                            <option
+                                                value="available"
+                                                ${previous.stock_status ===
+                        'available' ||
+                        !previous.stock_status
+                        ? 'selected'
+                        : ''
+                    }
+                                            >
+                                                متوفر في المخزون
+                                            </option>
+
+                                            <option
+                                                value="unavailable"
+                                                ${previous.stock_status ===
+                        'unavailable'
+                        ? 'selected'
+                        : ''
+                    }
+                                            >
+                                                غير متوفر في المخزون
+                                            </option>
+
+                                        </select>
+
+                                    </div>
+
+                                </div>
+
+
+                                <!-- ========================== -->
+                                <!-- SKU -->
+                                <!-- ========================== -->
+
+                                <div
+                                    class="
+                                        row
+                                        align-items-center
+                                        py-4
+                                        border-bottom
+                                        px-6
+                                    "
+                                >
+
+                                    <div
+                                        class="
+                                            col-md-2
+                                            text-end
+                                        "
+                                    >
+
+                                        <label
+                                            class="
+                                                form-label
+                                                fw-bold
+                                                mb-0
+                                            "
+                                        >
+                                            SKU:
+                                        </label>
+
+                                    </div>
+
+
+                                    <div class="col-md-5">
+
+                                        <input
+                                            type="text"
+                                            class="form-control"
+                                            name="variants[${index}][sku]"
+                                            value="${escapeValue(previous.sku)}"
+                                            placeholder="SKU"
+                                        >
+
+                                    </div>
+
+                                </div>
+
+
+                                <!-- ========================== -->
+                                <!-- كمية المخزون -->
+                                <!-- ========================== -->
+
+                                <div
+                                    class="
+                                        row
+                                        align-items-center
+                                        py-4
+                                        border-bottom
+                                        px-6
+                                    "
+                                >
+
+                                    <div
+                                        class="
+                                            col-md-2
+                                            text-end
+                                        "
+                                    >
+
+                                        <label
+                                            class="
+                                                form-label
+                                                fw-bold
+                                                mb-0
+                                            "
+                                        >
+                                            كمية المخزون:
+                                        </label>
+
+                                    </div>
+
+
+                                    <div class="col-md-5">
+
+                                        <input
+                                            type="number"
+                                            min="0"
+                                            class="form-control"
+                                            name="variants[${index}][quantity]"
+                                            value="${escapeValue(previous.quantity)}"
+                                            placeholder="كمية المخزون"
+                                        >
+
+                                    </div>
+
+                                </div>
+
+
+                                <!-- ========================== -->
+                                <!-- الوزن -->
+                                <!-- ========================== -->
+
+                                <div
+                                    class="
+                                        row
+                                        align-items-center
+                                        py-4
+                                        border-bottom
+                                        px-6
+                                    "
+                                >
+
+                                    <div
+                                        class="
+                                            col-md-2
+                                            text-end
+                                        "
+                                    >
+
+                                        <label
+                                            class="
+                                                form-label
+                                                fw-bold
+                                                mb-0
+                                            "
+                                        >
+                                            الوزن (kg):
+                                        </label>
+
+                                    </div>
+
+
+                                    <div class="col-md-5">
+
+                                        <input
+                                            type="number"
+                                            step="0.01"
+                                            min="0"
+                                            class="form-control"
+                                            name="variants[${index}][weight]"
+                                            value="${escapeValue(previous.weight)}"
+                                            placeholder="الوزن"
+                                        >
+
+                                    </div>
+
+                                </div>
+
+
+                                <!-- ========================== -->
+                                <!-- الأبعاد -->
+                                <!-- ========================== -->
+
+                                <div
+                                    class="
+                                        row
+                                        align-items-center
+                                        py-4
+                                        border-bottom
+                                        px-6
+                                    "
+                                >
+
+                                    <div
+                                        class="
+                                            col-md-2
+                                            text-end
+                                        "
+                                    >
+
+                                        <label
+                                            class="
+                                                form-label
+                                                fw-bold
+                                                mb-0
+                                            "
+                                        >
+                                            الأبعاد:
+                                        </label>
+
+                                    </div>
+
+
+                                    <div class="col-md-6">
+
+                                        <div class="input-group">
+
+                                            <input
+                                                type="number"
+                                                step="0.01"
+                                                min="0"
+                                                class="form-control"
+                                                name="variants[${index}][length]"
+                                                value="${escapeValue(previous.length)}"
+                                                placeholder="الطول"
+                                            >
+
+                                            <input
+                                                type="number"
+                                                step="0.01"
+                                                min="0"
+                                                class="form-control"
+                                                name="variants[${index}][width]"
+                                                value="${escapeValue(previous.width)}"
+                                                placeholder="العرض"
+                                            >
+
+                                            <input
+                                                type="number"
+                                                step="0.01"
+                                                min="0"
+                                                class="form-control"
+                                                name="variants[${index}][height]"
+                                                value="${escapeValue(previous.height)}"
+                                                placeholder="الارتفاع"
+                                            >
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+                                <!-- ========================== -->
+                                <!-- الحد الأدنى -->
+                                <!-- ========================== -->
+
+                                <div
+                                    class="
+                                        row
+                                        align-items-center
+                                        py-4
+                                        border-bottom
+                                        px-6
+                                    "
+                                >
+
+                                    <div
+                                        class="
+                                            col-md-2
+                                            text-end
+                                        "
+                                    >
+
+                                        <label
+                                            class="
+                                                form-label
+                                                fw-bold
+                                                mb-0
+                                            "
+                                        >
+                                            الحد الأدنى من الكمية:
+                                        </label>
+
+                                    </div>
+
+
+                                    <div class="col-md-5">
+
+                                        <input
+                                            type="number"
+                                            min="1"
+                                            class="form-control"
+                                            name="variants[${index}][min_quantity]"
+                                            value="${previous.min_quantity !== undefined &&
+                        previous.min_quantity !== ''
+                        ? escapeValue(
+                            previous.min_quantity
+                        )
+                        : 1
+                    }"
+                                        >
+
+                                    </div>
+
+                                </div>
+
+
+                                <!-- ========================== -->
+                                <!-- الحد الأعلى -->
+                                <!-- ========================== -->
+
+                                <div
+                                    class="
+                                        row
+                                        align-items-center
+                                        py-4
+                                        border-bottom
+                                        px-6
+                                    "
+                                >
+
+                                    <div
+                                        class="
+                                            col-md-2
+                                            text-end
+                                        "
+                                    >
+
+                                        <label
+                                            class="
+                                                form-label
+                                                fw-bold
+                                                mb-0
+                                            "
+                                        >
+                                            الحد الأعلى من الكمية:
+                                        </label>
+
+                                    </div>
+
+
+                                    <div class="col-md-5">
+
+                                        <input
+                                            type="number"
+                                            min="1"
+                                            class="form-control"
+                                            name="variants[${index}][max_quantity]"
+                                            value="${previous.max_quantity !== undefined &&
+                        previous.max_quantity !== ''
+                        ? escapeValue(
+                            previous.max_quantity
+                        )
+                        : 99
+                    }"
+                                        >
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        `;
+                variantsContainer.appendChild(
+                    card
+                );
+            }
+            function createHiddenFeatureValues(
+                combination,
+                variantIndex
+            ) {
+                let html = '';
+                combination.forEach(
+                    function (
+                        item,
+                        featureIndex
+                    ) {
+                        html += `
+                                    <input
+                                        type="hidden"
+                                        name="
+                                            variants[
+                                                ${variantIndex}
+                                            ][features][
+                                                ${featureIndex}
+                                            ][feature_id]
+                                        "
+                                        value="${item.feature.id}"
+                                    >
+                                    <input
+                                        type="hidden"
+                                        name="
+                                            variants[
+                                                ${variantIndex}
+                                            ][features][
+                                                ${featureIndex}
+                                            ][value_id]
+                                        "
+                                        value="${item.value.id}"
+                                    >
+                                `;
+                    }
+                );
+                return html;
+            }
+            function createVariantPreview(
+                combination
+            ) {
+                let html = '';
+                combination.forEach(
+                    function (item) {
+                        if (item.value.color) {
+                            html += `
+                                        <span
+                                            title="${item.value.name}"
+                                            style="
+                                                width:18px;
+                                                height:18px;
+                                                border-radius:50%;
+                                                background:${item.value.color};
+                                                display:inline-block;
+                                                border:2px solid rgba(255,255,255,.8);
+                                                flex-shrink:0;
+                                            "
+                                        ></span>
+                                    `;
+                        }
+                        if (item.value.avatar) {
+                            html += `
+                                        <img
+                                            src="{{ asset('img/${item.value.avatar}') }}"
+                                            title="${item.value.name}"
+                                            style="
+                                                width:28px;
+                                                height:28px;
+                                                border-radius:5px;
+                                                object-fit:cover;
+                                                border:2px solid #fff;
+                                            "
+                                        >
+
+                                    `;
+
+                        }
+
+                    }
+                );
+                return html;
+            }
+            variantsContainer.addEventListener(
+                'click',
+                function (e) {
+                    const header =
+                        e.target.closest(
+                            '.variant-header'
+                        );
+                    if (!header) {
+                        return;
+                    }
+                    const card =
+                        header.closest(
+                            '.variant-card'
+                        );
+                    if (!card) {
+                        return;
+                    }
+                    const body =
+                        card.querySelector(
+                            '.variant-body'
+                        );
+                    const arrow =
+                        header.querySelector(
+                            '.variant-arrow'
+                        );
+                    if (!body) {
+                        return;
+                    }
+                    if (
+                        body.style.display ===
+                        'none'
+                    ) {
+                        body.style.display =
+                            'block';
+                        if (arrow) {
+                            arrow.textContent =
+                                '▴';
+                        }
+                        header.style.borderRadius =
+                            '6px 6px 0 0';
+                    }
+                    else {
+                        body.style.display =
+                            'none';
+                        if (arrow) {
+                            arrow.textContent =
+                                '▾';
+                        }
+                        header.style.borderRadius =
+                            '6px';
+                    }
+                }
+            );
+            function collectExistingVariantValues() {
+                const data = {};
+                variantsContainer
+                    .querySelectorAll(
+                        '.variant-card'
+                    )
+                    .forEach(
+                        function (card) {
+                            const key =
+                                card.dataset.variantKey;
+                            if (!key) {
+                                return;
+                            }
+                            data[key] = {};
+                            card
+                                .querySelectorAll(
+                                    'input, select, textarea'
+                                )
+                                .forEach(
+                                    function (field) {
+                                        const name =
+                                            field.name;
+                                        if (!name) {
+                                            return;
+                                        }
+                                        const match =
+                                            name.match(
+                                                /\]\[([^\]]+)\]$/
+                                            );
+                                        if (!match) {
+                                            return;
+                                        }
+                                        const fieldName =
+                                            match[1];
+                                        data[key][fieldName] =
+                                            field.value;
+                                    }
+                                );
+                        }
+                    );
+                return data;
+            }
+            function escapeValue(value) {
+                if (
+                    value === undefined ||
+                    value === null
+                ) {
+                    return '';
+                }
+                return String(value)
+                    .replaceAll('&', '&amp;')
+                    .replaceAll('"', '&quot;')
+                    .replaceAll('<', '&lt;')
+                    .replaceAll('>', '&gt;');
+            }
+            $(document).on(
+                'change',
+                '.feature-values-select',
+                function () {
+                    refreshFeatureCheckboxes();
+                }
+            );
+            const observer =
+                new MutationObserver(
+                    function () {
+                        refreshFeatureCheckboxes();
+                    }
+                );
+            observer.observe(
+                featuresContainer,
+                {
+                    childList: true,
+                    subtree: false
+                }
+            );
+            document.addEventListener(
+                'click',
+                function (e) {
+                    if (
+                        e.target.closest(
+                            '.remove-feature'
+                        )
+                    ) {
+                        setTimeout(
+                            function () {
+                                refreshFeatureCheckboxes();
+                            },
+                            100
+                        );
+
+                    }
+
+                }
+            );
+            refreshFeatureCheckboxes();
         });
     </script>
 @endsection
