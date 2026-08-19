@@ -16,8 +16,9 @@ function read_url(input, selector) {
     reader.readAsDataURL(input.files[0]);
 }
 
-function get_file_name(url) {
-    return url.replace(get_url + "/uploads/", "");
+function get_file_name(url)
+{
+    return url.replace(get_url+"/uploads/" , "");
     return url.split('/').pop().split('#')[0].split('?')[0];
 }
 
@@ -33,7 +34,7 @@ function cartesian(array) {
     function c(part, index) {
         var k = Object.keys(array[index])[0];
         array[index][k].forEach(function (a) {
-            var p = Object.assign({}, part, { [k]: a });
+            var p = Object.assign({}, part, {[k]: a});
             if (index + 1 === array.length) {
                 r.push(p);
                 return;
@@ -180,7 +181,7 @@ function general_handle_response__(response, selector_success, selector_error) {
 
 }
 
-function full_general_handle_response(response, vue_obj, show_msg = false) {
+function full_general_handle_response(response , vue_obj , show_msg = false) {
 
     var status = response.status;
     var auth = response.auth;
@@ -192,7 +193,7 @@ function full_general_handle_response(response, vue_obj, show_msg = false) {
         swal("Error", error_msg, "error");
         return false;
     } else if (!status) {
-        if (show_msg) {
+        if(show_msg) {
             vue_obj.msg.error = error_msg;
             $('.success_msg').addClass('hidden');
             $('.error_msg').removeClass('hidden');
@@ -204,7 +205,7 @@ function full_general_handle_response(response, vue_obj, show_msg = false) {
 
         return false;
     } else {
-        if (show_msg) {
+        if(show_msg) {
             vue_obj.msg.success = success_msg;
             $('.success_msg').removeClass('hidden');
             $('.error_msg').addClass('hidden');
@@ -240,16 +241,16 @@ function handle_product_response(response) {
         var m_error_tab_id = "#m" + data['error_tab_id'];
 
         var random_id = data['random_id'];
-        if (random_id) {
-            var get_m_accordion = '.get_m_accordion' + random_id;
+        if(random_id) {
+            var get_m_accordion = '.get_m_accordion'+random_id;
             $('.m-accordion__item-head').addClass('collapsed');
-            $('.m-accordion__item-head').prop("aria-expanded", "false");
+            $('.m-accordion__item-head').prop("aria-expanded","false");
             $('.m-accordion__item-head').addClass('collapsed');
             $('.m-accordion__item-body').removeClass('show');
 
 
             $(get_m_accordion).find('.m-accordion__item-head').removeClass('collapsed');
-            $(get_m_accordion).find('.m-accordion__item-head').prop("aria-expanded", "true");
+            $(get_m_accordion).find('.m-accordion__item-head').prop("aria-expanded","true");
             $(get_m_accordion).find('.m-accordion__item-body').addClass('show');
 
         }
@@ -331,7 +332,7 @@ function formatDate(dateVal) {
 
     sHour = padValue(sHour);
 
-    return sYear + "-" + sMonth + "-" + sDay + " " + sHour + ":" + sMinute + " " + sAMPM;
+    return sYear  + "-" + sMonth + "-" +  sDay  + " " + sHour + ":" + sMinute + " " + sAMPM;
 }
 
 
@@ -341,7 +342,7 @@ $(document).ready(function () {
 
     try {
         $('.multi_select_').select2();
-    } catch (err) {
+    }catch (err) {
 
     }
 

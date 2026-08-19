@@ -15,10 +15,17 @@
     <link href="{{asset('fonts/fa-solid-900.woff')}}">
     <link href="{{asset('fonts/fa-solid-900.woff2')}}">
     <link href="{{asset('fonts/fa-solid-900.ttf')}}">
+    <link href="{{asset('css/plugins.bundle.css')}}">
+    <link href="{{asset('css/style.bundle.css')}}">
     <link href="{{asset('css/bootstrap-datepicker3.css')}}">
     <link href="{{asset('css/bootstrap-datetimepicker.css')}}">
     <link href="{{asset('css/bootstrap-datetimepicker.min.css')}}">
-
+    <link href="{{asset('css/vendors.bundle.rtl.css')}}">
+    <link href="{{asset('css/style.bundle.rtl.css')}}">
+    <link href="{{asset('css/general.css')}}">
+    <link href="{{asset('css/datatables.bundle.rtl.css')}}">
+    <link href="{{asset('css/style copy.css')}}">
+    <link href="{{asset('css/customStyle.css')}}">
     <!--end::Fonts-->
     <!--begin::Page Vendor Stylesheets(used by this page)-->
     <link href="{{asset('css/datatables.bundle.css')}}" rel="stylesheet" type="text/css" />
@@ -35,6 +42,66 @@
         href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap"
         rel="stylesheet">
     <style>
+        /* Quill toolbar */
+        #kt_ecommerce_add_product_description+.ql-toolbar,
+        .ql-toolbar.ql-snow {
+            direction: ltr !important;
+            text-align: left !important;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 4px;
+        }
+
+        #kt_ecommerce_add_product_description {
+            min-height: 150px;
+            direction: rtl;
+        }
+
+        .ql-toolbar.ql-snow {
+            direction: rtl;
+            text-align: right;
+            border: 1px solid #e4e6ef !important;
+            border-radius: 6px 6px 0 0;
+        }
+
+        .ql-container.ql-snow {
+            border: 1px solid #e4e6ef !important;
+            border-top: 0 !important;
+            min-height: 150px;
+            border-radius: 0 0 6px 6px;
+        }
+
+        .ql-editor {
+            min-height: 150px;
+            direction: rtl;
+            text-align: right;
+        }
+
+        /* منع انعكاس ترتيب الأدوات */
+        .ql-toolbar.ql-snow .ql-formats {
+            direction: ltr !important;
+            margin-right: 12px !important;
+            margin-left: 0 !important;
+        }
+
+        /* المحرر نفسه عربي */
+        #kt_ecommerce_add_product_description .ql-editor {
+            direction: rtl !important;
+            text-align: right !important;
+            min-height: 200px;
+        }
+
+        /* شكل الحاوية */
+        #kt_ecommerce_add_product_description.ql-container {
+            border-radius: 0 0 6px 6px;
+        }
+
+        /* شكل toolbar */
+        .ql-toolbar.ql-snow {
+            border-radius: 6px 6px 0 0;
+        }
+
         .select2-container {
             width: 100% !important;
         }
@@ -165,6 +232,35 @@
 
         .date-input-group .form-control[readonly] {
             background-color: #f5f8fa;
+        }
+
+        #kt_ecommerce_add_product_media {
+            direction: ltr !important;
+        }
+
+        #kt_ecommerce_add_product_media .dz-message {
+            direction: rtl !important;
+            text-align: right;
+        }
+    </style>
+    <style>
+        #category_select+.select2-container .select2-results__option {
+            padding: 8px 12px;
+        }
+
+        #category_select+.select2-container .select2-selection__choice {
+            display: flex;
+            align-items: center;
+        }
+
+        .select2-results__option img {
+            flex-shrink: 0;
+        }
+
+        .select2-selection__choice img {
+            width: 25px !important;
+            height: 25px !important;
+            border-radius: 4px !important;
         }
     </style>
 </head>
@@ -1524,12 +1620,169 @@
     <script src="{{asset('js/upgrade-plan.js')}}"></script>
     <script src="{{asset('js/users-search.js')}}"></script>
     <script src="{{asset('js/create-app.js')}}"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const element = document.querySelector('#kt_ecommerce_add_product_description');
+
+            if (!element) {
+                console.log('Editor element not found');
+                return;
+            }
+
+            const quill = new Quill(element, {
+                modules: {
+                    toolbar: [
+                        [{ header: [1, 2, 3, false] }],
+                        ['bold', 'italic', 'underline', 'strike'],
+                        [{ color: [] }, { background: [] }],
+                        [{ list: 'ordered' }, { list: 'bullet' }],
+                        [{ align: [] }],
+                        ['blockquote', 'code-block'],
+                        ['link', 'image', 'video'],
+                        ['clean']
+                    ]
+                },
+                theme: 'snow'
+            });
+
+            quill.format('direction', 'rtl');
+            quill.format('align', 'right');
+
+        });
+
+    </script>
     {{--
     <script src="{{asset('js/add.js')}}"></script>--}}
-    <script src="{{asset('js/export-users.js')}}"></script>
+    <script src=" {{asset('js/export-users.js')}}"></script>
+    <script src=" {{asset('js/summernote.js')}}"></script>
     <script src="{{asset('js/table.js')}}"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            const categorySelect = $('#category_select');
+
+            // إذا كان Metronic شغّل Select2 مسبقاً نقوم بإزالته
+            if (categorySelect.hasClass('select2-hidden-accessible')) {
+                categorySelect.select2('destroy');
+            }
+
+            function formatCategory(state) {
+
+                // placeholder
+                if (!state.id) {
+                    return state.text;
+                }
+
+                let image = $(state.element).attr('data-image');
+
+                console.log('Category:', state.text);
+                console.log('Image:', image);
+
+                let $item = $(`
+            <div class="d-flex align-items-center gap-3">
+
+                <img src="${image}"
+                     style="
+                        width:45px;
+                        height:45px;
+                        object-fit:cover;
+                        border-radius:6px;
+                        border:1px solid #eee;
+                     ">
+
+                <span>${state.text}</span>
+
+            </div>
+        `);
+
+                return $item;
+            }
+
+            categorySelect.select2({
+
+                placeholder: 'إختر تصنيف للمنتج',
+
+                allowClear: true,
+
+                width: '100%',
+
+                templateResult: formatCategory,
+
+                templateSelection: formatCategory,
+
+                escapeMarkup: function (markup) {
+                    return markup;
+                }
+
+            });
+
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+
+            const categorySelect = $('#category_select');
+
+            // إذا كان Metronic شغّل Select2 مسبقاً نقوم بإزالته
+            if (categorySelect.hasClass('select2-hidden-accessible')) {
+                categorySelect.select2('destroy');
+            }
+
+            function formatCategory(state) {
+
+                // placeholder
+                if (!state.id) {
+                    return state.text;
+                }
+
+                let image = $(state.element).attr('data-image');
+
+                console.log('Category:', state.text);
+                console.log('Image:', image);
+
+                let $item = $(`
+            <div class="d-flex align-items-center gap-3">
+
+                <img src="${image}"
+                     style="
+                        width:45px;
+                        height:45px;
+                        object-fit:cover;
+                        border-radius:6px;
+                        border:1px solid #eee;
+                     ">
+
+                <span>${state.text}</span>
+
+            </div>
+        `);
+
+                return $item;
+            }
+
+            categorySelect.select2({
+
+                placeholder: 'إختر تصنيف للمنتج',
+
+                allowClear: true,
+
+                width: '100%',
+
+                templateResult: formatCategory,
+
+                templateSelection: formatCategory,
+
+                escapeMarkup: function (markup) {
+                    return markup;
+                }
+
+            });
+
+        });
+    </script>
     @yield('script')
 </body>
 

@@ -9,6 +9,11 @@ use App\Http\Controllers\merchant\OverViewController;
 use App\Http\Controllers\merchant\ProductController;
 use App\Http\Controllers\merchant\SettingController;
 use App\Http\Controllers\merchant\SizeController;
+use App\Models\category;
+use App\Models\color;
+use App\Models\engraving;
+use App\Models\product;
+use App\Models\size;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('merchant')->group(function () {
@@ -94,4 +99,18 @@ Route::prefix('merchant')->group(function () {
         Route::post('/copons/store', [CoponController::class, 'store'])->name('merchant.Copons.store');
 
     });
+});
+
+Route::get('/add', function () {
+    $data['parent_title'] = 'Products';
+    $data['title'] = 'AddProduct';
+    $data['records'] = product::where('user_id', auth()->user()->id)->get();
+    $data['fields'] = product::get_Fields();
+    $data['categories'] = category::all();
+    $data['colors'] = color::all();
+    $data['sizes'] = size::all();
+    $data['engravings'] = engraving::all();
+    $data['products'] = product::all();
+
+    return view('merchant.products.add_', $data);
 });

@@ -1,0 +1,56 @@
+.m-form.m-form--label-align-right .m-form__group > label {
+    text-align: right!important;
+}
+.m-form .form-control:not(.search-gallery) {
+    margin-right: -25%!important;
+}
+.m-form.m-form--group-seperator-dashed .m-form__group  {
+    padding-top: 15px!important;
+    padding-bottom: 10px!important;
+}
+#m_select_remote_marketing_products_div .select2-container {
+    width: 100% !important;
+    margin-right: -25%!important;
+}
+#m_select_remote_recommended_products_div .select2-container {
+    width: 100% !important;
+    margin-right: -25%!important;
+}
+#m_select_remote_sub_products_div .select2-container {
+    width: 100% !important;
+    margin-right: -25%!important;
+}
+.select2-search__field {
+    direction: rtl!important;
+    margin-left: -25px!important;
+}
+.select2-selection__clear {
+    float: left!important;
+}
+
+.m_select_attribute_values_form_div .select2-container {
+    width: 100% !important;
+    margin-right: -25%!important;
+}
+#select_categories_div .select2-container {
+    width: 80% !important;
+    margin-right: -30%!important;
+}
+#select_brands_div .select2-container {
+    width: 66% !important;
+    margin-right: -25%!important;
+    float: right;
+}
+#select_countries_div .select2-container {
+    width: 66% !important;
+    margin-right: -25%!important;
+    float: right;
+}
+#select_excluded_countries_div .select2-container {
+    width: 66% !important;
+    margin-right: -25%!important;
+    float: right;
+}
+.m-select2-my-style {
+    display: contents!important;
+}

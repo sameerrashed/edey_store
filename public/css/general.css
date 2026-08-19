@@ -1,0 +1,342 @@
+
+@font-face {
+    font-family: 'Cairo';
+    src: url('../fonts/DroidArabicKufiBold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Cairo';
+    src: url('../fonts/DroidArabicKufiRegular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+/*@import url('https://fonts.googleapis.com/css?family=DroidArabicKufi&display=swap');*/
+.hidden {
+    display: none!important;
+}
+
+.vue_border_error {
+    border-color: red !important;
+}
+
+.vue_error {
+    color: red !important;
+}
+
+body, h3, span {
+    font-family: Cairo !important;
+}
+.table.table-striped thead th{
+    font-weight: bold;
+}
+table.dataTable{
+    font-weight: bold!important;
+    font-family: Cairo !important;
+}
+td {
+    font-size: 15px;
+}
+
+.m-radio > input:checked ~ span:after, .m-checkbox > input:checked ~ span:after {
+    transform: rotate(45deg);
+}
+
+.m-dropdown.m-dropdown--align-center .m-dropdown__wrapper {
+    margin-right: -180px !important;
+}
+
+/*******************************************/
+.m-aside-menu.m-aside-menu--skin-dark .m-menu__nav > .m-menu__item > .m-menu__heading .m-menu__link-text, .m-aside-menu.m-aside-menu--skin-dark .m-menu__nav > .m-menu__item > .m-menu__link .m-menu__link-text {
+    color: #fff !important;
+}
+.m-aside-menu.m-aside-menu--skin-dark .m-menu__nav > .m-menu__item .m-menu__submenu .m-menu__item:not(.m-menu__item--parent):not(.m-menu__item--open):not(.m-menu__item--expanded):not(.m-menu__item--active) > .m-menu__link .m-menu__link-text {
+    color: #fff !important;
+}
+.m-aside-menu.m-aside-menu--skin-dark .m-menu__nav > .m-menu__item > .m-menu__heading .m-menu__link-icon, .m-aside-menu.m-aside-menu--skin-dark .m-menu__nav > .m-menu__item > .m-menu__link .m-menu__link-icon {
+    color: #a8a2ff  !important;
+}
+
+.m-aside-menu.m-aside-menu--skin-dark .m-menu__nav > .m-menu__item.m-menu__item--active > .m-menu__heading .m-menu__link-text, .m-aside-menu.m-aside-menu--skin-dark .m-menu__nav > .m-menu__item.m-menu__item--active > .m-menu__link .m-menu__link-text {
+    color: #ffcdcd !important;
+    font-weight: 600 !important;
+}
+
+.bootstrap-select > .dropdown-toggle.btn-light, .bootstrap-select > .dropdown-toggle.btn-secondary {
+    border-color: #aeb0b9 !important;
+}
+
+.select2-container--default .select2-selection--multiple, .select2-container--default .select2-selection--single {
+    border-color: #aeb0b9 !important;
+}
+
+.input-group > .form-control:not(:last-child), .input-group > .custom-select:not(:last-child) {
+    border-color: #aeb0b9 !important;
+}
+
+label {
+    color: black !important;
+}
+
+.m-invoice-2 .m-invoice__wrapper .m-invoice__head .m-invoice__container .m-invoice__items .m-invoice__item > span {
+    color: black !important;
+}
+
+.form-control {
+    border-color: #aeb0b9 !important;
+}
+
+/* dataTable */
+/*
+div.dataTables_wrapper div.dataTables_processing {
+    top: 12%!important;
+
+    height: 200px!important;
+    border: none!important;
+    background-color: inherit!important;
+}
+
+.m-spinner.m-spinner--danger {
+    width: 100px;
+    height: 100px;
+    background-color: #e80307;
+}
+*/
+
+.m-accordion.m-accordion--toggle-arrow .m-accordion__item .m-accordion__item-head.collapsed .m-accordion__item-mode {
+    font-family: "Cairo" !important;
+}
+
+.m-accordion.m-accordion--toggle-arrow .m-accordion__item .m-accordion__item-head .m-accordion__item-mode {
+    font-family: "Cairo" !important;
+
+}
+
+.bootstrap-select .dropdown-menu.inner > li.selected > a span.check-mark {
+    font-family: "Cairo" !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    font-family: "Cairo" !important;
+}
+
+.blockOverlay {
+    opacity: 0.12 !important;
+}
+
+/***************  loading ****************/
+.blockOverlay_2 {
+    opacity: 0.6 !important;
+}
+
+#loading_ {
+    height: 2em;
+    width: 2em;
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 50%;
+    margin-right: -.5em;
+    margin-top: -.5em;
+    content: '';
+    -webkit-animation: spin 1s ease-in-out infinite;
+    animation: spin 1s ease-in-out infinite;
+    background: url("http://alfowzan.com/wp-content/plugins/woocommerce/assets/images/icons/loader.svg") center center;
+    background-size: cover;
+    line-height: 1;
+    text-align: center;
+    font-size: 2em;
+    color: rgba(0, 0, 0, .75);
+}
+
+.my-block-overlay {
+    z-index: 1000;
+    border: none;
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    background: rgb(255, 255, 255);
+    opacity: 0.4;
+    cursor: wait;
+    /* position: absolute; */
+    pointer-events: none;
+
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/*********************************************/
+
+.m-subheader {
+    padding: 10px 30px 0 10px !important;
+}
+
+.m-body .m-content {
+    padding: 0 !important;
+}
+
+@media (min-width: 1025px) {
+    .m-header {
+        height: 37px !important;
+    }
+}
+
+@media (min-width: 1025px) {
+    body.m-aside-left--skin-dark .m-header .m-header-head {
+        -webkit-box-shadow: none;
+        box-shadow: none;
+    }
+}
+
+.m-nav.m-nav--inline {
+    height: 56%;
+}
+
+.m-badge {
+    line-height: 15px;
+    min-height: 15px;
+    min-width: 15px;
+}
+
+.m-topbar__userpic img {
+    width: 27px !important;
+    height: 27px !important;
+    margin-top: -3px !important;
+}
+
+.m-grid__item .m-grid__item--fluid .m-wrapper {
+    margin-top: -30px !important;
+}
+/*
+.card {
+    background-color: inherit!important;
+    border: none!important;
+}
+*/
+
+/*************** order status *****************/
+.order-status {
+    display: inline-flex;
+    line-height: 2.5em;
+    color: #777;
+    background: #e5e5e5;
+    border-radius: 4px;
+    border-bottom: 1px solid rgba(0, 0, 0, .05);
+    margin: -.25em 0;
+    cursor: inherit !important;
+    white-space: nowrap;
+    max-width: 100%;
+    padding: 0px 8px;
+}
+
+.order-status.status-on-hold {
+    background: #f8dda7;
+    color: #94660c;
+}
+
+.order-status.status-pending {
+    background: #F8ECEC;
+    color: #2e4453;
+}
+
+.order-status.status-awaiting-shipment {
+
+}
+
+.order-status.status-failed {
+    background: #eba3a3;
+    color: #761919;
+}
+
+.order-status.status-completed {
+    background: #c8d7e1;
+    color: #2e4453;
+}
+
+.order-status.status-cancelled {
+
+}
+
+.order-status.status-refunded {
+
+}
+
+.order-status.status-processing {
+    background: #c6e1c6;
+    color: #5b841b;
+}
+
+
+
+/****************************************/
+body{
+    font-family: Cairo   !important;
+}
+table.dataTable {
+    font-weight: bold!important;
+    font-family: Cairo !important;
+}
+.m-aside-left {
+    width: 175px !important;
+}
+.m-aside-menu .m-menu__nav > .m-menu__item > .m-menu__link {
+    padding: 20px 15px !important;
+}
+.m-brand {
+    width: 175.5px !important;
+}
+.m-aside-menu .m-menu__nav {
+    padding: 5px 0 !important;
+}
+@media (min-width: 1025px){
+    .m-aside-left--fixed .m-body {
+        padding-right: 175px !important;
+    }
+    .m-brand .m-brand__logo, .m-brand .m-brand__tools {
+        height: 37px !important;
+    }
+    .m-aside-left--fixed.m-header--static .m-aside-left, .m-aside-left--fixed.m-header--fixed .m-aside-left {
+        top: 40px !important;
+    }
+}
+.order-status span {
+    font-size: 11px !important;
+}
+.m-badge.m-badge--primary {
+    padding: 10px 8px !important;
+}
+.m-aside-menu .m-menu__nav > .m-menu__item > .m-menu__submenu .m-menu__subnav > .m-menu__item > .m-menu__link {
+    padding: 0 10px !important;
+    padding-right: 10px !important;
+}
+
+table.table-bordered.dataTable th {
+    font-size: 14px !important;
+    font-weight: bold !important;
+}
+
+table.table-bordered.dataTable td{
+    font-size: 14px !important;
+    font-weight: normal !important;
+}
