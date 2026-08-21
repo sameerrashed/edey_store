@@ -10,6 +10,7 @@ class product extends Model
         'product_name',
         'avatar',
         'description',
+        'cost_price',
         'price',
         'price_after',
         'sku',
@@ -19,6 +20,7 @@ class product extends Model
         'discount',
         'category_id',
         'user_id',
+        'type_id',
     ];
 
     public static function get_Fields(): array
@@ -52,6 +54,15 @@ class product extends Model
         ];
 
         $ary[] = [
+            'name' => 'cost_price',
+            'type' => 'text',
+            'label' => 'سعر المنتج',
+            'is_required' => true,
+            'is_readonly' => false,
+            'is_trans' => false,
+        ];
+
+        $ary[] = [
             'name' => 'price',
             'type' => 'text',
             'label' => 'سعر المنتج',
@@ -70,7 +81,7 @@ class product extends Model
         ];
 
         $ary[] = [
-            'name' => 'count',
+            'name' => 'discount',
             'type' => 'text',
             'label' => 'الكمية المتاحة',
             'is_required' => true,
@@ -79,7 +90,7 @@ class product extends Model
         ];
 
         $ary[] = [
-            'name' => 'discount',
+            'name' => 'type_id',
             'type' => 'text',
             'label' => 'الكمية المتاحة',
             'is_required' => true,

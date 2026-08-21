@@ -36,6 +36,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/quill@1.3.7/dist/quill.snow.css" rel="stylesheet">
 
 
     <link
@@ -1620,40 +1621,8 @@
     <script src="{{asset('js/upgrade-plan.js')}}"></script>
     <script src="{{asset('js/users-search.js')}}"></script>
     <script src="{{asset('js/create-app.js')}}"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
 
-            const element = document.querySelector('#kt_ecommerce_add_product_description');
-
-            if (!element) {
-                console.log('Editor element not found');
-                return;
-            }
-
-            const quill = new Quill(element, {
-                modules: {
-                    toolbar: [
-                        [{ header: [1, 2, 3, false] }],
-                        ['bold', 'italic', 'underline', 'strike'],
-                        [{ color: [] }, { background: [] }],
-                        [{ list: 'ordered' }, { list: 'bullet' }],
-                        [{ align: [] }],
-                        ['blockquote', 'code-block'],
-                        ['link', 'image', 'video'],
-                        ['clean']
-                    ]
-                },
-                theme: 'snow'
-            });
-
-            quill.format('direction', 'rtl');
-            quill.format('align', 'right');
-
-        });
-
-    </script>
-    {{--
-    <script src="{{asset('js/add.js')}}"></script>--}}
+    <script src="{{asset('js/add.js')}}"></script>
     <script src=" {{asset('js/export-users.js')}}"></script>
     <script src=" {{asset('js/summernote.js')}}"></script>
     <script src="{{asset('js/table.js')}}"></script>
@@ -1784,6 +1753,7 @@
         });
     </script>
     @yield('script')
+    <script src="https://cdn.jsdelivr.net/npm/quill@1.3.7/dist/quill.min.js"></script>
 </body>
 
 </html>

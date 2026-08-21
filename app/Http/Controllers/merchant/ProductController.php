@@ -54,17 +54,16 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-
-        $request->validate([
-            'avatar' => 'required',
-            'image' => 'array|max:5',
-            'product_name' => 'required',
-            'price' => 'required',
-            'count' => 'required',
-            'color_id' => 'required',
-            'size_id' => 'required',
-            'engraving_id' => 'required',
-        ]);
+        // $request->validate([
+        //     'avatar' => 'required',
+        //     'image' => 'array|max:5',
+        //     'product_name' => 'required',
+        //     'price' => 'required',
+        //     'count' => 'required',
+        //     'color_id' => 'required',
+        //     'size_id' => 'required',
+        //     'engraving_id' => 'required',
+        // ]);
 
         $product = new product;
         $product->product_name = $request->product_name;
@@ -123,6 +122,16 @@ class ProductController extends Controller
                     'image' => $image_name,
                 ]);
             }
+        }
+
+        if ($request->has('stock_status')) {
+            DB::table('inventories')->insert([
+                'product_id' => $product->id,
+                'quantity' => $request->quantity,
+                'min_quantity' => $request->min_quantity,
+                'max_quantity' => $request->max_quantity,
+                'stock_status' => $request->stock_status,
+            ]);
         }
 
         return back()->with('success', 'تم إضافة المنتج بنجاح');

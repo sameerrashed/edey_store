@@ -3,8 +3,6 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\copon;
-use App\Models\store;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -84,17 +82,8 @@ class ManageController extends Controller
         if (isset($data->user_id)) {
             $data->user_id = auth()->user()->id;
         }
-
-        // $store_id = store::where('user_id', auth()->id())->value('id');
-        // if (isset($data->code)) {
-        //     dd('d');
-        //     do {
-        //         $code = strtoupper(Str::random(8));
-        //     } while (copon::where('code', $code)->exists());
-        //     $data->code = $code;
-        //     $data->store_id = $store_id;
-        // }
-
+        $data->user_id = auth()->user()->id;
+        $data->sku = $sku;
         $data->save();
 
         return $data;
