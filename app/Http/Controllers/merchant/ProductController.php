@@ -8,6 +8,9 @@ use App\Models\category;
 use App\Models\color;
 use App\Models\engraving;
 use App\Models\product;
+use App\Models\productfeature;
+use App\Models\ProductVariant;
+use App\Models\ProductVariantFeature;
 use App\Models\related_product;
 use App\Models\size;
 use Illuminate\Http\Request;
@@ -41,12 +44,13 @@ class ProductController extends Controller
         $data['records'] = product::where('user_id', auth()->user()->id)->get();
         $data['fields'] = product::get_Fields();
         $data['categories'] = category::all();
+        $data['features'] = productfeature::all();
         $data['colors'] = color::all();
         $data['sizes'] = size::all();
         $data['engravings'] = engraving::all();
         $data['products'] = product::all();
 
-        return view('merchant.products.add', $data);
+        return view('merchant.products.add_', $data);
     }
 
     /**
@@ -54,15 +58,13 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         // $request->validate([
         //     'avatar' => 'required',
         //     'image' => 'array|max:5',
         //     'product_name' => 'required',
         //     'price' => 'required',
         //     'count' => 'required',
-        //     'color_id' => 'required',
-        //     'size_id' => 'required',
-        //     'engraving_id' => 'required',
         // ]);
 
         $product = new product;
@@ -132,6 +134,41 @@ class ProductController extends Controller
                 'max_quantity' => $request->max_quantity,
                 'stock_status' => $request->stock_status,
             ]);
+        }
+
+        if ($request->has('variants')) {
+            foreach ($request->variants as $variantData) {
+                $variant = ProductVariant::create([
+                    'product_id' => $product->id,
+                    'variant_key' => isset($variantData['key'])
+                        ? $variantData['key']
+                        : null,
+                    'stock_status' => isset($variantData['stock_status'])
+                        ? $variantData['stock_status']
+                        : 'available',
+                    'quantity' => isset($variantData['quantity'])
+                        ? $variantData['quantity']
+                        : 0,
+                ]);
+                if (
+                    isset($variantData['features']) &&
+                    is_array($variantData['features'])
+                ) {
+                    foreach ($variantData['features'] as $featureData) {
+                        if (
+                            ! isset($featureData['feature_id']) ||
+                            ! isset($featureData['value_id'])
+                        ) {
+                            continue;
+                        }
+                        ProductVariantFeature::create([
+                            'product_variant_id' => $variant->id,
+                            'feature_id' => $featureData['feature_id'],
+                            'value_id' => $featureData['value_id'],
+                        ]);
+                    }
+                }
+            }
         }
 
         return back()->with('success', 'تم إضافة المنتج بنجاح');

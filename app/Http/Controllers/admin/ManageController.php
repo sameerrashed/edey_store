@@ -66,7 +66,7 @@ class ManageController extends Controller
         } while (\App\Models\Product::where('sku', $sku)->exists());
 
         if (isset($request->price_after)) {
-            if (empty($request->price_after) || $request->CheckPrice == 0) {
+            if (empty($request->price_after)) {
                 $data->price_after = 0;
                 $data->discount = 0;
             } else {
@@ -82,8 +82,8 @@ class ManageController extends Controller
         if (isset($data->user_id)) {
             $data->user_id = auth()->user()->id;
         }
-        $data->user_id = auth()->user()->id;
-        $data->sku = $sku;
+        // $data->user_id = auth()->user()->id;
+        // $data->sku = $sku;
         $data->save();
 
         return $data;

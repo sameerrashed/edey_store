@@ -74,7 +74,7 @@ class product extends Model
         $ary[] = [
             'name' => 'price_after',
             'type' => 'text',
-            'label' => 'سعر المنتج',
+            'label' => 'سعؤ المنتج بعد الخصم',
             'is_required' => true,
             'is_readonly' => false,
             'is_trans' => false,
@@ -142,5 +142,10 @@ class product extends Model
             'id',
             'id'
         );
+    }
+
+    public function variants()
+    {
+        return $this->hasMany(ProductVariant::class);
     }
 }
