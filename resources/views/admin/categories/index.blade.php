@@ -1,5 +1,5 @@
 @extends("admin.layout._layout")
-@section('title','ايدي ستور')
+@section('title', 'ايدي ستور')
 @section('breadcrumb')
     <h1 class="d-flex text-dark fw-bolder fs-3 align-items-center my-1">{{__('app.' . $title)}}</h1>
     <!--end::Title-->
@@ -41,19 +41,17 @@
                 <div class="d-flex align-items-center position-relative my-1">
                     <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
                     <span class="svg-icon svg-icon-1 position-absolute ms-6">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                             viewBox="0 0 24 24" fill="none">
-                            <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546"
-                                  height="2" rx="1" transform="rotate(45 17.0365 15.1223)"
-                                  fill="currentColor"/>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1"
+                                transform="rotate(45 17.0365 15.1223)" fill="currentColor" />
                             <path
                                 d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z"
-                                fill="currentColor"/>
+                                fill="currentColor" />
                         </svg>
                     </span>
                     <!--end::Svg Icon-->
                     <input type="text" data-kt-user-table-filter="search"
-                           class="form-control form-control-solid w-250px ps-14" placeholder="البحث عن تصنيف"/>
+                        class="form-control form-control-solid w-250px ps-14" placeholder="البحث عن تصنيف" />
                 </div>
                 <!--end::Search-->
             </div>
@@ -64,16 +62,13 @@
                 <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
                     <!--begin::Add user-->
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                            data-bs-target="#kt_modal_add_user">
+                        data-bs-target="#kt_modal_add_user">
                         <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
                         <span class="svg-icon svg-icon-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                 viewBox="0 0 24 24" fill="none">
-                                <rect opacity="0.5" x="11.364" y="20.364" width="16" height="2"
-                                      rx="1" transform="rotate(-90 11.364 20.364)"
-                                      fill="currentColor"/>
-                                <rect x="4.36396" y="11.364" width="16" height="2" rx="1"
-                                      fill="currentColor"/>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <rect opacity="0.5" x="11.364" y="20.364" width="16" height="2" rx="1"
+                                    transform="rotate(-90 11.364 20.364)" fill="currentColor" />
+                                <rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="currentColor" />
                             </svg>
                         </span>
                         إضافة تصنيف
@@ -101,19 +96,16 @@
                                 <h2 class="fw-bolder">إضافة تصنيف</h2>
                                 <!--end::Modal title-->
                                 <!--begin::Close-->
-                                <div class="btn btn-icon btn-sm btn-active-icon-primary"
-                                     data-kt-users-modal-action="close" id="btnClose">
+                                <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-users-modal-action="close"
+                                    id="btnClose">
                                     <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
                                     <span class="svg-icon svg-icon-1">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                             height="24" viewBox="0 0 24 24" fill="none">
-                                            <rect opacity="0.5" x="6" y="17.3137" width="16"
-                                                  height="2" rx="1"
-                                                  transform="rotate(-45 6 17.3137)"
-                                                  fill="currentColor"/>
-                                            <rect x="7.41422" y="6" width="16" height="2"
-                                                  rx="1" transform="rotate(45 7.41422 6)"
-                                                  fill="currentColor"/>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                            fill="none">
+                                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1"
+                                                transform="rotate(-45 6 17.3137)" fill="currentColor" />
+                                            <rect x="7.41422" y="6" width="16" height="2" rx="1"
+                                                transform="rotate(45 7.41422 6)" fill="currentColor" />
                                         </svg>
                                     </span>
                                     <!--end::Svg Icon-->
@@ -124,16 +116,14 @@
                             <!--begin::Modal body-->
                             <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
                                 <!--begin::Form-->
-                                <form id="kt_modal_add_category" method="post"
-                                      action="#" enctype="multipart/form-data">
+                                <form id="kt_modal_add_category" method="post" action="#" enctype="multipart/form-data">
                                     @csrf
-                                    <div class="d-flex flex-column scroll-y me-n7 pe-7"
-                                         id="kt_modal_add_category_scroll"
-                                         data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}"
-                                         data-kt-scroll-max-height="auto"
-                                         data-kt-scroll-dependencies="#kt_modal_add_category_header"
-                                         data-kt-scroll-wrappers="#kt_modal_add_category_scroll"
-                                         data-kt-scroll-offset="300px">
+                                    <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_category_scroll"
+                                        data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}"
+                                        data-kt-scroll-max-height="auto"
+                                        data-kt-scroll-dependencies="#kt_modal_add_category_header"
+                                        data-kt-scroll-wrappers="#kt_modal_add_category_scroll"
+                                        data-kt-scroll-offset="300px">
                                         <!--begin::Input group-->
                                         <div class="fv-row mb-7">
                                             <!--begin::Label-->
@@ -141,10 +131,10 @@
                                             <!--end::Label-->
                                             <!--begin::Image input-->
                                             <div class="image-input image-input-outline" data-kt-image-input="true"
-                                                 style="background-image: url({{asset('img/blank.svg')}})">
+                                                style="background-image: url({{asset('img/blank.svg')}})">
                                                 <!--begin::Preview existing avatar-->
                                                 <div class="image-input-wrapper w-125px h-125px"
-                                                     style="background-image: url({{asset('img/profilepic.jpg')}});"></div>
+                                                    style="background-image: url({{asset('img/profilepic.jpg')}});"></div>
                                                 <!--end::Preview existing avatar-->
                                                 <!--begin::Label-->
                                                 <label
@@ -154,8 +144,8 @@
                                                     <i class="bi bi-pencil-fill fs-7"></i>
                                                     <!--begin::Inputs-->
                                                     <input type="file" id="photo_cover" name="photo_cover"
-                                                           accept=".png, .jpg, .jpeg"/>
-                                                    <input type="hidden" id="photo_cover" name="photo_cover"/>
+                                                        accept=".png, .jpg, .jpeg" />
+                                                    <input type="hidden" id="photo_cover" name="photo_cover" />
                                                     <!--end::Inputs-->
                                                 </label>
                                                 <!--end::Label-->
@@ -164,16 +154,16 @@
                                                     class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
                                                     data-kt-image-input-action="cancel" data-bs-toggle="tooltip"
                                                     title="Cancel avatar">
-																				<i class="bi bi-x fs-2"></i>
-																			</span>
+                                                    <i class="bi bi-x fs-2"></i>
+                                                </span>
                                                 <!--end::Cancel-->
                                                 <!--begin::Remove-->
                                                 <span
                                                     class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
                                                     data-kt-image-input-action="remove" data-bs-toggle="tooltip"
                                                     title="Remove avatar">
-																				<i class="bi bi-x fs-2"></i>
-																			</span>
+                                                    <i class="bi bi-x fs-2"></i>
+                                                </span>
                                                 <!--end::Remove-->
                                             </div>
                                             <!--end::Image input-->
@@ -188,10 +178,10 @@
                                             <!--end::Label-->
                                             <!--begin::Image input-->
                                             <div class="image-input image-input-outline" data-kt-image-input="true"
-                                                 style="background-image: url({{asset('img/blank.svg')}})">
+                                                style="background-image: url({{asset('img/blank.svg')}})">
                                                 <!--begin::Preview existing avatar-->
                                                 <div class="image-input-wrapper w-125px h-125px"
-                                                     style="background-image: url({{asset('img/profilepic.jpg')}});"></div>
+                                                    style="background-image: url({{asset('img/profilepic.jpg')}});"></div>
                                                 <!--end::Preview existing avatar-->
                                                 <!--begin::Label-->
                                                 <label
@@ -200,9 +190,8 @@
                                                     title="Change avatar">
                                                     <i class="bi bi-pencil-fill fs-7"></i>
                                                     <!--begin::Inputs-->
-                                                    <input type="file" id="icon" name="icon"
-                                                           accept=".png, .jpg, .jpeg"/>
-                                                    <input type="hidden" id="icon" name="icon"/>
+                                                    <input type="file" id="icon" name="icon" accept=".png, .jpg, .jpeg" />
+                                                    <input type="hidden" id="icon" name="icon" />
                                                     <!--end::Inputs-->
                                                 </label>
                                                 <!--end::Label-->
@@ -211,16 +200,16 @@
                                                     class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
                                                     data-kt-image-input-action="cancel" data-bs-toggle="tooltip"
                                                     title="Cancel avatar">
-																				<i class="bi bi-x fs-2"></i>
-																			</span>
+                                                    <i class="bi bi-x fs-2"></i>
+                                                </span>
                                                 <!--end::Cancel-->
                                                 <!--begin::Remove-->
                                                 <span
                                                     class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
                                                     data-kt-image-input-action="remove" data-bs-toggle="tooltip"
                                                     title="Remove avatar">
-																				<i class="bi bi-x fs-2"></i>
-																			</span>
+                                                    <i class="bi bi-x fs-2"></i>
+                                                </span>
                                                 <!--end::Remove-->
                                             </div>
                                             <!--end::Image input-->
@@ -234,7 +223,7 @@
                                             <!--end::Label-->
                                             <!--begin::Input-->
                                             <input type="text" id="category_name" name="category_name"
-                                                   class="form-control form-control-solid mb-3 mb-lg-0"/>
+                                                class="form-control form-control-solid mb-3 mb-lg-0" />
                                         </div>
                                     </div>
                                     <!--end::Scroll-->
@@ -265,98 +254,98 @@
                     <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_table_users">
                         <!--begin::Table head-->
                         <thead>
-                        <!--begin::Table row-->
-                        <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
-                            <th class="w-10px pe-2">
-                                #
-                            </th>
-                            <th class="min-w-125px">التصنيف</th>
-                            <th class="min-w-125px">وصف التصنيف</th>
-                            <th class="min-w-125px">تاريخ الإضافة</th>
-                            <th class="text-end min-w-100px">الإجراءات</th>
-                        </tr>
-                        <!--end::Table row-->
+                            <!--begin::Table row-->
+                            <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
+                                <th class="w-10px pe-2">
+                                    #
+                                </th>
+                                <th class="min-w-125px">التصنيف</th>
+                                <th class="min-w-125px">وصف التصنيف</th>
+                                <th class="min-w-125px">تاريخ الإضافة</th>
+                                <th class="text-end min-w-100px">الإجراءات</th>
+                            </tr>
+                            <!--end::Table row-->
                         </thead>
                         <!--end::Table head-->
                         <!--begin::Table body-->
                         <tbody class="text-gray-600 fw-bold">
-                        <!--begin::Table row-->
-                        @foreach($records as $key => $record)
-                            <tr>
-                                <!--begin::Checkbox-->
-                                <td>
-                                    {{($key+1)}}
-                                </td>
-                                <!--end::Checkbox-->
-                                <!--begin::User=-->
-                                <td class="d-flex align-items-center">
-                                    <!--begin:: Avatar -->
-                                    <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
-                                        <a href="">
-                                            <div class="symbol-label">
-                                                <img src="{{asset('img/' . $record->photo_cover)}}" alt="Emma Smith"
-                                                     class="w-100"/>
+                            <!--begin::Table row-->
+                            @foreach($records as $key => $record)
+                                <tr>
+                                    <!--begin::Checkbox-->
+                                    <td>
+                                        {{($key + 1)}}
+                                    </td>
+                                    <!--end::Checkbox-->
+                                    <!--begin::User=-->
+                                    <td class="d-flex align-items-center">
+                                        <!--begin:: Avatar -->
+                                        <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
+                                            <a href="">
+                                                <div class="symbol-label">
+                                                    <img src="{{asset('img/' . $record->photo_cover)}}" alt="Emma Smith"
+                                                        class="w-100" />
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <!--end::Avatar-->
+                                        <!--begin::User details-->
+                                        <div class="d-flex flex-column">
+                                            <a href=""
+                                                class="text-gray-800 text-hover-primary mb-1">{{$record->category_name}}</a>
+                                        </div>
+                                        <!--begin::User details-->
+                                    </td>
+                                    <!--end::User=-->
+                                    <td></td>
+                                    <!--end::Two step=-->
+                                    <!--begin::Joined-->
+                                    <td>{{$record->created_at->translatedFormat('d/m/Y H:i')}}</td>
+                                    <!--begin::Joined-->
+                                    <!--begin::Action=-->
+                                    <td class="text-end">
+                                        <a href="#" class="btn btn-light btn-active-light-primary btn-sm"
+                                            data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">الإجراءات
+                                            <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
+                                            <span class="svg-icon svg-icon-5 m-0">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                    viewBox="0 0 24 24" fill="none">
+                                                    <path
+                                                        d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z"
+                                                        fill="currentColor" />
+                                                </svg>
+                                            </span>
+                                            <!--end::Svg Icon--></a>
+                                        <!--begin::Menu-->
+                                        <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4"
+                                            data-kt-menu="true">
+                                            <!--begin::Menu item-->
+                                            <div class="menu-item px-3">
+                                                <a href="{{route('admin.Categories.edit', $record->id)}}"
+                                                    class="menu-link px-3">تعديل</a>
                                             </div>
-                                        </a>
-                                    </div>
-                                    <!--end::Avatar-->
-                                    <!--begin::User details-->
-                                    <div class="d-flex flex-column">
-                                        <a href=""
-                                           class="text-gray-800 text-hover-primary mb-1">{{$record->category_name}}</a>
-                                    </div>
-                                    <!--begin::User details-->
-                                </td>
-                                <!--end::User=-->
-                                <td></td>
-                                <!--end::Two step=-->
-                                <!--begin::Joined-->
-                                <td>{{$record->created_at->translatedFormat('d/m/Y H:i')}}</td>
-                                <!--begin::Joined-->
-                                <!--begin::Action=-->
-                                <td class="text-end">
-                                    <a href="#" class="btn btn-light btn-active-light-primary btn-sm"
-                                       data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">الإجراءات
-                                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
-                                        <span class="svg-icon svg-icon-5 m-0">
-															<svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                 height="24" viewBox="0 0 24 24" fill="none">
-																<path
-                                                                    d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z"
-                                                                    fill="currentColor"/>
-															</svg>
-														</span>
-                                        <!--end::Svg Icon--></a>
-                                    <!--begin::Menu-->
-                                    <div
-                                        class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4"
-                                        data-kt-menu="true">
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-3">
-                                            <a href="{{route('admin.Categories.edit',$record->id)}}"
-                                               class="menu-link px-3">تعديل</a>
+                                            <!--end::Menu item-->
+                                            <!--begin::Menu item-->
+                                            <div class="menu-item px-3">
+                                                <a href="#" class="menu-link px-3"
+                                                    data-kt-users-table-filter="delete_row">حذف</a>
+                                            </div>
+                                            <!--end::Menu item-->
                                         </div>
-                                        <!--end::Menu item-->
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-3">
-                                            <a href="#" class="menu-link px-3"
-                                               data-kt-users-table-filter="delete_row">حذف</a>
-                                        </div>
-                                        <!--end::Menu item-->
-                                    </div>
-                                    <!--end::Menu-->
-                                </td>
-                                <!--end::Action=-->
-                            </tr>
-                        @endforeach
-                        <!--end::Table row-->
+                                        <!--end::Menu-->
+                                    </td>
+                                    <!--end::Action=-->
+                                </tr>
+                            @endforeach
+                            <!--end::Table row-->
                         </tbody>
                         <!--end::Table body-->
                     </table>
                 </div>
                 <div class="row">
                     <div
-                        class="col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start"></div>
+                        class="col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start">
+                    </div>
                     <div
                         class="col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start">
                         <div class="dataTables_paginate paging_simple_numbers" id="kt_table_users_paginate">
@@ -389,10 +378,24 @@
                 data: formData,
                 processData: false,
                 contentType: false,
-                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
                 success: function (data, status, xhr) {
                     if (data.status === 'error') {
+                        Swal.fire({
+                            text: "هناك خطأ اثناء عملية الإضافة",
+                            icon: "error",
+                            confirmButtonText: "حسناً"
+                        }).then(() => {
+                            location.reload();
+                        });
                     } else {
+                        Swal.fire({
+                            text: "تمت الإضافة بنجاح",
+                            icon: "success",
+                            confirmButtonText: "حسناً"
+                        }).then(() => {
+                            location.reload();
+                        });
                         $('#kt_modal_add_category')[0].reset();
                     }
                     console.log(status);
@@ -406,15 +409,15 @@
         });
 
         $('#btnClose').on('click', function () {
-            var modal = bootstrap.Modal.getInstance(document.getElementById('kt_modal_add_user'));
+            var modal = bootstrap.Modal.getInstance(document.getElementById('kt_modal_add_category'));
             modal.hide();
-            $('#kt_modal_add_user').hide().removeClass('show').removeAttr('role').removeAttr('aria-modal').attr('aria-hidden', 'true').modal('hide');
+            $('#kt_modal_add_category').hide().removeClass('show').removeAttr('role').removeAttr('aria-modal').attr('aria-hidden', 'true').modal('hide');
             $('.modal-backdrop').remove();
-            $('body').removeClass('modal-open').css({'overflow': '', 'padding': ''});
+            $('body').removeClass('modal-open').css({ 'overflow': '', 'padding': '' });
 
         });
 
-        $('#kt_modal_add_user').on('click', function () {
+        $('#kt_modal_add_category').on('click', function () {
             $('.modal-backdrop').addClass('show');
         });
     </script>
