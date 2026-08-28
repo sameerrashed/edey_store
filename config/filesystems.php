@@ -49,8 +49,8 @@ return [
 
         'SaveImg' => [
             'driver' => 'local',
-            'root' => public_path(FILE_PATH()),
-            'url' => env('APP_URL') . '/storage',
+            'root' => public_path('img/'),
+            'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
             'throw' => false,
             'report' => false,

@@ -7,7 +7,7 @@
     @else
     {{route("admin.".$parent_title.".store")}}
     @endif" class="form form-wrapper mb-15" method="post" id="kt_contact_form"
-          style="">
+          style="" enctype="multipart/form-data">
         @csrf
         @if(isset($record))
             @method("PATCH")
@@ -28,7 +28,7 @@
         <!--begin::Submit-->
         <button type="submit" class="btn btn-primary" id="kt_contact_submit_button">
             <!--begin::Indicator-->
-            <span class="indicator-label">Save</span>
+            <span class="indicator-label">حفظ التغييرات</span>
             <span class="indicator-progress">Please wait...
 														<span
                                                             class="spinner-border spinner-border-sm align-middle ms-2"></span></span>

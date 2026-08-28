@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\admin\AdsController;
 use App\Http\Controllers\admin\AuthController;
+use App\Http\Controllers\admin\BrandController;
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\ContactController;
 use App\Http\Controllers\admin\FeatureController;
@@ -92,6 +93,17 @@ Route::prefix('admin')->group(function () {
         ]);
 
         Route::post('/categories/store', [CategoryController::class, 'store'])->name('admin.Categories.store');
+
+        Route::resource('/brands', BrandController::class)->names([
+            'index' => 'admin.Brands.index',
+            'create' => 'admin.Brands.create',
+            //        "store" => "admin.Categories.store",
+            'edit' => 'admin.Brands.edit',
+            'update' => 'admin.Brands.update',
+            'destroy' => 'admin.Brands.destroy',
+        ]);
+
+        Route::post('/brands/store', [BrandController::class, 'store'])->name('admin.Brands.store');
 
         Route::resource('/intros', IntroController::class)->names([
             'index' => 'admin.Intros.index',

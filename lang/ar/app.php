@@ -5,6 +5,7 @@ return [
     'User management' => 'إدارة المستخدمين',
     'Intros' => 'المقدمات',
     'Categories' => 'التصنيفات',
+    'Brands' => 'الماركات',
     'Products' => 'المنتجات',
     'Sizes' => 'المقاسات',
     'Colors' => 'الألوان',

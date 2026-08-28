@@ -44,6 +44,7 @@ function ADMIN_MENU(): array
         ['name' => 'update_to_merchant', 'icon' => 'Payment_Methods.svg'],
         ['name' => 'Intros', 'icon' => 'Intros.svg'],
         ['name' => 'Categories', 'icon' => 'Categories.svg'],
+        ['name' => 'Brands', 'icon' => 'gen026.svg'],
         ['name' => 'FeaturedWorks', 'icon' => 'FeaturedWorks.svg'],
         ['name' => 'Stores', 'icon' => 'Stores.svg'],
         ['name' => 'Subscription', 'icon' => 'Subscription.svg'],

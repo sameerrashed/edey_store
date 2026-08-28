@@ -20,9 +20,17 @@ class ManageController extends Controller
             } elseif (in_array($field['type'], ['file'])) {
                 if ($request->hasFile($field['name'])) {
                     if (isset($record)) {
-                        $data->{$field['name']} = $request->file($field['name'])->store('', 'SaveImg');
+                        $file = $request->file($field['name']);
+
+                        $path = $file->store('', 'SaveImg');
+
+                        $data[$field['name']] = $path;
                     } else {
-                        $data->{$field['name']} = $request->file($field['name'])->store('', 'SaveImg');
+                        $file = $request->file($field['name']);
+
+                        $path = $file->store('', 'SaveImg');
+
+                        $data[$field['name']] = $path;
                     }
                 }
             }
@@ -40,7 +48,11 @@ class ManageController extends Controller
                         if (isset($record)) {
                             $data->{$field['name']} = $request->file($field['name'])->store('', 'SaveImg');
                         } else {
-                            $data->{$field['name']} = $request->file($field['name'])->store('', 'SaveImg');
+                            $file = $request->file($field['name']);
+
+                            $path = $file->store('', 'SaveImg');
+
+                            $data[$field['name']] = $path;
                         }
                     }
                 }

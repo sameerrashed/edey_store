@@ -9,7 +9,7 @@ class category extends Model
     protected $fillable = [
         'category_name',
         'photo_cover',
-        'icon',
+        'description',
         'status',
         'show_in_intro',
     ];
@@ -20,8 +20,17 @@ class category extends Model
         $ary[] = [
             'name' => 'category_name',
             'type' => 'text',
-            'label' => 'category_name',
+            'label' => 'إسم التصنيف',
             'is_required' => true,
+            'is_readonly' => false,
+            'is_trans' => false,
+        ];
+
+        $ary[] = [
+            'name' => 'description',
+            'type' => 'text',
+            'label' => 'وصف التصنيف',
+            'is_required' => false,
             'is_readonly' => false,
             'is_trans' => false,
         ];
@@ -29,17 +38,8 @@ class category extends Model
         $ary[] = [
             'name' => 'status',
             'type' => 'text',
-            'label' => 'status',
+            'label' => 'حالة التصنيف',
             'is_required' => false,
-            'is_readonly' => false,
-            'is_trans' => false,
-        ];
-
-        $ary[] = [
-            'name' => 'icon',
-            'type' => 'file',
-            'label' => 'icon',
-            'is_required' => true,
             'is_readonly' => false,
             'is_trans' => false,
         ];
@@ -47,7 +47,7 @@ class category extends Model
         $ary[] = [
             'name' => 'photo_cover',
             'type' => 'file',
-            'label' => 'photo_cover',
+            'label' => 'صورة الغلاف',
             'is_required' => true,
             'is_readonly' => false,
             'is_trans' => false,

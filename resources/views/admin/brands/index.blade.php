@@ -19,16 +19,8 @@
         </li>
         <!--end::Item-->
         <!--begin::Item-->
-        <li class="breadcrumb-item text-muted">{{__('app.' . $title)}}</li>
-        <!--end::Item-->
-        <!--begin::Item-->
-        <li class="breadcrumb-item">
-            <span class="bullet bg-gray-300 w-5px h-2px"></span>
-        </li>
-        <!--end::Item-->
-        <!--begin::Item-->
-        <li class="breadcrumb-item text-dark">تصنيفاتي</li>
-        <!--end::Item-->
+        <li class="breadcrumb-item text-dark">{{__('app.' . $title)}}</li>
+
     </ul>
 @endsection
 @section("body")
@@ -71,7 +63,7 @@
                                 <rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="currentColor" />
                             </svg>
                         </span>
-                        إضافة تصنيف
+                        إضافة ماركة
                     </button>
                 </div>
                 <!--end::Toolbar-->
@@ -93,7 +85,7 @@
                             <!--begin::Modal header-->
                             <div class="modal-header" id="kt_modal_add_user_header">
                                 <!--begin::Modal title-->
-                                <h2 class="fw-bolder">إضافة تصنيف</h2>
+                                <h2 class="fw-bolder">إضافة ماركة</h2>
                                 <!--end::Modal title-->
                                 <!--begin::Close-->
                                 <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-users-modal-action="close"
@@ -125,68 +117,12 @@
                                         data-kt-scroll-dependencies="#kt_modal_add_category_header"
                                         data-kt-scroll-wrappers="#kt_modal_add_category_scroll"
                                         data-kt-scroll-offset="300px">
-                                        <!--begin::Input group-->
                                         <div class="fv-row mb-7">
-                                            <!--begin::Label-->
-                                            <label class="d-block fw-bold fs-6 mb-5">صورة الغلاف</label>
-                                            <!--end::Label-->
-                                            <!--begin::Image input-->
-                                            <div class="image-input image-input-outline" data-kt-image-input="true"
-                                                style="background-image: url({{asset('img/blank.svg')}})">
-                                                <!--begin::Preview existing avatar-->
-                                                <div class="image-input-wrapper w-125px h-125px"
-                                                    style="background-image: url({{asset('img/profilepic.jpg')}});"></div>
-                                                <!--end::Preview existing avatar-->
-                                                <!--begin::Label-->
-                                                <label
-                                                    class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-                                                    data-kt-image-input-action="change" data-bs-toggle="tooltip"
-                                                    title="إختر صورة">
-                                                    <i class="bi bi-pencil-fill fs-7"></i>
-                                                    <!--begin::Inputs-->
-                                                    <input type="file" id="photo_cover" name="photo_cover"
-                                                        accept=".png, .jpg, .jpeg" />
-                                                    <input type="hidden" id="photo_cover" name="photo_cover" />
-                                                    <!--end::Inputs-->
-                                                </label>
-                                                <!--end::Label-->
-                                                <!--begin::Cancel-->
-                                                <span
-                                                    class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-                                                    data-kt-image-input-action="cancel" data-bs-toggle="tooltip"
-                                                    title="قم بإلغاء الصورة">
-                                                    <i class="bi bi-x fs-2"></i>
-                                                </span>
-                                                <!--end::Cancel-->
-                                                <!--begin::Remove-->
-                                                <span
-                                                    class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-                                                    data-kt-image-input-action="remove" data-bs-toggle="tooltip"
-                                                    title="إحذف الصورة">
-                                                    <i class="bi bi-x fs-2"></i>
-                                                </span>
-                                                <!--end::Remove-->
-                                            </div>
-                                            <!--end::Image input-->
-                                            <!--begin::Hint-->
-                                            <div class="form-text">أنواع الملفات المسموح بها : jpeg , jpg , png.</div>
-                                            <!--end::Hint-->
-                                        </div>
-                                        <!--begin::Input group-->
-                                        <div class="fv-row mb-7">
-                                            <label class="required fw-bold fs-6 mb-2">اسم التصنيف</label>
+                                            <label class="required fw-bold fs-6 mb-2">اسم الماركة</label>
                                             <!--end::Label-->
                                             <!--begin::Input-->
-                                            <input type="text" id="category_name" name="category_name"
+                                            <input type="text" id="name" name="category_name"
                                                 class="form-control form-control-solid mb-3 mb-lg-0" required />
-                                        </div>
-
-                                        <div class="fv-row mb-7">
-                                            <label class="fw-bold fs-6 mb-2" for="description">وصف التصنيف</label>
-                                            <!--end::Label-->
-                                            <!--begin::Input-->
-                                            <textarea class="form-control form-control-solid mb-3 mb-lg-0"
-                                                name="description" id="description"></textarea>
                                         </div>
                                     </div>
                                     <!--end::Scroll-->
@@ -225,8 +161,7 @@
                                 <th class="w-10px pe-2">
                                     #
                                 </th>
-                                <th class="min-w-125px">التصنيف</th>
-                                <th class="min-w-125px">وصف التصنيف</th>
+                                <th class="min-w-125px">إسم الماركة</th>
                                 <th class="min-w-125px">تاريخ الإضافة</th>
                                 <th class="text-end min-w-100px">الإجراءات</th>
                             </tr>
@@ -242,28 +177,7 @@
                                     <td>
                                         {{($key + 1)}}
                                     </td>
-                                    <!--end::Checkbox-->
-                                    <!--begin::User=-->
-                                    <td class="d-flex align-items-center">
-                                        <!--begin:: Avatar -->
-                                        <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
-                                            <a href="">
-                                                <div class="symbol-label">
-                                                    <img src="{{asset('img/' . $record->photo_cover)}}" alt="Emma Smith"
-                                                        class="w-100" />
-                                                </div>
-                                            </a>
-                                        </div>
-                                        <!--end::Avatar-->
-                                        <!--begin::User details-->
-                                        <div class="d-flex flex-column">
-                                            <a href=""
-                                                class="text-gray-800 text-hover-primary mb-1">{{$record->category_name}}</a>
-                                        </div>
-                                        <!--begin::User details-->
-                                    </td>
-                                    <!--end::User=-->
-                                    <td>{{$record->description}}</td>
+                                    <td>{{$record->name}}</td>
                                     <!--end::Two step=-->
                                     <!--begin::Joined-->
                                     <td>{{$record->created_at->translatedFormat('d/m/Y H:i')}}</td>
@@ -287,7 +201,7 @@
                                             data-kt-menu="true">
                                             <!--begin::Menu item-->
                                             <div class="menu-item px-3">
-                                                <a href="{{route('admin.Categories.edit', $record->id)}}"
+                                                <a href="{{route('admin.Brands.edit', $record->id)}}"
                                                     class="menu-link px-3">تعديل</a>
                                             </div>
                                             <!--end::Menu item-->
@@ -417,7 +331,7 @@
 
             jQuery.ajax({
                 type: "POST",
-                url: "{{\Illuminate\Support\Facades\URL::to('admin/categories/store')}}",
+                url: "{{\Illuminate\Support\Facades\URL::to('admin/brands/store')}}",
                 data: formData,
                 processData: false,
                 contentType: false,
