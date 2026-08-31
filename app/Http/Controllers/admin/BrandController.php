@@ -19,9 +19,6 @@ class BrandController extends Controller
         return view('admin.brands.index', $data);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         //
@@ -48,17 +45,25 @@ class BrandController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(brand $brand)
+    public function edit($id)
     {
-        //
+        $data['title'] = 'edit';
+        $data['parent_title'] = 'Brands';
+        $data['fields'] = brand::get_Fields();
+        $data['record'] = brand::findorfail($id);
+
+        return view('admin.layout.form', $data);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, brand $brand)
+    public function update(Request $request, $id)
     {
-        //
+        $record = brand::query()->findOrFail($id);
+        ManageController::save($request, $record);
+
+        return redirect()->back()->with('success', 'تم التعديل بنجاح');
     }
 
     /**

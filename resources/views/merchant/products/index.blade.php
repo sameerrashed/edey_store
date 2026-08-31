@@ -82,10 +82,11 @@
                                 <th class="w-10px pe-2">#</th>
                                 <th class="min-w-125px">المنتج</th>
                                 <th class="min-w-125px">السعر</th>
-                                <th class="min-w-125px">الكمية</th>
-                                <th class="min-w-125px">التقييم</th>
-                                <th class="min-w-125px">اسم التاجر</th>
-                                <th class="min-w-125px">اسم الصنف</th>
+                                <th class="min-w-125px">السعر بعد الخصم</th>
+                                <th class="min-w-125px">التصنيف</th>
+                                <th class="min-w-125px">حالة المنتج</th>
+                                <th class="min-w-125px">حالة المخزون</th>
+                                <th class="min-w-125px">التاريخ</th>
                                 <th class="text-end min-w-100px">الاجراءات</th>
                             </tr>
                             <!--end::Table row-->
@@ -117,15 +118,38 @@
                                         </div>
                                     </td>
                                     <td>{{toArabicNumber($record->price)}}</td>
-                                    <td>{{toArabicNumber($record->count)}}</td>
-                                    <td>{{toArabicNumber($record->rate)}}</td>
-                                    <td>{{$record->user->first_name}} {{$record->user->last_name}}</td>
+                                    <td>{{toArabicNumber($record->price_after)}}</td>
                                     <td>
                                         @foreach ($record->categories as $category)
                                             <span class="badge badge-light-primary me-1 mb-1">
                                                 {{ $category->category_name }}
                                             </span>
                                         @endforeach
+                                    </td>
+                                    <td>
+                                        @if ($record->status == 1)
+                                            منشور
+                                        @else
+                                            مسودة
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if ($record->inventory->min_quantity >= $record->inventory->quantity)
+                                            <p style="color: chocolate;">قاربت على النفاذ</p>
+                                            {{$record->inventory->quantity  }}
+                                        @elseif ($record->inventory->min_quantity <= $record->inventory->quantity)
+                                            <p style="color: green">متوفر</p>
+                                            {{$record->inventory->quantity}}
+                                        @elseif ($record->inventory->quantity == 0)
+                                            <p style="color: red">غير متوفر</p>
+                                            {{$record->inventory->quantity}}
+                                        @endif
+
+                                    </td>
+                                    <td>
+                                        {{ $record->created_at->format('Y-m-d') }}
+                                        <br>
+                                        {{ $record->created_at->format('H:i:s') }}
                                     </td>
                                     <td class="text-end">
                                         <a href="#" class="btn btn-light btn-active-light-primary btn-sm"

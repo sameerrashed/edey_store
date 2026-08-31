@@ -98,6 +98,15 @@ class product extends Model
             'is_trans' => false,
         ];
 
+        $ary[] = [
+            'name' => 'brand_id',
+            'type' => 'text',
+            'label' => 'الماركة',
+            'is_required' => true,
+            'is_readonly' => false,
+            'is_trans' => false,
+        ];
+
         return $ary;
 
     }
@@ -147,5 +156,10 @@ class product extends Model
     public function variants()
     {
         return $this->hasMany(ProductVariant::class);
+    }
+
+    public function inventory()
+    {
+        return $this->hasOne(inventory::class);
     }
 }

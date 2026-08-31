@@ -121,7 +121,7 @@
                                             <label class="required fw-bold fs-6 mb-2">اسم الماركة</label>
                                             <!--end::Label-->
                                             <!--begin::Input-->
-                                            <input type="text" id="name" name="category_name"
+                                            <input type="text" id="name" name="name"
                                                 class="form-control form-control-solid mb-3 mb-lg-0" required />
                                         </div>
                                     </div>

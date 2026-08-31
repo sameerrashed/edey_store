@@ -4,6 +4,7 @@ namespace App\Http\Controllers\merchant;
 
 use App\Http\Controllers\admin\ManageController;
 use App\Http\Controllers\Controller;
+use App\Models\brand;
 use App\Models\category;
 use App\Models\color;
 use App\Models\engraving;
@@ -24,7 +25,7 @@ class ProductController extends Controller
     public function index()
     {
         $data['title'] = 'Products';
-        $data['records'] = product::with('categories')->where('user_id', auth()->user()->id)->get();
+        $data['records'] = product::with('categories', 'inventory')->where('user_id', auth()->user()->id)->get();
         $data['fields'] = product::get_Fields();
         $data['categories'] = category::all();
         $data['colors'] = color::all();
@@ -44,6 +45,7 @@ class ProductController extends Controller
         $data['records'] = product::where('user_id', auth()->user()->id)->get();
         $data['fields'] = product::get_Fields();
         $data['categories'] = category::all();
+        $data['brands'] = brand::all();
         $data['features'] = productfeature::all();
         $data['colors'] = color::all();
         $data['sizes'] = size::all();
