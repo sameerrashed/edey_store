@@ -162,4 +162,9 @@ class product extends Model
     {
         return $this->hasOne(inventory::class);
     }
+
+    public function brand()
+    {
+        return $this->hasOne(brand::class);
+    }
 }

@@ -245,20 +245,19 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
+        $data['brands'] = brand::all();
+        $data['products'] = product::all();
         $data['parent_title'] = 'Products';
         $data['title'] = 'EditProduct';
         $data['records'] = product::where('user_id', auth()->user()->id)->get();
         $data['value'] = product::where('id', $id)->first();
-        $data['product'] = product::with('categories', 'colors', 'engravings', 'sizes', 'relateds')->find($id);
+        $data['product'] = product::with('categories', 'colors', 'engravings', 'sizes', 'relateds', 'inventory')->find($id);
         $data['relation'] = related_product::all();
         $data['fields'] = product::get_Fields();
         $data['categories'] = category::all();
-        $data['colors'] = color::all();
-        $data['sizes'] = size::all();
-        $data['engravings'] = engraving::all();
-        $data['products'] = product::all();
+        $data['features'] = productfeature::all();
 
-        return view('merchant.products.edit', $data);
+        return view('merchant.products.edit_', $data);
     }
 
     /**
@@ -271,18 +270,18 @@ class ProductController extends Controller
 
         $product = product::where('id', $id)->first();
 
-        $request->validate([
-            'avatar' => $product->avatar
-                ? 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048'
-                : 'required|image|mimes:jpg,jpeg,png,webp|max:2048',
-            'image' => 'array|max:5',
-            'product_name' => 'required',
-            'price' => 'required',
-            'count' => 'required',
-            'color_id' => 'required',
-            'size_id' => 'required',
-            'engraving_id' => 'required',
-        ]);
+        // $request->validate([
+        //     'avatar' => $product->avatar
+        //         ? 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048'
+        //         : 'required|image|mimes:jpg,jpeg,png,webp|max:2048',
+        //     'image' => 'array|max:5',
+        //     'product_name' => 'required',
+        //     'price' => 'required',
+        //     'count' => 'required',
+        //     'color_id' => 'required',
+        //     'size_id' => 'required',
+        //     'engraving_id' => 'required',
+        // ]);
 
         $product->product_name = $request->product_name;
         $record = ManageController::save($request, $product);
@@ -308,16 +307,57 @@ class ProductController extends Controller
         }
 
         if ($request->has('image')) {
-            DB::table('product_slider')
-                ->where('product_id', $product->id)
-                ->delete();
-
             foreach ($request->image as $image) {
+
                 $image_name = $image->store('', 'SaveImg');
                 DB::table('pruduct_slider')->insert([
                     'product_id' => $product->id,
                     'image' => $image_name,
                 ]);
+            }
+        }
+
+        if ($request->has('stock_status')) {
+            DB::table('inventories')->where('product_id', $product->id)->update([
+                'quantity' => $request->quantity,
+                'min_quantity' => $request->min_quantity,
+                'max_quantity' => $request->max_quantity,
+                'stock_status' => $request->stock_status,
+            ]);
+        }
+
+        if ($request->has('variants')) {
+            foreach ($request->variants as $variantData) {
+                $variant = ProductVariant::create([
+                    'product_id' => $product->id,
+                    'variant_key' => isset($variantData['key'])
+                        ? $variantData['key']
+                        : null,
+                    'stock_status' => isset($variantData['stock_status'])
+                        ? $variantData['stock_status']
+                        : 'available',
+                    'quantity' => isset($variantData['quantity'])
+                        ? $variantData['quantity']
+                        : 0,
+                ]);
+                if (
+                    isset($variantData['features']) &&
+                    is_array($variantData['features'])
+                ) {
+                    foreach ($variantData['features'] as $featureData) {
+                        if (
+                            ! isset($featureData['feature_id']) ||
+                            ! isset($featureData['value_id'])
+                        ) {
+                            continue;
+                        }
+                        ProductVariantFeature::create([
+                            'product_variant_id' => $variant->id,
+                            'feature_id' => $featureData['feature_id'],
+                            'value_id' => $featureData['value_id'],
+                        ]);
+                    }
+                }
             }
         }
 

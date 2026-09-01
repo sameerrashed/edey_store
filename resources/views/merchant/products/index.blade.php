@@ -117,8 +117,8 @@
                                                 class="text-gray-800 text-hover-primary mb-1">{{$record->product_name}}</a>
                                         </div>
                                     </td>
-                                    <td>{{toArabicNumber($record->price)}}</td>
-                                    <td>{{toArabicNumber($record->price_after)}}</td>
+                                    <td>{{$record->price}}</td>
+                                    <td>{{$record->price_after}}</td>
                                     <td>
                                         @foreach ($record->categories as $category)
                                             <span class="badge badge-light-primary me-1 mb-1">

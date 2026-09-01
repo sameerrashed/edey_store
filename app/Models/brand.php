@@ -23,4 +23,9 @@ class brand extends Model
         return $ary;
 
     }
+
+    public function product()
+    {
+        return $this->belongsTo(product::class);
+    }
 }

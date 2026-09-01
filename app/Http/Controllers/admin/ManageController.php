@@ -91,9 +91,10 @@ class ManageController extends Controller
             $data->sku = $sku;
         }
 
-        if (auth()->user()) {
+        if (isset($request->user_id)) {
             $data->user_id = auth()->user()->id;
         }
+        // dd($data);
         $data->save();
 
         return $data;

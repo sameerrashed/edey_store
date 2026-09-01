@@ -117,6 +117,9 @@
                                                     <!--begin::Input-->
                                                     <input type="text" name="product_name" class="form-control mb-2"
                                                         placeholder="إسم المنتج" value="" required />
+
+                                                    <input type="number" name="user_id" class="form-control mb-2"
+                                                        placeholder="إسم المنتج" value="{{auth()->user()->id}}" hidden />
                                                     <!--end::Input-->
                                                     <!--begin::Description-->
                                                     <div class="text-muted fs-7">يُشترط وجود اسم للمنتج، ويُنصح بأن يكون
@@ -318,356 +321,354 @@
                                                     <!--end::Label-->
                                                     <!--begin::Input-->
                                                     <select name="brand_id" class="form-select mb-2" data-hide-search="true"
-                                                            data-placeholder="Select an option"
-                                                            id="kt_ecommerce_add_product_store_template" required>
-                                                            <option value=""></option>
-                                                            @foreach ($brands as $record)
-                                                                <option value="{{ $record->id }}">
-                                                                    {{ $record->name}}
-                                                                </option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
+                                                        data-placeholder="Select an option"
+                                                        id="kt_ecommerce_add_product_store_template" required>
+                                                        <option value=""></option>
+                                                        @foreach ($brands as $record)
+                                                            <option value="{{ $record->id }}">
+                                                                {{ $record->name}}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
                                                 </div>
-                                                <!--end::Card header-->
                                             </div>
-
+                                            <!--end::Card header-->
                                         </div>
+
                                     </div>
-                                    <div class="tab-pane fade" id="kt_ecommerce_add_product_relproduct" role="tab-panel">
-                                        <div class="d-flex flex-column gap-7 gap-lg-10">
-                                            <!--begin::Inventory-->
+                                </div>
+                                <div class="tab-pane fade" id="kt_ecommerce_add_product_relproduct" role="tab-panel">
+                                    <div class="d-flex flex-column gap-7 gap-lg-10">
+                                        <!--begin::Inventory-->
+                                        <div class="card card-flush py-4">
+                                            <!--begin::Card header-->
+                                            <div class="card-header">
+                                                <div class="card-title">
+                                                    <h2>المنتجات المرتبطة</h2>
+                                                </div>
+                                            </div>
+                                            <!--end::Card header-->
+                                            <!--begin::Card body-->
+                                            <div class="card-body pt-0">
+                                                <div class="mb-10 fv-row">
+                                                    <!--begin::Label-->
+                                                    <label class="required form-label">منتجات يوصى بها</label>
+                                                    <!--end::Label-->
+                                                    <!--begin::Input-->
+                                                    <select class="form-select form-select-solid lh-1 py-3"
+                                                        id="related_select" name="related_id[]"
+                                                        data-placeholder="إختر منتج مرتبط للمنتج" multiple="multiple">
+                                                        @foreach ($products as $record)
+                                                            <option value="{{ $record->id }}"
+                                                                data-image="{{ asset('img/' . $record->avatar) }}">
+                                                                {{ $record->product_name }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+
+                                            </div>
+                                            <!--end::Card header-->
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="kt_ecommerce_add_product_image" role="tab-panel">
+                                    <div class="d-flex flex-column gap-7 gap-lg-10">
+                                        <!--begin::Inventory-->
+                                        <div class="card card-flush py-4">
+                                            <!--begin::Card header-->
+
                                             <div class="card card-flush py-4">
                                                 <!--begin::Card header-->
                                                 <div class="card-header">
+                                                    <!--begin::Card title-->
                                                     <div class="card-title">
-                                                        <h2>المنتجات المرتبطة</h2>
+                                                        <h2>صورة مصغرة</h2>
                                                     </div>
+                                                    <!--end::Card title-->
                                                 </div>
                                                 <!--end::Card header-->
                                                 <!--begin::Card body-->
-                                                <div class="card-body pt-0">
-                                                    <div class="mb-10 fv-row">
+                                                <div class="card-body text-center pt-0">
+                                                    <!--begin::Image input-->
+                                                    <div class="image-input image-input-empty image-input-outline mb-3"
+                                                        data-kt-image-input="true"
+                                                        style="background-image: url({{ asset('img/blank-image.svg') }})">
+                                                        <!--begin::Preview existing avatar-->
+                                                        <div class="image-input-wrapper w-150px h-150px"></div>
+                                                        <!--end::Preview existing avatar-->
                                                         <!--begin::Label-->
-                                                        <label class="required form-label">منتجات يوصى بها</label>
+                                                        <label
+                                                            class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                                            data-kt-image-input-action="change" data-bs-toggle="tooltip"
+                                                            title="إختيار صورة">
+                                                            <i class="bi bi-pencil-fill fs-7"></i>
+                                                            <!--begin::Inputs-->
+                                                            <input type="file" name="avatar" accept=".png, .jpg, .jpeg" />
+                                                            <input type="hidden" name="avatar_remove" />
+                                                            <!--end::Inputs-->
+                                                        </label>
                                                         <!--end::Label-->
-                                                        <!--begin::Input-->
-                                                        <select class="form-select form-select-solid lh-1 py-3"
-                                                            id="related_select" name="related_id[]"
-                                                            data-placeholder="إختر منتج مرتبط للمنتج" multiple="multiple">
-                                                            @foreach ($products as $record)
-                                                                <option value="{{ $record->id }}"
-                                                                    data-image="{{ asset('img/' . $record->avatar) }}">
-                                                                    {{ $record->product_name }}
-                                                                </option>
-                                                            @endforeach
-                                                        </select>
+                                                        <!--begin::Cancel-->
+                                                        <span
+                                                            class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                                            data-kt-image-input-action="cancel" data-bs-toggle="tooltip"
+                                                            title="إلغاء الصورة">
+                                                            <i class="bi bi-x fs-2"></i>
+                                                        </span>
+                                                        <!--end::Cancel-->
+                                                        <!--begin::Remove-->
+                                                        <span
+                                                            class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                                            data-kt-image-input-action="remove" data-bs-toggle="tooltip"
+                                                            title="Remove avatar">
+                                                            <i class="bi bi-x fs-2"></i>
+                                                        </span>
+                                                        <!--end::Remove-->
+                                                    </div>
+                                                    <!--end::Image input-->
+                                                    <!--begin::Description-->
+                                                    <div class="text-muted fs-7">قم بتعيين صورة مصغرة للمنتج. يُقبل فقط
+                                                        ملفات الصور بصيغة
+                                                        *.png و *.jpg و *.jpeg</div>
+                                                    <!--end::Description-->
+                                                </div>
+                                                <!--end::Card body-->
+                                            </div>
+                                        </div>
+
+                                        <div class="card-body pt-0">
+
+                                            <div class="fv-row mb-2">
+
+                                                <div id="product_media_area" class="dropzone" style="cursor:pointer;">
+
+                                                    <input type="file" id="product_images" name="image[]"
+                                                        accept="image/jpeg,image/png,image/jpg,image/webp" multiple hidden>
+
+                                                    <div class="dz-message needsclick">
+
+                                                        <i class="bi bi-file-earmark-arrow-up text-primary fs-3x"></i>
+
+                                                        <div class="ms-4">
+                                                            <h3 class="fs-5 fw-bolder text-gray-900 mb-1">
+                                                                أسقط الملفات هنا أو انقر للتحميل.
+                                                            </h3>
+
+                                                            <span class="fs-7 fw-bold text-gray-400">
+                                                                حمّل ما يصل إلى 10 صور
+                                                            </span>
+                                                        </div>
+
                                                     </div>
 
+                                                </div>
+
+                                                <div id="images_preview" class="d-flex flex-wrap gap-3 mt-5">
+                                                </div>
+
+                                            </div>
+
+                                            <div class="text-muted fs-7">
+                                                قم بإعداد معرض صور المنتج.
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade multiple-product-pane d-none"
+                                    id="kt_ecommerce_add_product_variations" role="tabpanel">
+                                    <div class="d-flex flex-column gap-7 gap-lg-10">
+                                        <!--begin::Inventory-->
+                                        <div class="card card-flush py-4">
+                                            <div class="card card-flush py-4">
+                                                <div class="card-header">
+                                                    <div class="card-title">
+                                                        <h2>سمة المنتج</h2>
+                                                    </div>
+                                                </div>
+                                                <div class="card-body pt-0">
+                                                    <!--begin::Image input-->
+                                                    <div class="mb-10">
+                                                        <div class="row align-items-center">
+                                                            <div class="col-md-1">
+                                                                <label class="required form-label mb-0">
+                                                                    السمات :
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <select class="form-select"
+                                                                    id="kt_ecommerce_add_features_store_template"
+                                                                    name="features">
+                                                                    <option></option>
+                                                                    @foreach ($features as $record)
+                                                                        <option value="{{ $record->id }}">{{ $record->name }}
+                                                                        </option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <button type="button" class="btn btn-primary"
+                                                                    id="add_feature_btn">
+                                                                    إضافة
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div id="selected_features_container"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade multiple-product-pane d-none"
+                                    id="kt_ecommerce_add_product_variants" role="tabpanel">
+                                    <div class="d-flex flex-column gap-7 gap-lg-10">
+                                        <!--begin::Inventory-->
+                                        <div class="card card-flush py-4">
+                                            <!--begin::Card header-->
+
+                                            <div class="card card-flush py-4">
+                                                <!--begin::Card header-->
+                                                <div class="card-header">
+                                                    <!--begin::Card title-->
+                                                    <div class="card-title">
+                                                        <h2>الأنواع</h2>
+                                                    </div>
+                                                    <!--end::Card title-->
                                                 </div>
                                                 <!--end::Card header-->
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane fade" id="kt_ecommerce_add_product_image" role="tab-panel">
-                                        <div class="d-flex flex-column gap-7 gap-lg-10">
-                                            <!--begin::Inventory-->
-                                            <div class="card card-flush py-4">
-                                                <!--begin::Card header-->
-
-                                                <div class="card card-flush py-4">
-                                                    <!--begin::Card header-->
-                                                    <div class="card-header">
-                                                        <!--begin::Card title-->
-                                                        <div class="card-title">
-                                                            <h2>صورة مصغرة</h2>
-                                                        </div>
-                                                        <!--end::Card title-->
-                                                    </div>
-                                                    <!--end::Card header-->
-                                                    <!--begin::Card body-->
-                                                    <div class="card-body text-center pt-0">
-                                                        <!--begin::Image input-->
-                                                        <div class="image-input image-input-empty image-input-outline mb-3"
-                                                            data-kt-image-input="true"
-                                                            style="background-image: url({{ asset('img/blank-image.svg') }})">
-                                                            <!--begin::Preview existing avatar-->
-                                                            <div class="image-input-wrapper w-150px h-150px"></div>
-                                                            <!--end::Preview existing avatar-->
-                                                            <!--begin::Label-->
-                                                            <label
-                                                                class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-                                                                data-kt-image-input-action="change" data-bs-toggle="tooltip"
-                                                                title="إختيار صورة">
-                                                                <i class="bi bi-pencil-fill fs-7"></i>
-                                                                <!--begin::Inputs-->
-                                                                <input type="file" name="avatar" accept=".png, .jpg, .jpeg" />
-                                                                <input type="hidden" name="avatar_remove" />
-                                                                <!--end::Inputs-->
+                                                <!--begin::Card body-->
+                                                <div class="card-body text-center pt-0">
+                                                    <div id="variants_features_wrapper" style="display:none;">
+                                                        <div class="mb-7">
+                                                            <label class="form-label fw-bold fs-6 mb-4">
+                                                                اختر السمات المستخدمة في الأنواع
                                                             </label>
-                                                            <!--end::Label-->
-                                                            <!--begin::Cancel-->
-                                                            <span
-                                                                class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-                                                                data-kt-image-input-action="cancel" data-bs-toggle="tooltip"
-                                                                title="إلغاء الصورة">
-                                                                <i class="bi bi-x fs-2"></i>
-                                                            </span>
-                                                            <!--end::Cancel-->
-                                                            <!--begin::Remove-->
-                                                            <span
-                                                                class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-                                                                data-kt-image-input-action="remove" data-bs-toggle="tooltip"
-                                                                title="Remove avatar">
-                                                                <i class="bi bi-x fs-2"></i>
-                                                            </span>
-                                                            <!--end::Remove-->
-                                                        </div>
-                                                        <!--end::Image input-->
-                                                        <!--begin::Description-->
-                                                        <div class="text-muted fs-7">قم بتعيين صورة مصغرة للمنتج. يُقبل فقط
-                                                            ملفات الصور بصيغة
-                                                            *.png و *.jpg و *.jpeg</div>
-                                                        <!--end::Description-->
-                                                    </div>
-                                                    <!--end::Card body-->
-                                                </div>
-                                            </div>
-
-                                            <div class="card-body pt-0">
-
-                                                <div class="fv-row mb-2">
-
-                                                    <div id="product_media_area" class="dropzone" style="cursor:pointer;">
-
-                                                        <input type="file" id="product_images" name="image[]"
-                                                            accept="image/jpeg,image/png,image/jpg,image/webp" multiple hidden>
-
-                                                        <div class="dz-message needsclick">
-
-                                                            <i class="bi bi-file-earmark-arrow-up text-primary fs-3x"></i>
-
-                                                            <div class="ms-4">
-                                                                <h3 class="fs-5 fw-bolder text-gray-900 mb-1">
-                                                                    أسقط الملفات هنا أو انقر للتحميل.
-                                                                </h3>
-
-                                                                <span class="fs-7 fw-bold text-gray-400">
-                                                                    حمّل ما يصل إلى 10 صور
-                                                                </span>
-                                                            </div>
-
-                                                        </div>
-
-                                                    </div>
-
-                                                    <div id="images_preview" class="d-flex flex-wrap gap-3 mt-5">
-                                                    </div>
-
-                                                </div>
-
-                                                <div class="text-muted fs-7">
-                                                    قم بإعداد معرض صور المنتج.
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane fade multiple-product-pane d-none"
-                                        id="kt_ecommerce_add_product_variations" role="tabpanel">
-                                        <div class="d-flex flex-column gap-7 gap-lg-10">
-                                            <!--begin::Inventory-->
-                                            <div class="card card-flush py-4">
-                                                <div class="card card-flush py-4">
-                                                    <div class="card-header">
-                                                        <div class="card-title">
-                                                            <h2>سمة المنتج</h2>
-                                                        </div>
-                                                    </div>
-                                                    <div class="card-body pt-0">
-                                                        <!--begin::Image input-->
-                                                        <div class="mb-10">
-                                                            <div class="row align-items-center">
-                                                                <div class="col-md-1">
-                                                                    <label class="required form-label mb-0">
-                                                                        السمات :
-                                                                    </label>
-                                                                </div>
-                                                                <div class="col-md-8">
-                                                                    <select class="form-select"
-                                                                        id="kt_ecommerce_add_features_store_template"
-                                                                        name="features">
-                                                                        <option></option>
-                                                                        @foreach ($features as $record)
-                                                                            <option value="{{ $record->id }}">{{ $record->name }}
-                                                                            </option>
-                                                                        @endforeach
-                                                                    </select>
-                                                                </div>
-                                                                <div class="col-md-3">
-                                                                    <button type="button" class="btn btn-primary"
-                                                                        id="add_feature_btn">
-                                                                        إضافة
-                                                                    </button>
-                                                                </div>
+                                                            <div id="variants_checkboxes" class="d-flex flex-wrap gap-4">
                                                             </div>
                                                         </div>
-                                                        <div id="selected_features_container"></div>
                                                     </div>
+                                                    <div id="variants_container"></div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="tab-pane fade multiple-product-pane d-none"
-                                        id="kt_ecommerce_add_product_variants" role="tabpanel">
-                                        <div class="d-flex flex-column gap-7 gap-lg-10">
-                                            <!--begin::Inventory-->
-                                            <div class="card card-flush py-4">
-                                                <!--begin::Card header-->
-
-                                                <div class="card card-flush py-4">
-                                                    <!--begin::Card header-->
-                                                    <div class="card-header">
-                                                        <!--begin::Card title-->
-                                                        <div class="card-title">
-                                                            <h2>الأنواع</h2>
-                                                        </div>
-                                                        <!--end::Card title-->
-                                                    </div>
-                                                    <!--end::Card header-->
-                                                    <!--begin::Card body-->
-                                                    <div class="card-body text-center pt-0">
-                                                        <div id="variants_features_wrapper" style="display:none;">
-                                                            <div class="mb-7">
-                                                                <label class="form-label fw-bold fs-6 mb-4">
-                                                                    اختر السمات المستخدمة في الأنواع
-                                                                </label>
-                                                                <div id="variants_checkboxes" class="d-flex flex-wrap gap-4">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div id="variants_container"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="d-flex justify-content-center">
-                                    <a href="{{ route('merchant.Products.store') }}" id="kt_ecommerce_add_product_cancel"
-                                        class="btn btn-light me-5"
-                                        style=" background-color: #ffb822;border-color: #ffb822;color: #111;">إضافة كمسودة</a>
-                                    <button type="submit" id="" class="btn btn-primary">
-                                        <span class="indicator-label">إضافة</span>
-                                        <span class="indicator-progress">الرجاء الإنتظار...
-                                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                                    </button>
                                 </div>
                             </div>
-                        </form>
-                        <script>
-                            document.addEventListener('DOMContentLoaded', function () {
+                            <div class="d-flex justify-content-center">
+                                <a href="{{ route('merchant.Products.store') }}" id="kt_ecommerce_add_product_cancel"
+                                    class="btn btn-light me-5"
+                                    style=" background-color: #ffb822;border-color: #ffb822;color: #111;">إضافة كمسودة</a>
+                                <button type="submit" id="" class="btn btn-primary">
+                                    <span class="indicator-label">إضافة</span>
+                                    <span class="indicator-progress">الرجاء الإنتظار...
+                                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function () {
 
-                                const productType = document.getElementById(
-                                    'kt_ecommerce_add_product_store_template'
-                                );
+                            const productType = document.getElementById(
+                                'kt_ecommerce_add_product_store_template'
+                            );
 
-                                const multipleTabs = document.querySelectorAll(
-                                    '.multiple-product-tab'
-                                );
+                            const multipleTabs = document.querySelectorAll(
+                                '.multiple-product-tab'
+                            );
 
-                                const multiplePanes = document.querySelectorAll(
-                                    '.multiple-product-pane'
-                                );
+                            const multiplePanes = document.querySelectorAll(
+                                '.multiple-product-pane'
+                            );
 
 
-                                if (!productType) {
-                                    return;
+                            if (!productType) {
+                                return;
+                            }
+
+
+                            function changeProductType() {
+
+                                // ============================
+                                // منتج متعدد
+                                // ============================
+                                if (productType.value === '2') {
+
+                                    multipleTabs.forEach(function (item) {
+                                        item.classList.remove('d-none');
+                                    });
+
+                                    multiplePanes.forEach(function (item) {
+                                        item.classList.remove('d-none');
+                                    });
+
                                 }
 
 
-                                function changeProductType() {
+                                // ============================
+                                // منتج بسيط
+                                // ============================
+                                else {
 
-                                    // ============================
-                                    // منتج متعدد
-                                    // ============================
-                                    if (productType.value === '2') {
-
-                                        multipleTabs.forEach(function (item) {
-                                            item.classList.remove('d-none');
-                                        });
-
-                                        multiplePanes.forEach(function (item) {
-                                            item.classList.remove('d-none');
-                                        });
-
-                                    }
+                                    let wasMultipleTabActive = false;
 
 
-                                    // ============================
-                                    // منتج بسيط
-                                    // ============================
-                                    else {
+                                    // نتحقق هل المستخدم موجود حالياً داخل
+                                    // إحدى نوافذ المنتج المتعدد
+                                    multiplePanes.forEach(function (item) {
 
-                                        let wasMultipleTabActive = false;
+                                        if (item.classList.contains('active')) {
+                                            wasMultipleTabActive = true;
+                                        }
 
-
-                                        // نتحقق هل المستخدم موجود حالياً داخل
-                                        // إحدى نوافذ المنتج المتعدد
-                                        multiplePanes.forEach(function (item) {
-
-                                            if (item.classList.contains('active')) {
-                                                wasMultipleTabActive = true;
-                                            }
-
-                                        });
+                                    });
 
 
-                                        // نخفي أزرار المنتج المتعدد
-                                        multipleTabs.forEach(function (item) {
-                                            item.classList.add('d-none');
-                                        });
+                                    // نخفي أزرار المنتج المتعدد
+                                    multipleTabs.forEach(function (item) {
+                                        item.classList.add('d-none');
+                                    });
 
 
-                                        // نخفي محتوى المنتج المتعدد
-                                        multiplePanes.forEach(function (item) {
+                                    // نخفي محتوى المنتج المتعدد
+                                    multiplePanes.forEach(function (item) {
 
-                                            item.classList.add('d-none');
-                                            item.classList.remove('show');
-                                            item.classList.remove('active');
+                                        item.classList.add('d-none');
+                                        item.classList.remove('show');
+                                        item.classList.remove('active');
 
-                                        });
-
-
-                                        // ====================================
-                                        // إذا كان المستخدم داخل Tab متعدد
-                                        // ننقله تلقائياً إلى "عام"
-                                        // ====================================
-                                        if (wasMultipleTabActive) {
-
-                                            const generalButton = document.querySelector(
-                                                '[href="#kt_ecommerce_add_product_general"]'
-                                            );
-
-                                            const generalPane = document.getElementById(
-                                                'kt_ecommerce_add_product_general'
-                                            );
+                                    });
 
 
-                                            if (generalButton) {
+                                    // ====================================
+                                    // إذا كان المستخدم داخل Tab متعدد
+                                    // ننقله تلقائياً إلى "عام"
+                                    // ====================================
+                                    if (wasMultipleTabActive) {
 
-                                                // Bootstrap / Metronic
-                                                const generalTab =
-                                                    bootstrap.Tab.getOrCreateInstance(generalButton);
+                                        const generalButton = document.querySelector(
+                                            '[href="#kt_ecommerce_add_product_general"]'
+                                        );
 
-                                                generalTab.show();
+                                        const generalPane = document.getElementById(
+                                            'kt_ecommerce_add_product_general'
+                                        );
 
-                                            } else if (generalPane) {
-                                                generalPane.classList.add('show');
-                                                generalPane.classList.add('active');
 
-                                            }
+                                        if (generalButton) {
+
+                                            // Bootstrap / Metronic
+                                            const generalTab =
+                                                bootstrap.Tab.getOrCreateInstance(generalButton);
+
+                                            generalTab.show();
+
+                                        } else if (generalPane) {
+                                            generalPane.classList.add('show');
+                                            generalPane.classList.add('active');
 
                                         }
 
@@ -675,24 +676,26 @@
 
                                 }
 
+                            }
 
-                                // عند تحميل الصفحة
+
+                            // عند تحميل الصفحة
+                            changeProductType();
+
+
+                            // عند تغيير نوع المنتج
+                            productType.addEventListener('change', function () {
+
                                 changeProductType();
 
-
-                                // عند تغيير نوع المنتج
-                                productType.addEventListener('change', function () {
-
-                                    changeProductType();
-
-                                });
-
                             });
-                        </script>
-                    </div>
+
+                        });
+                    </script>
                 </div>
             </div>
         </div>
+    </div>
 @endsection
 @section('script')
     <script>
@@ -858,15 +861,15 @@
                         item.style.position = 'relative';
 
                         item.innerHTML = `
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <img src="${e.target.result}"
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 style="
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    width:100px;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    height:100px;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    object-fit:cover;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    border-radius:8px;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    border:1px solid #e4e6ef;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 ">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        `;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <img src="${e.target.result}"
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         style="
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            width:100px;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            height:100px;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            object-fit:cover;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            border-radius:8px;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            border:1px solid #e4e6ef;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         ">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                `;
 
                         preview.appendChild(item);
                     };
@@ -995,21 +998,21 @@
                 }
 
                 return $(`
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <div class="d-flex align-items-center gap-3">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <div class="d-flex align-items-center gap-3">
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <img src="${image}"
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 style="
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    width: 45px;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    height: 45px;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    object-fit: cover;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    border-radius: 6px;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    border: 1px solid #e4e6ef;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 ">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <img src="${image}"
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         style="
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            width: 45px;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            height: 45px;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            object-fit: cover;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            border-radius: 6px;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            border: 1px solid #e4e6ef;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         ">
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <span>${product.text}</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <span>${product.text}</span>
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    `);
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            `);
             }
 
 
@@ -1109,10 +1112,10 @@
                             return;
                         }
                         let options = `
-                                                                                                                                                                                                                                                                                                                                        <option value="">
-                                                                                                                                                                                                                                                                                                                                            اختر القيمة
-                                                                                                                                                                                                                                                                                                                                        </option>
-                                                                                                                                                                                                                                                                                                                                    `;
+                                                                                                                                                                                                                                                                                                                                                <option value="">
+                                                                                                                                                                                                                                                                                                                                                    اختر القيمة
+                                                                                                                                                                                                                                                                                                                                                </option>
+                                                                                                                                                                                                                                                                                                                                            `;
 
                         response.values.forEach(function (item) {
 
@@ -1129,13 +1132,13 @@
                             }
 
                             options += `
-                                                                                                                                                                                                                                                                                                                                            <option
-                                                                                                                                                                                                                                                                                                                                                value="${item.id}"
-                                                                                                                                                                                                                                                                                                                                                ${extraData}
-                                                                                                                                                                                                                                                                                                                                            >
-                                                                                                                                                                                                                                                                                                                                                ${item.name}
-                                                                                                                                                                                                                                                                                                                                            </option>
-                                                                                                                                                                                                                                                                                                                                        `;
+                                                                                                                                                                                                                                                                                                                                                    <option
+                                                                                                                                                                                                                                                                                                                                                        value="${item.id}"
+                                                                                                                                                                                                                                                                                                                                                        ${extraData}
+                                                                                                                                                                                                                                                                                                                                                    >
+                                                                                                                                                                                                                                                                                                                                                        ${item.name}
+                                                                                                                                                                                                                                                                                                                                                    </option>
+                                                                                                                                                                                                                                                                                                                                                `;
                         });
                         const featureRow =
                             document.createElement('div');
@@ -1146,38 +1149,38 @@
                         featureRow.dataset.featureId =
                             featureId;
                         featureRow.innerHTML = `
-                                                                                                                                                                                                                                                                                                                                                                            <div class="row align-items-center">
-                                                                                                                                                                                                                                                                                                                                                                                <div class="col-md-2">
-                                                                                                                                                                                                                                                                                                                                                                                    <label class="form-label mb-0">
-                                                                                                                                                                                                                                                                                                                                                                                        السمة:
-                                                                                                                                                                                                                                                                                                                                                                                        <strong>
-                                                                                                                                                                                                                                                                                                                                                                                            ${selectedFeature.name}
-                                                                                                                                                                                                                                                                                                                                                                                        </strong>
-                                                                                                                                                                                                                                                                                                                                                                                    </label>
-                                                                                                                                                                                                                                                                                                                                                                                    <input
-                                                                                                                                                                                                                                                                                                                                                                                        type="hidden"
-                                                                                                                                                                                                                                                                                                                                                                                        name="feature_ids[]"
-                                                                                                                                                                                                                                                                                                                                                                                        value="${featureId}"
-                                                                                                                                                                                                                                                                                                                                                                                    >
-                                                                                                                                                                                                                                                                                                                                                                                </div>
-                                                                                                                                                                                                                                                                                                                                                                                <div class="col-md-7">
-                                                                                                                                                                                                                                                                                                                                                                                    <select
-                                                                                                                                                                                                                                                                                                                                                                                        class="form-select feature-values-select"
-                                                                                                                                                                                                                    multiple                                                                                                                                                                 name="feature_values[${featureId}]"
-                                                                                                                                                                                                                                                                                                                                                                                    >
-                                                                                                                                                                                                                                                                                                                                                                                        ${options}
-                                                                                                                                                                                                                                                                                                                                                                                    </select>
-                                                                                                                                                                                                                                                                                                                                                                                </div>
-                                                                                                                                                                                                                                                                                                                                                                                <div class="col-md-3">
-                                                                                                                                                                                                                                                                                                                                                                                    <button
-                                                                                                                                                                                                                                                                                                                                                                                        type="button"
-                                                                                                                                                                                                                                                                                                                                                                                        class="btn btn-danger remove-feature"
-                                                                                                                                                                                                                                                                                                                                                                                    >
-                                                                                                                                                                                                                                                                                                                                                                                        إزالة
-                                                                                                                                                                                                                                                                                                                                                                                    </button>
-                                                                                                                                                                                                                                                                                                                                                                                </div>
-                                                                                                                                                                                                                                                                                                                                                                            </div>
-                                                                                                                                                                                                                                                                                                                                                                        `;
+                                                                                                                                                                                                                                                                                                                                                                                    <div class="row align-items-center">
+                                                                                                                                                                                                                                                                                                                                                                                        <div class="col-md-2">
+                                                                                                                                                                                                                                                                                                                                                                                            <label class="form-label mb-0">
+                                                                                                                                                                                                                                                                                                                                                                                                السمة:
+                                                                                                                                                                                                                                                                                                                                                                                                <strong>
+                                                                                                                                                                                                                                                                                                                                                                                                    ${selectedFeature.name}
+                                                                                                                                                                                                                                                                                                                                                                                                </strong>
+                                                                                                                                                                                                                                                                                                                                                                                            </label>
+                                                                                                                                                                                                                                                                                                                                                                                            <input
+                                                                                                                                                                                                                                                                                                                                                                                                type="hidden"
+                                                                                                                                                                                                                                                                                                                                                                                                name="feature_ids[]"
+                                                                                                                                                                                                                                                                                                                                                                                                value="${featureId}"
+                                                                                                                                                                                                                                                                                                                                                                                            >
+                                                                                                                                                                                                                                                                                                                                                                                        </div>
+                                                                                                                                                                                                                                                                                                                                                                                        <div class="col-md-7">
+                                                                                                                                                                                                                                                                                                                                                                                            <select
+                                                                                                                                                                                                                                                                                                                                                                                                class="form-select feature-values-select"
+                                                                                                                                                                                                                            multiple                                                                                                                                                                 name="feature_values[${featureId}]"
+                                                                                                                                                                                                                                                                                                                                                                                            >
+                                                                                                                                                                                                                                                                                                                                                                                                ${options}
+                                                                                                                                                                                                                                                                                                                                                                                            </select>
+                                                                                                                                                                                                                                                                                                                                                                                        </div>
+                                                                                                                                                                                                                                                                                                                                                                                        <div class="col-md-3">
+                                                                                                                                                                                                                                                                                                                                                                                            <button
+                                                                                                                                                                                                                                                                                                                                                                                                type="button"
+                                                                                                                                                                                                                                                                                                                                                                                                class="btn btn-danger remove-feature"
+                                                                                                                                                                                                                                                                                                                                                                                            >
+                                                                                                                                                                                                                                                                                                                                                                                                إزالة
+                                                                                                                                                                                                                                                                                                                                                                                            </button>
+                                                                                                                                                                                                                                                                                                                                                                                        </div>
+                                                                                                                                                                                                                                                                                                                                                                                    </div>
+                                                                                                                                                                                                                                                                                                                                                                                `;
                         container.appendChild(featureRow);
                         const valueSelect = $(featureRow)
                             .find('.feature-values-select');
@@ -1195,56 +1198,56 @@
                                 const avatar = option.dataset.avatar;
                                 if (color) {
                                     return $(`
-                                                                                                                                                                                                                                                                                                                                                <div
-                                                                                                                                                                                                                                                                                                                                                    style="
-                                                                                                                                                                                                                                                                                                                                                        display:flex;
-                                                                                                                                                                                                                                                                                                                                                        align-items:center;
-                                                                                                                                                                                                                                                                                                                                                        gap:10px;
-                                                                                                                                                                                                                                                                                                                                                        direction:rtl;
-                                                                                                                                                                                                                                                                                                                                                    "
-                                                                                                                                                                                                                                                                                                                                                >
-                                                                                                                                                                                                                                                                                                                                                    <span
-                                                                                                                                                                                                                                                                                                                                                        style="
-                                                                                                                                                                                                                                                                                                                                                            width:18px;
-                                                                                                                                                                                                                                                                                                                                                            height:18px;
-                                                                                                                                                                                                                                                                                                                                                            border-radius:50%;
-                                                                                                                                                                                                                                                                                                                                                            background:${color};
-                                                                                                                                                                                                                                                                                                                                                            border:1px solid #ddd;
-                                                                                                                                                                                                                                                                                                                                                            display:inline-block;
-                                                                                                                                                                                                                                                                                                                                                            flex-shrink:0;
-                                                                                                                                                                                                                                                                                                                                                        "
-                                                                                                                                                                                                                                                                                                                                                    ></span>
-                                                                                                                                                                                                                                                                                                                                                    <span>
-                                                                                                                                                                                                                                                                                                                                                        ${state.text}
-                                                                                                                                                                                                                                                                                                                                                    </span>
-                                                                                                                                                                                                                                                                                                                                                </div>
-                                                                                                                                                                                                                                                                                                                                            `);
+                                                                                                                                                                                                                                                                                                                                                        <div
+                                                                                                                                                                                                                                                                                                                                                            style="
+                                                                                                                                                                                                                                                                                                                                                                display:flex;
+                                                                                                                                                                                                                                                                                                                                                                align-items:center;
+                                                                                                                                                                                                                                                                                                                                                                gap:10px;
+                                                                                                                                                                                                                                                                                                                                                                direction:rtl;
+                                                                                                                                                                                                                                                                                                                                                            "
+                                                                                                                                                                                                                                                                                                                                                        >
+                                                                                                                                                                                                                                                                                                                                                            <span
+                                                                                                                                                                                                                                                                                                                                                                style="
+                                                                                                                                                                                                                                                                                                                                                                    width:18px;
+                                                                                                                                                                                                                                                                                                                                                                    height:18px;
+                                                                                                                                                                                                                                                                                                                                                                    border-radius:50%;
+                                                                                                                                                                                                                                                                                                                                                                    background:${color};
+                                                                                                                                                                                                                                                                                                                                                                    border:1px solid #ddd;
+                                                                                                                                                                                                                                                                                                                                                                    display:inline-block;
+                                                                                                                                                                                                                                                                                                                                                                    flex-shrink:0;
+                                                                                                                                                                                                                                                                                                                                                                "
+                                                                                                                                                                                                                                                                                                                                                            ></span>
+                                                                                                                                                                                                                                                                                                                                                            <span>
+                                                                                                                                                                                                                                                                                                                                                                ${state.text}
+                                                                                                                                                                                                                                                                                                                                                            </span>
+                                                                                                                                                                                                                                                                                                                                                        </div>
+                                                                                                                                                                                                                                                                                                                                                    `);
                                 }
                                 if (avatar) {
 
                                     return $(`
-                                                                                                                                                                                                                                                                                                                                                <div
-                                                                                                                                                                                                                                                                                                                                                    style="
-                                                                                                                                                                                                                                                                                                                                                        display:flex;
-                                                                                                                                                                                                                                                                                                                                                        align-items:center;
-                                                                                                                                                                                                                                                                                                                                                        gap:10px;
-                                                                                                                                                                                                                                                                                                                                                        direction:rtl;
-                                                                                                                                                                                                                                                                                                                                                    "
-                                                                                                                                                                                                                                                                                                                                                >
-                                                                                                                                                                                                                                                                                                                                                    <img
-                                                                                                                                                                                                                                                                                                                                                        src="{{ asset('img/${avatar}') }}"
-                                                                                                                                                                                                                                                                                                                                                        style="
-                                                                                                                                                                                                                                                                                                                                                            width:30px;
-                                                                                                                                                                                                                                                                                                                                                            height:30px;
-                                                                                                                                                                                                                                                                                                                                                            border-radius:5px;
-                                                                                                                                                                                                                                                                                                                                                            object-fit:cover;
-                                                                                                                                                                                                                                                                                                                                                        "
-                                                                                                                                                                                                                                                                                                                                                    >
-                                                                                                                                                                                                                                                                                                                                                    <span>
-                                                                                                                                                                                                                                                                                                                                                        ${state.text}
-                                                                                                                                                                                                                                                                                                                                                    </span>
-                                                                                                                                                                                                                                                                                                                                                </div>
-                                                                                                                                                                                                                                                                                                                                            `);
+                                                                                                                                                                                                                                                                                                                                                        <div
+                                                                                                                                                                                                                                                                                                                                                            style="
+                                                                                                                                                                                                                                                                                                                                                                display:flex;
+                                                                                                                                                                                                                                                                                                                                                                align-items:center;
+                                                                                                                                                                                                                                                                                                                                                                gap:10px;
+                                                                                                                                                                                                                                                                                                                                                                direction:rtl;
+                                                                                                                                                                                                                                                                                                                                                            "
+                                                                                                                                                                                                                                                                                                                                                        >
+                                                                                                                                                                                                                                                                                                                                                            <img
+                                                                                                                                                                                                                                                                                                                                                                src="{{ asset('img/${avatar}') }}"
+                                                                                                                                                                                                                                                                                                                                                                style="
+                                                                                                                                                                                                                                                                                                                                                                    width:30px;
+                                                                                                                                                                                                                                                                                                                                                                    height:30px;
+                                                                                                                                                                                                                                                                                                                                                                    border-radius:5px;
+                                                                                                                                                                                                                                                                                                                                                                    object-fit:cover;
+                                                                                                                                                                                                                                                                                                                                                                "
+                                                                                                                                                                                                                                                                                                                                                            >
+                                                                                                                                                                                                                                                                                                                                                            <span>
+                                                                                                                                                                                                                                                                                                                                                                ${state.text}
+                                                                                                                                                                                                                                                                                                                                                            </span>
+                                                                                                                                                                                                                                                                                                                                                        </div>
+                                                                                                                                                                                                                                                                                                                                                    `);
                                 }
                                 return state.text;
                             },
@@ -1257,54 +1260,54 @@
                                 const avatar = option.dataset.avatar;
                                 if (color) {
                                     return $(`
-                                                                                                                                                                                                                                                                                                                                                <div
-                                                                                                                                                                                                                                                                                                                                                    style="
-                                                                                                                                                                                                                                                                                                                                                        display:flex;
-                                                                                                                                                                                                                                                                                                                                                        align-items:center;
-                                                                                                                                                                                                                                                                                                                                                        gap:8px;
-                                                                                                                                                                                                                                                                                                                                                        direction:rtl;
-                                                                                                                                                                                                                                                                                                                                                    "
-                                                                                                                                                                                                                                                                                                                                                >
-                                                                                                                                                                                                                                                                                                                                                    <span
-                                                                                                                                                                                                                                                                                                                                                        style="
-                                                                                                                                                                                                                                                                                                                                                            width:15px;
-                                                                                                                                                                                                                                                                                                                                                            height:15px;
-                                                                                                                                                                                                                                                                                                                                                            border-radius:50%;
-                                                                                                                                                                                                                                                                                                                                                            background:${color};
-                                                                                                                                                                                                                                                                                                                                                            border:1px solid #ddd;
-                                                                                                                                                                                                                                                                                                                                                            display:inline-block;
-                                                                                                                                                                                                                                                                                                                                                        "
-                                                                                                                                                                                                                                                                                                                                                    ></span>
-                                                                                                                                                                                                                                                                                                                                                    <span>
-                                                                                                                                                                                                                                                                                                                                                        ${state.text}
-                                                                                                                                                                                                                                                                                                                                                    </span>
-                                                                                                                                                                                                                                                                                                                                                </div>
-                                                                                                                                                                                                                                                                                                                                            `);
+                                                                                                                                                                                                                                                                                                                                                        <div
+                                                                                                                                                                                                                                                                                                                                                            style="
+                                                                                                                                                                                                                                                                                                                                                                display:flex;
+                                                                                                                                                                                                                                                                                                                                                                align-items:center;
+                                                                                                                                                                                                                                                                                                                                                                gap:8px;
+                                                                                                                                                                                                                                                                                                                                                                direction:rtl;
+                                                                                                                                                                                                                                                                                                                                                            "
+                                                                                                                                                                                                                                                                                                                                                        >
+                                                                                                                                                                                                                                                                                                                                                            <span
+                                                                                                                                                                                                                                                                                                                                                                style="
+                                                                                                                                                                                                                                                                                                                                                                    width:15px;
+                                                                                                                                                                                                                                                                                                                                                                    height:15px;
+                                                                                                                                                                                                                                                                                                                                                                    border-radius:50%;
+                                                                                                                                                                                                                                                                                                                                                                    background:${color};
+                                                                                                                                                                                                                                                                                                                                                                    border:1px solid #ddd;
+                                                                                                                                                                                                                                                                                                                                                                    display:inline-block;
+                                                                                                                                                                                                                                                                                                                                                                "
+                                                                                                                                                                                                                                                                                                                                                            ></span>
+                                                                                                                                                                                                                                                                                                                                                            <span>
+                                                                                                                                                                                                                                                                                                                                                                ${state.text}
+                                                                                                                                                                                                                                                                                                                                                            </span>
+                                                                                                                                                                                                                                                                                                                                                        </div>
+                                                                                                                                                                                                                                                                                                                                                    `);
                                 }
                                 if (avatar) {
                                     return $(`
-                                                                                                                                                                                                                                                                                                                                                <div
-                                                                                                                                                                                                                                                                                                                                                    style="
-                                                                                                                                                                                                                                                                                                                                                        display:flex;
-                                                                                                                                                                                                                                                                                                                                                        align-items:center;
-                                                                                                                                                                                                                                                                                                                                                        gap:8px;
-                                                                                                                                                                                                                                                                                                                                                        direction:rtl;
-                                                                                                                                                                                                                                                                                                                                                    "
-                                                                                                                                                                                                                                                                                                                                                >
-                                                                                                                                                                                                                                                                                                                                                    <img
-                                                                                                                                                                                                                                                                                                                                                        src="{{ asset('img/${avatar}') }}"
-                                                                                                                                                                                                                                                                                                                                                        style="
-                                                                                                                                                                                                                                                                                                                                                            width:25px;
-                                                                                                                                                                                                                                                                                                                                                            height:25px;
-                                                                                                                                                                                                                                                                                                                                                            border-radius:4px;
-                                                                                                                                                                                                                                                                                                                                                            object-fit:cover;
-                                                                                                                                                                                                                                                                                                                                                        "
-                                                                                                                                                                                                                                                                                                                                                    >
-                                                                                                                                                                                                                                                                                                                                                    <span>
-                                                                                                                                                                                                                                                                                                                                                        ${state.text}
-                                                                                                                                                                                                                                                                                                                                                    </span>
-                                                                                                                                                                                                                                                                                                                                                </div>
-                                                                                                                                                                                                                                                                                                                                            `);
+                                                                                                                                                                                                                                                                                                                                                        <div
+                                                                                                                                                                                                                                                                                                                                                            style="
+                                                                                                                                                                                                                                                                                                                                                                display:flex;
+                                                                                                                                                                                                                                                                                                                                                                align-items:center;
+                                                                                                                                                                                                                                                                                                                                                                gap:8px;
+                                                                                                                                                                                                                                                                                                                                                                direction:rtl;
+                                                                                                                                                                                                                                                                                                                                                            "
+                                                                                                                                                                                                                                                                                                                                                        >
+                                                                                                                                                                                                                                                                                                                                                            <img
+                                                                                                                                                                                                                                                                                                                                                                src="{{ asset('img/${avatar}') }}"
+                                                                                                                                                                                                                                                                                                                                                                style="
+                                                                                                                                                                                                                                                                                                                                                                    width:25px;
+                                                                                                                                                                                                                                                                                                                                                                    height:25px;
+                                                                                                                                                                                                                                                                                                                                                                    border-radius:4px;
+                                                                                                                                                                                                                                                                                                                                                                    object-fit:cover;
+                                                                                                                                                                                                                                                                                                                                                                "
+                                                                                                                                                                                                                                                                                                                                                            >
+                                                                                                                                                                                                                                                                                                                                                            <span>
+                                                                                                                                                                                                                                                                                                                                                                ${state.text}
+                                                                                                                                                                                                                                                                                                                                                            </span>
+                                                                                                                                                                                                                                                                                                                                                        </div>
+                                                                                                                                                                                                                                                                                                                                                    `);
                                 }
                                 return state.text;
                             },
@@ -1482,62 +1485,62 @@
 
                         checkboxItem.innerHTML = `
 
-                                                                                                                                                                                                                                                                                                        <label
-                                                                                                                                                                                                                                                                                                            class="
-                                                                                                                                                                                                                                                                                                                d-flex
-                                                                                                                                                                                                                                                                                                                align-items-center
-                                                                                                                                                                                                                                                                                                                gap-3
-                                                                                                                                                                                                                                                                                                                border
-                                                                                                                                                                                                                                                                                                                border-gray-300
-                                                                                                                                                                                                                                                                                                                rounded
-                                                                                                                                                                                                                                                                                                                px-4
-                                                                                                                                                                                                                                                                                                                py-3
-                                                                                                                                                                                                                                                                                                                cursor-pointer
-                                                                                                                                                                                                                                                                                                            "
-                                                                                                                                                                                                                                                                                                        >
+                                                                                                                                                                                                                                                                                                                <label
+                                                                                                                                                                                                                                                                                                                    class="
+                                                                                                                                                                                                                                                                                                                        d-flex
+                                                                                                                                                                                                                                                                                                                        align-items-center
+                                                                                                                                                                                                                                                                                                                        gap-3
+                                                                                                                                                                                                                                                                                                                        border
+                                                                                                                                                                                                                                                                                                                        border-gray-300
+                                                                                                                                                                                                                                                                                                                        rounded
+                                                                                                                                                                                                                                                                                                                        px-4
+                                                                                                                                                                                                                                                                                                                        py-3
+                                                                                                                                                                                                                                                                                                                        cursor-pointer
+                                                                                                                                                                                                                                                                                                                    "
+                                                                                                                                                                                                                                                                                                                >
 
-                                                                                                                                                                                                                                                                                                            <input
-                                                                                                                                                                                                                                                                                                                class="
-                                                                                                                                                                                                                                                                                                                    form-check-input
-                                                                                                                                                                                                                                                                                                                    variant-checkbox
-                                                                                                                                                                                                                                                                                                                "
-                                                                                                                                                                                                                                                                                                                type="checkbox"
+                                                                                                                                                                                                                                                                                                                    <input
+                                                                                                                                                                                                                                                                                                                        class="
+                                                                                                                                                                                                                                                                                                                            form-check-input
+                                                                                                                                                                                                                                                                                                                            variant-checkbox
+                                                                                                                                                                                                                                                                                                                        "
+                                                                                                                                                                                                                                                                                                                        type="checkbox"
 
-                                                                                                                                                                                                                                                                                                                name="selected_variants[]"
+                                                                                                                                                                                                                                                                                                                        name="selected_variants[]"
 
-                                                                                                                                                                                                                                                                                                                value="${index}"
+                                                                                                                                                                                                                                                                                                                        value="${index}"
 
-                                                                                                                                                                                                                                                                                                                data-variant='${JSON.stringify(ids)}'
-                                                                                                                                                                                                                                                                                                            >
+                                                                                                                                                                                                                                                                                                                        data-variant='${JSON.stringify(ids)}'
+                                                                                                                                                                                                                                                                                                                    >
 
 
-                                                                                                                                                                                                                                                                                                            <div
-                                                                                                                                                                                                                                                                                                                class="
-                                                                                                                                                                                                                                                                                                                    d-flex
-                                                                                                                                                                                                                                                                                                                    align-items-center
-                                                                                                                                                                                                                                                                                                                    gap-2
-                                                                                                                                                                                                                                                                                                                    flex-wrap
-                                                                                                                                                                                                                                                                                                                "
-                                                                                                                                                                                                                                                                                                            >
+                                                                                                                                                                                                                                                                                                                    <div
+                                                                                                                                                                                                                                                                                                                        class="
+                                                                                                                                                                                                                                                                                                                            d-flex
+                                                                                                                                                                                                                                                                                                                            align-items-center
+                                                                                                                                                                                                                                                                                                                            gap-2
+                                                                                                                                                                                                                                                                                                                            flex-wrap
+                                                                                                                                                                                                                                                                                                                        "
+                                                                                                                                                                                                                                                                                                                    >
 
-                                                                                                                                                                                                                                                                                                                ${createVariantPreview(
+                                                                                                                                                                                                                                                                                                                        ${createVariantPreview(
                             combination
                         )}
 
-                                                                                                                                                                                                                                                                                                                <span
-                                                                                                                                                                                                                                                                                                                    class="
-                                                                                                                                                                                                                                                                                                                        fw-semibold
-                                                                                                                                                                                                                                                                                                                        text-gray-800
-                                                                                                                                                                                                                                                                                                                    "
-                                                                                                                                                                                                                                                                                                                >
-                                                                                                                                                                                                                                                                                                                    ${names.join(' - ')}
-                                                                                                                                                                                                                                                                                                                </span>
+                                                                                                                                                                                                                                                                                                                        <span
+                                                                                                                                                                                                                                                                                                                            class="
+                                                                                                                                                                                                                                                                                                                                fw-semibold
+                                                                                                                                                                                                                                                                                                                                text-gray-800
+                                                                                                                                                                                                                                                                                                                            "
+                                                                                                                                                                                                                                                                                                                        >
+                                                                                                                                                                                                                                                                                                                            ${names.join(' - ')}
+                                                                                                                                                                                                                                                                                                                        </span>
 
-                                                                                                                                                                                                                                                                                                            </div>
+                                                                                                                                                                                                                                                                                                                    </div>
 
-                                                                                                                                                                                                                                                                                                        </label>
+                                                                                                                                                                                                                                                                                                                </label>
 
-                                                                                                                                                                                                                                                                                                    `;
+                                                                                                                                                                                                                                                                                                            `;
 
 
                         variantsCheckboxes
@@ -1631,20 +1634,20 @@
 
                             html += `
 
-                                                                                                                                                                                                                                                                                                            <span
-                                                                                                                                                                                                                                                                                                                title="${item.value.name}"
-                                                                                                                                                                                                                                                                                                                style="
-                                                                                                                                                                                                                                                                                                                    width:18px;
-                                                                                                                                                                                                                                                                                                                    height:18px;
-                                                                                                                                                                                                                                                                                                                    border-radius:50%;
-                                                                                                                                                                                                                                                                                                                    background:${item.value.color};
-                                                                                                                                                                                                                                                                                                                    border:1px solid #ddd;
-                                                                                                                                                                                                                                                                                                                    display:inline-block;
-                                                                                                                                                                                                                                                                                                                    flex-shrink:0;
-                                                                                                                                                                                                                                                                                                                "
-                                                                                                                                                                                                                                                                                                            ></span>
+                                                                                                                                                                                                                                                                                                                    <span
+                                                                                                                                                                                                                                                                                                                        title="${item.value.name}"
+                                                                                                                                                                                                                                                                                                                        style="
+                                                                                                                                                                                                                                                                                                                            width:18px;
+                                                                                                                                                                                                                                                                                                                            height:18px;
+                                                                                                                                                                                                                                                                                                                            border-radius:50%;
+                                                                                                                                                                                                                                                                                                                            background:${item.value.color};
+                                                                                                                                                                                                                                                                                                                            border:1px solid #ddd;
+                                                                                                                                                                                                                                                                                                                            display:inline-block;
+                                                                                                                                                                                                                                                                                                                            flex-shrink:0;
+                                                                                                                                                                                                                                                                                                                        "
+                                                                                                                                                                                                                                                                                                                    ></span>
 
-                                                                                                                                                                                                                                                                                                        `;
+                                                                                                                                                                                                                                                                                                                `;
 
                         }
 
@@ -1659,19 +1662,19 @@
 
                             html += `
 
-                                                                                                                                                                                                                                                                                                            <img
-                                                                                                                                                                                                                                                                                                                src="${item.value.avatar}"
-                                                                                                                                                                                                                                                                                                                title="${item.value.name}"
-                                                                                                                                                                                                                                                                                                                style="
-                                                                                                                                                                                                                                                                                                                    width:28px;
-                                                                                                                                                                                                                                                                                                                    height:28px;
-                                                                                                                                                                                                                                                                                                                    border-radius:5px;
-                                                                                                                                                                                                                                                                                                                    object-fit:cover;
-                                                                                                                                                                                                                                                                                                                    border:1px solid #e4e6ef;
-                                                                                                                                                                                                                                                                                                                "
-                                                                                                                                                                                                                                                                                                            >
+                                                                                                                                                                                                                                                                                                                    <img
+                                                                                                                                                                                                                                                                                                                        src="${item.value.avatar}"
+                                                                                                                                                                                                                                                                                                                        title="${item.value.name}"
+                                                                                                                                                                                                                                                                                                                        style="
+                                                                                                                                                                                                                                                                                                                            width:28px;
+                                                                                                                                                                                                                                                                                                                            height:28px;
+                                                                                                                                                                                                                                                                                                                            border-radius:5px;
+                                                                                                                                                                                                                                                                                                                            object-fit:cover;
+                                                                                                                                                                                                                                                                                                                            border:1px solid #e4e6ef;
+                                                                                                                                                                                                                                                                                                                        "
+                                                                                                                                                                                                                                                                                                                    >
 
-                                                                                                                                                                                                                                                                                                        `;
+                                                                                                                                                                                                                                                                                                                `;
 
                         }
 
@@ -1944,29 +1947,29 @@
 
                         wrapper.innerHTML = `
 
-                                                                                                                                                                                                                                                            <input
-                                                                                                                                                                                                                                                                class="
-                                                                                                                                                                                                                                                                    form-check-input
-                                                                                                                                                                                                                                                                    variant-feature-checkbox
-                                                                                                                                                                                                                                                                "
-                                                                                                                                                                                                                                                                type="checkbox"
-                                                                                                                                                                                                                                                                value="${feature.id}"
-                                                                                                                                                                                                                                                                id="variant_feature_${feature.id}"
-                                                                                                                                                                                                                                                                ${checked ? 'checked' : ''}
-                                                                                                                                                                                                                                                            >
+                                                                                                                                                                                                                                                                    <input
+                                                                                                                                                                                                                                                                        class="
+                                                                                                                                                                                                                                                                            form-check-input
+                                                                                                                                                                                                                                                                            variant-feature-checkbox
+                                                                                                                                                                                                                                                                        "
+                                                                                                                                                                                                                                                                        type="checkbox"
+                                                                                                                                                                                                                                                                        value="${feature.id}"
+                                                                                                                                                                                                                                                                        id="variant_feature_${feature.id}"
+                                                                                                                                                                                                                                                                        ${checked ? 'checked' : ''}
+                                                                                                                                                                                                                                                                    >
 
-                                                                                                                                                                                                                                                            <label
-                                                                                                                                                                                                                                                                class="
-                                                                                                                                                                                                                                                                    form-check-label
-                                                                                                                                                                                                                                                                    fw-semibold
-                                                                                                                                                                                                                                                                    text-gray-800
-                                                                                                                                                                                                                                                                "
-                                                                                                                                                                                                                                                                for="variant_feature_${feature.id}"
-                                                                                                                                                                                                                                                            >
-                                                                                                                                                                                                                                                                ${feature.name}
-                                                                                                                                                                                                                                                            </label>
+                                                                                                                                                                                                                                                                    <label
+                                                                                                                                                                                                                                                                        class="
+                                                                                                                                                                                                                                                                            form-check-label
+                                                                                                                                                                                                                                                                            fw-semibold
+                                                                                                                                                                                                                                                                            text-gray-800
+                                                                                                                                                                                                                                                                        "
+                                                                                                                                                                                                                                                                        for="variant_feature_${feature.id}"
+                                                                                                                                                                                                                                                                    >
+                                                                                                                                                                                                                                                                        ${feature.name}
+                                                                                                                                                                                                                                                                    </label>
 
-                                                                                                                                                                                                                                                        `;
+                                                                                                                                                                                                                                                                `;
 
 
                         variantsCheckboxes.appendChild(
@@ -2204,214 +2207,214 @@
                     key;
                 card.innerHTML = `
 
-                                                                                                                                                                                                                                                    <!-- ========================================================= -->
-                                                                                                                                                                                                                                                    <!-- Header -->
-                                                                                                                                                                                                                                                    <!-- ========================================================= -->
-
-                                                                                                                                                                                                                                                    <div
-                                                                                                                                                                                                                                                        class="
-                                                                                                                                                                                                                                                            variant-header
-                                                                                                                                                                                                                                                            d-flex
-                                                                                                                                                                                                                                                            align-items-center
-                                                                                                                                                                                                                                                            justify-content-between
-                                                                                                                                                                                                                                                            px-6
-                                                                                                                                                                                                                                                            py-4
-                                                                                                                                                                                                                                                            cursor-pointer
-                                                                                                                                                                                                                                                        "
-                                                                                                                                                                                                                                                        style="
-                                                                                                                                                                                                                                                            background:#6258c9;
-                                                                                                                                                                                                                                                            color:#fff;
-                                                                                                                                                                                                                                                            min-height:54px;
-                                                                                                                                                                                                                                                            border-radius:6px;
-                                                                                                                                                                                                                                                        "
-                                                                                                                                                                                                                                                    >
-
-                                                                                                                                                                                                                                                        <div
-                                                                                                                                                                                                                                                            class="
-                                                                                                                                                                                                                                                                d-flex
-                                                                                                                                                                                                                                                                align-items-center
-                                                                                                                                                                                                                                                                gap-3
-                                                                                                                                                                                                                                                            "
-                                                                                                                                                                                                                                                        >
-
-                                                                                                                                                                                                                                                            <span
-                                                                                                                                                                                                                                                                class="fs-2"
-                                                                                                                                                                                                                                                            >
-                                                                                                                                                                                                                                                                📋
-                                                                                                                                                                                                                                                            </span>
-
-                                                                                                                                                                                                                                                            <span
-                                                                                                                                                                                                                                                                class="
-                                                                                                                                                                                                                                                                    fw-bold
-                                                                                                                                                                                                                                                                    fs-5
-                                                                                                                                                                                                                                                                "
-                                                                                                                                                                                                                                                            >
-
-                                                                                                                                                                                                                                                                النوع : ${title}
-
-                                                                                                                                                                                                                                                            </span>
-
-                                                                                                                                                                                                                                                            ${createVariantPreview(
-                    combination
-                )}
-
-                                                                                                                                                                                                                                                        </div>
-
-
-                                                                                                                                                                                                                                                        <span
-                                                                                                                                                                                                                                                            class="
-                                                                                                                                                                                                                                                                variant-arrow
-                                                                                                                                                                                                                                                                fw-bold
-                                                                                                                                                                                                                                                                fs-4
-                                                                                                                                                                                                                                                            "
-                                                                                                                                                                                                                                                        >
-                                                                                                                                                                                                                                                            ▾
-                                                                                                                                                                                                                                                        </span>
-
-                                                                                                                                                                                                                                                    </div>
-
-
-                                                                                                                                                                                                                                                    <!-- ========================================================= -->
-                                                                                                                                                                                                                                                    <!-- Body -->
-                                                                                                                                                                                                                                                    <!-- ========================================================= -->
-
-                                                                                                                                                                                                                                                    <div
-                                                                                                                                                                                                                                                        class="
-                                                                                                                                                                                                                                                            variant-body
-                                                                                                                                                                                                                                                            border
-                                                                                                                                                                                                                                                            border-top-0
-                                                                                                                                                                                                                                                            rounded-bottom
-                                                                                                                                                                                                                                                        "
-                                                                                                                                                                                                                                                        style="display:none;"
-                                                                                                                                                                                                                                                    >
-
-                                                                                                                                                                                                                                                        <input
-                                                                                                                                                                                                                                                            type="hidden"
-                                                                                                                                                                                                                                                            name="variants[${index}][key]"
-                                                                                                                                                                                                                                                            value="${key}"
-                                                                                                                                                                                                                                                        >
-
-
-                                                                                                                                                                                                                                                        ${createHiddenFeatureValues(
-                    combination,
-                    index
-                )}
-
-                                                                                                                                                                                                                                                                                                                                                                                                                <!-- حالة المخزون -->
-                                                                                                                                                                                                                                                        <!-- ========================== -->
-
-                                                                                                                                                                                                                                                        <div
-                                                                                                                                                                                                                                                            class="
-                                                                                                                                                                                                                                                                row
-                                                                                                                                                                                                                                                                align-items-center
-                                                                                                                                                                                                                                                                py-4
-                                                                                                                                                                                                                                                                border-bottom
-                                                                                                                                                                                                                                                                px-6
-                                                                                                                                                                                                                                                            "
-                                                                                                                                                                                                                                                        >
+                                                                                                                                                                                                                                                            <!-- ========================================================= -->
+                                                                                                                                                                                                                                                            <!-- Header -->
+                                                                                                                                                                                                                                                            <!-- ========================================================= -->
 
                                                                                                                                                                                                                                                             <div
                                                                                                                                                                                                                                                                 class="
-                                                                                                                                                                                                                                                                    col-md-2
-                                                                                                                                                                                                                                                                    text-end
+                                                                                                                                                                                                                                                                    variant-header
+                                                                                                                                                                                                                                                                    d-flex
+                                                                                                                                                                                                                                                                    align-items-center
+                                                                                                                                                                                                                                                                    justify-content-between
+                                                                                                                                                                                                                                                                    px-6
+                                                                                                                                                                                                                                                                    py-4
+                                                                                                                                                                                                                                                                    cursor-pointer
+                                                                                                                                                                                                                                                                "
+                                                                                                                                                                                                                                                                style="
+                                                                                                                                                                                                                                                                    background:#6258c9;
+                                                                                                                                                                                                                                                                    color:#fff;
+                                                                                                                                                                                                                                                                    min-height:54px;
+                                                                                                                                                                                                                                                                    border-radius:6px;
                                                                                                                                                                                                                                                                 "
                                                                                                                                                                                                                                                             >
 
-                                                                                                                                                                                                                                                                <label
+                                                                                                                                                                                                                                                                <div
                                                                                                                                                                                                                                                                     class="
-                                                                                                                                                                                                                                                                        form-label
-                                                                                                                                                                                                                                                                        fw-bold
-                                                                                                                                                                                                                                                                        mb-0
+                                                                                                                                                                                                                                                                        d-flex
+                                                                                                                                                                                                                                                                        align-items-center
+                                                                                                                                                                                                                                                                        gap-3
                                                                                                                                                                                                                                                                     "
                                                                                                                                                                                                                                                                 >
-                                                                                                                                                                                                                                                                    حالة المخزون:
-                                                                                                                                                                                                                                                                </label>
+
+                                                                                                                                                                                                                                                                    <span
+                                                                                                                                                                                                                                                                        class="fs-2"
+                                                                                                                                                                                                                                                                    >
+                                                                                                                                                                                                                                                                        📋
+                                                                                                                                                                                                                                                                    </span>
+
+                                                                                                                                                                                                                                                                    <span
+                                                                                                                                                                                                                                                                        class="
+                                                                                                                                                                                                                                                                            fw-bold
+                                                                                                                                                                                                                                                                            fs-5
+                                                                                                                                                                                                                                                                        "
+                                                                                                                                                                                                                                                                    >
+
+                                                                                                                                                                                                                                                                        النوع : ${title}
+
+                                                                                                                                                                                                                                                                    </span>
+
+                                                                                                                                                                                                                                                                    ${createVariantPreview(
+                    combination
+                )}
+
+                                                                                                                                                                                                                                                                </div>
+
+
+                                                                                                                                                                                                                                                                <span
+                                                                                                                                                                                                                                                                    class="
+                                                                                                                                                                                                                                                                        variant-arrow
+                                                                                                                                                                                                                                                                        fw-bold
+                                                                                                                                                                                                                                                                        fs-4
+                                                                                                                                                                                                                                                                    "
+                                                                                                                                                                                                                                                                >
+                                                                                                                                                                                                                                                                    ▾
+                                                                                                                                                                                                                                                                </span>
 
                                                                                                                                                                                                                                                             </div>
 
 
-                                                                                                                                                                                                                                                            <div class="col-md-5">
+                                                                                                                                                                                                                                                            <!-- ========================================================= -->
+                                                                                                                                                                                                                                                            <!-- Body -->
+                                                                                                                                                                                                                                                            <!-- ========================================================= -->
 
-                                                                                                                                                                                                                                                                <select
-                                                                                                                                                                                                                                                                    class="form-select"
-                                                                                                                                                                                                                                                                    name="variants[${index}][stock_status]"
+                                                                                                                                                                                                                                                            <div
+                                                                                                                                                                                                                                                                class="
+                                                                                                                                                                                                                                                                    variant-body
+                                                                                                                                                                                                                                                                    border
+                                                                                                                                                                                                                                                                    border-top-0
+                                                                                                                                                                                                                                                                    rounded-bottom
+                                                                                                                                                                                                                                                                "
+                                                                                                                                                                                                                                                                style="display:none;"
+                                                                                                                                                                                                                                                            >
+
+                                                                                                                                                                                                                                                                <input
+                                                                                                                                                                                                                                                                    type="hidden"
+                                                                                                                                                                                                                                                                    name="variants[${index}][key]"
+                                                                                                                                                                                                                                                                    value="${key}"
                                                                                                                                                                                                                                                                 >
 
-                                                                                                                                                                                                                                                                    <option
-                                                                                                                                                                                                                                                                        value="available"
-                                                                                                                                                                                                                                                                        ${previous.stock_status ===
+
+                                                                                                                                                                                                                                                                ${createHiddenFeatureValues(
+                    combination,
+                    index
+                )}
+
+                                                                                                                                                                                                                                                                                                                                                                                                                        <!-- حالة المخزون -->
+                                                                                                                                                                                                                                                                <!-- ========================== -->
+
+                                                                                                                                                                                                                                                                <div
+                                                                                                                                                                                                                                                                    class="
+                                                                                                                                                                                                                                                                        row
+                                                                                                                                                                                                                                                                        align-items-center
+                                                                                                                                                                                                                                                                        py-4
+                                                                                                                                                                                                                                                                        border-bottom
+                                                                                                                                                                                                                                                                        px-6
+                                                                                                                                                                                                                                                                    "
+                                                                                                                                                                                                                                                                >
+
+                                                                                                                                                                                                                                                                    <div
+                                                                                                                                                                                                                                                                        class="
+                                                                                                                                                                                                                                                                            col-md-2
+                                                                                                                                                                                                                                                                            text-end
+                                                                                                                                                                                                                                                                        "
+                                                                                                                                                                                                                                                                    >
+
+                                                                                                                                                                                                                                                                        <label
+                                                                                                                                                                                                                                                                            class="
+                                                                                                                                                                                                                                                                                form-label
+                                                                                                                                                                                                                                                                                fw-bold
+                                                                                                                                                                                                                                                                                mb-0
+                                                                                                                                                                                                                                                                            "
+                                                                                                                                                                                                                                                                        >
+                                                                                                                                                                                                                                                                            حالة المخزون:
+                                                                                                                                                                                                                                                                        </label>
+
+                                                                                                                                                                                                                                                                    </div>
+
+
+                                                                                                                                                                                                                                                                    <div class="col-md-5">
+
+                                                                                                                                                                                                                                                                        <select
+                                                                                                                                                                                                                                                                            class="form-select"
+                                                                                                                                                                                                                                                                            name="variants[${index}][stock_status]"
+                                                                                                                                                                                                                                                                        >
+
+                                                                                                                                                                                                                                                                            <option
+                                                                                                                                                                                                                                                                                value="available"
+                                                                                                                                                                                                                                                                                ${previous.stock_status ===
                         'available' ||
                         !previous.stock_status
                         ? 'selected'
                         : ''
                     }
-                                                                                                                                                                                                                                                                    >
-                                                                                                                                                                                                                                                                        متوفر في المخزون
-                                                                                                                                                                                                                                                                    </option>
+                                                                                                                                                                                                                                                                            >
+                                                                                                                                                                                                                                                                                متوفر في المخزون
+                                                                                                                                                                                                                                                                            </option>
 
-                                                                                                                                                                                                                                                                    <option
-                                                                                                                                                                                                                                                                        value="unavailable"
-                                                                                                                                                                                                                                                                        ${previous.stock_status ===
+                                                                                                                                                                                                                                                                            <option
+                                                                                                                                                                                                                                                                                value="unavailable"
+                                                                                                                                                                                                                                                                                ${previous.stock_status ===
                         'unavailable'
                         ? 'selected'
                         : ''
                     }
-                                                                                                                                                                                                                                                                    >
-                                                                                                                                                                                                                                                                        غير متوفر في المخزون
-                                                                                                                                                                                                                                                                    </option>
+                                                                                                                                                                                                                                                                            >
+                                                                                                                                                                                                                                                                                غير متوفر في المخزون
+                                                                                                                                                                                                                                                                            </option>
 
-                                                                                                                                                                                                                                                                </select>
+                                                                                                                                                                                                                                                                        </select>
 
-                                                                                                                                                                                                                                                            </div>
+                                                                                                                                                                                                                                                                    </div>
 
-                                                                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                                                                        <!-- ========================== -->
-                                                                                                                                                                                                                                                        <!-- كمية المخزون -->
-                                                                                                                                                                                                                                                        <!-- ========================== -->
+                                                                                                                                                                                                                                                                </div>
+                                                                                                                                                                                                                                                                <!-- ========================== -->
+                                                                                                                                                                                                                                                                <!-- كمية المخزون -->
+                                                                                                                                                                                                                                                                <!-- ========================== -->
 
-                                                                                                                                                                                                                                                        <div
-                                                                                                                                                                                                                                                            class="
-                                                                                                                                                                                                                                                                row
-                                                                                                                                                                                                                                                                align-items-center
-                                                                                                                                                                                                                                                                py-4
-                                                                                                                                                                                                                                                                border-bottom
-                                                                                                                                                                                                                                                                px-6
-                                                                                                                                                                                                                                                            "
-                                                                                                                                                                                                                                                        >
-
-                                                                                                                                                                                                                                                            <div
-                                                                                                                                                                                                                                                                class="
-                                                                                                                                                                                                                                                                    col-md-2
-                                                                                                                                                                                                                                                                    text-end
-                                                                                                                                                                                                                                                                "
-                                                                                                                                                                                                                                                            >
-
-                                                                                                                                                                                                                                                                <label
+                                                                                                                                                                                                                                                                <div
                                                                                                                                                                                                                                                                     class="
-                                                                                                                                                                                                                                                                        form-label
-                                                                                                                                                                                                                                                                        fw-bold
-                                                                                                                                                                                                                                                                        mb-0
+                                                                                                                                                                                                                                                                        row
+                                                                                                                                                                                                                                                                        align-items-center
+                                                                                                                                                                                                                                                                        py-4
+                                                                                                                                                                                                                                                                        border-bottom
+                                                                                                                                                                                                                                                                        px-6
                                                                                                                                                                                                                                                                     "
                                                                                                                                                                                                                                                                 >
-                                                                                                                                                                                                                                                                    كمية المخزون:
-                                                                                                                                                                                                                                                                </label>
 
-                                                                                                                                                                                                                                                            </div>
+                                                                                                                                                                                                                                                                    <div
+                                                                                                                                                                                                                                                                        class="
+                                                                                                                                                                                                                                                                            col-md-2
+                                                                                                                                                                                                                                                                            text-end
+                                                                                                                                                                                                                                                                        "
+                                                                                                                                                                                                                                                                    >
+
+                                                                                                                                                                                                                                                                        <label
+                                                                                                                                                                                                                                                                            class="
+                                                                                                                                                                                                                                                                                form-label
+                                                                                                                                                                                                                                                                                fw-bold
+                                                                                                                                                                                                                                                                                mb-0
+                                                                                                                                                                                                                                                                            "
+                                                                                                                                                                                                                                                                        >
+                                                                                                                                                                                                                                                                            كمية المخزون:
+                                                                                                                                                                                                                                                                        </label>
+
+                                                                                                                                                                                                                                                                    </div>
 
 
-                                                                                                                                                                                                                                                            <div class="col-md-5">
+                                                                                                                                                                                                                                                                    <div class="col-md-5">
 
-                                                                                                                                                                                                                                                                <input
-                                                                                                                                                                                                                                                                    type="number"
-                                                                                                                                                                                                                                                                    min="0"
-                                                                                                                                                                                                                                                                    class="form-control"
-                                                                                                                                                                                                                                                                    name="variants[${index}][quantity]"
-                                                                                                                                                                                                                                                                    value="${escapeValue(previous.quantity)}"
-                                                                                                                                                                                                                                                                    placeholder="كمية المخزون"
-                                                                                                                                                                                                                                                                >
-                                                                                                                                                                                                                                                            </div>
-                                                                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                                                                `;
+                                                                                                                                                                                                                                                                        <input
+                                                                                                                                                                                                                                                                            type="number"
+                                                                                                                                                                                                                                                                            min="0"
+                                                                                                                                                                                                                                                                            class="form-control"
+                                                                                                                                                                                                                                                                            name="variants[${index}][quantity]"
+                                                                                                                                                                                                                                                                            value="${escapeValue(previous.quantity)}"
+                                                                                                                                                                                                                                                                            placeholder="كمية المخزون"
+                                                                                                                                                                                                                                                                        >
+                                                                                                                                                                                                                                                                    </div>
+                                                                                                                                                                                                                                                                </div>
+                                                                                                                                                                                                                                                        `;
                 variantsContainer.appendChild(
                     card
                 );
@@ -2427,29 +2430,29 @@
                         featureIndex
                     ) {
                         html += `
-                                                                                                                                                                                                                                                            <input
-                                                                                                                                                                                                                                                                type="hidden"
-                                                                                                                                                                                                                                                                name="
-                                                                                                                                                                                                                                                                    variants[
-                                                                                                                                                                                                                                                                        ${variantIndex}
-                                                                                                                                                                                                                                                                    ][features][
-                                                                                                                                                                                                                                                                        ${featureIndex}
-                                                                                                                                                                                                                                                                    ][feature_id]
-                                                                                                                                                                                                                                                                "
-                                                                                                                                                                                                                                                                value="${item.feature.id}"
-                                                                                                                                                                                                                                                            >
-                                                                                                                                                                                                                                                            <input
-                                                                                                                                                                                                                                                                type="hidden"
-                                                                                                                                                                                                                                                                name="
-                                                                                                                                                                                                                                                                    variants[
-                                                                                                                                                                                                                                                                        ${variantIndex}
-                                                                                                                                                                                                                                                                    ][features][
-                                                                                                                                                                                                                                                                        ${featureIndex}
-                                                                                                                                                                                                                                                                    ][value_id]
-                                                                                                                                                                                                                                                                "
-                                                                                                                                                                                                                                                                value="${item.value.id}"
-                                                                                                                                                                                                                                                            >
-                                                                                                                                                                                                                                                        `;
+                                                                                                                                                                                                                                                                    <input
+                                                                                                                                                                                                                                                                        type="hidden"
+                                                                                                                                                                                                                                                                        name="
+                                                                                                                                                                                                                                                                            variants[
+                                                                                                                                                                                                                                                                                ${variantIndex}
+                                                                                                                                                                                                                                                                            ][features][
+                                                                                                                                                                                                                                                                                ${featureIndex}
+                                                                                                                                                                                                                                                                            ][feature_id]
+                                                                                                                                                                                                                                                                        "
+                                                                                                                                                                                                                                                                        value="${item.feature.id}"
+                                                                                                                                                                                                                                                                    >
+                                                                                                                                                                                                                                                                    <input
+                                                                                                                                                                                                                                                                        type="hidden"
+                                                                                                                                                                                                                                                                        name="
+                                                                                                                                                                                                                                                                            variants[
+                                                                                                                                                                                                                                                                                ${variantIndex}
+                                                                                                                                                                                                                                                                            ][features][
+                                                                                                                                                                                                                                                                                ${featureIndex}
+                                                                                                                                                                                                                                                                            ][value_id]
+                                                                                                                                                                                                                                                                        "
+                                                                                                                                                                                                                                                                        value="${item.value.id}"
+                                                                                                                                                                                                                                                                    >
+                                                                                                                                                                                                                                                                `;
                     }
                 );
                 return html;
@@ -2462,35 +2465,35 @@
                     function (item) {
                         if (item.value.color) {
                             html += `
-                                                                                                                                                                                                                                                                <span
-                                                                                                                                                                                                                                                                    title="${item.value.name}"
-                                                                                                                                                                                                                                                                    style="
-                                                                                                                                                                                                                                                                        width:18px;
-                                                                                                                                                                                                                                                                        height:18px;
-                                                                                                                                                                                                                                                                        border-radius:50%;
-                                                                                                                                                                                                                                                                        background:${item.value.color};
-                                                                                                                                                                                                                                                                        display:inline-block;
-                                                                                                                                                                                                                                                                        border:2px solid rgba(255,255,255,.8);
-                                                                                                                                                                                                                                                                        flex-shrink:0;
-                                                                                                                                                                                                                                                                    "
-                                                                                                                                                                                                                                                                ></span>
-                                                                                                                                                                                                                                                            `;
+                                                                                                                                                                                                                                                                        <span
+                                                                                                                                                                                                                                                                            title="${item.value.name}"
+                                                                                                                                                                                                                                                                            style="
+                                                                                                                                                                                                                                                                                width:18px;
+                                                                                                                                                                                                                                                                                height:18px;
+                                                                                                                                                                                                                                                                                border-radius:50%;
+                                                                                                                                                                                                                                                                                background:${item.value.color};
+                                                                                                                                                                                                                                                                                display:inline-block;
+                                                                                                                                                                                                                                                                                border:2px solid rgba(255,255,255,.8);
+                                                                                                                                                                                                                                                                                flex-shrink:0;
+                                                                                                                                                                                                                                                                            "
+                                                                                                                                                                                                                                                                        ></span>
+                                                                                                                                                                                                                                                                    `;
                         }
                         if (item.value.avatar) {
                             html += `
-                                                                                                                                                                                                                                                                <img
-                                                                                                                                                                                                                                                                    src="{{ asset('img/${item.value.avatar}') }}"
-                                                                                                                                                                                                                                                                    title="${item.value.name}"
-                                                                                                                                                                                                                                                                    style="
-                                                                                                                                                                                                                                                                        width:28px;
-                                                                                                                                                                                                                                                                        height:28px;
-                                                                                                                                                                                                                                                                        border-radius:5px;
-                                                                                                                                                                                                                                                                        object-fit:cover;
-                                                                                                                                                                                                                                                                        border:2px solid #fff;
-                                                                                                                                                                                                                                                                    "
-                                                                                                                                                                                                                                                                >
+                                                                                                                                                                                                                                                                        <img
+                                                                                                                                                                                                                                                                            src="{{ asset('img/${item.value.avatar}') }}"
+                                                                                                                                                                                                                                                                            title="${item.value.name}"
+                                                                                                                                                                                                                                                                            style="
+                                                                                                                                                                                                                                                                                width:28px;
+                                                                                                                                                                                                                                                                                height:28px;
+                                                                                                                                                                                                                                                                                border-radius:5px;
+                                                                                                                                                                                                                                                                                object-fit:cover;
+                                                                                                                                                                                                                                                                                border:2px solid #fff;
+                                                                                                                                                                                                                                                                            "
+                                                                                                                                                                                                                                                                        >
 
-                                                                                                                                                                                                                                                            `;
+                                                                                                                                                                                                                                                                    `;
 
                         }
 
