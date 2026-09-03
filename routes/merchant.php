@@ -56,11 +56,14 @@ Route::prefix('merchant')->group(function () {
         Route::resource('/sizes', SizeController::class)->names([
             'index' => 'merchant.Sizes.index',
             'create' => 'merchant.Sizes.create',
-            'store' => 'merchant.Sizes.store',
+            // 'store' => 'merchant.Sizes.store',
             'edit' => 'merchant.Sizes.edit',
             'update' => 'merchant.Sizes.update',
-            'destroy' => 'merchant.Sizes.destroy',
+            // 'destroy' => 'merchant.Sizes.destroy',
         ]);
+
+        Route::post('/sizes/store', [SizeController::class, 'store'])->name('merchant.Sizes.store');
+        Route::get('/sizes/destroy/{id}', [SizeController::class, 'destroy'])->name('merchant.Sizes.destroy');
 
         Route::resource('/colors', ColorController::class)->names([
             'index' => 'merchant.Colors.index',
@@ -68,19 +71,23 @@ Route::prefix('merchant')->group(function () {
             // 'store' => 'merchant.Colors.store',
             'edit' => 'merchant.Colors.edit',
             'update' => 'merchant.Colors.update',
-            'destroy' => 'merchant.Colors.destroy',
+            // 'destroy' => 'merchant.Colors.destroy',
         ]);
 
         Route::post('/colors/store', [ColorController::class, 'store'])->name('merchant.Colors.store');
+        Route::get('/colors/destroy/{id}', [ColorController::class, 'destroy'])->name('merchant.Colors.destroy');
 
         Route::resource('/engravings', EngravingController::class)->names([
             'index' => 'merchant.Engravings.index',
             'create' => 'merchant.Engravings.create',
-            'store' => 'merchant.Engravings.store',
+            // 'store' => 'merchant.Engravings.store',
             'edit' => 'merchant.Engravings.edit',
             'update' => 'merchant.Engravings.update',
-            'destroy' => 'merchant.Engravings.destroy',
+            // 'destroy' => 'merchant.Engravings.destroy',
         ]);
+
+        Route::post('/engravings/store', [EngravingController::class, 'store'])->name('merchant.Engravings.store');
+        Route::get('/engravings/destroy/{id}', [EngravingController::class, 'destroy'])->name('merchant.Engravings.destroy');
 
         Route::resource('/copons', CoponController::class)->names([
             'index' => 'merchant.Copons.index',

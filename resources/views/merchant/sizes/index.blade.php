@@ -19,16 +19,7 @@
         </li>
         <!--end::Item-->
         <!--begin::Item-->
-        <li class="breadcrumb-item text-muted">{{__('app.' . $title)}}</li>
-        <!--end::Item-->
-        <!--begin::Item-->
-        <li class="breadcrumb-item">
-            <span class="bullet bg-gray-300 w-5px h-2px"></span>
-        </li>
-        <!--end::Item-->
-        <!--begin::Item-->
-        <li class="breadcrumb-item text-dark">تصنيفاتي</li>
-        <!--end::Item-->
+        <li class="breadcrumb-item text-dark">{{__('app.' . $title)}}</li>
     </ul>
 @endsection
 @section("body")
@@ -53,7 +44,7 @@
                     </span>
                     <!--end::Svg Icon-->
                     <input type="text" data-kt-user-table-filter="search"
-                           class="form-control form-control-solid w-250px ps-14" placeholder="البحث عن تصنيف"/>
+                           class="form-control form-control-solid w-250px ps-14" placeholder="البحث عن مقاس"/>
                 </div>
                 <!--end::Search-->
             </div>
@@ -64,7 +55,7 @@
                 <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
                     <!--begin::Add user-->
                     <buttno type="button" class="btn btn-primary" data-bs-toggle="modal"
-                            data-bs-target="#kt_modal_add_user">
+                            data-bs-target="#kt_modal_add_category">
                         <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
                         <span class="svg-icon svg-icon-2">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -90,7 +81,7 @@
                     </button>
                 </div>
                 <!--begin::Modal - Add task-->
-                <div class="modal fade" id="kt_modal_add_user" tabindex="-1" aria-hidden="true">
+                <div class="modal fade" id="kt_modal_add_category" tabindex="-1" aria-hidden="true">
                     <!--begin::Modal dialog-->
                     <div class="modal-dialog modal-dialog-centered mw-650px">
                         <!--begin::Modal content-->
@@ -124,7 +115,7 @@
                             <!--begin::Modal body-->
                             <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
                                 <!--begin::Form-->
-                                <form id="kt_modal_add_category" method="post"
+                                <form id="kt_modal_add_category_form" method="post"
                                       action="#" enctype="multipart/form-data">
                                     @csrf
                                     <div class="d-flex flex-column scroll-y me-n7 pe-7"
@@ -149,6 +140,9 @@
                                     <!--end::Scroll-->
                                     <!--begin::Actions-->
                                     <div class="text-center pt-15">
+                                        <button type="button" id="kt_modal_add_category_cancel" class="btn btn-light me-3">
+                                            إلغاء
+                                        </button>
                                         <button type="submit" class="btn btn-primary">
                                             تأكيد
                                         </button>
@@ -178,7 +172,6 @@
                         <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
                             <th class="w-10px pe-2">#</th>
                             <th class="min-w-125px">المقاس</th>
-                            <th class="min-w-125px">التصنيف</th>
                             <th class="text-end min-w-100px">الاجراءات</th>
                         </tr>
                         <!--end::Table row-->
@@ -193,7 +186,6 @@
                                     {{($key+1)}}
                                 </td>
                                 <td>{{toArabicNumber($record->name)}}</td>
-                                <td>{{$record->category->category_name}}</td>
                                 <td class="text-end">
                                     <a href="#" class="btn btn-light btn-active-light-primary btn-sm"
                                        data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">الاجراءات
@@ -211,20 +203,11 @@
                                     <div
                                         class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4"
                                         data-kt-menu="true">
-                                        <!--begin::Menu item-->
                                         <div class="menu-item px-3">
-                                            <a href="{{route('admin.Categories.edit',$record->id)}}"
-                                               class="menu-link px-3">Edit</a>
+                                            <a href="{{ route('merchant.Sizes.destroy' , $record->id) }}" class="menu-link px-3"
+                                               data-kt-users-table-filter="delete_row">خذف</a>
                                         </div>
-                                        <!--end::Menu item-->
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-3">
-                                            <a href="#" class="menu-link px-3"
-                                               data-kt-users-table-filter="delete_row">Delete</a>
-                                        </div>
-                                        <!--end::Menu item-->
                                     </div>
-                                    <!--end::Menu-->
                                 </td>
                             </tr>
                         @endforeach
@@ -254,8 +237,102 @@
 
 @endsection
 @section('script')
+    @if(session('success'))
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+
+                Swal.fire({
+                    text: @json(session('success')),
+                    icon: "success",
+                    buttonsStyling: false,
+                    confirmButtonText: "حسناً",
+                    customClass: {
+                        confirmButton: "btn btn-primary"
+                    }
+                });
+
+            });
+        </script>
+    @endif
     <script>
-        $(document).on('submit', '#kt_modal_add_category', function (e) {
+        document.addEventListener('DOMContentLoaded', function () {
+
+            const cancelButton = document.getElementById(
+                'kt_modal_add_category_cancel'
+            );
+
+            const form = document.getElementById(
+                'kt_modal_add_category_form'
+            );
+
+            const modalElement = document.getElementById(
+                'kt_modal_add_category'
+            );
+
+            cancelButton.addEventListener('click', function (e) {
+
+                e.preventDefault();
+
+                Swal.fire({
+                    text: "هل أنت متأكد أنك تريد الإلغاء؟",
+                    icon: "warning",
+
+                    showCancelButton: true,
+                    buttonsStyling: false,
+
+                    confirmButtonText: "نعم، قم بالإلغاء",
+                    cancelButtonText: "لا، عد للخلف",
+
+                    customClass: {
+                        confirmButton: "btn btn-primary",
+                        cancelButton: "btn btn-active-light"
+                    },
+
+                    allowOutsideClick: false,
+                    allowEscapeKey: false
+
+                }).then(function (result) {
+
+                    // المستخدم اختار نعم قم بالإلغاء
+                    if (result.isConfirmed) {
+
+                        form.reset();
+
+                        const modal =
+                            bootstrap.Modal.getInstance(modalElement)
+                            || new bootstrap.Modal(modalElement);
+
+                        modal.hide();
+
+                    }
+
+                    // المستخدم اختار لا عد للخلف
+                    else if (
+                        result.dismiss === Swal.DismissReason.cancel
+                    ) {
+
+                        Swal.fire({
+                            text: "لم يتم إلغاء النموذج",
+                            icon: "error",
+
+                            buttonsStyling: false,
+                            confirmButtonText: "حسنًا",
+
+                            customClass: {
+                                confirmButton: "btn btn-primary"
+                            }
+                        });
+
+                    }
+
+                });
+
+            });
+
+        });
+    </script>
+    <script>
+        $(document).on('submit', '#kt_modal_add_category_form', function (e) {
 
             e.preventDefault();
             e.stopPropagation();
@@ -264,14 +341,28 @@
 
             jQuery.ajax({
                 type: "POST",
-                url: "{{\Illuminate\Support\Facades\URL::to('admin/categories/store')}}",
+                url: "{{\Illuminate\Support\Facades\URL::to('merchant/sizes/store')}}",
                 data: formData,
                 processData: false,
                 contentType: false,
-                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
                 success: function (data, status, xhr) {
                     if (data.status === 'error') {
+                        Swal.fire({
+                            text: "هناك خطأ اثناء عملية الإضافة",
+                            icon: "error",
+                            confirmButtonText: "حسناً"
+                        }).then(() => {
+                            location.reload();
+                        });
                     } else {
+                        Swal.fire({
+                            text: "تمت الإضافة بنجاح",
+                            icon: "success",
+                            confirmButtonText: "حسناً"
+                        }).then(() => {
+                            location.reload();
+                        });
                         $('#kt_modal_add_category')[0].reset();
                     }
                     console.log(status);
@@ -285,15 +376,15 @@
         });
 
         $('#btnClose').on('click', function () {
-            var modal = bootstrap.Modal.getInstance(document.getElementById('kt_modal_add_user'));
+            var modal = bootstrap.Modal.getInstance(document.getElementById('kt_modal_add_category'));
             modal.hide();
-            $('#kt_modal_add_user').hide().removeClass('show').removeAttr('role').removeAttr('aria-modal').attr('aria-hidden', 'true').modal('hide');
+            $('#kt_modal_add_category').hide().removeClass('show').removeAttr('role').removeAttr('aria-modal').attr('aria-hidden', 'true').modal('hide');
             $('.modal-backdrop').remove();
-            $('body').removeClass('modal-open').css({'overflow': '', 'padding': ''});
+            $('body').removeClass('modal-open').css({ 'overflow': '', 'padding': '' });
 
         });
 
-        $('#kt_modal_add_user').on('click', function () {
+        $('#kt_modal_add_category').on('click', function () {
             $('.modal-backdrop').addClass('show');
         });
     </script>

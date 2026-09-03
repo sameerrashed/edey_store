@@ -68,8 +68,11 @@ class ColorController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(color $color)
+    public function destroy($id)
     {
-        //
+        $record = color::findOrFail($id);
+        $record->delete();
+
+        return back()->with('success', 'تم حذف اللون بنجاح');
     }
 }

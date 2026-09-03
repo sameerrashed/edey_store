@@ -8,7 +8,7 @@ class engraving extends Model
 {
     protected $fillable = [
         'name',
-        'category_id',
+        'avatar',
     ];
 
     public static function get_Fields(): array
@@ -27,15 +27,6 @@ class engraving extends Model
             'name' => 'name',
             'type' => 'text',
             'label' => 'إسم النقش',
-            'is_required' => true,
-            'is_readonly' => false,
-            'is_trans' => true,
-        ];
-
-        $ary[] = [
-            'name' => 'category_id',
-            'type' => 'text',
-            'label' => 'الصنف المطلوب',
             'is_required' => true,
             'is_readonly' => false,
             'is_trans' => true,

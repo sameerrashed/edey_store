@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\merchant;
 
+use App\Http\Controllers\admin\ManageController;
 use App\Http\Controllers\Controller;
 use App\Models\size;
 use Illuminate\Http\Request;
@@ -13,9 +14,10 @@ class SizeController extends Controller
      */
     public function index()
     {
-        $data['title'] = "Sizes";
+        $data['title'] = 'Sizes';
         $data['records'] = size::all();
         $data['fields'] = size::get_Fields();
+
         return view('merchant.sizes.index', $data);
     }
 
@@ -32,7 +34,9 @@ class SizeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $record = ManageController::save($request, new size);
+
+        return $record;
     }
 
     /**
@@ -62,8 +66,11 @@ class SizeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(size $size)
+    public function destroy($id)
     {
-        //
+        $record = size::findOrFail($id);
+        $record->delete();
+
+        return back()->with('success', 'تم حذف الحجم بنجاح');
     }
 }

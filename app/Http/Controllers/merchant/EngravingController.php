@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\merchant;
 
+use App\Http\Controllers\admin\ManageController;
 use App\Http\Controllers\Controller;
 use App\Models\engraving;
 use Illuminate\Http\Request;
@@ -13,9 +14,10 @@ class EngravingController extends Controller
      */
     public function index()
     {
-        $data['title'] = "Sizes";
+        $data['title'] = 'Sizes';
         $data['records'] = engraving::all();
         $data['fields'] = engraving::get_Fields();
+
         return view('merchant.engravings.index', $data);
     }
 
@@ -32,7 +34,9 @@ class EngravingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $record = ManageController::save($request, new engraving);
+
+        return $record;
     }
 
     /**
@@ -62,8 +66,11 @@ class EngravingController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(engraving $engraving)
+    public function destroy($id)
     {
-        //
+        $record = engraving::findOrFail($id);
+        $record->delete();
+
+        return back()->with('success', 'تم حذف النقش بنجاح');
     }
 }
