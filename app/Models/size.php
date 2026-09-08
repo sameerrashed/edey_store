@@ -8,6 +8,7 @@ class size extends Model
 {
     protected $fillable = [
         'name',
+        'status',
     ];
 
     public static function get_Fields(): array

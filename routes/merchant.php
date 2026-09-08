@@ -6,6 +6,7 @@ use App\Http\Controllers\merchant\CoponController;
 use App\Http\Controllers\merchant\EngravingController;
 use App\Http\Controllers\merchant\HomeController;
 use App\Http\Controllers\merchant\OverViewController;
+use App\Http\Controllers\merchant\PaymentStoreMethodController;
 use App\Http\Controllers\merchant\ProductController;
 use App\Http\Controllers\merchant\SettingController;
 use App\Http\Controllers\merchant\SizeController;
@@ -52,6 +53,15 @@ Route::prefix('merchant')->group(function () {
             'update' => 'merchant.AddProduct.update',
             'destroy' => 'merchant.AddProduct.destroy',
         ]);
+
+        Route::resource('/PaymentMethods', PaymentStoreMethodController::class)->names([
+            'index' => 'merchant.Payment_Methods.index',
+            'create' => 'merchant.Payment_Methods.create',
+            'update' => 'merchant.Payment_Methods.update',
+            'destroy' => 'merchant.Payment_Methods.destroy',
+        ]);
+
+        Route::post('/PaymentMethods/store', [PaymentStoreMethodController::class, 'store'])->name('merchant.Payment_Methods.store');
 
         Route::resource('/sizes', SizeController::class)->names([
             'index' => 'merchant.Sizes.index',

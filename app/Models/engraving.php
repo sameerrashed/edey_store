@@ -9,6 +9,7 @@ class engraving extends Model
     protected $fillable = [
         'name',
         'avatar',
+        'status',
     ];
 
     public static function get_Fields(): array

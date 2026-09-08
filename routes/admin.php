@@ -4,7 +4,9 @@ use App\Http\Controllers\admin\AdsController;
 use App\Http\Controllers\admin\AuthController;
 use App\Http\Controllers\admin\BrandController;
 use App\Http\Controllers\admin\CategoryController;
+use App\Http\Controllers\admin\ColorController;
 use App\Http\Controllers\admin\ContactController;
+use App\Http\Controllers\admin\EngravingController;
 use App\Http\Controllers\admin\FeatureController;
 use App\Http\Controllers\admin\HomeController;
 use App\Http\Controllers\admin\IntroController;
@@ -13,6 +15,7 @@ use App\Http\Controllers\admin\OverViewController;
 use App\Http\Controllers\admin\PaymentMethodController;
 use App\Http\Controllers\admin\RequestUpgradeMerchantController;
 use App\Http\Controllers\admin\SettingController;
+use App\Http\Controllers\admin\SizeController;
 use App\Http\Controllers\admin\StatisticController;
 use App\Http\Controllers\admin\StoreController;
 use App\Http\Controllers\admin\SubscriptionController;
@@ -104,6 +107,39 @@ Route::prefix('admin')->group(function () {
         ]);
 
         Route::post('/brands/store', [BrandController::class, 'store'])->name('admin.Brands.store');
+
+        Route::resource('/sizes', SizeController::class)->names([
+            'index' => 'admin.Sizes.index',
+            'create' => 'admin.Sizes.create',
+            'edit' => 'admin.Sizes.edit',
+            // 'update' => 'admin.Sizes.update',
+        ]);
+
+        Route::post('/sizes/store', [SizeController::class, 'store'])->name('admin.Sizes.store');
+        Route::get('/sizes/destroy/{id}', [SizeController::class, 'destroy'])->name('admin.Sizes.destroy');
+        Route::get('/sizes/update/{id}', [SizeController::class, 'update'])->name('admin.Sizes.update');
+
+        Route::resource('/colors', ColorController::class)->names([
+            'index' => 'admin.Colors.index',
+            'create' => 'admin.Colors.create',
+            'edit' => 'admin.Colors.edit',
+            // 'update' => 'admin.Colors.update',
+        ]);
+
+        Route::post('/colors/store', [ColorController::class, 'store'])->name('admin.Colors.store');
+        Route::get('/colors/destroy/{id}', [ColorController::class, 'destroy'])->name('admin.Colors.destroy');
+        Route::get('/colors/update/{id}', [ColorController::class, 'update'])->name('admin.Colors.update');
+
+        Route::resource('/engravings', EngravingController::class)->names([
+            'index' => 'admin.Engravings.index',
+            'create' => 'admin.Engravings.create',
+            'edit' => 'admin.Engravings.edit',
+            // 'update' => 'admin.Engravings.update',
+        ]);
+
+        Route::post('/engravings/store', [EngravingController::class, 'store'])->name('admin.Engravings.store');
+        Route::get('/engravings/destroy/{id}', [EngravingController::class, 'destroy'])->name('admin.Engravings.destroy');
+        Route::get('/engravings/update/{id}', [EngravingController::class, 'update'])->name('admin.Engravings.update');
 
         Route::resource('/intros', IntroController::class)->names([
             'index' => 'admin.Intros.index',

@@ -9,6 +9,7 @@ class color extends Model
     protected $fillable = [
         'name',
         'color',
+        'status',
     ];
 
     public static function get_Fields(): array
