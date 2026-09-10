@@ -80,6 +80,8 @@ The platform is designed primarily for Arabic users and supports RTL layouts.
 
 Screenshots of the Admin Dashboard, Merchant Dashboard, product management, and storefront will be added here.
 
-## License
+## 👨‍💻 Developer
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Developed by **Sameer Rashed**
+
+Laravel / PHP Developer
