@@ -92,7 +92,7 @@ The platform is designed primarily for Arabic users and supports RTL layouts.
 
 ### Add Multiple Product
 
-![Add Multiple Product](screenshots/add_multiple_product.png.png)
+![Add Multiple Product](screenshots/add_multiple_product.png)
 
 ## 👨‍💻 Developer
 
