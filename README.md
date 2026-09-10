@@ -1,59 +1,84 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Edey Store 🛒
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Edey Store is a multi-vendor e-commerce platform built with Laravel.
 
-## About Laravel
+The project includes separate dashboards for administrators and merchants, allowing merchants to manage their own stores, products, inventory, and payment methods while administrators manage the overall platform.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 🚀 Main Features
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- Multi-vendor e-commerce system
+- Admin dashboard
+- Merchant dashboard
+- Store management
+- Product management
+- Product categories
+- Product attributes and variants
+- Colors, sizes and patterns
+- Inventory management
+- Shopping cart
+- Orders management
+- Coupons and discounts
+- Payment methods
+- User roles and permissions
+- Arabic RTL interface
+- AJAX-based interactions
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## 🛠 Technologies
 
-## Learning Laravel
+- PHP
+- Laravel 12
+- MySQL
+- Blade
+- JavaScript
+- jQuery
+- AJAX
+- Bootstrap
+- Metronic
+- HTML / CSS
+- Git / GitHub
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+## 🏗 System Structure
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+The platform contains multiple user roles:
 
-## Laravel Sponsors
+### Admin
+The administrator manages the overall platform including users, merchants, categories, and system settings.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### Merchant
+Each merchant can manage their own store, including products, inventory, product attributes, and available payment methods.
 
-### Premium Partners
+### Customer
+Customers can browse products, add products to the shopping cart, apply coupons, and place orders.
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+## 📦 Product Management
 
-## Contributing
+Products can contain multiple attributes such as:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+- Colors
+- Sizes
+- Patterns
+- Engravings
+- Product variants
+- Inventory quantities
 
-## Code of Conduct
+Each product can also contain multiple images and categories.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## 🛒 Shopping Cart
 
-## Security Vulnerabilities
+The shopping cart supports products from different stores and calculates totals separately for each store.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Coupons can also be applied according to the selected store.
 
-## License
+## 🌍 Localization
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+The platform is designed primarily for Arabic users and supports RTL layouts.
+
+## 📸 Screenshots
+
+Screenshots of the Admin Dashboard, Merchant Dashboard, product management, and storefront will be added here.
+
+## 👨‍💻 Developer
+
+Developed by **Sameer Rashed**
+
+Laravel / PHP Developer
