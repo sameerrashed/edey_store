@@ -42,12 +42,15 @@ The project includes separate dashboards for administrators and merchants, allow
 The platform contains multiple user roles:
 
 ### Admin
+
 The administrator manages the overall platform including users, merchants, categories, and system settings.
 
 ### Merchant
+
 Each merchant can manage their own store, including products, inventory, product attributes, and available payment methods.
 
 ### Customer
+
 Customers can browse products, add products to the shopping cart, apply coupons, and place orders.
 
 ## 📦 Product Management
@@ -77,8 +80,6 @@ The platform is designed primarily for Arabic users and supports RTL layouts.
 
 Screenshots of the Admin Dashboard, Merchant Dashboard, product management, and storefront will be added here.
 
-## 👨‍💻 Developer
+## License
 
-Developed by **Sameer Rashed**
-
-Laravel / PHP Developer
+The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
