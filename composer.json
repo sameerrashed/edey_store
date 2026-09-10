@@ -2,8 +2,13 @@
     "$schema": "https://getcomposer.org/schema.json",
     "name": "laravel/laravel",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
-    "keywords": ["laravel", "framework"],
+    "description": "Multi-vendor e-commerce platform built with Laravel.",
+    "keywords": [
+        "laravel",
+        "ecommerce",
+        "multi-vendor",
+        "marketplace"
+    ],
     "license": "MIT",
     "require": {
         "php": "^8.2",
