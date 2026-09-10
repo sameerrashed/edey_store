@@ -78,7 +78,21 @@ The platform is designed primarily for Arabic users and supports RTL layouts.
 
 ## 📸 Screenshots
 
-Screenshots of the Admin Dashboard, Merchant Dashboard, product management, and storefront will be added here.
+### Request upgrade merchant
+
+![Request upgrade merchant](screenshots/request_upgrade_merchant.png)
+
+### Product Management
+
+![Product Management](screenshots/products.png)
+
+### Add Simple Product
+
+![Add Simple Product](screenshots/add_simple_product.png)
+
+### Add Multiple Product
+
+![Add Multiple Product](screenshots/add_multiple_product.png.png)
 
 ## License
 
