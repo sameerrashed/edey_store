@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'Dashboard' => 'الرئيسية',
+    'Dashboard' => 'الصفحة الرئيسية',
     'User management' => 'إدارة المستخدمين',
     'Intros' => 'المقدمات',
     'Categories' => 'التصنيفات',

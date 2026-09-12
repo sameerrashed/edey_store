@@ -10,13 +10,14 @@ class HomeController extends Controller
     {
         if (auth()->user()->role->name == 'ادمن') {
             auth()->user()->update([
-                'last_login_at' => now()
+                'last_login_at' => now(),
             ]);
-            return view('admin.dashboard.index');
+            $data['title'] = 'Dashboard';
+
+            return view('admin.dashboard.index', $data);
         } else {
             return redirect('/admin');
         }
-
 
     }
 }
