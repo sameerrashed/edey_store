@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('copon_stores', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('copon_id')->unsigned()->constrained('copons')->onDelete('cascade');
+            $table->foreignId('store_id')->unsigned()->constrained('stores')->onDelete('cascade');
+            $table->index(['copon_id'], 'copon_store');
+            $table->index(['store_id'], 'store_copon');
             $table->timestamps();
         });
     }

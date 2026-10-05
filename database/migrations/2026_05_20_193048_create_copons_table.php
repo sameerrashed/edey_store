@@ -13,6 +13,16 @@ return new class extends Migration
     {
         Schema::create('copons', function (Blueprint $table) {
             $table->id();
+            $table->string('code', 255);
+            $table->string('name', 255);
+            $table->float('discount_percentage');
+            $table->integer('count');
+            $table->date('start_date');
+            $table->date('end_date');
+            $table->integer('status')->default(1);
+            $table->foreignId('store_id')->unsigned()->nullable()->constrained('stores')->onDelete('cascade');
+            $table->unique(['code'], 'code');
+            $table->index(['store_id'], 'copon_store_rel');
             $table->timestamps();
         });
     }

@@ -4,7 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class extends Migration
+{
     /**
      * Run the migrations.
      */
@@ -12,11 +13,11 @@ return new class extends Migration {
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
-            $table->string('category_name');
-            $table->string('photo_cover');
-            $table->string('icon');
-            $table->string('status')->nullable();
-            $table->boolean('show_in_intro')->default(false);
+            $table->string('category_name', 255);
+            $table->string('description', 255)->nullable();
+            $table->text('photo_cover')->nullable();
+            $table->string('status', 255)->default('1');
+            $table->integer('show_in_intro')->default(0);
             $table->timestamps();
         });
     }

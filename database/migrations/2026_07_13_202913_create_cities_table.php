@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('cities', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name', 255);
+            $table->foreignId('country_id')->unsigned()->nullable()->constrained('countries')->onDelete('cascade');
+            $table->index(['country_id'], 'village_city');
             $table->timestamps();
         });
     }

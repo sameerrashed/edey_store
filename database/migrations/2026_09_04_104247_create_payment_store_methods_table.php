@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('payment_store_methods', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('payment_id')->unsigned()->constrained('payment_methods')->onDelete('cascade');
+            $table->foreignId('store_id')->unsigned()->constrained('stores')->onDelete('cascade');
+            $table->index(['payment_id'], 'payment_store_name');
+            $table->index(['store_id'], 'store_payment');
             $table->timestamps();
         });
     }

@@ -13,6 +13,13 @@ return new class extends Migration
     {
         Schema::create('carts', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('coupon_id')->unsigned()->nullable()->constrained('coupons')->onDelete('cascade');
+            $table->foreignId('user_id')->unsigned()->nullable()->constrained('users')->onDelete('cascade');
+            $table->foreignId('store_id')->unsigned()->nullable()->constrained('stores')->onDelete('cascade');
+            $table->double('tax')->default(0);
+            $table->double('total_discount')->default(0);
+            $table->index(['user_id'], 'cart_user');
+            $table->index(['store_id'], 'cart_store');
             $table->timestamps();
         });
     }

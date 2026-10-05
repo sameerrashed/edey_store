@@ -12,8 +12,10 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "laravel/ai": "^0.7.2",
         "laravel/framework": "^12.0",
-        "laravel/tinker": "^2.10.1"
+        "laravel/tinker": "^2.10.1",
+        "predis/predis": "^3.6"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",

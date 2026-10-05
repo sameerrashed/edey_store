@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('favorites', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('product_id')->unsigned()->constrained('products')->onDelete('cascade');
+            $table->foreignId('user_id')->unsigned()->constrained('users')->onDelete('cascade');
+            $table->index(['product_id'], 'favorite_product');
+            $table->index(['user_id'], 'user_fav');
             $table->timestamps();
         });
     }

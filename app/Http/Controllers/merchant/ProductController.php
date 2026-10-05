@@ -15,6 +15,7 @@ use App\Models\ProductVariantFeature;
 use App\Models\related_product;
 use App\Models\size;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
@@ -25,12 +26,17 @@ class ProductController extends Controller
     public function index()
     {
         $data['title'] = 'Products';
-        $data['records'] = product::with('categories', 'inventory')->where('user_id', auth()->user()->id)->get();
-        $data['fields'] = product::get_Fields();
-        $data['categories'] = category::all();
-        $data['colors'] = color::all();
-        $data['sizes'] = size::all();
-        $data['engravings'] = engraving::all();
+        $userId = auth()->id();
+
+        $data['records'] = Cache::remember(
+            'merchant_products_'.$userId,
+            600,
+            function () use ($userId) {
+                return product::with('categories', 'inventory')
+                    ->where('user_id', $userId)
+                    ->get();
+            }
+        );
 
         return view('merchant.products.index', $data);
     }

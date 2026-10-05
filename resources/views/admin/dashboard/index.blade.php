@@ -196,12 +196,12 @@
 
                                 <div class="mt-5">
                                     <span class="fs-2 fw-bold text-primary">
-                                        125
+                                        {{ $users }}
                                     </span>
                                 </div>
 
                                 <div class="progress h-4px mt-4">
-                                    <div class="progress-bar bg-primary" style="width: 65%"></div>
+                                    <div class="progress-bar bg-primary" style="width: {{ $usersPercent }}%"></div>
                                 </div>
 
                             </div>
@@ -236,12 +236,12 @@
 
                                 <div class="mt-5">
                                     <span class="fs-2 fw-bold text-info">
-                                        320
+                                        {{ $products }}
                                     </span>
                                 </div>
 
                                 <div class="progress h-4px mt-4">
-                                    <div class="progress-bar bg-info" style="width: 50%"></div>
+                                    <div class="progress-bar bg-info" style="width: {{ $productsPercent }}%"></div>
                                 </div>
 
                             </div>
@@ -565,11 +565,6 @@
 
                 </div>
             </div>
-
-            <!-- ============================================== -->
-            <!-- قسم المبيعات -->
-            <!-- ============================================== -->
-
             <div class="card mt-10">
 
                 <div class="card-body py-8">
@@ -672,7 +667,6 @@
                 </div>
 
             </div>
-
             <div class="row g-5 g-xl-8 mt-5">
 
                 <!-- ========================================== -->

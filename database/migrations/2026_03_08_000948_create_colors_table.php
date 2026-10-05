@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('colors', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name', 255);
+            $table->string('color', 255);
+            $table->enum('status', ['0', '1'])->default('0');
             $table->timestamps();
         });
     }

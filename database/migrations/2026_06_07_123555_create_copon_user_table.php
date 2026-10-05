@@ -13,8 +13,10 @@ return new class extends Migration
     {
         Schema::create('copon_user', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('copon_id')->unsigned();
-            $table->foreignId('user_id')->unsigned();
+            $table->foreignId('copon_id')->unsigned()->constrained('copons')->onDelete('cascade');
+            $table->foreignId('user_id')->unsigned()->constrained('users')->onDelete('cascade');
+            $table->index(['copon_id'], 'copon_store_rel2');
+            $table->index(['user_id'], 'copon_user_rel');
             $table->timestamps();
         });
     }

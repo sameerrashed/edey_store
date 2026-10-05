@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('shipping_addresses', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('user_id')->unsigned()->cascadeOnDelete();
+            $table->foreignId('user_id')->unsigned()->cascadeOnDelete()->constrained('users')->onDelete('cascade');
+            $table->foreignId('order_id')->nullable()->constrained('orders')->onDelete('set null');
 
             $table->string('email');
             $table->string('country')->default('المملكة العربية السعودية');
