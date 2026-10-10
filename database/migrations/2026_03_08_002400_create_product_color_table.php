@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('product_color', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('product_id')->unsigned();
-            $table->foreignId('color_id')->unsigned();
+            $table->id()->unsigned();
+            $table->foreignId('product_id')->unsigned()->constrained('products')->onDelete('cascade');
+            $table->foreignId('color_id')->unsigned()->constrained('colors')->onDelete('cascade');
             $table->timestamps();
         });
     }

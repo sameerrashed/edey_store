@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('copon_user', function (Blueprint $table) {
-            $table->id();
+            $table->id()->unsigned();
             $table->foreignId('copon_id')->unsigned()->constrained('copons')->onDelete('cascade');
             $table->foreignId('user_id')->unsigned()->constrained('users')->onDelete('cascade');
             $table->index(['copon_id'], 'copon_store_rel2');

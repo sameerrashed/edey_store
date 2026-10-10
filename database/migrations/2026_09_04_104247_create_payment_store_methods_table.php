@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('payment_store_methods', function (Blueprint $table) {
-            $table->id();
+            $table->id()->unsigned();
             $table->foreignId('payment_id')->unsigned()->constrained('payment_methods')->onDelete('cascade');
             $table->foreignId('store_id')->unsigned()->constrained('stores')->onDelete('cascade');
             $table->index(['payment_id'], 'payment_store_name');

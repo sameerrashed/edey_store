@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('colors', function (Blueprint $table) {
-            $table->id();
+            $table->id()->unsigned();
             $table->string('name', 255);
             $table->string('color', 255);
             $table->enum('status', ['0', '1'])->default('0');

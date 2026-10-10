@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('favorites', function (Blueprint $table) {
-            $table->id();
+            $table->id()->unsigned();
             $table->foreignId('product_id')->unsigned()->constrained('products')->onDelete('cascade');
             $table->foreignId('user_id')->unsigned()->constrained('users')->onDelete('cascade');
             $table->index(['product_id'], 'favorite_product');

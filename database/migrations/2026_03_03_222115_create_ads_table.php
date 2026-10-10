@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('ads', function (Blueprint $table) {
-            $table->id();
+            $table->id()->unsigned();
             $table->string('title');
             $table->string('image');
             $table->string('link_url')->nullable();

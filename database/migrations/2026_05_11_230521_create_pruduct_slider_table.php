@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('pruduct_slider', function (Blueprint $table) {
-            $table->id();
+            $table->id()->unsigned();
             $table->longText('image');
             $table->foreignId('pruduct_id')->unsigned()->after('id')->constrained('products')->onDelete('cascade');
             $table->timestamps();

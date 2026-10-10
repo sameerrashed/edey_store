@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('engravings', function (Blueprint $table) {
-            $table->id();
+            $table->id()->unsigned();
             $table->string('avatar', 255);
             $table->string('name', 255);
             $table->enum('status', ['0', '1'])->default('0');

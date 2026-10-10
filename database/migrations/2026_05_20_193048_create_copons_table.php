@@ -12,10 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('copons', function (Blueprint $table) {
-            $table->id();
+            $table->id()->unsigned();
             $table->string('code', 255);
             $table->string('name', 255);
-            $table->float('discount_percentage');
+            $table->float('discount_percentage', 10, 2);
             $table->integer('count');
             $table->date('start_date');
             $table->date('end_date');

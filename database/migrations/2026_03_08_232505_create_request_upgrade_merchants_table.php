@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('request_upgrade_merchants', function (Blueprint $table) {
-            $table->id();
+            $table->id()->unsigned();
             $table->foreignId('user_id')->unsigned()->constrained('users')->onDelete('cascade');
             $table->foreignId('store_id')->unsigned()->constrained('stores')->onDelete('cascade');
             $table->integer('status')->default(1);

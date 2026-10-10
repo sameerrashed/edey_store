@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('featured_works', function (Blueprint $table) {
-            $table->id();
+            $table->id()->unsigned();
             $table->foreignId('product_id')->unsigned()->constrained('products')->onDelete('cascade');
             $table->float('discount')->nullable();
             $table->index(['product_id'], 'product_feature');
