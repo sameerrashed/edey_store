@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\merchant;
 
+use App\Ai\Agents\ProductWriter;
 use App\Http\Controllers\admin\ManageController;
 use App\Http\Controllers\Controller;
 use App\Models\brand;
@@ -17,6 +18,8 @@ use App\Models\size;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
+use Laravel\Ai\Enums\Lab;
+use Log;
 
 class ProductController extends Controller
 {
@@ -66,17 +69,24 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
-        // $request->validate([
-        //     'avatar' => 'required',
-        //     'image' => 'array|max:5',
-        //     'product_name' => 'required',
-        //     'price' => 'required',
-        //     'count' => 'required',
-        // ]);
-
         $product = new product;
         $product->product_name = $request->product_name;
+        try {
+            $response = (new ProductWriter)->prompt(
+                'اكتب وصفًا للمنتج التالي: '.$product->product_name,
+                provider: Lab::Ollama,
+                model: 'llama3.2',
+            );
+
+            $product->description = trim((string) $response);
+
+            $product->save();
+
+        } catch (\Throwable $e) {
+            Log::error('AI Product Description Error', [
+                'message' => $e->getMessage(),
+            ]);
+        }
         $record = ManageController::save($request, $product);
         if ($request->has('color_id')) {
             foreach ($request->color_id as $color_id) {

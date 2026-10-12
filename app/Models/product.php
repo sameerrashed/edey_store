@@ -45,15 +45,6 @@ class product extends Model
         ];
 
         $ary[] = [
-            'name' => 'description',
-            'type' => 'text',
-            'label' => 'وصف المنتج',
-            'is_required' => false,
-            'is_readonly' => false,
-            'is_trans' => false,
-        ];
-
-        $ary[] = [
             'name' => 'cost_price',
             'type' => 'text',
             'label' => 'سعر المنتج',

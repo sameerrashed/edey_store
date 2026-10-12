@@ -13,6 +13,7 @@ use App\Http\Controllers\admin\IntroController;
 use App\Http\Controllers\admin\MerchantController;
 use App\Http\Controllers\admin\OverViewController;
 use App\Http\Controllers\admin\PaymentMethodController;
+use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\RequestUpgradeMerchantController;
 use App\Http\Controllers\admin\SettingController;
 use App\Http\Controllers\admin\SizeController;
@@ -100,13 +101,24 @@ Route::prefix('admin')->group(function () {
         Route::resource('/brands', BrandController::class)->names([
             'index' => 'admin.Brands.index',
             'create' => 'admin.Brands.create',
-            //        "store" => "admin.Categories.store",
             'edit' => 'admin.Brands.edit',
             'update' => 'admin.Brands.update',
             'destroy' => 'admin.Brands.destroy',
         ]);
 
         Route::post('/brands/store', [BrandController::class, 'store'])->name('admin.Brands.store');
+
+        Route::resource('/products', ProductController::class)->names([
+            'index' => 'admin.Products.index',
+            'create' => 'admin.Products.create',
+            'update' => 'admin.Products.update',
+            'destroy' => 'admin.Products.destroy',
+        ]);
+
+        Route::post('/products/store', [ProductController::class, 'store'])->name('admin.Products.store');
+        Route::get('/products/edit/{id}', [ProductController::class, 'edit'])->name('admin.Products.edit');
+        Route::post('/products/update/{id}', [ProductController::class, 'update'])->name('admin.Products.update');
+        Route::get('/products/delete/{id}', [ProductController::class, 'destroy'])->name('admin.Products.delete');
 
         Route::resource('/sizes', SizeController::class)->names([
             'index' => 'admin.Sizes.index',

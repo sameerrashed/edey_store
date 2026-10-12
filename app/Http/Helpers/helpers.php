@@ -45,6 +45,7 @@ function ADMIN_MENU(): array
         ['name' => 'Intros', 'icon' => 'Intros.svg'],
         ['name' => 'Categories', 'icon' => 'Categories.svg'],
         ['name' => 'Brands', 'icon' => 'gen026.svg'],
+        ['name' => 'Products', 'icon' => 'Products.svg'],
         ['name' => 'Sizes', 'icon' => 'Sizes.svg'],
         ['name' => 'Colors', 'icon' => 'Colors.svg'],
         ['name' => 'Engravings', 'icon' => 'Engravings.svg'],
