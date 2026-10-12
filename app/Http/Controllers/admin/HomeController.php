@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\product;
 use App\Models\role;
 use App\Models\User;
+use Illuminate\Support\Facades\Cache;
 
 class HomeController extends Controller
 {
@@ -28,6 +29,31 @@ class HomeController extends Controller
             $data['productsPercent'] = min(
                 10 + (log10(max($products, 1)) * 20),
                 100
+            );
+
+            $data['outOfStockProducts'] = Cache::remember(
+                'admin_out_of_stock_products',
+                600,
+                function () {
+                    return Product::with(['categories', 'inventory', 'user'])
+                        ->whereHas('inventory', function ($query) {
+                            $query->where('quantity', 0);
+                        })
+                        ->get();
+                }
+            );
+
+            $data['lowStockProducts'] = Cache::remember(
+                'admin_low_stock_products',
+                600,
+                function () {
+                    return Product::with(['categories', 'inventory', 'user'])
+                        ->whereHas('inventory', function ($query) {
+                            $query->where('quantity', '>', 0)
+                                ->whereColumn('quantity', '<=', 'min_quantity');
+                        })
+                        ->get();
+                }
             );
 
             return view('admin.dashboard.index', $data);

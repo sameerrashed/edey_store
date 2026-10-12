@@ -691,236 +691,29 @@
 
                         <div class="card-body pt-3">
 
-                            <!-- المنتج 1 -->
-                            <div class="d-flex align-items-center mb-7">
+                            @foreach($lowStockProducts as $product)
+                                <!-- المنتج 1 -->
+                                <div class="d-flex align-items-center mb-7">
 
-                                <div class="symbol symbol-55px me-5">
-                                    <span class="symbol-label bg-light-warning">
-                                        <i class="ki-duotone ki-cube-2 fs-2 text-warning">
-                                            <span class="path1"></span>
-                                            <span class="path2"></span>
-                                            <span class="path3"></span>
-                                        </i>
+                                    <div class="symbol symbol-55px me-5">
+                                        <span class="symbol-label overflow-hidden p-0">
+                                            <img src="{{ asset('img/' . $product->avatar) }}" alt="{{ $product->product_name }}"
+                                                class="w-100 h-100" style="object-fit: cover;">
+                                        </span>
+                                    </div>
+                                    <div class="d-flex flex-column flex-grow-1">
+                                        <span class="text-gray-800 fw-bold fs-6 mb-1">
+                                            {{ $product->product_name }}
+                                        </span>
+                                        <span class="text-muted fw-semibold fs-7">
+                                            متبقي {{ $product->inventory->quantity }} قطع
+                                        </span>
+                                    </div>
+                                    <span class="badge badge-light-warning fs-7">
+                                        {{ $product->inventory->quantity }}
                                     </span>
                                 </div>
-
-                                <div class="d-flex flex-column flex-grow-1">
-                                    <span class="text-gray-800 fw-bold fs-6 mb-1">
-                                        هاتف بدون فتحة رجالي
-                                    </span>
-
-                                    <span class="text-muted fw-semibold fs-7">
-                                        متبقي 3 قطع
-                                    </span>
-                                </div>
-
-                                <span class="badge badge-light-warning fs-7">
-                                    3
-                                </span>
-
-                            </div>
-
-
-                            <!-- المنتج 2 -->
-                            <div class="d-flex align-items-center mb-7">
-
-                                <div class="symbol symbol-55px me-5">
-                                    <span class="symbol-label bg-light-warning">
-                                        <i class="ki-duotone ki-cube-2 fs-2 text-warning">
-                                            <span class="path1"></span>
-                                            <span class="path2"></span>
-                                            <span class="path3"></span>
-                                        </i>
-                                    </span>
-                                </div>
-
-                                <div class="d-flex flex-column flex-grow-1">
-                                    <span class="text-gray-800 fw-bold fs-6 mb-1">
-                                        فانيلة حلق نص كم رجالي
-                                    </span>
-
-                                    <span class="text-muted fw-semibold fs-7">
-                                        متبقي 5 قطع
-                                    </span>
-                                </div>
-
-                                <span class="badge badge-light-warning fs-7">
-                                    5
-                                </span>
-
-                            </div>
-
-
-                            <!-- المنتج 3 -->
-                            <div class="d-flex align-items-center mb-7">
-
-                                <div class="symbol symbol-55px me-5">
-                                    <span class="symbol-label bg-light-warning">
-                                        <i class="ki-duotone ki-cube-2 fs-2 text-warning">
-                                            <span class="path1"></span>
-                                            <span class="path2"></span>
-                                            <span class="path3"></span>
-                                        </i>
-                                    </span>
-                                </div>
-
-                                <div class="d-flex flex-column flex-grow-1">
-                                    <span class="text-gray-800 fw-bold fs-6 mb-1">
-                                        منتج تجريبي
-                                    </span>
-
-                                    <span class="text-muted fw-semibold fs-7">
-                                        متبقي قطعتان
-                                    </span>
-                                </div>
-
-                                <span class="badge badge-light-danger fs-7">
-                                    2
-                                </span>
-
-                            </div>
-
-
-                            <!-- المنتج 4 -->
-                            <div class="d-flex align-items-center mb-5">
-
-                                <div class="symbol symbol-55px me-5">
-                                    <span class="symbol-label bg-light-warning">
-                                        <i class="ki-duotone ki-cube-2 fs-2 text-warning">
-                                            <span class="path1"></span>
-                                            <span class="path2"></span>
-                                            <span class="path3"></span>
-                                        </i>
-                                    </span>
-                                </div>
-
-                                <div class="d-flex flex-column flex-grow-1">
-                                    <span class="text-gray-800 fw-bold fs-6 mb-1">
-                                        فانيلة دائرية نص كم
-                                    </span>
-
-                                    <span class="text-muted fw-semibold fs-7">
-                                        متبقي 4 قطع
-                                    </span>
-                                </div>
-
-                                <span class="badge badge-light-warning fs-7">
-                                    4
-                                </span>
-
-                            </div>
-
-                            <div class="d-flex align-items-center mb-5">
-
-                                <div class="symbol symbol-55px me-5">
-                                    <span class="symbol-label bg-light-warning">
-                                        <i class="ki-duotone ki-cube-2 fs-2 text-warning">
-                                            <span class="path1"></span>
-                                            <span class="path2"></span>
-                                            <span class="path3"></span>
-                                        </i>
-                                    </span>
-                                </div>
-
-                                <div class="d-flex flex-column flex-grow-1">
-                                    <span class="text-gray-800 fw-bold fs-6 mb-1">
-                                        فانيلة دائرية نص كم
-                                    </span>
-
-                                    <span class="text-muted fw-semibold fs-7">
-                                        متبقي 4 قطع
-                                    </span>
-                                </div>
-
-                                <span class="badge badge-light-warning fs-7">
-                                    4
-                                </span>
-
-                            </div>
-
-                            <div class="d-flex align-items-center mb-5">
-
-                                <div class="symbol symbol-55px me-5">
-                                    <span class="symbol-label bg-light-warning">
-                                        <i class="ki-duotone ki-cube-2 fs-2 text-warning">
-                                            <span class="path1"></span>
-                                            <span class="path2"></span>
-                                            <span class="path3"></span>
-                                        </i>
-                                    </span>
-                                </div>
-
-                                <div class="d-flex flex-column flex-grow-1">
-                                    <span class="text-gray-800 fw-bold fs-6 mb-1">
-                                        فانيلة دائرية نص كم
-                                    </span>
-
-                                    <span class="text-muted fw-semibold fs-7">
-                                        متبقي 4 قطع
-                                    </span>
-                                </div>
-
-                                <span class="badge badge-light-warning fs-7">
-                                    4
-                                </span>
-
-                            </div>
-
-                            <div class="d-flex align-items-center mb-5">
-
-                                <div class="symbol symbol-55px me-5">
-                                    <span class="symbol-label bg-light-warning">
-                                        <i class="ki-duotone ki-cube-2 fs-2 text-warning">
-                                            <span class="path1"></span>
-                                            <span class="path2"></span>
-                                            <span class="path3"></span>
-                                        </i>
-                                    </span>
-                                </div>
-
-                                <div class="d-flex flex-column flex-grow-1">
-                                    <span class="text-gray-800 fw-bold fs-6 mb-1">
-                                        فانيلة دائرية نص كم
-                                    </span>
-
-                                    <span class="text-muted fw-semibold fs-7">
-                                        متبقي 4 قطع
-                                    </span>
-                                </div>
-
-                                <span class="badge badge-light-warning fs-7">
-                                    4
-                                </span>
-
-                            </div>
-
-                            <div class="d-flex align-items-center mb-5">
-
-                                <div class="symbol symbol-55px me-5">
-                                    <span class="symbol-label bg-light-warning">
-                                        <i class="ki-duotone ki-cube-2 fs-2 text-warning">
-                                            <span class="path1"></span>
-                                            <span class="path2"></span>
-                                            <span class="path3"></span>
-                                        </i>
-                                    </span>
-                                </div>
-
-                                <div class="d-flex flex-column flex-grow-1">
-                                    <span class="text-gray-800 fw-bold fs-6 mb-1">
-                                        فانيلة دائرية نص كم
-                                    </span>
-
-                                    <span class="text-muted fw-semibold fs-7">
-                                        متبقي 4 قطع
-                                    </span>
-                                </div>
-
-                                <span class="badge badge-light-warning fs-7">
-                                    4
-                                </span>
-
-                            </div>
+                            @endforeach
 
                             <div class="text-center pt-5">
                                 <a href="#" class="btn btn-sm btn-light-primary">
@@ -957,253 +750,35 @@
 
 
                         <div class="card-body pt-3">
+                            @foreach($outOfStockProducts as $product)
+                                <!-- المنتج 1 -->
+                                <div class="d-flex align-items-center mb-7">
 
-                            <!-- المنتج 1 -->
-                            <div class="d-flex align-items-center mb-7">
+                                    <div class="symbol symbol-55px me-5">
+                                        <span class="symbol-label overflow-hidden p-0">
+                                            <img src="{{ asset('img/' . $product->avatar) }}" alt="{{ $product->product_name }}"
+                                                class="w-100 h-100" style="object-fit: cover;">
+                                        </span>
+                                    </div>
 
-                                <div class="symbol symbol-55px me-5">
-                                    <span class="symbol-label bg-light-danger">
-                                        <i class="ki-duotone ki-cube-2 fs-2 text-danger">
-                                            <span class="path1"></span>
-                                            <span class="path2"></span>
-                                            <span class="path3"></span>
-                                        </i>
-                                    </span>
-                                </div>
+                                    <div class="d-flex flex-column flex-grow-1">
 
-                                <div class="d-flex flex-column flex-grow-1">
+                                        <span class="text-gray-800 fw-bold fs-6 mb-1">
+                                            {{ $product->product_name }}
+                                        </span>
 
-                                    <span class="text-gray-800 fw-bold fs-6 mb-1">
-                                        هاتف بناتي
-                                    </span>
+                                        <span class="text-muted fw-semibold fs-7">
+                                            المخزون نفد
+                                        </span>
 
-                                    <span class="text-muted fw-semibold fs-7">
-                                        المخزون نفد
-                                    </span>
+                                    </div>
 
-                                </div>
-
-                                <span class="badge badge-light-danger">
-                                    0
-                                </span>
-
-                            </div>
-
-                            <div class="d-flex align-items-center mb-7">
-
-                                <div class="symbol symbol-55px me-5">
-                                    <span class="symbol-label bg-light-danger">
-                                        <i class="ki-duotone ki-cube-2 fs-2 text-danger">
-                                            <span class="path1"></span>
-                                            <span class="path2"></span>
-                                            <span class="path3"></span>
-                                        </i>
-                                    </span>
-                                </div>
-
-                                <div class="d-flex flex-column flex-grow-1">
-
-                                    <span class="text-gray-800 fw-bold fs-6 mb-1">
-                                        هاتف بناتي
-                                    </span>
-
-                                    <span class="text-muted fw-semibold fs-7">
-                                        المخزون نفد
+                                    <span class="badge badge-light-danger">
+                                        {{ $product->inventory->quantity }}
                                     </span>
 
                                 </div>
-
-                                <span class="badge badge-light-danger">
-                                    0
-                                </span>
-
-                            </div>
-
-                            <div class="d-flex align-items-center mb-7">
-
-                                <div class="symbol symbol-55px me-5">
-                                    <span class="symbol-label bg-light-danger">
-                                        <i class="ki-duotone ki-cube-2 fs-2 text-danger">
-                                            <span class="path1"></span>
-                                            <span class="path2"></span>
-                                            <span class="path3"></span>
-                                        </i>
-                                    </span>
-                                </div>
-
-                                <div class="d-flex flex-column flex-grow-1">
-
-                                    <span class="text-gray-800 fw-bold fs-6 mb-1">
-                                        هاتف بناتي
-                                    </span>
-
-                                    <span class="text-muted fw-semibold fs-7">
-                                        المخزون نفد
-                                    </span>
-
-                                </div>
-
-                                <span class="badge badge-light-danger">
-                                    0
-                                </span>
-
-                            </div>
-
-                            <div class="d-flex align-items-center mb-7">
-
-                                <div class="symbol symbol-55px me-5">
-                                    <span class="symbol-label bg-light-danger">
-                                        <i class="ki-duotone ki-cube-2 fs-2 text-danger">
-                                            <span class="path1"></span>
-                                            <span class="path2"></span>
-                                            <span class="path3"></span>
-                                        </i>
-                                    </span>
-                                </div>
-
-                                <div class="d-flex flex-column flex-grow-1">
-
-                                    <span class="text-gray-800 fw-bold fs-6 mb-1">
-                                        هاتف بناتي
-                                    </span>
-
-                                    <span class="text-muted fw-semibold fs-7">
-                                        المخزون نفد
-                                    </span>
-
-                                </div>
-
-                                <span class="badge badge-light-danger">
-                                    0
-                                </span>
-
-                            </div>
-
-                            <div class="d-flex align-items-center mb-7">
-
-                                <div class="symbol symbol-55px me-5">
-                                    <span class="symbol-label bg-light-danger">
-                                        <i class="ki-duotone ki-cube-2 fs-2 text-danger">
-                                            <span class="path1"></span>
-                                            <span class="path2"></span>
-                                            <span class="path3"></span>
-                                        </i>
-                                    </span>
-                                </div>
-
-                                <div class="d-flex flex-column flex-grow-1">
-
-                                    <span class="text-gray-800 fw-bold fs-6 mb-1">
-                                        هاتف بناتي
-                                    </span>
-
-                                    <span class="text-muted fw-semibold fs-7">
-                                        المخزون نفد
-                                    </span>
-
-                                </div>
-
-                                <span class="badge badge-light-danger">
-                                    0
-                                </span>
-
-                            </div>
-
-                            <!-- المنتج 2 -->
-                            <div class="d-flex align-items-center mb-7">
-
-                                <div class="symbol symbol-55px me-5">
-                                    <span class="symbol-label bg-light-danger">
-                                        <i class="ki-duotone ki-cube-2 fs-2 text-danger">
-                                            <span class="path1"></span>
-                                            <span class="path2"></span>
-                                            <span class="path3"></span>
-                                        </i>
-                                    </span>
-                                </div>
-
-                                <div class="d-flex flex-column flex-grow-1">
-
-                                    <span class="text-gray-800 fw-bold fs-6 mb-1">
-                                        ثوب سعودي رجالي
-                                    </span>
-
-                                    <span class="text-muted fw-semibold fs-7">
-                                        المخزون نفد
-                                    </span>
-
-                                </div>
-
-                                <span class="badge badge-light-danger">
-                                    0
-                                </span>
-
-                            </div>
-
-
-                            <!-- المنتج 3 -->
-                            <div class="d-flex align-items-center mb-7">
-
-                                <div class="symbol symbol-55px me-5">
-                                    <span class="symbol-label bg-light-danger">
-                                        <i class="ki-duotone ki-cube-2 fs-2 text-danger">
-                                            <span class="path1"></span>
-                                            <span class="path2"></span>
-                                            <span class="path3"></span>
-                                        </i>
-                                    </span>
-                                </div>
-
-                                <div class="d-flex flex-column flex-grow-1">
-
-                                    <span class="text-gray-800 fw-bold fs-6 mb-1">
-                                        تي شيرت رجالي ملون
-                                    </span>
-
-                                    <span class="text-muted fw-semibold fs-7">
-                                        المخزون نفد
-                                    </span>
-
-                                </div>
-
-                                <span class="badge badge-light-danger">
-                                    0
-                                </span>
-
-                            </div>
-
-
-                            <!-- المنتج 4 -->
-                            <div class="d-flex align-items-center mb-5">
-
-                                <div class="symbol symbol-55px me-5">
-                                    <span class="symbol-label bg-light-danger">
-                                        <i class="ki-duotone ki-cube-2 fs-2 text-danger">
-                                            <span class="path1"></span>
-                                            <span class="path2"></span>
-                                            <span class="path3"></span>
-                                        </i>
-                                    </span>
-                                </div>
-
-                                <div class="d-flex flex-column flex-grow-1">
-
-                                    <span class="text-gray-800 fw-bold fs-6 mb-1">
-                                        فانيلة ولادي
-                                    </span>
-
-                                    <span class="text-muted fw-semibold fs-7">
-                                        المخزون نفد
-                                    </span>
-
-                                </div>
-
-                                <span class="badge badge-light-danger">
-                                    0
-                                </span>
-
-                            </div>
-
+                            @endforeach
 
                             <div class="text-center pt-5">
                                 <a href="#" class="btn btn-sm btn-light-danger">
