@@ -14,6 +14,8 @@ class category extends Model
         'show_in_intro',
     ];
 
+    protected $table = 'categories';
+
     public static function get_Fields(): array
     {
 

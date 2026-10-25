@@ -28,14 +28,10 @@ function ADMIN_DATES($record): string
     return \Carbon\Carbon::parse($record)->translatedFormat('Y-m-d g:i A');
 }
 
-function GET_SVG_ICONS()
-{
-    return DB::table('svg')->select('name', 'svg_content')->get();
-}
+
 
 function ADMIN_MENU(): array
 {
-    $icons = GET_SVG_ICONS();
 
     $menu = [
         ['name' => 'Dashboard', 'icon' => 'dashboard.svg'],
@@ -65,7 +61,6 @@ function ADMIN_MENU(): array
 
 function MERCHANT_MENU(): array
 {
-    $icons = GET_SVG_ICONS();
 
     $menu = [
         ['name' => 'Dashboard', 'icon' => 'dashboard.svg'],

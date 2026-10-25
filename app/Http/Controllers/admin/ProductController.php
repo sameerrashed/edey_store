@@ -50,7 +50,7 @@ class ProductController extends Controller
         $data['title'] = 'AddProduct';
         $data['records'] = product::all();
         $data['fields'] = product::get_Fields();
-        $data['categories'] = category::all();
+        $data['categorie'] = category::all();
         $data['brands'] = brand::all();
         $data['features'] = productfeature::all();
         $data['colors'] = color::all();
