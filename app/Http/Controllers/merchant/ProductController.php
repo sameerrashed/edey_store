@@ -60,6 +60,7 @@ class ProductController extends Controller
         $data['sizes'] = size::all();
         $data['engravings'] = engraving::all();
         $data['products'] = product::all();
+        $data['products1'] = product::all();
 
         return view('merchant.products.add_', $data);
     }
