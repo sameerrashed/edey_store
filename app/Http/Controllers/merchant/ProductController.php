@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Laravel\Ai\Enums\Lab;
 use Log;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
