@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="97" height="97" viewBox="0 0 97 97">
+  <g id="Group_10301" data-name="Group 10301" transform="translate(-100.029 -33)">
+    <g id="Rectangle_14" data-name="Rectangle 14" transform="translate(100.029 33)" fill="none" stroke="#a9a4d1" stroke-width="1" stroke-dasharray="4 8">
+      <rect width="97" height="97" rx="6" stroke="none"/>
+      <rect x="0.5" y="0.5" width="96" height="96" rx="5.5" fill="none"/>
+    </g>
+    <g id="open-book_1" data-name="open-book 1" transform="translate(119.147 52.335)">
+      <g id="Group">
+        <path id="Vector" d="M779.969,7555.206v38.238H762.4a10.368,10.368,0,0,0-7.627,3.455H746.2a10.286,10.286,0,0,0-7.627-3.455H721v-41.694h3.455v38.239h14.132a14.586,14.586,0,0,1,9.154,3.456h5.487a14.584,14.584,0,0,1,9.154-3.456h14.132v-34.782Z" transform="translate(-721 -7537.928)" fill="#a9a4d1"/>
+        <path id="Vector-2" data-name="Vector" d="M747.758,7585.446a16.854,16.854,0,0,0-6.707-1.378H730.375v-41.693h3.455v34.783h5.183A8.71,8.71,0,0,1,747.758,7585.446Z" transform="translate(-723.464 -7535.464)" fill="#a9a4d1"/>
+        <path id="Vector-3" data-name="Vector" d="M773.47,7547.063a20.166,20.166,0,0,0-10.292,2.792,23.472,23.472,0,0,1,.122,2.391v36.438c.231-.167.5-.354.8-.552,5.335-3.558,9.01-2.831,20.049-2.831v-38.238Z" transform="translate(-732.088 -7536.696)" fill="#a9a4d1"/>
+        <g id="Group-2" data-name="Group" transform="translate(13.821)">
+          <path id="Vector-4" data-name="Vector" d="M753.686,7583.332a12.165,12.165,0,0,0-12.208-12.094H739.75V7533c8.637,0,13.936,6.976,13.936,15.548Z" transform="translate(-739.75 -7533)" fill="#a9a4d1"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

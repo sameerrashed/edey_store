@@ -1,0 +1,18 @@
+<svg width="24" height="24" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+<!-- machine head -->
+<rect x="24" y="8" width="16" height="10" rx="2" fill="currentColor"/>
+
+<!-- vertical arm -->
+<rect x="30" y="18" width="4" height="20" fill="currentColor"/>
+
+<!-- engraving tip -->
+<rect x="31" y="38" width="2" height="6" fill="currentColor"/>
+
+<!-- product -->
+<rect x="16" y="44" width="32" height="10" rx="2" fill="currentColor" opacity="0.4"/>
+
+<!-- engraving sparks -->
+<path d="M28 42L26 40M36 42L38 40M32 41L32 39" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+
+</svg>

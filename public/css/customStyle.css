@@ -1,0 +1,160 @@
+.custom_head{
+    border-bottom: none !important;
+}
+
+.custom_invoice_body{
+    width: 100% !important;
+    padding: 1rem 2rem !important;
+    margin: 0 !important;
+}
+
+.m-portlet .m-portlet__body {
+    padding: .5rem 0 !important;
+}
+
+.custom_m_portal_body{
+    padding: 2.2rem 2.2rem !important;
+}
+
+.custom_m_portal{
+    margin-bottom: 1rem !important;
+}
+
+.m-portlet .m-portlet__head {
+    border-bottom: 0px;
+    height: 4rem;
+}
+
+.dash_icon{
+    color: red !important;
+}
+
+.order-status {
+    border-bottom: 0;
+    background-color: white;
+}
+
+.dataTables_length {
+    float: right;
+}
+
+.dataTables_info {
+    margin-right: 1rem;
+    float: right;
+    line-height: 1rem;
+}
+
+.m-portlet .m-portlet__head {
+    height: 4rem;
+    /*height: 2rem;*/
+}
+
+.m-portlet__head-title{
+    margin-top: .5rem;
+}
+
+.successdone{
+    width: 0px;
+    max-width: 0px;
+}
+
+#order_details_1{
+    padding: 0;
+    margin: 0;
+    width: 100% !important;
+}
+
+#orderDetailsTable{
+    border-collapse: separate;
+}
+
+#orderDetailsTable td{
+    border: 1px solid #c3c4c9;
+    padding: .3rem 0;
+}
+
+#shipping_policy_td{
+    width: 100%;
+    margin: 0;
+    text-align: center;
+    border-radius: .25rem;
+    border: 1px solid #aeb0b9 ;
+    padding: .7rem;
+}
+
+.btn{
+    font-family: Cairo;
+}
+
+#custom-order-table th, td{
+    white-space: normal;
+    padding: 0;
+    text-align: center;
+}
+
+#custom-order-table th:first-child {
+    padding: 1rem 1rem 1rem 1.6rem;
+}
+
+#hash_td{
+    width: 5rem !important;
+}
+
+#order-table{
+    white-space: nowrap;
+}
+#order-table th{
+    padding-left: 0;
+}
+
+#doc_entry_col{
+    padding: 1rem 1rem 1rem 1.6rem !important;
+}
+
+.order_details_products_block{
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 1rem 2rem !important;
+}
+
+.custom_footer{
+    padding: 0 !important;
+    margin: 0 !important;
+}
+.custom_row{
+    margin-top: -.9rem;
+}
+.custom_col{
+    padding: 0 !important;
+}
+.custom_body{
+    padding-top: 0 !important;
+}
+.content_wrapper{
+    margin-top: -2.3rem !important;
+    margin-left: 0.5ex !important;
+    margin-right: 0.5ex !important;
+}
+.top_row{
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+.col_sm_custom{
+    padding-left: .2rem !important;
+    padding-right: 0 !important;
+}
+
+.nowrap_table td{
+    text-align: center;
+    white-space: nowrap !important;
+}
+
+.nowrap_table th{
+    text-align: center;
+    /*white-space: nowrap !important;*/
+}
+
+.custom_search{
+    margin: 1rem 3rem 0 0;
+    width: 50rem;
+}

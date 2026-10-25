@@ -1,0 +1,19 @@
+<svg width="24" height="24" viewBox="0 0 64 64" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+
+<!-- Shirt -->
+<path d="M24 6l4 4h8l4-4 8 6-6 8v26H18V20l-6-8 12-6z"/>
+
+<!-- Ruler bottom -->
+<rect x="10" y="50" width="44" height="6" rx="2"/>
+
+<!-- Ruler marks -->
+<rect x="14" y="48" width="2" height="6"/>
+<rect x="18" y="46" width="2" height="8"/>
+<rect x="22" y="48" width="2" height="6"/>
+<rect x="26" y="46" width="2" height="8"/>
+<rect x="30" y="48" width="2" height="6"/>
+<rect x="34" y="46" width="2" height="8"/>
+<rect x="38" y="48" width="2" height="6"/>
+<rect x="42" y="46" width="2" height="8"/>
+
+</svg>

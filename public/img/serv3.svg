@@ -1,0 +1,8 @@
+<svg id="icon" xmlns="http://www.w3.org/2000/svg" width="43" height="43" viewBox="0 0 43 43">
+  <rect id="background" width="43" height="43" rx="14" transform="translate(0 0)" fill="#a9a4d1" opacity="0.17"/>
+  <g id="approve_1" data-name="approve 1" transform="translate(12.2 10.026)">
+    <g id="_08_approve_protect_safe_shield_success" data-name="08 approve, protect, safe, shield, success">
+      <path id="Shape" d="M9.488,21.823h0a26.286,26.286,0,0,1-7.116-5.136A7.979,7.979,0,0,1,0,11.359V4.174L9.488,0l9.488,4.174v7.185A7.979,7.979,0,0,1,16.6,16.687a26.288,26.288,0,0,1-7.115,5.136ZM7.313,9.756,5.971,11.084l2.568,2.542L13,9.206,11.663,7.878,8.539,10.97,7.313,9.756Z" fill="#a9a4d1" stroke="rgba(0,0,0,0)" stroke-width="1"/>
+    </g>
+  </g>
+</svg>

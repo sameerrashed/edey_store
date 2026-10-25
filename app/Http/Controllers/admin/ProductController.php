@@ -1,0 +1,393 @@
+<?php
+
+namespace App\Http\Controllers\admin;
+
+use App\Ai\Agents\ProductWriter;
+use App\Http\Controllers\Controller;
+use App\Models\brand;
+use App\Models\category;
+use App\Models\color;
+use App\Models\engraving;
+use App\Models\product;
+use App\Models\productfeature;
+use App\Models\ProductVariant;
+use App\Models\ProductVariantFeature;
+use App\Models\related_product;
+use App\Models\size;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
+use Laravel\Ai\Enums\Lab;
+use Log;
+
+class ProductController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+        $data['title'] = 'Products';
+
+        $data['records'] = Cache::remember(
+            'admin_all_products',
+            600,
+            function () {
+                return Product::with(['categories', 'inventory', 'user'])
+                    ->get();
+            }
+        );
+
+        return view('admin.products.index', $data);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        $data['parent_title'] = 'Products';
+        $data['title'] = 'AddProduct';
+        $data['records'] = product::all();
+        $data['fields'] = product::get_Fields();
+        $data['categorie'] = category::all();
+        $data['brands'] = brand::all();
+        $data['features'] = productfeature::all();
+        $data['colors'] = color::all();
+        $data['sizes'] = size::all();
+        $data['engravings'] = engraving::all();
+        $data['products'] = product::all();
+
+        return view('admin.products.add_', $data);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        $product = new product;
+        $product->product_name = $request->product_name;
+        try {
+            $response = (new ProductWriter)->prompt(
+                'اكتب وصفًا للمنتج التالي: '.$product->product_name,
+                provider: Lab::Ollama,
+                model: 'llama3.2',
+            );
+
+            $product->description = trim((string) $response);
+
+            $product->save();
+
+        } catch (\Throwable $e) {
+            Log::error('AI Product Description Error', [
+                'message' => $e->getMessage(),
+            ]);
+        }
+        $record = ManageController::save($request, $product);
+        if ($request->has('color_id')) {
+            foreach ($request->color_id as $color_id) {
+                DB::table('product_color')->insert([
+                    'product_id' => $product->id,
+                    'color_id' => $color_id,
+                ]);
+            }
+        }
+
+        if ($request->has('size_id')) {
+            foreach ($request->size_id as $size_id) {
+                DB::table('product_size')->insert([
+                    'product_id' => $product->id,
+                    'size_id' => $size_id,
+                ]);
+            }
+        }
+
+        if ($request->has('engraving_id')) {
+            foreach ($request->engraving_id as $engraving_id) {
+                DB::table('product_engraving')->insert([
+                    'product_id' => $product->id,
+                    'engraving_id' => $engraving_id,
+                ]);
+            }
+        }
+
+        if ($request->has('related_id')) {
+            foreach ($request->related_id as $related_id) {
+                DB::table('related_products')->insert([
+                    'product_id' => $product->id,
+                    'related_id' => $related_id,
+                ]);
+            }
+        }
+
+        if ($request->has('category')) {
+            foreach ($request->category as $category_id) {
+                DB::table('product_category')->insert([
+                    'product_id' => $product->id,
+                    'category_id' => $category_id,
+                ]);
+            }
+        }
+
+        if ($request->has('image')) {
+            foreach ($request->image as $image) {
+
+                $image_name = $image->store('', 'SaveImg');
+                DB::table('pruduct_slider')->insert([
+                    'product_id' => $product->id,
+                    'image' => $image_name,
+                ]);
+            }
+        }
+
+        if ($request->has('stock_status')) {
+            DB::table('inventories')->insert([
+                'product_id' => $product->id,
+                'quantity' => $request->quantity,
+                'min_quantity' => $request->min_quantity,
+                'max_quantity' => $request->max_quantity,
+                'stock_status' => $request->stock_status,
+            ]);
+        }
+
+        if ($request->has('variants')) {
+            foreach ($request->variants as $variantData) {
+                $variant = ProductVariant::create([
+                    'product_id' => $product->id,
+                    'variant_key' => isset($variantData['key'])
+                        ? $variantData['key']
+                        : null,
+                    'stock_status' => isset($variantData['stock_status'])
+                        ? $variantData['stock_status']
+                        : 'available',
+                    'quantity' => isset($variantData['quantity'])
+                        ? $variantData['quantity']
+                        : 0,
+                ]);
+                if (
+                    isset($variantData['features']) &&
+                    is_array($variantData['features'])
+                ) {
+                    foreach ($variantData['features'] as $featureData) {
+                        if (
+                            ! isset($featureData['feature_id']) ||
+                            ! isset($featureData['value_id'])
+                        ) {
+                            continue;
+                        }
+                        ProductVariantFeature::create([
+                            'product_variant_id' => $variant->id,
+                            'feature_id' => $featureData['feature_id'],
+                            'value_id' => $featureData['value_id'],
+                        ]);
+                    }
+                }
+            }
+        }
+
+        return back()->with('success', 'تم إضافة المنتج بنجاح');
+    }
+
+    public function getFeatureValues($feature_id)
+    {
+        // نجيب السمة نفسها أولاً
+        $feature = DB::table('productfeatures')
+            ->where('id', $feature_id)
+            ->first();
+
+        if (! $feature) {
+            return response()->json([
+                'status' => false,
+                'message' => 'السمة غير موجودة',
+            ], 404);
+        }
+
+        // تحديد الجدول حسب السمة
+        switch ($feature->name) {
+
+            case 'اللون':
+
+                $values = DB::table('colors')
+                    ->select('id', 'name', 'color')
+                    ->get();
+
+                break;
+
+            case 'المقاس':
+
+                $values = DB::table('sizes')
+                    ->select('id', 'name')
+                    ->get();
+
+                break;
+
+            case 'النقش':
+
+                $values = DB::table('engravings')
+                    ->select('id', 'name', 'avatar')
+                    ->get();
+
+                break;
+
+            default:
+
+                $values = collect();
+
+                break;
+        }
+
+        return response()->json([
+            'status' => true,
+            'feature_id' => $feature->id,
+            'feature_name' => $feature->name,
+            'values' => $values,
+        ]);
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(product $product)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit($id)
+    {
+        $data['brands'] = brand::all();
+        $data['products'] = product::all();
+        $data['parent_title'] = 'Products';
+        $data['title'] = 'EditProduct';
+        $data['records'] = product::where('user_id', auth()->user()->id)->get();
+        $data['value'] = product::where('id', $id)->first();
+        $data['product'] = product::with('categories', 'colors', 'engravings', 'sizes', 'relateds', 'inventory')->find($id);
+        $data['relation'] = related_product::all();
+        $data['fields'] = product::get_Fields();
+        $data['categories'] = category::all();
+        $data['features'] = productfeature::all();
+
+        return view('admin.products.edit_', $data);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, $id)
+    {
+
+        // dd($request->CheckPrice);
+
+        $product = product::where('id', $id)->first();
+
+        // $request->validate([
+        //     'avatar' => $product->avatar
+        //         ? 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048'
+        //         : 'required|image|mimes:jpg,jpeg,png,webp|max:2048',
+        //     'image' => 'array|max:5',
+        //     'product_name' => 'required',
+        //     'price' => 'required',
+        //     'count' => 'required',
+        //     'color_id' => 'required',
+        //     'size_id' => 'required',
+        //     'engraving_id' => 'required',
+        // ]);
+
+        $product->product_name = $request->product_name;
+        $record = ManageController::save($request, $product);
+        if ($request->has('color_id')) {
+
+            $product->colors()->sync($request->color_id);
+        }
+
+        if ($request->has('size_id')) {
+            $product->sizes()->sync($request->size_id);
+        }
+
+        if ($request->has('engraving_id')) {
+            $product->engravings()->sync($request->engraving_id);
+        }
+
+        if ($request->has('related_id')) {
+            $product->relateds()->sync($request->related_id);
+        }
+
+        if ($request->has('category')) {
+            $product->categories()->sync($request->category);
+        }
+
+        if ($request->has('image')) {
+            foreach ($request->image as $image) {
+
+                $image_name = $image->store('', 'SaveImg');
+                DB::table('pruduct_slider')->insert([
+                    'product_id' => $product->id,
+                    'image' => $image_name,
+                ]);
+            }
+        }
+
+        if ($request->has('stock_status')) {
+            DB::table('inventories')->where('product_id', $product->id)->update([
+                'quantity' => $request->quantity,
+                'min_quantity' => $request->min_quantity,
+                'max_quantity' => $request->max_quantity,
+                'stock_status' => $request->stock_status,
+            ]);
+        }
+
+        if ($request->has('variants')) {
+            foreach ($request->variants as $variantData) {
+                $variant = ProductVariant::create([
+                    'product_id' => $product->id,
+                    'variant_key' => isset($variantData['key'])
+                        ? $variantData['key']
+                        : null,
+                    'stock_status' => isset($variantData['stock_status'])
+                        ? $variantData['stock_status']
+                        : 'available',
+                    'quantity' => isset($variantData['quantity'])
+                        ? $variantData['quantity']
+                        : 0,
+                ]);
+                if (
+                    isset($variantData['features']) &&
+                    is_array($variantData['features'])
+                ) {
+                    foreach ($variantData['features'] as $featureData) {
+                        if (
+                            ! isset($featureData['feature_id']) ||
+                            ! isset($featureData['value_id'])
+                        ) {
+                            continue;
+                        }
+                        ProductVariantFeature::create([
+                            'product_variant_id' => $variant->id,
+                            'feature_id' => $featureData['feature_id'],
+                            'value_id' => $featureData['value_id'],
+                        ]);
+                    }
+                }
+            }
+        }
+
+        return back()->with('success', 'تم تعديل المنتج بنجاح');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy($id)
+    {
+        $product = Product::findOrFail($id);
+
+        $product->delete();
+
+        return redirect()
+            ->back()
+            ->with('success', 'تم حذف المنتج بنجاح');
+    }
+}
