@@ -11,13 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('copon_stores', function (Blueprint $table) {
             $table->id()->unsigned();
-            $table->string('category_name', 255);
-            $table->string('description', 255)->nullable();
-            $table->text('photo_cover')->nullable();
-            $table->string('status', 255)->nullable()->default('1');
-            $table->integer('show_in_intro')->default(0);
+            $table->foreignId('copon_id')->unsigned()->constrained('copons')->onDelete('cascade');
+            $table->foreignId('store_id')->unsigned()->constrained('stores')->onDelete('cascade');
+            $table->index(['copon_id'], 'copon_store');
+            $table->index(['store_id'], 'store_copon');
             $table->timestamps();
         });
     }
@@ -27,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('copon_stores');
     }
 };
