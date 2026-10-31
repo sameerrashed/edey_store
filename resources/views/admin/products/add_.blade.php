@@ -1,7 +1,7 @@
-@extends("admin.layout._layout")
+@extends('admin.layout._layout')
 @section('title', 'ايدي ستور')
 @section('breadcrumb')
-    <h1 class="d-flex text-dark fw-bolder fs-3 align-items-center my-1">{{__('app.' . $parent_title)}}</h1>
+    <h1 class="d-flex text-dark fw-bolder fs-3 align-items-center my-1">{{ __('app.' . $parent_title) }}</h1>
     <!--end::Title-->
     <!--begin::Separator-->
     <span class="h-20px border-gray-300 border-start mx-4"></span>
@@ -10,7 +10,7 @@
     <ul class="breadcrumb breadcrumb-separatorless fw-bold fs-7 my-1">
         <!--begin::Item-->
         <li class="breadcrumb-item text-muted">
-            <a href="{{route('admin.Dashboard.index')}}" class="text-muted text-hover-primary">{{__('app.Dashboard')}}</a>
+            <a href="{{ route('admin.Dashboard.index') }}" class="text-muted text-hover-primary">{{ __('app.Dashboard') }}</a>
         </li>
         <!--end::Item-->
         <!--begin::Item-->
@@ -19,16 +19,16 @@
         </li>
         <!--end::Item-->
         <!--begin::Item-->
-        <li class="breadcrumb-item text-dark">{{__('app.' . $parent_title)}}</li>
+        <li class="breadcrumb-item text-dark">{{ __('app.' . $parent_title) }}</li>
 
         <li class="breadcrumb-item">
             <span class="bullet bg-gray-300 w-5px h-2px"></span>
         </li>
 
-        <li class="breadcrumb-item text-dark">{{__('app.' . $title)}}</li>
+        <li class="breadcrumb-item text-dark">{{ __('app.' . $title) }}</li>
     </ul>
 @endsection
-@section("body")
+@section('body')
 
     <div class="row g-7">
         <div class="col-xl-12">
@@ -119,7 +119,7 @@
                                                         placeholder="إسم المنتج" value="" required />
 
                                                     <input type="number" name="user_id" class="form-control mb-2"
-                                                        placeholder="إسم المنتج" value="{{auth()->user()->id}}" hidden />
+                                                        placeholder="إسم المنتج" value="{{ auth()->user()->id }}" hidden />
                                                     <!--end::Input-->
                                                     <!--begin::Description-->
                                                     <div class="text-muted fs-7">يُشترط وجود اسم للمنتج، ويُنصح بأن يكون
@@ -146,9 +146,9 @@
                                                     <label class="required form-label">السعر الأساسي</label>
                                                     <!--end::Label-->
                                                     <!--begin::Input-->
-                                                    <input type="number" name="price" class="form-control mb-2 price-input"
-                                                        placeholder="سعر المنتج" value="" dir="ltr"
-                                                        style="text-align: left;" required />
+                                                    <input type="number" name="price"
+                                                        class="form-control mb-2 price-input" placeholder="سعر المنتج"
+                                                        value="" dir="ltr" style="text-align: left;" required />
                                                     <!--end::Input-->
                                                     <!--begin::Description-->
                                                     <div class="text-muted fs-7">حدد سعر المنتج.</div>
@@ -176,8 +176,9 @@
                                                     <!--end::Label-->
                                                     <!--begin::Input-->
                                                     <input type="number" name="cost_price"
-                                                        class="form-control mb-2 price-input" placeholder="سعر تكلفة المنتج"
-                                                        value="" dir="ltr" style="text-align: left;" required />
+                                                        class="form-control mb-2 price-input"
+                                                        placeholder="سعر تكلفة المنتج" value="" dir="ltr"
+                                                        style="text-align: left;" required />
                                                     <!--end::Input-->
                                                     <!--begin::Description-->
                                                     <div class="text-muted fs-7">حدد سعر تكلفة المنتج .</div>
@@ -190,8 +191,8 @@
                                                     <!--end::Label-->
                                                     <!--begin::Input-->
                                                     <input type="number" name="min_quantity"
-                                                        class="form-control mb-2 price-input" value="1" dir="ltr"
-                                                        style="text-align: left;" />
+                                                        class="form-control mb-2 price-input" value="1"
+                                                        dir="ltr" style="text-align: left;" />
                                                     <!--end::Input-->
                                                     <!--begin::Description-->
                                                     <div class="text-muted fs-7">حدد الحد الأدنى لتوفر المنتج.</div>
@@ -204,8 +205,8 @@
                                                     <!--end::Label-->
                                                     <!--begin::Input-->
                                                     <input type="number" name="max_quantity"
-                                                        class="form-control mb-2 price-input" value="99" dir="ltr"
-                                                        style="text-align: left;" />
+                                                        class="form-control mb-2 price-input" value="99"
+                                                        dir="ltr" style="text-align: left;" />
                                                     <!--end::Input-->
                                                     <!--begin::Description-->
                                                     <div class="text-muted fs-7">حدد الحد الأعلى من المنتج.</div>
@@ -266,8 +267,8 @@
                                                     <!--end::Label-->
                                                     <!--begin::Input-->
                                                     <input type="number" name="quantity"
-                                                        class="form-control mb-2 price-input" value="99" dir="ltr"
-                                                        style="text-align: left;" required />
+                                                        class="form-control mb-2 price-input" value="99"
+                                                        dir="ltr" style="text-align: left;" required />
                                                     <!--end::Input-->
                                                     <!--begin::Description-->
                                                     <div class="text-muted fs-7">أدخل كمية المنتج.</div>
@@ -296,8 +297,9 @@
                                                 <div class="mb-10 fv-row">
                                                     <!--begin::Label-->
                                                     <select name="category[]"
-                                                        class="form-select form-select-solid lh-1 py-3" id="category_select"
-                                                        data-placeholder="إختر تصنيف للمنتج" multiple="multiple">
+                                                        class="form-select form-select-solid lh-1 py-3"
+                                                        id="category_select" data-placeholder="إختر تصنيف للمنتج"
+                                                        multiple="multiple">
 
                                                         <option></option>
 
@@ -320,13 +322,13 @@
                                                     <label class="required form-label">الماركة</label>
                                                     <!--end::Label-->
                                                     <!--begin::Input-->
-                                                    <select name="brand_id" class="form-select mb-2" data-hide-search="true"
-                                                        data-placeholder="Select an option"
+                                                    <select name="brand_id" class="form-select mb-2"
+                                                        data-hide-search="true" data-placeholder="Select an option"
                                                         id="kt_ecommerce_add_product_store_template" required>
                                                         <option value=""></option>
                                                         @foreach ($brands as $record)
                                                             <option value="{{ $record->id }}">
-                                                                {{ $record->name}}
+                                                                {{ $record->name }}
                                                             </option>
                                                         @endforeach
                                                     </select>
@@ -405,7 +407,8 @@
                                                             title="إختيار صورة">
                                                             <i class="bi bi-pencil-fill fs-7"></i>
                                                             <!--begin::Inputs-->
-                                                            <input type="file" name="avatar" accept=".png, .jpg, .jpeg" />
+                                                            <input type="file" name="avatar"
+                                                                accept=".png, .jpg, .jpeg" />
                                                             <input type="hidden" name="avatar_remove" />
                                                             <!--end::Inputs-->
                                                         </label>
@@ -503,7 +506,8 @@
                                                                     name="features">
                                                                     <option></option>
                                                                     @foreach ($features as $record)
-                                                                        <option value="{{ $record->id }}">{{ $record->name }}
+                                                                        <option value="{{ $record->id }}">
+                                                                            {{ $record->name }}
                                                                         </option>
                                                                     @endforeach
                                                                 </select>
@@ -570,7 +574,7 @@
                         </div>
                     </form>
                     <script>
-                        document.addEventListener('DOMContentLoaded', function () {
+                        document.addEventListener('DOMContentLoaded', function() {
 
                             const productType = document.getElementById(
                                 'kt_ecommerce_add_product_store_template'
@@ -597,11 +601,11 @@
                                 // ============================
                                 if (productType.value === '2') {
 
-                                    multipleTabs.forEach(function (item) {
+                                    multipleTabs.forEach(function(item) {
                                         item.classList.remove('d-none');
                                     });
 
-                                    multiplePanes.forEach(function (item) {
+                                    multiplePanes.forEach(function(item) {
                                         item.classList.remove('d-none');
                                     });
 
@@ -618,7 +622,7 @@
 
                                     // نتحقق هل المستخدم موجود حالياً داخل
                                     // إحدى نوافذ المنتج المتعدد
-                                    multiplePanes.forEach(function (item) {
+                                    multiplePanes.forEach(function(item) {
 
                                         if (item.classList.contains('active')) {
                                             wasMultipleTabActive = true;
@@ -628,13 +632,13 @@
 
 
                                     // نخفي أزرار المنتج المتعدد
-                                    multipleTabs.forEach(function (item) {
+                                    multipleTabs.forEach(function(item) {
                                         item.classList.add('d-none');
                                     });
 
 
                                     // نخفي محتوى المنتج المتعدد
-                                    multiplePanes.forEach(function (item) {
+                                    multiplePanes.forEach(function(item) {
 
                                         item.classList.add('d-none');
                                         item.classList.remove('show');
@@ -684,7 +688,7 @@
 
 
                             // عند تغيير نوع المنتج
-                            productType.addEventListener('change', function () {
+                            productType.addEventListener('change', function() {
 
                                 changeProductType();
 
@@ -699,8 +703,7 @@
 @endsection
 @section('script')
     <script>
-
-        $('#has_discount').change(function () {
+        $('#has_discount').change(function() {
 
             if ($(this).is(':checked')) {
 
@@ -713,10 +716,9 @@
             }
 
         });
-
     </script>
     <script>
-        @if(session('success'))
+        @if (session('success'))
             Swal.fire({
                 text: "{{ session('success') }}",
                 icon: "success",
@@ -724,7 +726,7 @@
             });
         @endif
 
-        @if(session('error'))
+        @if (session('error'))
             Swal.fire({
                 text: "{{ session('error') }}",
                 icon: "error",
@@ -733,7 +735,7 @@
         @endif
     </script>
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", function() {
 
             console.log("Dropzone type:", typeof Dropzone);
 
@@ -780,31 +782,31 @@
                     "X-CSRF-TOKEN": "{{ csrf_token() }}"
                 },
 
-                init: function () {
+                init: function() {
 
                     console.log("Dropzone initialized successfully");
 
-                    this.on("addedfile", function (file) {
+                    this.on("addedfile", function(file) {
 
                         console.log("File selected:");
                         console.log(file);
 
                     });
 
-                    this.on("sending", function (file, xhr, formData) {
+                    this.on("sending", function(file, xhr, formData) {
 
                         console.log("Sending image...");
 
                     });
 
-                    this.on("success", function (file, response) {
+                    this.on("success", function(file, response) {
 
                         console.log("Upload success:");
                         console.log(response);
 
                     });
 
-                    this.on("error", function (file, response) {
+                    this.on("error", function(file, response) {
 
                         console.error("Upload error:");
                         console.log(response);
@@ -818,13 +820,13 @@
         });
     </script>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
 
             const area = document.getElementById('product_media_area');
             const input = document.getElementById('product_images');
             const preview = document.getElementById('images_preview');
 
-            area.addEventListener('click', function (e) {
+            area.addEventListener('click', function(e) {
 
                 if (e.target.closest('.remove-image')) {
                     return;
@@ -834,7 +836,7 @@
             });
 
 
-            input.addEventListener('change', function () {
+            input.addEventListener('change', function() {
 
                 preview.innerHTML = '';
 
@@ -846,7 +848,7 @@
                     return;
                 }
 
-                files.forEach(function (file) {
+                files.forEach(function(file) {
 
                     if (!file.type.startsWith('image/')) {
                         return;
@@ -854,13 +856,14 @@
 
                     const reader = new FileReader();
 
-                    reader.onload = function (e) {
+                    reader.onload = function(e) {
 
                         const item = document.createElement('div');
 
                         item.style.position = 'relative';
 
-                        item.innerHTML = `
+                        item.innerHTML =
+                            `
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 <img src="${e.target.result}"
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      style="
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         width:100px;
@@ -882,8 +885,8 @@
         });
     </script>
     <script>
-        $(document).ready(function () {
-            $('#has_color').on('change', function () {
+        $(document).ready(function() {
+            $('#has_color').on('change', function() {
                 if ($(this).is(':checked')) {
                     $('#color_select_box').removeClass('d-none');
                 } else {
@@ -894,10 +897,10 @@
         });
     </script>
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
 
             // اللون
-            $('#has_color').on('change', function () {
+            $('#has_color').on('change', function() {
                 if ($(this).is(':checked')) {
                     $('#color_select_box').removeClass('d-none');
                 } else {
@@ -907,7 +910,7 @@
             });
 
             // الحجم
-            $('#has_size').on('change', function () {
+            $('#has_size').on('change', function() {
                 if ($(this).is(':checked')) {
                     $('#size_select_box').removeClass('d-none');
                 } else {
@@ -918,7 +921,7 @@
 
         });
 
-        $('#has_engraving').on('change', function () {
+        $('#has_engraving').on('change', function() {
             if ($(this).is(':checked')) {
                 $('#engraving_select_box').removeClass('d-none');
             } else {
@@ -927,18 +930,16 @@
             }
         });
 
-        $(document).ready(function () {
+        $(document).ready(function() {
             $('[data-control="select2"]').select2();
         });
 
-        $(document).on('shown.bs.modal', function () {
+        $(document).on('shown.bs.modal', function() {
             $('[data-control="select2"]').select2();
         });
-
-
     </script>
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
 
             let modal = $('#kt_modal_add_category'); // ← عدل هذا حسب id المودال عندك
 
@@ -951,7 +952,7 @@
             });
 
             // اللون
-            $('#has_color').on('change', function () {
+            $('#has_color').on('change', function() {
                 if ($(this).is(':checked')) {
                     $('#color_box').removeClass('d-none');
                 } else {
@@ -961,7 +962,7 @@
             });
 
             // الحجم
-            $('#has_size').on('change', function () {
+            $('#has_size').on('change', function() {
                 if ($(this).is(':checked')) {
                     $('#size_box').removeClass('d-none');
                 } else {
@@ -971,7 +972,7 @@
             });
 
             // النقش
-            $('#has_engraving').on('change', function () {
+            $('#has_engraving').on('change', function() {
                 if ($(this).is(':checked')) {
                     $('#engraving_box').removeClass('d-none');
                 } else {
@@ -983,11 +984,12 @@
         });
     </script>
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             const relatedSelect = $('#related_select');
             if (relatedSelect.hasClass('select2-hidden-accessible')) {
                 relatedSelect.select2('destroy');
             }
+
             function formatProduct(product) {
                 if (!product.id) {
                     return product.text;
@@ -997,7 +999,8 @@
                     return product.text;
                 }
 
-                return $(`
+                return $(
+                    `
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             <div class="d-flex align-items-center gap-3">
 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 <img src="${image}"
@@ -1012,7 +1015,8 @@
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 <span>${product.text}</span>
 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        `);
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        `
+                );
             }
 
 
@@ -1030,7 +1034,7 @@
                 // شكل المنتج بعد الاختيار
                 templateSelection: formatProduct,
 
-                escapeMarkup: function (markup) {
+                escapeMarkup: function(markup) {
                     return markup;
                 }
 
@@ -1038,1617 +1042,354 @@
 
         });
     </script>
+    {{-- استبدل سكربتات السمات والأنواع الثلاثة الموجودة لديك بهذا السكربت الواحد --}}
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             const addButton = document.getElementById('add_feature_btn');
-            const featureSelect = document.getElementById(
-                'kt_ecommerce_add_features_store_template'
-            );
-            const container = document.getElementById(
-                'selected_features_container'
-            );
-            const originalFeatures = [];
-            Array.from(featureSelect.options).forEach(function (option) {
-                if (option.value !== '') {
-                    originalFeatures.push({
-                        id: option.value,
-                        name: option.text.trim()
-                    });
-                }
-            });
-            function refreshFeatureSelect() {
-                const usedFeatureIds = [];
-                container
-                    .querySelectorAll('.feature-item')
-                    .forEach(function (row) {
-                        usedFeatureIds.push(
-                            String(row.dataset.featureId)
-                        );
-                    });
-                if ($(featureSelect).hasClass('select2-hidden-accessible')) {
-                    $(featureSelect).select2('destroy');
-                }
-                featureSelect.innerHTML = '';
-                const emptyOption = document.createElement('option');
-                emptyOption.value = '';
-                emptyOption.textContent = '';
-                featureSelect.appendChild(emptyOption);
-                originalFeatures.forEach(function (feature) {
-                    if (!usedFeatureIds.includes(String(feature.id))) {
-                        const option = document.createElement('option');
-                        option.value = feature.id;
-                        option.textContent = feature.name;
-                        featureSelect.appendChild(option);
-                    }
+            const featureSelect = document.getElementById('kt_ecommerce_add_features_store_template');
+            const featuresContainer = document.getElementById('selected_features_container');
+            const variantsWrapper = document.getElementById('variants_features_wrapper');
+            const variantsCheckboxes = document.getElementById('variants_checkboxes');
+
+            if (!addButton || !featureSelect || !featuresContainer || !variantsWrapper || !variantsCheckboxes)
+                return;
+
+            // مكان البطاقات يجب أن يكون داخل النموذج الذي يرسل بيانات المنتج
+            let variantsContainer = document.getElementById('variants_container');
+            if (!variantsContainer) {
+                variantsContainer = document.createElement('div');
+                variantsContainer.id = 'variants_container';
+                variantsContainer.className = 'mt-7';
+                variantsWrapper.appendChild(variantsContainer);
+            }
+
+            const originalFeatures = Array.from(featureSelect.options)
+                .filter(option => option.value !== '')
+                .map(option => ({
+                    id: String(option.value),
+                    name: option.textContent.trim()
+                }));
+
+            // عند التعديل: بيانات المنتج من controller مع علاقة variants.features
+            const savedVariants = @json(isset($product)
+                    ? $product->variants->mapWithKeys(fn($variant) => [
+                            $variant->variant_key => ['quantity' => $variant->quantity, 'stock_status' => $variant->stock_status],
+                        ]
+            )
+                    : collect());
+            const savedFeatureIds = @json(isset($product)
+                    ? $product->variants->flatMap(fn($variant) => $variant->features->pluck('feature_id'))->unique()->values()
+                    : collect());
+            const savedValuesByFeature = @json(isset($product)
+                    ? $product->variants->flatMap(fn($variant) => $variant->features)->groupBy('feature_id')->map(fn($rows) => $rows->pluck('value_id')->unique()->values())
+                    : collect());
+
+            // دعم سجلات قديمة لها variant_key ولكن جدول product_variant_features فارغ
+            Object.keys(savedVariants || {}).forEach(key => {
+                key.split('|').forEach(pair => {
+                    const parts = pair.split(':');
+                    if (parts.length !== 2 || !/^\d+$/.test(parts[0]) || !/^\d+$/.test(parts[1]))
+                        return;
+                    const [featureId, valueId] = parts;
+                    if (!savedValuesByFeature[featureId]) savedValuesByFeature[featureId] = [];
+                    if (!savedValuesByFeature[featureId].map(String).includes(valueId))
+                        savedValuesByFeature[featureId].push(valueId);
+                    if (!savedFeatureIds.map(String).includes(featureId)) savedFeatureIds.push(
+                        featureId);
                 });
-                $(featureSelect).select2({
-                    placeholder: 'اختر السمة',
+            });
+
+            const editedVariantValues = {};
+            let enabledFeatures = new Set((savedFeatureIds || []).map(String));
+            let initialized = false;
+            const escaped = (value) => String(value ?? '').replaceAll('&', '&amp;').replaceAll('"', '&quot;')
+                .replaceAll("'", '&#039;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
+
+            function initializeSelect2(select, placeholder, extraOptions = {}) {
+                if (!window.jQuery || !$.fn.select2) return;
+                if ($(select).hasClass('select2-hidden-accessible')) $(select).select2('destroy');
+                $(select).select2({
+                    placeholder,
                     width: '100%',
                     dir: 'rtl',
-                    allowClear: true
+                    allowClear: true,
+                    ...extraOptions
                 });
             }
-            addButton.addEventListener('click', function () {
-                const featureId = featureSelect.value;
-                if (!featureId) {
-                    alert('اختر سمة أولاً');
-                    return;
-                }
-                const selectedFeature = originalFeatures.find(
-                    function (feature) {
-                        return String(feature.id) === String(featureId);
-                    }
-                );
-                if (!selectedFeature) {
-                    return;
-                }
-                $.ajax({
-                    url: "{{ route('merchant.products.feature-values', ':id') }}"
-                        .replace(':id', featureId),
-                    type: "GET",
-                    success: function (response) {
-                        if (!response.status) {
-                            alert('لم يتم العثور على قيم السمة');
-                            return;
-                        }
-                        let options = `
-                                                                                                                                                                                                                                                                                                                                                            <option value="">
-                                                                                                                                                                                                                                                                                                                                                                اختر القيمة
-                                                                                                                                                                                                                                                                                                                                                            </option>
-                                                                                                                                                                                                                                                                                                                                                        `;
 
-                        response.values.forEach(function (item) {
+            function refreshFeatureSelect() {
+                const used = new Set(Array.from(featuresContainer.querySelectorAll('.feature-item')).map(row =>
+                    String(row.dataset.featureId)));
+                featureSelect.innerHTML = '<option value=""></option>';
+                originalFeatures.forEach(feature => {
+                    if (!used.has(feature.id)) featureSelect.add(new Option(feature.name, feature.id));
+                });
+                initializeSelect2(featureSelect, 'اختر السمة');
+            }
 
-                            let extraData = '';
+            function imageUrl(avatar) {
+                if (!avatar) return '';
+                if (/^(https?:\/\/|\/)/i.test(avatar)) return avatar;
+                return @json(asset('img')) + '/' + String(avatar).replace(/^\/+/, '');
+            }
 
-                            // اللون
-                            if (response.feature_name === 'اللون') {
-                                extraData = `data-color="${item.color ?? ''}"`;
-                            }
+            function previewOption(state) {
+                if (!state.id || !state.element) return state.text;
+                const color = state.element.dataset.color;
+                const avatar = state.element.dataset.avatar;
+                const holder = $(
+                    '<span style="display:inline-flex;align-items:center;gap:8px;direction:rtl"></span>');
+                if (color) $('<span></span>').css({
+                    width: '18px',
+                    height: '18px',
+                    borderRadius: '50%',
+                    backgroundColor: color,
+                    border: '1px solid #ddd',
+                    display: 'inline-block'
+                }).appendTo(holder);
+                if (avatar) $('<img>').attr('src', imageUrl(avatar)).css({
+                    width: '28px',
+                    height: '28px',
+                    objectFit: 'cover',
+                    borderRadius: '5px'
+                }).appendTo(holder);
+                $('<span></span>').text(state.text).appendTo(holder);
+                return holder;
+            }
 
-                            // النقش
-                            if (response.feature_name === 'النقش') {
-                                extraData = `data-avatar="${item.avatar ?? ''}"`;
-                            }
+            async function addFeature(featureId, presetValueIds = []) {
+                featureId = String(featureId);
+                if (featuresContainer.querySelector('.feature-item[data-feature-id="' + CSS.escape(featureId) +
+                        '"]')) return;
+                const feature = originalFeatures.find(item => item.id === featureId);
+                if (!feature) return;
 
-                            options += `
-                                                                                                                                                                                                                                                                                                                                                                <option
-                                                                                                                                                                                                                                                                                                                                                                    value="${item.id}"
-                                                                                                                                                                                                                                                                                                                                                                    ${extraData}
-                                                                                                                                                                                                                                                                                                                                                                >
-                                                                                                                                                                                                                                                                                                                                                                    ${item.name}
-                                                                                                                                                                                                                                                                                                                                                                </option>
-                                                                                                                                                                                                                                                                                                                                                            `;
-                        });
-                        const featureRow =
-                            document.createElement('div');
-                        featureRow.id =
-                            'feature_row_' + featureId;
-                        featureRow.className =
-                            'feature-item border-top py-5';
-                        featureRow.dataset.featureId =
-                            featureId;
-                        featureRow.innerHTML = `
-                                                                                                                                                                                                                                                                                                                                                                                                <div class="row align-items-center">
-                                                                                                                                                                                                                                                                                                                                                                                                    <div class="col-md-2">
-                                                                                                                                                                                                                                                                                                                                                                                                        <label class="form-label mb-0">
-                                                                                                                                                                                                                                                                                                                                                                                                            السمة:
-                                                                                                                                                                                                                                                                                                                                                                                                            <strong>
-                                                                                                                                                                                                                                                                                                                                                                                                                ${selectedFeature.name}
-                                                                                                                                                                                                                                                                                                                                                                                                            </strong>
-                                                                                                                                                                                                                                                                                                                                                                                                        </label>
-                                                                                                                                                                                                                                                                                                                                                                                                        <input
-                                                                                                                                                                                                                                                                                                                                                                                                            type="hidden"
-                                                                                                                                                                                                                                                                                                                                                                                                            name="feature_ids[]"
-                                                                                                                                                                                                                                                                                                                                                                                                            value="${featureId}"
-                                                                                                                                                                                                                                                                                                                                                                                                        >
-                                                                                                                                                                                                                                                                                                                                                                                                    </div>
-                                                                                                                                                                                                                                                                                                                                                                                                    <div class="col-md-7">
-                                                                                                                                                                                                                                                                                                                                                                                                        <select
-                                                                                                                                                                                                                                                                                                                                                                                                            class="form-select feature-values-select"
-                                                                                                                                                                                                                                        multiple                                                                                                                                                                 name="feature_values[${featureId}]"
-                                                                                                                                                                                                                                                                                                                                                                                                        >
-                                                                                                                                                                                                                                                                                                                                                                                                            ${options}
-                                                                                                                                                                                                                                                                                                                                                                                                        </select>
-                                                                                                                                                                                                                                                                                                                                                                                                    </div>
-                                                                                                                                                                                                                                                                                                                                                                                                    <div class="col-md-3">
-                                                                                                                                                                                                                                                                                                                                                                                                        <button
-                                                                                                                                                                                                                                                                                                                                                                                                            type="button"
-                                                                                                                                                                                                                                                                                                                                                                                                            class="btn btn-danger remove-feature"
-                                                                                                                                                                                                                                                                                                                                                                                                        >
-                                                                                                                                                                                                                                                                                                                                                                                                            إزالة
-                                                                                                                                                                                                                                                                                                                                                                                                        </button>
-                                                                                                                                                                                                                                                                                                                                                                                                    </div>
-                                                                                                                                                                                                                                                                                                                                                                                                </div>
-                                                                                                                                                                                                                                                                                                                                                                                            `;
-                        container.appendChild(featureRow);
-                        const valueSelect = $(featureRow)
-                            .find('.feature-values-select');
-                        valueSelect.select2({
-                            placeholder: 'اختر القيمة',
-                            width: '100%',
-                            dir: 'rtl',
-                            allowClear: true,
-                            templateResult: function (state) {
-                                if (!state.id) {
-                                    return state.text;
-                                }
-                                const option = state.element;
-                                const color = option.dataset.color;
-                                const avatar = option.dataset.avatar;
-                                if (color) {
-                                    return $(`
-                                                                                                                                                                                                                                                                                                                                                                    <div
-                                                                                                                                                                                                                                                                                                                                                                        style="
-                                                                                                                                                                                                                                                                                                                                                                            display:flex;
-                                                                                                                                                                                                                                                                                                                                                                            align-items:center;
-                                                                                                                                                                                                                                                                                                                                                                            gap:10px;
-                                                                                                                                                                                                                                                                                                                                                                            direction:rtl;
-                                                                                                                                                                                                                                                                                                                                                                        "
-                                                                                                                                                                                                                                                                                                                                                                    >
-                                                                                                                                                                                                                                                                                                                                                                        <span
-                                                                                                                                                                                                                                                                                                                                                                            style="
-                                                                                                                                                                                                                                                                                                                                                                                width:18px;
-                                                                                                                                                                                                                                                                                                                                                                                height:18px;
-                                                                                                                                                                                                                                                                                                                                                                                border-radius:50%;
-                                                                                                                                                                                                                                                                                                                                                                                background:${color};
-                                                                                                                                                                                                                                                                                                                                                                                border:1px solid #ddd;
-                                                                                                                                                                                                                                                                                                                                                                                display:inline-block;
-                                                                                                                                                                                                                                                                                                                                                                                flex-shrink:0;
-                                                                                                                                                                                                                                                                                                                                                                            "
-                                                                                                                                                                                                                                                                                                                                                                        ></span>
-                                                                                                                                                                                                                                                                                                                                                                        <span>
-                                                                                                                                                                                                                                                                                                                                                                            ${state.text}
-                                                                                                                                                                                                                                                                                                                                                                        </span>
-                                                                                                                                                                                                                                                                                                                                                                    </div>
-                                                                                                                                                                                                                                                                                                                                                                `);
-                                }
-                                if (avatar) {
-
-                                    return $(`
-                                                                                                                                                                                                                                                                                                                                                                    <div
-                                                                                                                                                                                                                                                                                                                                                                        style="
-                                                                                                                                                                                                                                                                                                                                                                            display:flex;
-                                                                                                                                                                                                                                                                                                                                                                            align-items:center;
-                                                                                                                                                                                                                                                                                                                                                                            gap:10px;
-                                                                                                                                                                                                                                                                                                                                                                            direction:rtl;
-                                                                                                                                                                                                                                                                                                                                                                        "
-                                                                                                                                                                                                                                                                                                                                                                    >
-                                                                                                                                                                                                                                                                                                                                                                        <img
-                                                                                                                                                                                                                                                                                                                                                                            src="{{ asset('img/${avatar}') }}"
-                                                                                                                                                                                                                                                                                                                                                                            style="
-                                                                                                                                                                                                                                                                                                                                                                                width:30px;
-                                                                                                                                                                                                                                                                                                                                                                                height:30px;
-                                                                                                                                                                                                                                                                                                                                                                                border-radius:5px;
-                                                                                                                                                                                                                                                                                                                                                                                object-fit:cover;
-                                                                                                                                                                                                                                                                                                                                                                            "
-                                                                                                                                                                                                                                                                                                                                                                        >
-                                                                                                                                                                                                                                                                                                                                                                        <span>
-                                                                                                                                                                                                                                                                                                                                                                            ${state.text}
-                                                                                                                                                                                                                                                                                                                                                                        </span>
-                                                                                                                                                                                                                                                                                                                                                                    </div>
-                                                                                                                                                                                                                                                                                                                                                                `);
-                                }
-                                return state.text;
-                            },
-                            templateSelection: function (state) {
-                                if (!state.id) {
-                                    return state.text;
-                                }
-                                const option = state.element;
-                                const color = option.dataset.color;
-                                const avatar = option.dataset.avatar;
-                                if (color) {
-                                    return $(`
-                                                                                                                                                                                                                                                                                                                                                                    <div
-                                                                                                                                                                                                                                                                                                                                                                        style="
-                                                                                                                                                                                                                                                                                                                                                                            display:flex;
-                                                                                                                                                                                                                                                                                                                                                                            align-items:center;
-                                                                                                                                                                                                                                                                                                                                                                            gap:8px;
-                                                                                                                                                                                                                                                                                                                                                                            direction:rtl;
-                                                                                                                                                                                                                                                                                                                                                                        "
-                                                                                                                                                                                                                                                                                                                                                                    >
-                                                                                                                                                                                                                                                                                                                                                                        <span
-                                                                                                                                                                                                                                                                                                                                                                            style="
-                                                                                                                                                                                                                                                                                                                                                                                width:15px;
-                                                                                                                                                                                                                                                                                                                                                                                height:15px;
-                                                                                                                                                                                                                                                                                                                                                                                border-radius:50%;
-                                                                                                                                                                                                                                                                                                                                                                                background:${color};
-                                                                                                                                                                                                                                                                                                                                                                                border:1px solid #ddd;
-                                                                                                                                                                                                                                                                                                                                                                                display:inline-block;
-                                                                                                                                                                                                                                                                                                                                                                            "
-                                                                                                                                                                                                                                                                                                                                                                        ></span>
-                                                                                                                                                                                                                                                                                                                                                                        <span>
-                                                                                                                                                                                                                                                                                                                                                                            ${state.text}
-                                                                                                                                                                                                                                                                                                                                                                        </span>
-                                                                                                                                                                                                                                                                                                                                                                    </div>
-                                                                                                                                                                                                                                                                                                                                                                `);
-                                }
-                                if (avatar) {
-                                    return $(`
-                                                                                                                                                                                                                                                                                                                                                                    <div
-                                                                                                                                                                                                                                                                                                                                                                        style="
-                                                                                                                                                                                                                                                                                                                                                                            display:flex;
-                                                                                                                                                                                                                                                                                                                                                                            align-items:center;
-                                                                                                                                                                                                                                                                                                                                                                            gap:8px;
-                                                                                                                                                                                                                                                                                                                                                                            direction:rtl;
-                                                                                                                                                                                                                                                                                                                                                                        "
-                                                                                                                                                                                                                                                                                                                                                                    >
-                                                                                                                                                                                                                                                                                                                                                                        <img
-                                                                                                                                                                                                                                                                                                                                                                            src="{{ asset('img/${avatar}') }}"
-                                                                                                                                                                                                                                                                                                                                                                            style="
-                                                                                                                                                                                                                                                                                                                                                                                width:25px;
-                                                                                                                                                                                                                                                                                                                                                                                height:25px;
-                                                                                                                                                                                                                                                                                                                                                                                border-radius:4px;
-                                                                                                                                                                                                                                                                                                                                                                                object-fit:cover;
-                                                                                                                                                                                                                                                                                                                                                                            "
-                                                                                                                                                                                                                                                                                                                                                                        >
-                                                                                                                                                                                                                                                                                                                                                                        <span>
-                                                                                                                                                                                                                                                                                                                                                                            ${state.text}
-                                                                                                                                                                                                                                                                                                                                                                        </span>
-                                                                                                                                                                                                                                                                                                                                                                    </div>
-                                                                                                                                                                                                                                                                                                                                                                `);
-                                }
-                                return state.text;
-                            },
-                            escapeMarkup: function (markup) {
-                                return markup;
-                            }
-                        });
-                        refreshFeatureSelect();
-                    },
-                    error: function (xhr) {
-                        console.log(xhr.responseText);
-                        alert('حدث خطأ أثناء جلب قيم السمة');
+                const url = @json(route('merchant.products.feature-values', ':id')).replace(':id', encodeURIComponent(featureId));
+                const response = await fetch(url, {
+                    headers: {
+                        'Accept': 'application/json',
+                        'X-Requested-With': 'XMLHttpRequest'
                     }
                 });
-            });
-            container.addEventListener('click', function (e) {
-                const button =
-                    e.target.closest('.remove-feature');
-                if (!button) {
-                    return;
-                }
-                const row =
-                    button.closest('.feature-item');
-                if (!row) {
-                    return;
-                }
-                const valueSelect =
-                    row.querySelector('.feature-values-select');
-                if (
-                    valueSelect &&
-                    $(valueSelect).hasClass('select2-hidden-accessible')
-                ) {
-                    $(valueSelect).select2('destroy');
-                }
-                row.remove();
+                if (!response.ok) throw new Error('HTTP ' + response.status);
+                const data = await response.json();
+                if (!data.status || !Array.isArray(data.values)) throw new Error('لم يتم العثور على قيم السمة');
+
+                const row = document.createElement('div');
+                row.className = 'feature-item border-top py-5';
+                row.dataset.featureId = featureId;
+                row.id = 'feature_row_' + featureId;
+                row.innerHTML = `
+            <div class="row align-items-center">
+                <div class="col-md-2">
+                    <label class="form-label mb-0">السمة: <strong>${escaped(feature.name)}</strong></label>
+                    <input type="hidden" name="feature_ids[]" value="${escaped(featureId)}">
+                </div>
+                <div class="col-md-7">
+                    <select class="form-select feature-values-select" multiple name="feature_values[${escaped(featureId)}][]"></select>
+                </div>
+                <div class="col-md-3">
+                    <button type="button" class="btn btn-danger remove-feature">إزالة</button>
+                </div>
+            </div>`;
+                const select = row.querySelector('.feature-values-select');
+                data.values.forEach(item => {
+                    const option = new Option(item.name, item.id, false, presetValueIds.map(String)
+                        .includes(String(item.id)));
+                    if (data.feature_name === 'اللون' && item.color) option.dataset.color = item.color;
+                    if (data.feature_name === 'النقش' && item.avatar) option.dataset.avatar = item
+                        .avatar;
+                    select.add(option);
+                });
+                featuresContainer.appendChild(row);
+                initializeSelect2(select, 'اختر القيمة', {
+                    templateResult: previewOption,
+                    templateSelection: previewOption
+                });
                 refreshFeatureSelect();
-            });
-            refreshFeatureSelect();
-        });
-    </script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-
-            const featuresContainer =
-                document.getElementById('selected_features_container');
-
-            const variantsWrapper =
-                document.getElementById('variants_features_wrapper');
-
-            const variantsCheckboxes =
-                document.getElementById('variants_checkboxes');
-
-
-            if (
-                !featuresContainer ||
-                !variantsWrapper ||
-                !variantsCheckboxes
-            ) {
-                return;
-            }
-            function refreshVariants() {
-                variantsCheckboxes.innerHTML = '';
-                const features = [];
-                featuresContainer
-                    .querySelectorAll('.feature-item')
-                    .forEach(function (row) {
-                        const select =
-                            row.querySelector(
-                                '.feature-values-select'
-                            );
-                        if (!select) {
-                            return;
-                        }
-                        const featureNameElement =
-                            row.querySelector(
-                                'label strong'
-                            );
-                        const featureName =
-                            featureNameElement
-                                ? featureNameElement.textContent.trim()
-                                : '';
-                        let selectedOptions = [];
-                        if (select.multiple) {
-                            selectedOptions =
-                                Array.from(
-                                    select.selectedOptions
-                                );
-                        } else {
-                            const selectedOption =
-                                select.options[
-                                select.selectedIndex
-                                ];
-                            if (
-                                selectedOption &&
-                                selectedOption.value
-                            ) {
-                                selectedOptions.push(
-                                    selectedOption
-                                );
-                            }
-                        }
-                        if (!selectedOptions.length) {
-                            return;
-                        }
-                        const values =
-                            selectedOptions.map(function (option) {
-                                return {
-                                    id: option.value,
-                                    name:
-                                        option.textContent.trim(),
-                                    color:
-                                        option.dataset.color || '',
-                                    avatar:
-                                        option.dataset.avatar || ''
-                                };
-                            });
-                        features.push({
-
-                            id: row.dataset.featureId,
-
-                            name: featureName,
-
-                            values: values
-
-                        });
-
-                    });
-                if (!features.length) {
-
-                    variantsWrapper.style.display =
-                        'none';
-                    return;
-                }
-                variantsWrapper.style.display =
-                    'block';
-                const combinations =
-                    createCombinations(features);
-
-
-                /*
-                |--------------------------------------------------------------------------
-                | إنشاء Checkboxes
-                |--------------------------------------------------------------------------
-                */
-
-                combinations.forEach(
-                    function (combination, index) {
-
-                        const checkboxItem =
-                            document.createElement('div');
-
-                        checkboxItem.className =
-                            'variant-checkbox-item';
-
-
-                        const names =
-                            combination.map(
-                                item => item.value.name
-                            );
-
-
-                        const ids =
-                            combination.map(
-                                item => {
-                                    return {
-                                        feature_id:
-                                            item.feature.id,
-
-                                        value_id:
-                                            item.value.id
-                                    };
-                                }
-                            );
-
-
-                        checkboxItem.innerHTML = `
-
-                                                                                                                                                                                                                                                                                                                            <label
-                                                                                                                                                                                                                                                                                                                                class="
-                                                                                                                                                                                                                                                                                                                                    d-flex
-                                                                                                                                                                                                                                                                                                                                    align-items-center
-                                                                                                                                                                                                                                                                                                                                    gap-3
-                                                                                                                                                                                                                                                                                                                                    border
-                                                                                                                                                                                                                                                                                                                                    border-gray-300
-                                                                                                                                                                                                                                                                                                                                    rounded
-                                                                                                                                                                                                                                                                                                                                    px-4
-                                                                                                                                                                                                                                                                                                                                    py-3
-                                                                                                                                                                                                                                                                                                                                    cursor-pointer
-                                                                                                                                                                                                                                                                                                                                "
-                                                                                                                                                                                                                                                                                                                            >
-
-                                                                                                                                                                                                                                                                                                                                <input
-                                                                                                                                                                                                                                                                                                                                    class="
-                                                                                                                                                                                                                                                                                                                                        form-check-input
-                                                                                                                                                                                                                                                                                                                                        variant-checkbox
-                                                                                                                                                                                                                                                                                                                                    "
-                                                                                                                                                                                                                                                                                                                                    type="checkbox"
-
-                                                                                                                                                                                                                                                                                                                                    name="selected_variants[]"
-
-                                                                                                                                                                                                                                                                                                                                    value="${index}"
-
-                                                                                                                                                                                                                                                                                                                                    data-variant='${JSON.stringify(ids)}'
-                                                                                                                                                                                                                                                                                                                                >
-
-
-                                                                                                                                                                                                                                                                                                                                <div
-                                                                                                                                                                                                                                                                                                                                    class="
-                                                                                                                                                                                                                                                                                                                                        d-flex
-                                                                                                                                                                                                                                                                                                                                        align-items-center
-                                                                                                                                                                                                                                                                                                                                        gap-2
-                                                                                                                                                                                                                                                                                                                                        flex-wrap
-                                                                                                                                                                                                                                                                                                                                    "
-                                                                                                                                                                                                                                                                                                                                >
-
-                                                                                                                                                                                                                                                                                                                                    ${createVariantPreview(
-                            combination
-                        )}
-
-                                                                                                                                                                                                                                                                                                                                    <span
-                                                                                                                                                                                                                                                                                                                                        class="
-                                                                                                                                                                                                                                                                                                                                            fw-semibold
-                                                                                                                                                                                                                                                                                                                                            text-gray-800
-                                                                                                                                                                                                                                                                                                                                        "
-                                                                                                                                                                                                                                                                                                                                    >
-                                                                                                                                                                                                                                                                                                                                        ${names.join(' - ')}
-                                                                                                                                                                                                                                                                                                                                    </span>
-
-                                                                                                                                                                                                                                                                                                                                </div>
-
-                                                                                                                                                                                                                                                                                                                            </label>
-
-                                                                                                                                                                                                                                                                                                                        `;
-
-
-                        variantsCheckboxes
-                            .appendChild(
-                                checkboxItem
-                            );
-
-                    });
-
+                refreshFeatureCheckboxes();
             }
 
-
-            /*
-            |--------------------------------------------------------------------------
-            | عمل جميع التركيبات
-            |--------------------------------------------------------------------------
-            */
+            function availableFeatures() {
+                return Array.from(featuresContainer.querySelectorAll('.feature-item')).map(row => {
+                    const select = row.querySelector('.feature-values-select');
+                    const values = Array.from(select.selectedOptions)
+                        .filter(option => option.value !== '')
+                        .map(option => ({
+                            id: String(option.value),
+                            name: option.textContent.trim(),
+                            color: option.dataset.color || '',
+                            avatar: option.dataset.avatar || ''
+                        }));
+                    return {
+                        id: String(row.dataset.featureId),
+                        name: row.querySelector('label strong')?.textContent.trim() || '',
+                        values
+                    };
+                }).filter(feature => feature.values.length);
+            }
 
             function createCombinations(features) {
-
-                let result = [[]];
-
-
-                features.forEach(
-                    function (feature) {
-
-                        const temp = [];
-
-
-                        result.forEach(
-                            function (current) {
-
-                                feature.values.forEach(
-                                    function (value) {
-
-                                        temp.push([
-
-                                            ...current,
-
-                                            {
-                                                feature:
-                                                    feature,
-
-                                                value:
-                                                    value
-                                            }
-
-                                        ]);
-
-                                    }
-                                );
-
-                            }
-                        );
-
-
-                        result = temp;
-
-                    }
-                );
-
-
-                return result;
-
+                return features.reduce((combinations, feature) => combinations.flatMap(combination => feature.values
+                    .map(value => [...combination, {
+                        feature,
+                        value
+                    }])), [
+                    []
+                ]);
             }
 
-
-            /*
-            |--------------------------------------------------------------------------
-            | اللون / الصورة بجانب النوع
-            |--------------------------------------------------------------------------
-            */
-
-            function createVariantPreview(
-                combination
-            ) {
-
-                let html = '';
-
-
-                combination.forEach(
-                    function (item) {
-
-                        /*
-                        |--------------------------------------------------------------------------
-                        | اللون
-                        |--------------------------------------------------------------------------
-                        */
-
-                        if (item.value.color) {
-
-                            html += `
-
-                                                                                                                                                                                                                                                                                                                                <span
-                                                                                                                                                                                                                                                                                                                                    title="${item.value.name}"
-                                                                                                                                                                                                                                                                                                                                    style="
-                                                                                                                                                                                                                                                                                                                                        width:18px;
-                                                                                                                                                                                                                                                                                                                                        height:18px;
-                                                                                                                                                                                                                                                                                                                                        border-radius:50%;
-                                                                                                                                                                                                                                                                                                                                        background:${item.value.color};
-                                                                                                                                                                                                                                                                                                                                        border:1px solid #ddd;
-                                                                                                                                                                                                                                                                                                                                        display:inline-block;
-                                                                                                                                                                                                                                                                                                                                        flex-shrink:0;
-                                                                                                                                                                                                                                                                                                                                    "
-                                                                                                                                                                                                                                                                                                                                ></span>
-
-                                                                                                                                                                                                                                                                                                                            `;
-
-                        }
-
-
-                        /*
-                        |--------------------------------------------------------------------------
-                        | صورة النقش
-                        |--------------------------------------------------------------------------
-                        */
-
-                        if (item.value.avatar) {
-
-                            html += `
-
-                                                                                                                                                                                                                                                                                                                                <img
-                                                                                                                                                                                                                                                                                                                                    src="${item.value.avatar}"
-                                                                                                                                                                                                                                                                                                                                    title="${item.value.name}"
-                                                                                                                                                                                                                                                                                                                                    style="
-                                                                                                                                                                                                                                                                                                                                        width:28px;
-                                                                                                                                                                                                                                                                                                                                        height:28px;
-                                                                                                                                                                                                                                                                                                                                        border-radius:5px;
-                                                                                                                                                                                                                                                                                                                                        object-fit:cover;
-                                                                                                                                                                                                                                                                                                                                        border:1px solid #e4e6ef;
-                                                                                                                                                                                                                                                                                                                                    "
-                                                                                                                                                                                                                                                                                                                                >
-
-                                                                                                                                                                                                                                                                                                                            `;
-
-                        }
-
-                    }
-                );
-
-
-                return html;
-
+            function variantKey(combination) {
+                return combination.map(item => `${item.feature.id}:${item.value.id}`).sort().join('|');
             }
 
-
-            /*
-            |--------------------------------------------------------------------------
-            | عند تغيير قيمة أي سمة
-            |--------------------------------------------------------------------------
-            */
-
-            $(document).on(
-                'change',
-                '.feature-values-select',
-                function () {
-
-                    refreshVariants();
-
-                }
-            );
-
-
-            /*
-            |--------------------------------------------------------------------------
-            | عند حذف سمة
-            |--------------------------------------------------------------------------
-            */
-
-            document.addEventListener(
-                'click',
-                function (e) {
-
-                    if (
-                        e.target.closest(
-                            '.remove-feature'
-                        )
-                    ) {
-
-                        setTimeout(
-                            function () {
-
-                                refreshVariants();
-
-                            },
-                            50
-                        );
-
-                    }
-
-                }
-            );
-
-
-            /*
-            |--------------------------------------------------------------------------
-            | أول تشغيل
-            |--------------------------------------------------------------------------
-            */
-
-            refreshVariants();
-
-        });
-    </script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-
-            const featuresContainer =
-                document.getElementById('selected_features_container');
-
-            const variantsWrapper =
-                document.getElementById('variants_features_wrapper');
-
-            const variantsCheckboxes =
-                document.getElementById('variants_checkboxes');
-
-            // مكان ظهور الأنواع
-            let variantsContainer =
-                document.getElementById('variants_container');
-
-
-            if (!variantsContainer && variantsWrapper) {
-
-                variantsContainer =
-                    document.createElement('div');
-
-                variantsContainer.id =
-                    'variants_container';
-
-                variantsContainer.className =
-                    'mt-7';
-
-                variantsWrapper.parentNode.appendChild(
-                    variantsContainer
-                );
+            function previewCombination(combination) {
+                return combination.map(item => {
+                    if (item.value.color)
+                        return `<span title="${escaped(item.value.name)}" style="width:18px;height:18px;border-radius:50%;background:${escaped(item.value.color)};border:2px solid #ddd;display:inline-block"></span>`;
+                    if (item.value.avatar)
+                        return `<img src="${escaped(imageUrl(item.value.avatar))}" title="${escaped(item.value.name)}" style="width:28px;height:28px;border-radius:5px;object-fit:cover;border:1px solid #ddd">`;
+                    return '';
+                }).join('');
             }
 
-
-            if (
-                !featuresContainer ||
-                !variantsWrapper ||
-                !variantsCheckboxes ||
-                !variantsContainer
-            ) {
-                return;
+            function collectEditedValues() {
+                variantsContainer.querySelectorAll('.variant-card').forEach(card => {
+                    editedVariantValues[card.dataset.variantKey] = {
+                        quantity: card.querySelector('.variant-quantity')?.value ?? 0,
+                        stock_status: card.querySelector('.variant-status')?.value ?? 'available'
+                    };
+                });
             }
 
-            let enabledFeatures = [];
+            function buildVariants(features) {
+                collectEditedValues();
+                variantsContainer.replaceChildren();
+                const chosen = features.filter(feature => enabledFeatures.has(feature.id));
+                if (!chosen.length) return;
+                createCombinations(chosen).forEach((combination, index) => {
+                    const key = variantKey(combination);
+                    const previous = editedVariantValues[key] || savedVariants[key] || {};
+                    const title = combination.map(item => item.value.name).join(' - ');
+                    const card = document.createElement('div');
+                    card.className = 'variant-card mb-5';
+                    card.dataset.variantKey = key;
+
+                    // أسماء حقول features يجب أن تكون على سطر واحد ودون مسافات زائدة
+                    const hiddenFeatures = combination.map((item, featureIndex) => `
+                <input type="hidden" name="variants[${index}][features][${featureIndex}][feature_id]" value="${escaped(item.feature.id)}">
+                <input type="hidden" name="variants[${index}][features][${featureIndex}][value_id]" value="${escaped(item.value.id)}">
+            `).join('');
+
+                    card.innerHTML = `
+                <div class="variant-header d-flex align-items-center justify-content-between px-6 py-4 cursor-pointer" style="background:#6258c9;color:#fff;min-height:54px;border-radius:6px">
+                    <div class="d-flex align-items-center gap-3 flex-wrap">
+                        <span class="fs-2">📋</span>
+                        <span class="fw-bold fs-5">النوع : ${escaped(title)}</span>
+                        ${previewCombination(combination)}
+                    </div>
+                    <span class="variant-arrow fw-bold fs-4">▾</span>
+                </div>
+                <div class="variant-body border border-top-0 rounded-bottom" style="display:none">
+                    <input type="hidden" name="variants[${index}][key]" value="${escaped(key)}">
+                    ${hiddenFeatures}
+                    <div class="row align-items-center py-4 border-bottom px-6">
+                        <div class="col-md-2 text-end"><label class="form-label fw-bold mb-0">حالة المخزون:</label></div>
+                        <div class="col-md-5">
+                            <select class="form-select variant-status" name="variants[${index}][stock_status]">
+                                <option value="available" ${previous.stock_status !== 'unavailable' ? 'selected' : ''}>متوفر في المخزون</option>
+                                <option value="unavailable" ${previous.stock_status === 'unavailable' ? 'selected' : ''}>غير متوفر في المخزون</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row align-items-center py-4 border-bottom px-6">
+                        <div class="col-md-2 text-end"><label class="form-label fw-bold mb-0">كمية المخزون:</label></div>
+                        <div class="col-md-5"><input type="number" min="0" class="form-control variant-quantity" name="variants[${index}][quantity]" value="${escaped(previous.quantity ?? '')}" placeholder="كمية المخزون"></div>
+                    </div>
+                </div>`;
+                    variantsContainer.appendChild(card);
+                });
+            }
 
             function refreshFeatureCheckboxes() {
-
-                variantsCheckboxes.innerHTML = '';
-
-                const featureRows =
-                    featuresContainer.querySelectorAll(
-                        '.feature-item'
-                    );
-                if (!featureRows.length) {
-
-                    variantsWrapper.style.display =
-                        'none';
-
-                    variantsContainer.innerHTML =
-                        '';
-
-                    enabledFeatures = [];
-
-                    return;
-                }
-                const availableFeatures = [];
-
-
-                featureRows.forEach(function (row) {
-
-                    const featureId =
-                        String(row.dataset.featureId);
-
-
-                    const nameElement =
-                        row.querySelector(
-                            'label strong'
-                        );
-
-
-                    const featureName =
-                        nameElement
-                            ? nameElement.textContent.trim()
-                            : '';
-
-
-                    const select =
-                        row.querySelector(
-                            '.feature-values-select'
-                        );
-
-                    if (!select) {
-                        return;
-                    }
-
-                    const selectedOptions =
-                        Array.from(
-                            select.selectedOptions
-                        ).filter(function (option) {
-
-                            return option.value !== '';
-
-                        });
-
-                    if (!selectedOptions.length) {
-                        return;
-                    }
-
-
-                    const values =
-                        selectedOptions.map(
-                            function (option) {
-
-                                return {
-
-                                    id:
-                                        String(
-                                            option.value
-                                        ),
-
-                                    name:
-                                        option.textContent.trim(),
-
-                                    color:
-                                        option.dataset.color || '',
-
-                                    avatar:
-                                        option.dataset.avatar || ''
-
-                                };
-
-                            }
-                        );
-
-
-                    availableFeatures.push({
-
-                        id:
-                            featureId,
-
-                        name:
-                            featureName,
-
-                        values:
-                            values
-
-                    });
-
+                const features = availableFeatures();
+                enabledFeatures = new Set([...enabledFeatures].filter(id => features.some(feature => feature.id ===
+                    id)));
+                variantsCheckboxes.replaceChildren();
+                variantsWrapper.style.display = features.length ? 'block' : 'none';
+                features.forEach(feature => {
+                    const wrapper = document.createElement('div');
+                    wrapper.className = 'form-check form-check-custom form-check-solid me-5 mb-3';
+                    const checkbox = document.createElement('input');
+                    checkbox.type = 'checkbox';
+                    checkbox.className = 'form-check-input variant-feature-checkbox';
+                    checkbox.value = feature.id;
+                    checkbox.id = 'variant_feature_' + feature.id;
+                    checkbox.checked = enabledFeatures.has(feature.id);
+                    const label = document.createElement('label');
+                    label.className = 'form-check-label fw-semibold text-gray-800';
+                    label.htmlFor = checkbox.id;
+                    label.textContent = feature.name;
+                    wrapper.append(checkbox, label);
+                    variantsCheckboxes.appendChild(wrapper);
                 });
+                buildVariants(features);
+            }
 
-                if (!availableFeatures.length) {
-
-                    variantsWrapper.style.display =
-                        'none';
-
-                    variantsContainer.innerHTML =
-                        '';
-
-                    enabledFeatures = [];
-
-                    return;
+            addButton.addEventListener('click', async function() {
+                if (!featureSelect.value) return alert('اختر سمة أولاً');
+                try {
+                    await addFeature(featureSelect.value);
+                } catch (error) {
+                    console.error(error);
+                    alert('حدث خطأ أثناء جلب قيم السمة');
                 }
-
-                variantsWrapper.style.display =
-                    'block';
-
-                enabledFeatures =
-                    enabledFeatures.filter(
-                        function (id) {
-
-                            return availableFeatures.some(
-                                function (feature) {
-
-                                    return String(
-                                        feature.id
-                                    ) === String(id);
-
-                                }
-                            );
-
-                        }
-                    );
-
-                availableFeatures.forEach(
-                    function (feature) {
-
-                        const wrapper =
-                            document.createElement('div');
-
-
-                        wrapper.className =
-                            'form-check form-check-custom form-check-solid me-5 mb-3';
-
-
-                        const checked =
-                            enabledFeatures.includes(
-                                String(feature.id)
-                            );
-
-
-                        wrapper.innerHTML = `
-
-                                                                                                                                                                                                                                                                                <input
-                                                                                                                                                                                                                                                                                    class="
-                                                                                                                                                                                                                                                                                        form-check-input
-                                                                                                                                                                                                                                                                                        variant-feature-checkbox
-                                                                                                                                                                                                                                                                                    "
-                                                                                                                                                                                                                                                                                    type="checkbox"
-                                                                                                                                                                                                                                                                                    value="${feature.id}"
-                                                                                                                                                                                                                                                                                    id="variant_feature_${feature.id}"
-                                                                                                                                                                                                                                                                                    ${checked ? 'checked' : ''}
-                                                                                                                                                                                                                                                                                >
-
-                                                                                                                                                                                                                                                                                <label
-                                                                                                                                                                                                                                                                                    class="
-                                                                                                                                                                                                                                                                                        form-check-label
-                                                                                                                                                                                                                                                                                        fw-semibold
-                                                                                                                                                                                                                                                                                        text-gray-800
-                                                                                                                                                                                                                                                                                    "
-                                                                                                                                                                                                                                                                                    for="variant_feature_${feature.id}"
-                                                                                                                                                                                                                                                                                >
-                                                                                                                                                                                                                                                                                    ${feature.name}
-                                                                                                                                                                                                                                                                                </label>
-
-                                                                                                                                                                                                                                                                            `;
-
-
-                        variantsCheckboxes.appendChild(
-                            wrapper
-                        );
-
-                    }
-                );
-
-                buildVariants(
-                    availableFeatures
-                );
-
-            }
-            variantsCheckboxes.addEventListener(
-                'change',
-                function (e) {
-
-                    if (
-                        !e.target.classList.contains(
-                            'variant-feature-checkbox'
-                        )
-                    ) {
-                        return;
-                    }
-
-
-                    const featureId =
-                        String(e.target.value);
-
-
-                    if (e.target.checked) {
-
-                        if (
-                            !enabledFeatures.includes(
-                                featureId
-                            )
-                        ) {
-
-                            enabledFeatures.push(
-                                featureId
-                            );
-
-                        }
-
-                    } else {
-
-                        enabledFeatures =
-                            enabledFeatures.filter(
-                                function (id) {
-
-                                    return String(id) !==
-                                        featureId;
-
-                                }
-                            );
-
-                    }
-
-
-                    refreshFeatureCheckboxes();
-
-                }
-            );
-
-            function buildVariants(
-                availableFeatures
-            ) {
-
-
-                const oldValues =
-                    collectExistingVariantValues();
-
-
-                variantsContainer.innerHTML =
-                    '';
-
-                if (!enabledFeatures.length) {
-
-                    return;
-
-                }
-                const selectedFeatures =
-                    availableFeatures.filter(
-                        function (feature) {
-
-                            return enabledFeatures.includes(
-                                String(feature.id)
-                            );
-
-                        }
-                    );
-
-
-                if (!selectedFeatures.length) {
-
-                    return;
-
-                }
-                const combinations =
-                    createCombinations(
-                        selectedFeatures
-                    );
-
-
-                combinations.forEach(
-                    function (
-                        combination,
-                        index
-                    ) {
-
-                        createVariantCard(
-                            combination,
-                            index,
-                            oldValues
-                        );
-
-                    }
-                );
-
-            }
-            function createCombinations(
-                features
-            ) {
-
-                let result = [[]];
-
-
-                features.forEach(
-                    function (feature) {
-
-                        const temp = [];
-
-
-                        result.forEach(
-                            function (
-                                currentCombination
-                            ) {
-
-                                feature.values.forEach(
-                                    function (value) {
-
-                                        temp.push([
-
-                                            ...currentCombination,
-
-                                            {
-
-                                                feature:
-                                                    feature,
-
-                                                value:
-                                                    value
-
-                                            }
-
-                                        ]);
-
-                                    }
-                                );
-
-                            }
-                        );
-
-
-                        result = temp;
-
-                    }
-                );
-
-
-                return result;
-
-            }
-            function getVariantKey(
-                combination
-            ) {
-
-                return combination
-                    .map(
-                        function (item) {
-
-                            return (
-                                item.feature.id +
-                                ':' +
-                                item.value.id
-                            );
-
-                        }
-                    )
-                    .sort()
-                    .join('|');
-
-            }
-            function createVariantCard(
-                combination,
-                index,
-                oldValues
-            ) {
-
-                const key =
-                    getVariantKey(
-                        combination
-                    );
-
-
-                const title =
-                    combination
-                        .map(
-                            function (item) {
-
-                                return item.value.name;
-
-                            }
-                        )
-                        .join(' - ');
-                const valuesData =
-                    combination.map(
-                        function (item) {
-                            return {
-                                feature_id:
-                                    item.feature.id,
-                                value_id:
-                                    item.value.id
-                            };
-                        }
-                    );
-                const previous =
-                    oldValues[key] || {};
-                const card =
-                    document.createElement('div');
-                card.className =
-                    'variant-card mb-5';
-                card.dataset.variantKey =
-                    key;
-                card.innerHTML = `
-
-                                                                                                                                                                                                                                                                        <!-- ========================================================= -->
-                                                                                                                                                                                                                                                                        <!-- Header -->
-                                                                                                                                                                                                                                                                        <!-- ========================================================= -->
-
-                                                                                                                                                                                                                                                                        <div
-                                                                                                                                                                                                                                                                            class="
-                                                                                                                                                                                                                                                                                variant-header
-                                                                                                                                                                                                                                                                                d-flex
-                                                                                                                                                                                                                                                                                align-items-center
-                                                                                                                                                                                                                                                                                justify-content-between
-                                                                                                                                                                                                                                                                                px-6
-                                                                                                                                                                                                                                                                                py-4
-                                                                                                                                                                                                                                                                                cursor-pointer
-                                                                                                                                                                                                                                                                            "
-                                                                                                                                                                                                                                                                            style="
-                                                                                                                                                                                                                                                                                background:#6258c9;
-                                                                                                                                                                                                                                                                                color:#fff;
-                                                                                                                                                                                                                                                                                min-height:54px;
-                                                                                                                                                                                                                                                                                border-radius:6px;
-                                                                                                                                                                                                                                                                            "
-                                                                                                                                                                                                                                                                        >
-
-                                                                                                                                                                                                                                                                            <div
-                                                                                                                                                                                                                                                                                class="
-                                                                                                                                                                                                                                                                                    d-flex
-                                                                                                                                                                                                                                                                                    align-items-center
-                                                                                                                                                                                                                                                                                    gap-3
-                                                                                                                                                                                                                                                                                "
-                                                                                                                                                                                                                                                                            >
-
-                                                                                                                                                                                                                                                                                <span
-                                                                                                                                                                                                                                                                                    class="fs-2"
-                                                                                                                                                                                                                                                                                >
-                                                                                                                                                                                                                                                                                    📋
-                                                                                                                                                                                                                                                                                </span>
-
-                                                                                                                                                                                                                                                                                <span
-                                                                                                                                                                                                                                                                                    class="
-                                                                                                                                                                                                                                                                                        fw-bold
-                                                                                                                                                                                                                                                                                        fs-5
-                                                                                                                                                                                                                                                                                    "
-                                                                                                                                                                                                                                                                                >
-
-                                                                                                                                                                                                                                                                                    النوع : ${title}
-
-                                                                                                                                                                                                                                                                                </span>
-
-                                                                                                                                                                                                                                                                                ${createVariantPreview(
-                    combination
-                )}
-
-                                                                                                                                                                                                                                                                            </div>
-
-
-                                                                                                                                                                                                                                                                            <span
-                                                                                                                                                                                                                                                                                class="
-                                                                                                                                                                                                                                                                                    variant-arrow
-                                                                                                                                                                                                                                                                                    fw-bold
-                                                                                                                                                                                                                                                                                    fs-4
-                                                                                                                                                                                                                                                                                "
-                                                                                                                                                                                                                                                                            >
-                                                                                                                                                                                                                                                                                ▾
-                                                                                                                                                                                                                                                                            </span>
-
-                                                                                                                                                                                                                                                                        </div>
-
-
-                                                                                                                                                                                                                                                                        <!-- ========================================================= -->
-                                                                                                                                                                                                                                                                        <!-- Body -->
-                                                                                                                                                                                                                                                                        <!-- ========================================================= -->
-
-                                                                                                                                                                                                                                                                        <div
-                                                                                                                                                                                                                                                                            class="
-                                                                                                                                                                                                                                                                                variant-body
-                                                                                                                                                                                                                                                                                border
-                                                                                                                                                                                                                                                                                border-top-0
-                                                                                                                                                                                                                                                                                rounded-bottom
-                                                                                                                                                                                                                                                                            "
-                                                                                                                                                                                                                                                                            style="display:none;"
-                                                                                                                                                                                                                                                                        >
-
-                                                                                                                                                                                                                                                                            <input
-                                                                                                                                                                                                                                                                                type="hidden"
-                                                                                                                                                                                                                                                                                name="variants[${index}][key]"
-                                                                                                                                                                                                                                                                                value="${key}"
-                                                                                                                                                                                                                                                                            >
-
-
-                                                                                                                                                                                                                                                                            ${createHiddenFeatureValues(
-                    combination,
-                    index
-                )}
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                    <!-- حالة المخزون -->
-                                                                                                                                                                                                                                                                            <!-- ========================== -->
-
-                                                                                                                                                                                                                                                                            <div
-                                                                                                                                                                                                                                                                                class="
-                                                                                                                                                                                                                                                                                    row
-                                                                                                                                                                                                                                                                                    align-items-center
-                                                                                                                                                                                                                                                                                    py-4
-                                                                                                                                                                                                                                                                                    border-bottom
-                                                                                                                                                                                                                                                                                    px-6
-                                                                                                                                                                                                                                                                                "
-                                                                                                                                                                                                                                                                            >
-
-                                                                                                                                                                                                                                                                                <div
-                                                                                                                                                                                                                                                                                    class="
-                                                                                                                                                                                                                                                                                        col-md-2
-                                                                                                                                                                                                                                                                                        text-end
-                                                                                                                                                                                                                                                                                    "
-                                                                                                                                                                                                                                                                                >
-
-                                                                                                                                                                                                                                                                                    <label
-                                                                                                                                                                                                                                                                                        class="
-                                                                                                                                                                                                                                                                                            form-label
-                                                                                                                                                                                                                                                                                            fw-bold
-                                                                                                                                                                                                                                                                                            mb-0
-                                                                                                                                                                                                                                                                                        "
-                                                                                                                                                                                                                                                                                    >
-                                                                                                                                                                                                                                                                                        حالة المخزون:
-                                                                                                                                                                                                                                                                                    </label>
-
-                                                                                                                                                                                                                                                                                </div>
-
-
-                                                                                                                                                                                                                                                                                <div class="col-md-5">
-
-                                                                                                                                                                                                                                                                                    <select
-                                                                                                                                                                                                                                                                                        class="form-select"
-                                                                                                                                                                                                                                                                                        name="variants[${index}][stock_status]"
-                                                                                                                                                                                                                                                                                    >
-
-                                                                                                                                                                                                                                                                                        <option
-                                                                                                                                                                                                                                                                                            value="available"
-                                                                                                                                                                                                                                                                                            ${previous.stock_status ===
-                        'available' ||
-                        !previous.stock_status
-                        ? 'selected'
-                        : ''
-                    }
-                                                                                                                                                                                                                                                                                        >
-                                                                                                                                                                                                                                                                                            متوفر في المخزون
-                                                                                                                                                                                                                                                                                        </option>
-
-                                                                                                                                                                                                                                                                                        <option
-                                                                                                                                                                                                                                                                                            value="unavailable"
-                                                                                                                                                                                                                                                                                            ${previous.stock_status ===
-                        'unavailable'
-                        ? 'selected'
-                        : ''
-                    }
-                                                                                                                                                                                                                                                                                        >
-                                                                                                                                                                                                                                                                                            غير متوفر في المخزون
-                                                                                                                                                                                                                                                                                        </option>
-
-                                                                                                                                                                                                                                                                                    </select>
-
-                                                                                                                                                                                                                                                                                </div>
-
-                                                                                                                                                                                                                                                                            </div>
-                                                                                                                                                                                                                                                                            <!-- ========================== -->
-                                                                                                                                                                                                                                                                            <!-- كمية المخزون -->
-                                                                                                                                                                                                                                                                            <!-- ========================== -->
-
-                                                                                                                                                                                                                                                                            <div
-                                                                                                                                                                                                                                                                                class="
-                                                                                                                                                                                                                                                                                    row
-                                                                                                                                                                                                                                                                                    align-items-center
-                                                                                                                                                                                                                                                                                    py-4
-                                                                                                                                                                                                                                                                                    border-bottom
-                                                                                                                                                                                                                                                                                    px-6
-                                                                                                                                                                                                                                                                                "
-                                                                                                                                                                                                                                                                            >
-
-                                                                                                                                                                                                                                                                                <div
-                                                                                                                                                                                                                                                                                    class="
-                                                                                                                                                                                                                                                                                        col-md-2
-                                                                                                                                                                                                                                                                                        text-end
-                                                                                                                                                                                                                                                                                    "
-                                                                                                                                                                                                                                                                                >
-
-                                                                                                                                                                                                                                                                                    <label
-                                                                                                                                                                                                                                                                                        class="
-                                                                                                                                                                                                                                                                                            form-label
-                                                                                                                                                                                                                                                                                            fw-bold
-                                                                                                                                                                                                                                                                                            mb-0
-                                                                                                                                                                                                                                                                                        "
-                                                                                                                                                                                                                                                                                    >
-                                                                                                                                                                                                                                                                                        كمية المخزون:
-                                                                                                                                                                                                                                                                                    </label>
-
-                                                                                                                                                                                                                                                                                </div>
-
-
-                                                                                                                                                                                                                                                                                <div class="col-md-5">
-
-                                                                                                                                                                                                                                                                                    <input
-                                                                                                                                                                                                                                                                                        type="number"
-                                                                                                                                                                                                                                                                                        min="0"
-                                                                                                                                                                                                                                                                                        class="form-control"
-                                                                                                                                                                                                                                                                                        name="variants[${index}][quantity]"
-                                                                                                                                                                                                                                                                                        value="${escapeValue(previous.quantity)}"
-                                                                                                                                                                                                                                                                                        placeholder="كمية المخزون"
-                                                                                                                                                                                                                                                                                    >
-                                                                                                                                                                                                                                                                                </div>
-                                                                                                                                                                                                                                                                            </div>
-                                                                                                                                                                                                                                                                    `;
-                variantsContainer.appendChild(
-                    card
-                );
-            }
-            function createHiddenFeatureValues(
-                combination,
-                variantIndex
-            ) {
-                let html = '';
-                combination.forEach(
-                    function (
-                        item,
-                        featureIndex
-                    ) {
-                        html += `
-                                                                                                                                                                                                                                                                                <input
-                                                                                                                                                                                                                                                                                    type="hidden"
-                                                                                                                                                                                                                                                                                    name="
-                                                                                                                                                                                                                                                                                        variants[
-                                                                                                                                                                                                                                                                                            ${variantIndex}
-                                                                                                                                                                                                                                                                                        ][features][
-                                                                                                                                                                                                                                                                                            ${featureIndex}
-                                                                                                                                                                                                                                                                                        ][feature_id]
-                                                                                                                                                                                                                                                                                    "
-                                                                                                                                                                                                                                                                                    value="${item.feature.id}"
-                                                                                                                                                                                                                                                                                >
-                                                                                                                                                                                                                                                                                <input
-                                                                                                                                                                                                                                                                                    type="hidden"
-                                                                                                                                                                                                                                                                                    name="
-                                                                                                                                                                                                                                                                                        variants[
-                                                                                                                                                                                                                                                                                            ${variantIndex}
-                                                                                                                                                                                                                                                                                        ][features][
-                                                                                                                                                                                                                                                                                            ${featureIndex}
-                                                                                                                                                                                                                                                                                        ][value_id]
-                                                                                                                                                                                                                                                                                    "
-                                                                                                                                                                                                                                                                                    value="${item.value.id}"
-                                                                                                                                                                                                                                                                                >
-                                                                                                                                                                                                                                                                            `;
-                    }
-                );
-                return html;
-            }
-            function createVariantPreview(
-                combination
-            ) {
-                let html = '';
-                combination.forEach(
-                    function (item) {
-                        if (item.value.color) {
-                            html += `
-                                                                                                                                                                                                                                                                                    <span
-                                                                                                                                                                                                                                                                                        title="${item.value.name}"
-                                                                                                                                                                                                                                                                                        style="
-                                                                                                                                                                                                                                                                                            width:18px;
-                                                                                                                                                                                                                                                                                            height:18px;
-                                                                                                                                                                                                                                                                                            border-radius:50%;
-                                                                                                                                                                                                                                                                                            background:${item.value.color};
-                                                                                                                                                                                                                                                                                            display:inline-block;
-                                                                                                                                                                                                                                                                                            border:2px solid rgba(255,255,255,.8);
-                                                                                                                                                                                                                                                                                            flex-shrink:0;
-                                                                                                                                                                                                                                                                                        "
-                                                                                                                                                                                                                                                                                    ></span>
-                                                                                                                                                                                                                                                                                `;
-                        }
-                        if (item.value.avatar) {
-                            html += `
-                                                                                                                                                                                                                                                                                    <img
-                                                                                                                                                                                                                                                                                        src="{{ asset('img/${item.value.avatar}') }}"
-                                                                                                                                                                                                                                                                                        title="${item.value.name}"
-                                                                                                                                                                                                                                                                                        style="
-                                                                                                                                                                                                                                                                                            width:28px;
-                                                                                                                                                                                                                                                                                            height:28px;
-                                                                                                                                                                                                                                                                                            border-radius:5px;
-                                                                                                                                                                                                                                                                                            object-fit:cover;
-                                                                                                                                                                                                                                                                                            border:2px solid #fff;
-                                                                                                                                                                                                                                                                                        "
-                                                                                                                                                                                                                                                                                    >
-
-                                                                                                                                                                                                                                                                                `;
-
-                        }
-
-                    }
-                );
-                return html;
-            }
-            variantsContainer.addEventListener(
-                'click',
-                function (e) {
-                    const header =
-                        e.target.closest(
-                            '.variant-header'
-                        );
-                    if (!header) {
-                        return;
-                    }
-                    const card =
-                        header.closest(
-                            '.variant-card'
-                        );
-                    if (!card) {
-                        return;
-                    }
-                    const body =
-                        card.querySelector(
-                            '.variant-body'
-                        );
-                    const arrow =
-                        header.querySelector(
-                            '.variant-arrow'
-                        );
-                    if (!body) {
-                        return;
-                    }
-                    if (
-                        body.style.display ===
-                        'none'
-                    ) {
-                        body.style.display =
-                            'block';
-                        if (arrow) {
-                            arrow.textContent =
-                                '▴';
-                        }
-                        header.style.borderRadius =
-                            '6px 6px 0 0';
-                    }
-                    else {
-                        body.style.display =
-                            'none';
-                        if (arrow) {
-                            arrow.textContent =
-                                '▾';
-                        }
-                        header.style.borderRadius =
-                            '6px';
+            });
+
+            featuresContainer.addEventListener('click', function(event) {
+                const button = event.target.closest('.remove-feature');
+                if (!button) return;
+                const row = button.closest('.feature-item');
+                const select = row?.querySelector('.feature-values-select');
+                if (select && window.jQuery && $(select).hasClass('select2-hidden-accessible')) $(select)
+                    .select2('destroy');
+                row?.remove();
+                refreshFeatureSelect();
+                refreshFeatureCheckboxes();
+            });
+
+            $(featuresContainer).on('change', '.feature-values-select', refreshFeatureCheckboxes);
+            variantsCheckboxes.addEventListener('change', function(event) {
+                if (!event.target.classList.contains('variant-feature-checkbox')) return;
+                if (event.target.checked) enabledFeatures.add(String(event.target.value));
+                else enabledFeatures.delete(String(event.target.value));
+                refreshFeatureCheckboxes();
+            });
+            variantsContainer.addEventListener('click', function(event) {
+                const header = event.target.closest('.variant-header');
+                if (!header) return;
+                const body = header.closest('.variant-card')?.querySelector('.variant-body');
+                if (!body) return;
+                const opening = body.style.display === 'none';
+                body.style.display = opening ? 'block' : 'none';
+                header.querySelector('.variant-arrow').textContent = opening ? '▴' : '▾';
+                header.style.borderRadius = opening ? '6px 6px 0 0' : '6px';
+            });
+
+            async function loadExistingFeatures() {
+                const ids = Object.keys(savedValuesByFeature || {});
+                for (const featureId of ids) {
+                    try {
+                        await addFeature(featureId, savedValuesByFeature[featureId] || []);
+                    } catch (error) {
+                        console.error('فشل استرجاع السمة', featureId, error);
                     }
                 }
-            );
-            function collectExistingVariantValues() {
-                const data = {};
-                variantsContainer
-                    .querySelectorAll(
-                        '.variant-card'
-                    )
-                    .forEach(
-                        function (card) {
-                            const key =
-                                card.dataset.variantKey;
-                            if (!key) {
-                                return;
-                            }
-                            data[key] = {};
-                            card
-                                .querySelectorAll(
-                                    'input, select, textarea'
-                                )
-                                .forEach(
-                                    function (field) {
-                                        const name =
-                                            field.name;
-                                        if (!name) {
-                                            return;
-                                        }
-                                        const match =
-                                            name.match(
-                                                /\]\[([^\]]+)\]$/
-                                            );
-                                        if (!match) {
-                                            return;
-                                        }
-                                        const fieldName =
-                                            match[1];
-                                        data[key][fieldName] =
-                                            field.value;
-                                    }
-                                );
-                        }
-                    );
-                return data;
+                refreshFeatureCheckboxes();
             }
-            function escapeValue(value) {
-                if (
-                    value === undefined ||
-                    value === null
-                ) {
-                    return '';
-                }
-                return String(value)
-                    .replaceAll('&', '&amp;')
-                    .replaceAll('"', '&quot;')
-                    .replaceAll('<', '&lt;')
-                    .replaceAll('>', '&gt;');
-            }
-            $(document).on(
-                'change',
-                '.feature-values-select',
-                function () {
-                    refreshFeatureCheckboxes();
-                }
-            );
-            const observer =
-                new MutationObserver(
-                    function () {
-                        refreshFeatureCheckboxes();
-                    }
-                );
-            observer.observe(
-                featuresContainer,
-                {
-                    childList: true,
-                    subtree: false
-                }
-            );
-            document.addEventListener(
-                'click',
-                function (e) {
-                    if (
-                        e.target.closest(
-                            '.remove-feature'
-                        )
-                    ) {
-                        setTimeout(
-                            function () {
-                                refreshFeatureCheckboxes();
-                            },
-                            100
-                        );
 
-                    }
-
-                }
-            );
-            refreshFeatureCheckboxes();
+            refreshFeatureSelect();
+            loadExistingFeatures();
         });
     </script>
 

@@ -20,7 +20,6 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Laravel\Ai\Enums\Lab;
 use Log;
-use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -71,6 +70,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->input('variants'));
         $product = new product;
         $product->product_name = $request->product_name;
         try {
@@ -89,6 +89,7 @@ class ProductController extends Controller
                 'message' => $e->getMessage(),
             ]);
         }
+
         $record = ManageController::save($request, $product);
         if ($request->has('color_id')) {
             foreach ($request->color_id as $color_id) {
@@ -157,36 +158,73 @@ class ProductController extends Controller
         }
 
         if ($request->has('variants')) {
-            foreach ($request->variants as $variantData) {
+
+            foreach ($request->input('variants', []) as $variantData) {
+
+                $variantKey = $variantData['key']
+                    ?? $variantData['variant_key']
+                    ?? null;
+
+                // إنشاء النوع
                 $variant = ProductVariant::create([
                     'product_id' => $product->id,
-                    'variant_key' => isset($variantData['key'])
-                        ? $variantData['key']
-                        : null,
-                    'stock_status' => isset($variantData['stock_status'])
-                        ? $variantData['stock_status']
-                        : 'available',
-                    'quantity' => isset($variantData['quantity'])
-                        ? $variantData['quantity']
-                        : 0,
+                    'variant_key' => $variantKey,
+                    'stock_status' => $variantData['stock_status']
+                        ?? 'available',
+                    'quantity' => $variantData['quantity'] ?? 0,
                 ]);
-                if (
-                    isset($variantData['features']) &&
-                    is_array($variantData['features'])
-                ) {
-                    foreach ($variantData['features'] as $featureData) {
+
+                // جلب السمات المرسلة، إن وجدت
+                $features = $variantData['features'] ?? [];
+
+                // في حال لم تصل السمات من JavaScript
+                // نستخرجها من variant_key
+                if (empty($features) && ! empty($variantKey)) {
+
+                    $combinations = explode('|', $variantKey);
+
+                    foreach ($combinations as $combination) {
+
+                        $parts = explode(':', $combination);
+
+                        if (count($parts) !== 2) {
+                            continue;
+                        }
+
+                        $featureId = trim($parts[0]);
+                        $valueId = trim($parts[1]);
+
                         if (
-                            ! isset($featureData['feature_id']) ||
-                            ! isset($featureData['value_id'])
+                            ! ctype_digit($featureId) ||
+                            ! ctype_digit($valueId) ||
+                            (int) $featureId <= 0 ||
+                            (int) $valueId <= 0
                         ) {
                             continue;
                         }
-                        ProductVariantFeature::create([
-                            'product_variant_id' => $variant->id,
-                            'feature_id' => $featureData['feature_id'],
-                            'value_id' => $featureData['value_id'],
-                        ]);
+
+                        $features[] = [
+                            'feature_id' => (int) $featureId,
+                            'value_id' => (int) $valueId,
+                        ];
                     }
+                }
+
+                // حفظ السمات داخل product_variant_features
+                foreach ($features as $featureData) {
+
+                    $featureId = $featureData['feature_id'] ?? null;
+                    $valueId = $featureData['value_id'] ?? null;
+
+                    if (! $featureId || ! $valueId) {
+                        continue;
+                    }
+
+                    ProductVariantFeature::create([
+                        'product_variant_id' => $variant->id,
+                        'feature_id' => $featureId,
+                        'value_id' => $valueId,
+                    ]);
                 }
             }
         }
@@ -269,11 +307,38 @@ class ProductController extends Controller
         $data['title'] = 'EditProduct';
         $data['records'] = product::where('user_id', auth()->user()->id)->get();
         $data['value'] = product::where('id', $id)->first();
-        $data['product'] = product::with('categories', 'colors', 'engravings', 'sizes', 'relateds', 'inventory')->find($id);
+        $data['product'] = product::with('categories', 'colors', 'engravings', 'sizes', 'relateds', 'inventory', 'variants.features')->find($id);
         $data['relation'] = related_product::all();
         $data['fields'] = product::get_Fields();
         $data['categories'] = category::all();
         $data['features'] = productfeature::all();
+        $product = $data['product'];
+        $data['variants'] = $product->variants;
+        $data['savedVariants'] = $product->variants
+            ->map(function ($variant) {
+
+                return [
+                    'id' => $variant->id,
+
+                    'key' => $variant->variant_key,
+
+                    'stock_status' => $variant->stock_status,
+
+                    'quantity' => $variant->quantity,
+
+                    'features' => $variant->features
+                        ->map(function ($feature) {
+                            return [
+                                'feature_id' => $feature->feature_id,
+                                'value_id' => $feature->value_id,
+                            ];
+                        })
+                        ->values()
+                        ->toArray(),
+                ];
+            })
+            ->values()
+            ->toArray();
 
         return view('merchant.products.edit_', $data);
     }
@@ -344,39 +409,89 @@ class ProductController extends Controller
             ]);
         }
 
-        if ($request->has('variants')) {
-            foreach ($request->variants as $variantData) {
-                $variant = ProductVariant::create([
-                    'product_id' => $product->id,
-                    'variant_key' => isset($variantData['key'])
-                        ? $variantData['key']
-                        : null,
-                    'stock_status' => isset($variantData['stock_status'])
-                        ? $variantData['stock_status']
-                        : 'available',
-                    'quantity' => isset($variantData['quantity'])
-                        ? $variantData['quantity']
-                        : 0,
-                ]);
-                if (
-                    isset($variantData['features']) &&
-                    is_array($variantData['features'])
-                ) {
-                    foreach ($variantData['features'] as $featureData) {
-                        if (
-                            ! isset($featureData['feature_id']) ||
-                            ! isset($featureData['value_id'])
-                        ) {
-                            continue;
+        if ($request->boolean('sync_variants')) {
+
+            $variants = $request->input('variants', []);
+
+            DB::transaction(function () use ($product, $variants) {
+
+                $savedIds = [];
+
+                foreach ($variants as $variantData) {
+
+                    $key = $variantData['key'] ?? null;
+
+                    if (! $key) {
+                        continue;
+                    }
+
+                    $variant = ProductVariant::updateOrCreate(
+                        [
+                            'product_id' => $product->id,
+                            'variant_key' => $key,
+                        ],
+                        [
+                            'quantity' => $variantData['quantity'] ?? 0,
+                            'stock_status' => $variantData['stock_status'] ?? 'available',
+                        ]
+                    );
+
+                    $savedIds[] = $variant->id;
+
+                    $features = $variantData['features'] ?? [];
+
+                    // دعم توليد السمات من المفتاح
+                    if (empty($features)) {
+
+                        foreach (explode('|', $key) as $part) {
+
+                            $ids = explode(':', $part);
+
+                            if (
+                                count($ids) === 2 &&
+                                ctype_digit(trim($ids[0])) &&
+                                ctype_digit(trim($ids[1]))
+                            ) {
+                                $features[] = [
+                                    'feature_id' => (int) trim($ids[0]),
+                                    'value_id' => (int) trim($ids[1]),
+                                ];
+                            }
                         }
+                    }
+
+                    // تحديث سمات النوع الحالي
+                    ProductVariantFeature::where(
+                        'product_variant_id',
+                        $variant->id
+                    )->delete();
+
+                    foreach ($features as $feature) {
+
                         ProductVariantFeature::create([
                             'product_variant_id' => $variant->id,
-                            'feature_id' => $featureData['feature_id'],
-                            'value_id' => $featureData['value_id'],
+                            'feature_id' => $feature['feature_id'],
+                            'value_id' => $feature['value_id'],
                         ]);
                     }
                 }
-            }
+
+                // حذف الأنواع التي أزالها المستخدم من هذا المنتج فقط
+                $obsoleteVariants = ProductVariant::where(
+                    'product_id',
+                    $product->id
+                )->whereNotIn('id', $savedIds);
+
+                $obsoleteIds = (clone $obsoleteVariants)
+                    ->pluck('id');
+
+                ProductVariantFeature::whereIn(
+                    'product_variant_id',
+                    $obsoleteIds
+                )->delete();
+
+                $obsoleteVariants->delete();
+            });
         }
 
         return back()->with('success', 'تم تعديل المنتج بنجاح');

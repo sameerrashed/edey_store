@@ -21,6 +21,9 @@ class ProductVariantFeature extends Model
 
     public function feature()
     {
-        return $this->belongsTo(Feature::class);
+        return $this->belongsTo(
+            ProductFeature::class,
+            'feature_id'
+        );
     }
 }
