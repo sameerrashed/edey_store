@@ -70,7 +70,31 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->input('variants'));
+        if ($request->price < $request->price_after) {
+            return redirect()
+                ->back()->withInput()->with('error', 'سعر المنتج بعد الخصم يجب أن يكون أقل من السعر الأصلي');
+        }
+
+        if ($request->price <= $request->cost_price || $request->price_after <= $request->cost_price) {
+            return redirect()
+                ->back()->withInput()->with('error', 'سعر تكلفة المنتج يجب أن يكون أكبر من السعر الأصلي وسعر ما بعد الخصم');
+        }
+
+        if ($request->max_quantity < $request->min_quantity) {
+            return redirect()
+                ->back()->withInput()->with('error', 'اكثر كمية من المنتج يجب ان يكون اكبر من اقل كمية');
+        }
+
+        if ($request->quantity > $request->max_quantity) {
+            return redirect()
+                ->back()->withInput()->with('error', 'الكمية المتوفرة يجب أن تكون أقل من أو تساوي الكمية القصوى');
+        }
+
+        if ($request->quantity < $request->min_quantity) {
+            return redirect()
+                ->back()->withInput()->with('error', 'الكمية المتوفرة يجب أن تكون أكبر من أو تساوي اقل كمية');
+        }
+
         $product = new product;
         $product->product_name = $request->product_name;
         try {
@@ -349,7 +373,30 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
 
-        // dd($request->CheckPrice);
+        if ($request->price < $request->price_after) {
+            return redirect()
+                ->back()->withInput()->with('error', 'سعر المنتج بعد الخصم يجب أن يكون أقل من السعر الأصلي');
+        }
+
+        if ($request->price <= $request->cost_price || $request->price_after <= $request->cost_price) {
+            return redirect()
+                ->back()->withInput()->with('error', 'سعر تكلفة المنتج يجب أن يكون أكبر من السعر الأصلي وسعر ما بعد الخصم');
+        }
+
+        if ($request->max_quantity < $request->min_quantity) {
+            return redirect()
+                ->back()->withInput()->with('error', 'اكثر كمية من المنتج يجب ان يكون اكبر من اقل كمية');
+        }
+
+        if ($request->quantity > $request->max_quantity) {
+            return redirect()
+                ->back()->withInput()->with('error', 'الكمية المتوفرة يجب أن تكون أقل من أو تساوي الكمية القصوى');
+        }
+
+        if ($request->quantity < $request->min_quantity) {
+            return redirect()
+                ->back()->withInput()->with('error', 'الكمية المتوفرة يجب أن تكون أكبر من أو تساوي اقل كمية');
+        }
 
         $product = product::where('id', $id)->first();
 
