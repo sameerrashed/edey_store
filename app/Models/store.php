@@ -105,11 +105,6 @@ class store extends Model
 
     }
 
-    public function payment_methods()
-    {
-        return $this->belongsToMany(payment_method::class, 'payment_store');
-    }
-
     public function requestUpgradeMerchant()
     {
         return $this->belongsTo(requestUpgradeMerchant::class);
@@ -125,9 +120,9 @@ class store extends Model
     {
         return $this->belongsToMany(
             payment_method::class,
-            'payment_store',
+            'payment_store_methods',
             'store_id',
-            'payment_method_id'
+            'payment_id'
         );
     }
 }

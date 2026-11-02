@@ -124,71 +124,144 @@ class CartController extends Controller
         //     return back()->with('error', 'يجب اختيار النقش');
         // }
         $user_id = auth()->id();
-        $user_store_id = product::where('id', $id)->value('user_id');
-        $store_id = store::where('user_id', $user_store_id)->value('id');
-        $carts = cart::all();
-        $value_check = 0;
 
+        $user_store_id = product::where('id', $id)->value('user_id');
+
+        $store_id = store::where('user_id', $user_store_id)->value('id');
+
+        // التحقق من كمية الطلب
+        $request->validate([
+            'quantity' => 'required|integer|min:1',
+            'product_variant_id' => 'nullable|integer|min:1',
+        ]);
+
+        // إنشاء السلة أو جلبها
         $cart = DB::table('carts')
             ->where('user_id', $user_id)
             ->where('store_id', $store_id)
             ->first();
 
         if (! $cart) {
+
             $cart_id = DB::table('carts')->insertGetId([
                 'user_id' => $user_id,
                 'store_id' => $store_id,
             ]);
+
         } else {
+
             $cart_id = $cart->id;
         }
 
-        $product_color_id = DB::table('product_color')
-            ->where('product_id', $id)
-            ->where('color_id', $request->color_id)
-            ->value('id');
+        // ========================================
+        // جلب المتغير الخاص بالمنتج
+        // ========================================
 
-        $product_size_id = DB::table('product_size')
-            ->where('product_id', $id)
-            ->where('size_id', $request->size_id)
-            ->value('id');
+        $product_variant_id = $request->input('product_variant_id');
 
-        $product_engraving_id = DB::table('product_engraving')
+        $variants = DB::table('product_variants')
             ->where('product_id', $id)
-            ->where('engraving_id', $request->engraving_id)
-            ->value('id');
+            ->get();
+
+        if ($variants->isEmpty()) {
+
+            // المنتج ليس لديه أي متغير
+            $product_variant_id = null;
+
+        } elseif ($product_variant_id) {
+
+            // التأكد أن المتغير المختار تابع للمنتج
+            $variant = $variants->firstWhere(
+                'id',
+                (int) $product_variant_id
+            );
+
+            if (! $variant) {
+                return back()->with(
+                    'error',
+                    'المتغير المحدد غير موجود لهذا المنتج'
+                );
+            }
+
+            $product_variant_id = $variant->id;
+
+        } elseif ($variants->count() === 1) {
+
+            // يوجد متغير واحد فقط
+            // نتأكد أنه لا يحتوي على سمات
+            $variant = $variants->first();
+
+            $hasFeatures = DB::table('product_variant_features')
+                ->where('product_variant_id', $variant->id)
+                ->exists();
+
+            if ($hasFeatures) {
+                return back()->with(
+                    'error',
+                    'يرجى اختيار سمات المنتج'
+                );
+            }
+
+            // المتغير الوحيد ليس لديه سمات
+            $product_variant_id = $variant->id;
+
+        } else {
+
+            // توجد عدة متغيرات ولم يتم اختيار واحد
+            return back()->with(
+                'error',
+                'يرجى اختيار متغير المنتج'
+            );
+        }
+
+        // ========================================
+        // البحث عن المنتج في السلة
+        // ========================================
 
         $cartProduct = DB::table('cart_products')
             ->where('cart_id', $cart_id)
             ->where('product_id', $id)
-            ->where('product_color_id', $product_color_id)
-            ->where('product_size_id', $product_size_id)
-            ->where('product_engraving_id', $product_engraving_id)
+            ->where('product_variant_id', $product_variant_id)
             ->first();
 
+        // ========================================
+        // إضافة المنتج أو تحديث الكمية
+        // ========================================
+
         if ($cartProduct) {
+
             DB::table('cart_products')
                 ->where('id', $cartProduct->id)
                 ->update([
-                    'quantity' => $cartProduct->quantity + $request->quantity,
+                    'quantity' => $cartProduct->quantity
+                                + $request->quantity,
                 ]);
+
         } else {
+
             DB::table('cart_products')->insert([
                 'cart_id' => $cart_id,
                 'product_id' => $id,
-                'product_color_id' => $product_color_id,
-                'product_size_id' => $product_size_id,
-                'product_engraving_id' => $product_engraving_id,
+                'product_variant_id' => $product_variant_id,
                 'price' => $request->price,
                 'quantity' => $request->quantity,
             ]);
         }
 
-        $data['categories'] = category::with(['products' => function ($q) {
-            $q->latest();
-        }])->get();
+        // ========================================
+        // إرجاع النتيجة
+        // ========================================
 
-        return back()->with('success', 'تم الإضافة الى السلة بنجاح');
+        $data['categories'] = category::with([
+            'products' => function ($q) {
+                $q->latest();
+            },
+        ])->get();
+
+        return back()->with(
+            'success',
+            'تم الإضافة الى السلة بنجاح'
+        );
     }
 
     /**
