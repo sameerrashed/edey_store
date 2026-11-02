@@ -31,6 +31,10 @@ class ProductController extends Controller
             ->where('product_id', $id)
             ->get();
 
+        $data['inventory'] = DB::table('inventories')
+            ->where('product_id', $product->id)
+            ->first();
+
         $variants = $product->variants;
 
         // معرفات السمات والجداول المرتبطة بها
@@ -186,6 +190,11 @@ class ProductController extends Controller
 
     public function addFavorites($id)
     {
+
+        if (! auth()->check() || auth()->user()->id != $id) {
+            return redirect()->route('website.login')->with('error', 'يجب تسجيل الدخول أولاً');
+        }
+
         $product = product::findOrFail($id);
         $data['title'] = 'ايدي ستور';
         $data['cart'] = cart::where('user_id', auth()->user()->id);

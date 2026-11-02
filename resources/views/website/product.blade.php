@@ -268,7 +268,7 @@
                                     <div class="quantity_avalible">
                                         الكمية المتوفرة :
                                         <span id="available_quantity">
-                                            اختر صفات المنتج أولاً
+                                            جاري تحديد الكمية...
                                         </span>
                                     </div>
                                     <div class="m_product_action_list clearfix">
@@ -583,7 +583,7 @@
             });
         @endif
     </script>
-
+    // صفات المنتج والكمية المتوفرة
     <script>
         document.addEventListener('DOMContentLoaded', function() {
 
@@ -624,6 +624,37 @@
 
             function updateStock() {
 
+                // الكمية الأساسية للمنتج
+                const inventoryQuantity = @json($inventory ? (int) $inventory->quantity : 0);
+
+                // إذا كان المنتج لا يحتوي على أنواع
+
+                // المنتج لا يحتوي على سمات للاختيار
+                if (featureIds.length === 0) {
+
+                    variantInput.value = '';
+
+                    if (inventoryQuantity > 0) {
+
+                        stockText.textContent =
+                            inventoryQuantity + ' قطعة متوفرة';
+
+                        stockText.classList.add('in-stock');
+                        stockText.classList.remove('out-of-stock');
+
+                    } else {
+
+                        stockText.textContent = 'نفدت الكمية';
+
+                        stockText.classList.add('out-of-stock');
+                        stockText.classList.remove('in-stock');
+                    }
+
+                    return;
+                }
+
+
+
                 const selected = {};
 
                 radios.forEach(radio => {
@@ -640,6 +671,22 @@
                 const complete = featureIds.every(id =>
                     selected[id] !== undefined
                 );
+
+
+                if (featureIds.length === 0 && variants.length === 0) {
+
+                    const mainQuantity = Number(
+                        @json((int) ($product->count ?? 0))
+                    );
+
+                    stockText.textContent = mainQuantity > 0 ?
+                        mainQuantity + ' قطعة متوفرة' :
+                        'نفدت الكمية';
+
+                    variantInput.value = '';
+                    return;
+                }
+
 
                 if (!complete) {
                     stockText.textContent = 'اختر صفات المنتج أولاً';
@@ -659,10 +706,34 @@
                 console.log('Selected Key:', selectedKey);
                 console.log('Matched Variant:', variant);
 
+
                 if (!variant) {
-                    stockText.textContent = 'هذه التركيبة غير متوفرة';
+
+                    // استخدام الكمية الأساسية فقط إذا لم تكن
+                    // هناك أنواع محفوظة لهذا المنتج
+                    if (variants.length === 0) {
+
+                        const mainQuantity = Number(
+                            @json((int) ($product->count ?? 0))
+                        );
+
+                        if (mainQuantity > 0) {
+                            stockText.textContent =
+                                mainQuantity + ' قطعة متوفرة';
+                        } else {
+                            stockText.textContent = 'نفدت الكمية';
+                        }
+
+                    } else {
+                        // المنتج له أنواع، لكن الاختيار غير مطابق
+                        stockText.textContent =
+                            'هذه التركيبة غير متوفرة';
+                    }
+
+                    variantInput.value = '';
                     return;
                 }
+
 
                 const quantity = Number(variant.quantity);
 
@@ -693,9 +764,6 @@
 
         });
     </script>
-
-
-
     <script>
         document.addEventListener('DOMContentLoaded', function() {
 
@@ -738,9 +806,6 @@
 
         });
     </script>
-
-
-
 </body>
 
 </html>

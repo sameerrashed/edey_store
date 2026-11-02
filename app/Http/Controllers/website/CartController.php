@@ -108,6 +108,9 @@ class CartController extends Controller
      */
     public function store($id, Request $request)
     {
+        if (! auth()->check() || auth()->user()->id != $id) {
+            return redirect()->route('website.login')->with('error', 'يجب تسجيل الدخول أولاً');
+        }
 
         if ($request->color_id == 'undefined' || empty($request->color_id)) {
             return back()->with('error', 'يجب اختيار اللون');
