@@ -9,6 +9,44 @@
     <title>{{ $title }}</title>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @include('website.partial.links')
+    <style>
+        .product-color-circle {
+            display: inline-block;
+            width: 21px;
+            height: 21px;
+            min-width: 21px;
+            border-radius: 50%;
+            border: 1px solid #ddd;
+        }
+
+        .product-pattern-image {
+            display: block;
+            width: 38px;
+            height: 38px;
+            object-fit: cover;
+            border-radius: 6px;
+        }
+
+        .mproduct_check .feature-item {
+            cursor: pointer;
+        }
+
+        .mproduct_check .feature-item.selected {
+            background-color: #a69ed1;
+        }
+
+        .quantity_avalible #available_quantity {
+            font-weight: 600;
+        }
+
+        .quantity_avalible #available_quantity.in-stock {
+            color: #198754;
+        }
+
+        .quantity_avalible #available_quantity.out-of-stock {
+            color: #dc3545;
+        }
+    </style>
 
 </head>
 
@@ -71,7 +109,7 @@
                     <div class="col-md-7">
                         <div class="details_mproduct">
                             <div class="mcategory_seller">
-                                <h3>{{ $product->user->first_name . ' ' . $product->user->last_name}}</h3>
+                                <h3>{{ $product->user->first_name . ' ' . $product->user->last_name }}</h3>
                                 <div class="mn_eva">
                                     <p>المبيعات 20 </p>
                                 </div>
@@ -88,19 +126,24 @@
                                             <form action="#">
                                                 <div class="srate rate-input">
                                                     <span class="rating">
-                                                        <input type="radio" name="rating" id="star5" value="5">
+                                                        <input type="radio" name="rating" id="star5"
+                                                            value="5">
                                                         <label for="star5"><span class="fas fa-star"></span></label>
 
-                                                        <input type="radio" name="rating" id="star4" value="4">
+                                                        <input type="radio" name="rating" id="star4"
+                                                            value="4">
                                                         <label for="star4"><span class="fas fa-star"></span></label>
 
-                                                        <input type="radio" name="rating" id="star3" value="3" checked>
+                                                        <input type="radio" name="rating" id="star3"
+                                                            value="3" checked>
                                                         <label for="star3"><span class="fas fa-star"></span></label>
 
-                                                        <input type="radio" name="rating" id="star2" value="2">
+                                                        <input type="radio" name="rating" id="star2"
+                                                            value="2">
                                                         <label for="star2"><span class="fas fa-star"></span></label>
 
-                                                        <input type="radio" name="rating" id="star1" value="1">
+                                                        <input type="radio" name="rating" id="star1"
+                                                            value="1">
                                                         <label for="star1"><span class="fas fa-star"></span></label>
                                                     </span>
                                                 </div>
@@ -113,7 +156,8 @@
                                     <div class="mproduct_sale">
                                         @if ($product->price_after > 0)
                                             <p>{{ $product->price_after }} د.ك</p>
-                                            <p class="mold_sale price-item active" data-price="{{ $product->price }}">
+                                            <p class="mold_sale price-item active"
+                                                data-price="{{ $product->price }}">
                                                 {{ $product->price }} د.ك
                                             </p>
                                         @else
@@ -128,62 +172,110 @@
                                     <h3>وصف المنتج :</h3>
                                     <p>{{ $product->description }}</p>
                                 </div>
-                                <div class="mproduct_check">
-                                    <div class="rw_check_list">
-                                        <h3>إختر اللون :</h3>
-                                        <div class="list_type_check checks_group">
-                                            @foreach ($product->colors as $color)
-                                                <div class="itm_check_tp color-item" data-id="{{ $color->id }}">
-                                                    <input type="radio" class="radio_sty" name="color_id">
-                                                    <div class="label_title_ch ch_color"
-                                                        style="width:100%;display: block;text-align: center;">
-                                                        {{ $color->name }}
+
+                                <div class="mproduct_check" dir="rtl">
+
+                                    @foreach ($productFeatures as $feature)
+                                        <div class="rw_check_list">
+
+                                            <h3>إختر {{ $feature['name'] }} :</h3>
+
+                                            <div class="list_type_check checks_group">
+
+                                                @foreach ($feature['options'] as $option)
+                                                    @php
+                                                        $isColor = $feature['id'] == 1;
+                                                        $isEngraving = $feature['id'] == 2;
+
+                                                        $colorCode = $option['color'] ?? '';
+
+                                                        // عدّل المسار حسب مكان حفظ صور النقوش
+                                                        $imageUrl = !empty($option['avatar'])
+                                                            ? asset('storage/' . $option['avatar'])
+                                                            : '';
+                                                    @endphp
+
+                                                    <div class="itm_check_tp feature-item"
+                                                        data-feature-id="{{ $feature['id'] }}"
+                                                        data-value-id="{{ $option['id'] }}"
+                                                        data-image="{{ $isColor ? $colorCode : $imageUrl }}">
+
+                                                        <input type="radio" class="radio_sty"
+                                                            name="features[{{ $feature['id'] }}]"
+                                                            value="{{ $option['id'] }}"
+                                                            id="feature_{{ $feature['id'] }}_{{ $option['id'] }}">
+
+                                                        <label for="feature_{{ $feature['id'] }}_{{ $option['id'] }}"
+                                                            class="label_title_ch ch_color"
+                                                            style="
+                                width:100%;
+                                display:flex;
+                                align-items:center;
+                                justify-content:center;
+                                gap:8px;
+                                cursor:pointer;
+                            ">
+
+                                                            {{-- عرض اللون --}}
+                                                            @if ($isColor)
+                                                                <span>
+                                                                    {{ $option['name'] }}
+                                                                </span>
+
+                                                                <span class="product-color-circle"
+                                                                    style="background-color: {{ $colorCode }};"></span>
+
+                                                                {{-- عرض صورة النقش --}}
+                                                            @elseif($isEngraving)
+                                                                @if ($imageUrl)
+                                                                    <img src="{{ $imageUrl }}"
+                                                                        alt="{{ $option['name'] }}"
+                                                                        title="{{ $option['name'] }}"
+                                                                        class="product-pattern-image">
+                                                                @else
+                                                                    <span>
+                                                                        {{ $option['name'] }}
+                                                                    </span>
+                                                                @endif
+
+                                                                {{-- عرض المقاس --}}
+                                                            @else
+                                                                <span>
+                                                                    {{ $option['name'] }}
+                                                                </span>
+                                                            @endif
+
+                                                        </label>
+
                                                     </div>
-                                                </div>
-                                            @endforeach
+                                                @endforeach
+
+                                            </div>
+
                                         </div>
-                                    </div>
-                                    <div class="rw_check_list">
-                                        <h3>إختر النقش :</h3>
-                                        <div class="inscriptions_list checks_group">
-                                            @foreach ($product->engravings as $engraving)
-                                                <div class="inscriptions_itm engraving-item" data-id="{{ $engraving->id }}">
-                                                    <input type="radio" class="radio_sty" name="engraving_id" checked="">
-                                                    <div class="inscription_label">
-                                                        <img src="{{asset('img/' . $engraving->avatar) }}" alt="">
-                                                    </div>
-                                                </div>
-                                            @endforeach
-                                        </div>
-                                    </div>
-                                    <div class="rw_check_list">
-                                        <h3>إختر الحجم :</h3>
-                                        <div class="list_type_check checks_group">
-                                            @foreach ($product->sizes as $size)
-                                                <div class="itm_check_tp size-item" data-id="{{ $size->id }}">
-                                                    <input type="radio" class="radio_sty" name="size_id">
-                                                    <div class="label_title_ch ch_size"
-                                                        style="width:100%;display: block;text-align: center;">
-                                                        {{ $size->name }}
-                                                    </div>
-                                                </div>
-                                            @endforeach
-                                        </div>
-                                    </div>
+                                    @endforeach
+
                                 </div>
+
+                                <input type="hidden" name="product_variant_id" id="selected_variant_id">
                                 <div class="mproduct_note">
                                     <h3>ملاحظات مع المنتج</h3>
                                     <div class="form-group">
-                                        <textarea class="form-control"
-                                            placeholder="أدخل ملاحظاتك الإضافية على المنتج"></textarea>
+                                        <textarea class="form-control" placeholder="أدخل ملاحظاتك الإضافية على المنتج"></textarea>
                                     </div>
                                 </div>
                                 <div class="mproduct_action">
-                                    <div class="quantity_avalible">الكمية المتوفرة :{{ $product->count }}</div>
+                                    <div class="quantity_avalible">
+                                        الكمية المتوفرة :
+                                        <span id="available_quantity">
+                                            اختر صفات المنتج أولاً
+                                        </span>
+                                    </div>
                                     <div class="m_product_action_list clearfix">
                                         <div class="ac_itm quantity_acp">
                                             <div class="quantity">
-                                                <input type="text" name="quantity" value="1" max="{{ $product->count }}"
+                                                <input type="text" name="quantity" value="1"
+                                                    max="{{ $product->count }}"
                                                     class="jsQuantity available-count count-quat">
                                                 <div class="btn button-count inc jsQuantityIncrease">
                                                     <i class="far fa-plus"></i>
@@ -196,7 +288,8 @@
                                         </div>
                                         <div class="ac_itm addCart_acp">
                                             <a href="{{ route('products.cart.store', $product->id) }}"
-                                                data-id="{{ $product->id }}" class="btn m_pro_addCart addToCartBtn"><i
+                                                data-id="{{ $product->id }}"
+                                                class="btn m_pro_addCart addToCartBtn"><i
                                                     class="fal fa-shopping-cart"></i>أضف لعربة
                                                 التسوق</a>
                                         </div>
@@ -237,9 +330,9 @@
                                         <div class="cn_product_txt">
                                             <h2><a href="#">{{ $record->product_name }}</a></h2>
                                             <div class="seller_info">
-                                                <img src="{{asset('img/' . $record->user->image)  }}" alt="...">
+                                                <img src="{{ asset('img/' . $record->user->image) }}" alt="...">
                                                 <span
-                                                    class="seller_name">{{ $record->user->first_name . ' ' . $record->user->last_name}}</span>
+                                                    class="seller_name">{{ $record->user->first_name . ' ' . $record->user->last_name }}</span>
                                             </div>
                                             <div class="d-flex justify-content-between">
                                                 <div class="pro_evaluate">
@@ -293,9 +386,9 @@
                                         <div class="cn_product_txt">
                                             <h2><a href="#">{{ $record->product_name }}</a></h2>
                                             <div class="seller_info">
-                                                <img src="{{asset('img/' . $record->user->image)  }}" alt="...">
+                                                <img src="{{ asset('img/' . $record->user->image) }}" alt="...">
                                                 <span
-                                                    class="seller_name">{{ $record->user->first_name . ' ' . $record->user->last_name}}</span>
+                                                    class="seller_name">{{ $record->user->first_name . ' ' . $record->user->last_name }}</span>
                                             </div>
                                             <div class="d-flex justify-content-between">
                                                 <div class="pro_evaluate">
@@ -339,25 +432,24 @@
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+    </script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    </script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-    <script src="{{asset('js/owl.carousel.min.js')}}"></script>
-    <script src="{{asset('js/lightslider.min.js')}}"></script>
-    <script src="{{asset('js/lightgallery.js')}}"></script>
-    <script src="{{asset('js/lg-thumbnail.min.js')}}"></script>
-    <script src="{{asset('js/lg-fullscreen.min.js')}}"></script>
-    <script src="{{asset('js/script.js')}}"></script>
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+    </script>
+    <script src="{{ asset('js/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('js/lightslider.min.js') }}"></script>
+    <script src="{{ asset('js/lightgallery.js') }}"></script>
+    <script src="{{ asset('js/lg-thumbnail.min.js') }}"></script>
+    <script src="{{ asset('js/lg-fullscreen.min.js') }}"></script>
+    <script src="{{ asset('js/script.js') }}"></script>
     <script>
-
         // اختيار اللون
-        $(document).on('click', '.color-item', function () {
+        $(document).on('click', '.color-item', function() {
 
             $('.color-item').removeClass('active');
 
@@ -367,7 +459,7 @@
 
 
         // اختيار الحجم
-        $(document).on('click', '.size-item', function () {
+        $(document).on('click', '.size-item', function() {
 
             $('.size-item').removeClass('active');
 
@@ -377,7 +469,7 @@
 
 
         // اختيار النقش
-        $(document).on('click', '.engraving-item', function () {
+        $(document).on('click', '.engraving-item', function() {
 
             $('.engraving-item').removeClass('active');
 
@@ -388,7 +480,7 @@
 
 
         // زر اضافة للسلة
-        $(document).on('click', '.addToCartBtn', function (e) {
+        $(document).on('click', '.addToCartBtn', function(e) {
 
             e.preventDefault();
             let product_id = $(this).data('id');
@@ -411,10 +503,9 @@
             window.location.href = url;
 
         });
-
     </script>
     <script type="text/javascript">
-        $(document).ready(function () {
+        $(document).ready(function() {
             $('#imageGallery').lightSlider({
                 gallery: true,
                 item: 1,
@@ -430,7 +521,7 @@
                 thumbMargin: 10,
                 enableDrag: false,
                 currentPagerPosition: 'middle',
-                onSliderLoad: function (el) {
+                onSliderLoad: function(el) {
                     el.lightGallery({
                         selector: '#imageGallery .lslide'
                     });
@@ -441,7 +532,7 @@
     <script>
         $(document).off('click', '.jsQuantityIncrease');
         $(document).off('click', '.jsQuantityDecrease');
-        $(document).on('click', '.jsQuantityIncrease', function (e) {
+        $(document).on('click', '.jsQuantityIncrease', function(e) {
             e.preventDefault();
             e.stopImmediatePropagation();
 
@@ -456,7 +547,7 @@
                 input.val(max);
             }
         });
-        $(document).on('click', '.jsQuantityDecrease', function (e) {
+        $(document).on('click', '.jsQuantityDecrease', function(e) {
 
             e.preventDefault();
             e.stopImmediatePropagation();
@@ -476,7 +567,7 @@
         });
     </script>
     <script>
-        @if(session('success'))
+        @if (session('success'))
             Swal.fire({
                 text: "{{ session('success') }}",
                 icon: "success",
@@ -484,7 +575,7 @@
             });
         @endif
 
-        @if(session('error'))
+        @if (session('error'))
             Swal.fire({
                 text: "{{ session('error') }}",
                 icon: "error",
@@ -492,6 +583,164 @@
             });
         @endif
     </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+
+            const variants = @json($variantOptions);
+
+            const container = document.querySelector('.mproduct_check');
+            const stockText = document.getElementById('available_quantity');
+            const variantInput = document.getElementById('selected_variant_id');
+
+            if (!container || !stockText || !variantInput) {
+                console.error('Missing elements');
+                return;
+            }
+
+            const radios = container.querySelectorAll(
+                '.feature-item input[type="radio"]'
+            );
+
+            const featureIds = [
+                ...new Set(
+                    Array.from(radios).map(radio =>
+                        radio.closest('.feature-item').dataset.featureId
+                    )
+                )
+            ];
+
+            function normalizeKey(key) {
+                return String(key || '')
+                    .split('|')
+                    .map(part => part.trim())
+                    .filter(Boolean)
+                    .sort((a, b) =>
+                        Number(a.split(':')[0]) -
+                        Number(b.split(':')[0])
+                    )
+                    .join('|');
+            }
+
+            function updateStock() {
+
+                const selected = {};
+
+                radios.forEach(radio => {
+                    if (radio.checked) {
+                        const item = radio.closest('.feature-item');
+
+                        selected[item.dataset.featureId] =
+                            String(radio.value);
+                    }
+                });
+
+                variantInput.value = '';
+
+                const complete = featureIds.every(id =>
+                    selected[id] !== undefined
+                );
+
+                if (!complete) {
+                    stockText.textContent = 'اختر صفات المنتج أولاً';
+                    return;
+                }
+
+                const selectedKey = Object.keys(selected)
+                    .sort((a, b) => Number(a) - Number(b))
+                    .map(id => `${id}:${selected[id]}`)
+                    .join('|');
+
+                const variant = variants.find(item =>
+                    normalizeKey(item.variant_key) ===
+                    normalizeKey(selectedKey)
+                );
+
+                console.log('Selected Key:', selectedKey);
+                console.log('Matched Variant:', variant);
+
+                if (!variant) {
+                    stockText.textContent = 'هذه التركيبة غير متوفرة';
+                    return;
+                }
+
+                const quantity = Number(variant.quantity);
+
+                if (
+                    variant.stock_status !== 'available' ||
+                    quantity <= 0
+                ) {
+                    stockText.textContent = 'نفدت الكمية';
+                    return;
+                }
+
+                stockText.textContent = quantity + ' قطعة متوفرة';
+                variantInput.value = variant.id;
+            }
+
+            container.addEventListener('change', function(event) {
+
+                if (!event.target.matches(
+                        '.feature-item input[type="radio"]'
+                    )) {
+                    return;
+                }
+
+                updateStock();
+            });
+
+            updateStock();
+
+        });
+    </script>
+
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+
+            console.log('DOM READY');
+
+            const container = document.querySelector('.mproduct_check');
+
+            const quantityText = document.getElementById(
+                'available_quantity'
+            );
+
+            const variantInput = document.getElementById(
+                'selected_variant_id'
+            );
+
+            console.log('Container:', container);
+            console.log('Quantity:', quantityText);
+            console.log('Variant Input:', variantInput);
+
+            if (container) {
+
+                const radios = container.querySelectorAll(
+                    '.feature-item input[type="radio"]'
+                );
+
+                console.log('Radios found:', radios.length);
+
+                radios.forEach(radio => {
+
+                    radio.addEventListener('change', function() {
+
+                        console.log('COLOR CHANGED');
+
+                        console.log('Selected value:', this.value);
+
+                    });
+
+                });
+            }
+
+        });
+    </script>
+
+
+
 </body>
 
 </html>
