@@ -19,7 +19,7 @@ class ProductController extends Controller
         $data['engravings'] = DB::table('product_engraving')
             ->where('product_id', $id)
             ->get();
-        $data['slider'] = DB::table('pruduct_slider')
+        $data['slider'] = DB::table('product_slider')
             ->where('product_id', $id)
             ->get();
 
