@@ -112,17 +112,17 @@ class CartController extends Controller
             return redirect()->route('website.login')->with('error', 'يجب تسجيل الدخول أولاً');
         }
 
-        if ($request->color_id == 'undefined' || empty($request->color_id)) {
-            return back()->with('error', 'يجب اختيار اللون');
-        }
+        // if ($request->color_id == 'undefined' || empty($request->color_id)) {
+        //     return back()->with('error', 'يجب اختيار اللون');
+        // }
 
-        if ($request->size_id == 'undefined' || empty($request->size_id)) {
-            return back()->with('error', 'يجب اختيار الحجم');
-        }
+        // if ($request->size_id == 'undefined' || empty($request->size_id)) {
+        //     return back()->with('error', 'يجب اختيار الحجم');
+        // }
 
-        if ($request->engraving_id == 'undefined' || empty($request->engraving_id)) {
-            return back()->with('error', 'يجب اختيار النقش');
-        }
+        // if ($request->engraving_id == 'undefined' || empty($request->engraving_id)) {
+        //     return back()->with('error', 'يجب اختيار النقش');
+        // }
         $user_id = auth()->id();
         $user_store_id = product::where('id', $id)->value('user_id');
         $store_id = store::where('user_id', $user_store_id)->value('id');

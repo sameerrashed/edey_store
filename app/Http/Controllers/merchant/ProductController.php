@@ -372,7 +372,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-
+        // dd('ss');
         if ($request->price < $request->price_after) {
             return redirect()
                 ->back()->withInput()->with('error', 'سعر المنتج بعد الخصم يجب أن يكون أقل من السعر الأصلي');

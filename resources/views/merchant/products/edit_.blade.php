@@ -751,13 +751,13 @@
             });
         @endif
 
-        // @if (session('error'))
-        //     Swal.fire({
-        //         text: "{{ session('error') }}",
-        //         icon: "error",
-        //         confirmButtonText: "حسناً"
-        //     });
-        // @endif
+        @if (session('error'))
+            Swal.fire({
+                text: "{{ session('error') }}",
+                icon: "error",
+                confirmButtonText: "حسناً"
+            });
+        @endif
     </script>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
