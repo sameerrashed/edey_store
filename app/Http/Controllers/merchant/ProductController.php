@@ -548,6 +548,26 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      */
+    public function draft($id)
+    {
+        $product = product::findOrFail($id);
+
+        $product->status = 0;
+        $product->save();
+
+        return redirect()->back()->with('success', 'تم تحويل المنتج إلى مسودة بنجاح');
+    }
+
+    public function publish($id)
+    {
+        $product = product::findOrFail($id);
+
+        $product->status = 1;
+        $product->save();
+
+        return redirect()->back()->with('success', 'تم نشر المنتج بنجاح');
+    }
+
     public function destroy($id)
     {
         $product = Product::findOrFail($id);

@@ -1,7 +1,7 @@
-@extends("merchant.layout._layout")
+@extends('merchant.layout._layout')
 @section('title', 'ايدي ستور')
 @section('breadcrumb')
-    <h1 class="d-flex text-dark fw-bolder fs-3 align-items-center my-1">{{__('app.' . $title)}}</h1>
+    <h1 class="d-flex text-dark fw-bolder fs-3 align-items-center my-1">{{ __('app.' . $title) }}</h1>
     <!--end::Title-->
     <!--begin::Separator-->
     <span class="h-20px border-gray-300 border-start mx-4"></span>
@@ -10,7 +10,7 @@
     <ul class="breadcrumb breadcrumb-separatorless fw-bold fs-7 my-1">
         <!--begin::Item-->
         <li class="breadcrumb-item text-muted">
-            <a href="{{route('admin.Dashboard.index')}}" class="text-muted text-hover-primary">{{__('app.Dashboard')}}</a>
+            <a href="{{ route('admin.Dashboard.index') }}" class="text-muted text-hover-primary">{{ __('app.Dashboard') }}</a>
         </li>
         <!--end::Item-->
         <!--begin::Item-->
@@ -19,10 +19,10 @@
         </li>
         <!--end::Item-->
         <!--begin::Item-->
-        <li class="breadcrumb-item text-dark">{{__('app.' . $title)}}</li>
+        <li class="breadcrumb-item text-dark">{{ __('app.' . $title) }}</li>
     </ul>
 @endsection
-@section("body")
+@section('body')
     <div class="card">
         <!--begin::Card header-->
         <div class="card-header border-0 pt-6">
@@ -32,7 +32,8 @@
                 <div class="d-flex align-items-center position-relative my-1">
                     <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
                     <span class="svg-icon svg-icon-1 position-absolute ms-6">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                            fill="none">
                             <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1"
                                 transform="rotate(45 17.0365 15.1223)" fill="currentColor" />
                             <path
@@ -55,12 +56,14 @@
                     <a href="{{ route('merchant.Products.create') }}" class="btn btn-primary">
 
                         <span class="svg-icon svg-icon-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none">
 
                                 <rect opacity="0.5" x="11.364" y="20.364" width="16" height="2" rx="1"
                                     transform="rotate(-90 11.364 20.364)" fill="currentColor" />
 
-                                <rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="currentColor" />
+                                <rect x="4.36396" y="11.364" width="16" height="2" rx="1"
+                                    fill="currentColor" />
                             </svg>
                         </span>
 
@@ -95,17 +98,17 @@
                         <!--begin::Table body-->
                         <tbody class="text-gray-600 fw-bold">
                             <!--begin::Table row-->
-                            @foreach($records as $key => $record)
+                            @foreach ($records as $key => $record)
                                 <tr>
                                     <td>
-                                        {{($key + 1)}}
+                                        {{ $key + 1 }}
                                     </td>
                                     <td class="d-flex align-items-center">
                                         <!--begin:: Avatar -->
                                         <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
                                             <a href="">
                                                 <div class="symbol-label">
-                                                    <img src="{{asset('img/' . $record->avatar)}}" alt="Emma Smith"
+                                                    <img src="{{ asset('img/' . $record->avatar) }}" alt="Emma Smith"
                                                         class="w-100" />
                                                 </div>
                                             </a>
@@ -114,11 +117,11 @@
                                         <!--begin::User details-->
                                         <div class="d-flex flex-column">
                                             <a href=""
-                                                class="text-gray-800 text-hover-primary mb-1">{{$record->product_name}}</a>
+                                                class="text-gray-800 text-hover-primary mb-1">{{ $record->product_name }}</a>
                                         </div>
                                     </td>
-                                    <td>{{$record->price}}</td>
-                                    <td>{{$record->price_after}}</td>
+                                    <td>{{ $record->price }}</td>
+                                    <td>{{ $record->price_after }}</td>
                                     <td>
                                         @foreach ($record->categories as $category)
                                             <span class="badge badge-light-primary me-1 mb-1">
@@ -136,13 +139,13 @@
                                     <td>
                                         @if ($record->inventory->min_quantity >= $record->inventory->quantity)
                                             <p style="color: chocolate;">قاربت على النفاذ</p>
-                                            {{$record->inventory->quantity  }}
+                                            {{ $record->inventory->quantity }}
                                         @elseif ($record->inventory->min_quantity <= $record->inventory->quantity)
                                             <p style="color: green">متوفر</p>
-                                            {{$record->inventory->quantity}}
+                                            {{ $record->inventory->quantity }}
                                         @elseif ($record->inventory->quantity == 0)
                                             <p style="color: red">غير متوفر</p>
-                                            {{$record->inventory->quantity}}
+                                            {{ $record->inventory->quantity }}
                                         @endif
 
                                     </td>
@@ -169,15 +172,24 @@
                                             data-kt-menu="true">
                                             <!--begin::Menu item-->
                                             <div class="menu-item px-3">
-                                                <a href="{{route('merchant.Products.edit', $record->id)}}"
+                                                <a href="{{ route('merchant.Products.edit', $record->id) }}"
                                                     class="menu-link px-3">تعديل</a>
                                             </div>
-                                            <!--end::Menu item-->
-                                            <!--begin::Menu item-->
                                             <div class="menu-item px-3">
-                                                <a href="{{route('merchant.Products.delete', $record->id)}}"
+                                                <a href="{{ route('merchant.Products.delete', $record->id) }}"
                                                     class="menu-link px-3" data-kt-users-table-filter="delete_row">حذف</a>
                                             </div>
+                                            @if ($record->status == 1)
+                                                <div class="menu-item px-3">
+                                                    <a href="{{ route('merchant.Products.draft', $record->id) }}"
+                                                        class="menu-link px-3">إضافة مسودة</a>
+                                                </div>
+                                            @else
+                                                <div class="menu-item px-3">
+                                                    <a href="{{ route('merchant.Products.publish', $record->id) }}"
+                                                        class="menu-link px-3">نشر المنتج</a>
+                                                </div>
+                                            @endif
                                             <!--end::Menu item-->
                                         </div>
                                         <!--end::Menu-->
@@ -212,8 +224,8 @@
 @endsection
 @section('script')
     <script>
-        $(document).ready(function () {
-            $('#has_color').on('change', function () {
+        $(document).ready(function() {
+            $('#has_color').on('change', function() {
                 if ($(this).is(':checked')) {
                     $('#color_select_box').removeClass('d-none');
                 } else {
@@ -224,10 +236,10 @@
         });
     </script>
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
 
             // اللون
-            $('#has_color').on('change', function () {
+            $('#has_color').on('change', function() {
                 if ($(this).is(':checked')) {
                     $('#color_select_box').removeClass('d-none');
                 } else {
@@ -237,7 +249,7 @@
             });
 
             // الحجم
-            $('#has_size').on('change', function () {
+            $('#has_size').on('change', function() {
                 if ($(this).is(':checked')) {
                     $('#size_select_box').removeClass('d-none');
                 } else {
@@ -248,7 +260,7 @@
 
         });
 
-        $('#has_engraving').on('change', function () {
+        $('#has_engraving').on('change', function() {
             if ($(this).is(':checked')) {
                 $('#engraving_select_box').removeClass('d-none');
             } else {
@@ -257,19 +269,17 @@
             }
         });
 
-        $(document).ready(function () {
+        $(document).ready(function() {
             $('[data-control="select2"]').select2();
         });
 
-        $(document).on('shown.bs.modal', function () {
+        $(document).on('shown.bs.modal', function() {
             $('[data-control="select2"]').select2();
         });
-
-
     </script>
 
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
 
             let modal = $('#kt_modal_add_category'); // ← عدل هذا حسب id المودال عندك
 
@@ -282,7 +292,7 @@
             });
 
             // اللون
-            $('#has_color').on('change', function () {
+            $('#has_color').on('change', function() {
                 if ($(this).is(':checked')) {
                     $('#color_box').removeClass('d-none');
                 } else {
@@ -292,7 +302,7 @@
             });
 
             // الحجم
-            $('#has_size').on('change', function () {
+            $('#has_size').on('change', function() {
                 if ($(this).is(':checked')) {
                     $('#size_box').removeClass('d-none');
                 } else {
@@ -302,7 +312,7 @@
             });
 
             // النقش
-            $('#has_engraving').on('change', function () {
+            $('#has_engraving').on('change', function() {
                 if ($(this).is(':checked')) {
                     $('#engraving_box').removeClass('d-none');
                 } else {
