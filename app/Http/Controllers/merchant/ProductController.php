@@ -97,6 +97,7 @@ class ProductController extends Controller
 
         $product = new product;
         $product->product_name = $request->product_name;
+        $product->status = (int) $request->input('status');
         try {
             $response = (new ProductWriter)->prompt(
                 'اكتب وصفًا للمنتج التالي: '.$product->product_name,

@@ -21,6 +21,7 @@ class product extends Model
         'category_id',
         'user_id',
         'type_id',
+        'status',
     ];
 
     public static function get_Fields(): array

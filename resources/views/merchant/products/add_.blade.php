@@ -1,7 +1,7 @@
-@extends("merchant.layout._layout")
+@extends('merchant.layout._layout')
 @section('title', 'ايدي ستور')
 @section('breadcrumb')
-    <h1 class="d-flex text-dark fw-bolder fs-3 align-items-center my-1">{{__('app.' . $parent_title)}}</h1>
+    <h1 class="d-flex text-dark fw-bolder fs-3 align-items-center my-1">{{ __('app.' . $parent_title) }}</h1>
     <!--end::Title-->
     <!--begin::Separator-->
     <span class="h-20px border-gray-300 border-start mx-4"></span>
@@ -10,7 +10,7 @@
     <ul class="breadcrumb breadcrumb-separatorless fw-bold fs-7 my-1">
         <!--begin::Item-->
         <li class="breadcrumb-item text-muted">
-            <a href="{{route('admin.Dashboard.index')}}" class="text-muted text-hover-primary">{{__('app.Dashboard')}}</a>
+            <a href="{{ route('admin.Dashboard.index') }}" class="text-muted text-hover-primary">{{ __('app.Dashboard') }}</a>
         </li>
         <!--end::Item-->
         <!--begin::Item-->
@@ -19,16 +19,16 @@
         </li>
         <!--end::Item-->
         <!--begin::Item-->
-        <li class="breadcrumb-item text-dark">{{__('app.' . $parent_title)}}</li>
+        <li class="breadcrumb-item text-dark">{{ __('app.' . $parent_title) }}</li>
 
         <li class="breadcrumb-item">
             <span class="bullet bg-gray-300 w-5px h-2px"></span>
         </li>
 
-        <li class="breadcrumb-item text-dark">{{__('app.' . $title)}}</li>
+        <li class="breadcrumb-item text-dark">{{ __('app.' . $title) }}</li>
     </ul>
 @endsection
-@section("body")
+@section('body')
 
     <div class="row g-7">
         <div class="col-xl-12">
@@ -119,7 +119,7 @@
                                                         placeholder="إسم المنتج" value="" required />
 
                                                     <input type="number" name="user_id" class="form-control mb-2"
-                                                        placeholder="إسم المنتج" value="{{auth()->user()->id}}" hidden />
+                                                        placeholder="إسم المنتج" value="{{ auth()->user()->id }}" hidden />
                                                     <!--end::Input-->
                                                     <!--begin::Description-->
                                                     <div class="text-muted fs-7">يُشترط وجود اسم للمنتج، ويُنصح بأن يكون
@@ -146,9 +146,9 @@
                                                     <label class="required form-label">السعر الأساسي</label>
                                                     <!--end::Label-->
                                                     <!--begin::Input-->
-                                                    <input type="number" name="price" class="form-control mb-2 price-input"
-                                                        placeholder="سعر المنتج" value="" dir="ltr"
-                                                        style="text-align: left;" required />
+                                                    <input type="number" name="price"
+                                                        class="form-control mb-2 price-input" placeholder="سعر المنتج"
+                                                        value="" dir="ltr" style="text-align: left;" required />
                                                     <!--end::Input-->
                                                     <!--begin::Description-->
                                                     <div class="text-muted fs-7">حدد سعر المنتج.</div>
@@ -176,8 +176,9 @@
                                                     <!--end::Label-->
                                                     <!--begin::Input-->
                                                     <input type="number" name="cost_price"
-                                                        class="form-control mb-2 price-input" placeholder="سعر تكلفة المنتج"
-                                                        value="" dir="ltr" style="text-align: left;" required />
+                                                        class="form-control mb-2 price-input"
+                                                        placeholder="سعر تكلفة المنتج" value="" dir="ltr"
+                                                        style="text-align: left;" required />
                                                     <!--end::Input-->
                                                     <!--begin::Description-->
                                                     <div class="text-muted fs-7">حدد سعر تكلفة المنتج .</div>
@@ -190,8 +191,8 @@
                                                     <!--end::Label-->
                                                     <!--begin::Input-->
                                                     <input type="number" name="min_quantity"
-                                                        class="form-control mb-2 price-input" value="1" dir="ltr"
-                                                        style="text-align: left;" />
+                                                        class="form-control mb-2 price-input" value="1"
+                                                        dir="ltr" style="text-align: left;" />
                                                     <!--end::Input-->
                                                     <!--begin::Description-->
                                                     <div class="text-muted fs-7">حدد الحد الأدنى لتوفر المنتج.</div>
@@ -204,8 +205,8 @@
                                                     <!--end::Label-->
                                                     <!--begin::Input-->
                                                     <input type="number" name="max_quantity"
-                                                        class="form-control mb-2 price-input" value="99" dir="ltr"
-                                                        style="text-align: left;" />
+                                                        class="form-control mb-2 price-input" value="99"
+                                                        dir="ltr" style="text-align: left;" />
                                                     <!--end::Input-->
                                                     <!--begin::Description-->
                                                     <div class="text-muted fs-7">حدد الحد الأعلى من المنتج.</div>
@@ -266,8 +267,8 @@
                                                     <!--end::Label-->
                                                     <!--begin::Input-->
                                                     <input type="number" name="quantity"
-                                                        class="form-control mb-2 price-input" value="99" dir="ltr"
-                                                        style="text-align: left;" required />
+                                                        class="form-control mb-2 price-input" value="99"
+                                                        dir="ltr" style="text-align: left;" required />
                                                     <!--end::Input-->
                                                     <!--begin::Description-->
                                                     <div class="text-muted fs-7">أدخل كمية المنتج.</div>
@@ -296,8 +297,9 @@
                                                 <div class="mb-10 fv-row">
                                                     <!--begin::Label-->
                                                     <select name="category[]"
-                                                        class="form-select form-select-solid lh-1 py-3" id="category_select"
-                                                        data-placeholder="إختر تصنيف للمنتج" multiple="multiple">
+                                                        class="form-select form-select-solid lh-1 py-3"
+                                                        id="category_select" data-placeholder="إختر تصنيف للمنتج"
+                                                        multiple="multiple">
 
                                                         <option></option>
 
@@ -320,13 +322,13 @@
                                                     <label class="required form-label">الماركة</label>
                                                     <!--end::Label-->
                                                     <!--begin::Input-->
-                                                    <select name="brand_id" class="form-select mb-2" data-hide-search="true"
-                                                        data-placeholder="Select an option"
+                                                    <select name="brand_id" class="form-select mb-2"
+                                                        data-hide-search="true" data-placeholder="Select an option"
                                                         id="kt_ecommerce_add_product_store_template" required>
                                                         <option value=""></option>
                                                         @foreach ($brands as $record)
                                                             <option value="{{ $record->id }}">
-                                                                {{ $record->name}}
+                                                                {{ $record->name }}
                                                             </option>
                                                         @endforeach
                                                     </select>
@@ -405,7 +407,8 @@
                                                             title="إختيار صورة">
                                                             <i class="bi bi-pencil-fill fs-7"></i>
                                                             <!--begin::Inputs-->
-                                                            <input type="file" name="avatar" accept=".png, .jpg, .jpeg" />
+                                                            <input type="file" name="avatar"
+                                                                accept=".png, .jpg, .jpeg" />
                                                             <input type="hidden" name="avatar_remove" />
                                                             <!--end::Inputs-->
                                                         </label>
@@ -503,7 +506,8 @@
                                                                     name="features">
                                                                     <option></option>
                                                                     @foreach ($features as $record)
-                                                                        <option value="{{ $record->id }}">{{ $record->name }}
+                                                                        <option value="{{ $record->id }}">
+                                                                            {{ $record->name }}
                                                                         </option>
                                                                     @endforeach
                                                                 </select>
@@ -557,20 +561,30 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="d-flex justify-content-center">
-                                <a href="{{ route('merchant.Products.store') }}" id="kt_ecommerce_add_product_cancel"
-                                    class="btn btn-light me-5"
-                                    style=" background-color: #ffb822;border-color: #ffb822;color: #111;">إضافة كمسودة</a>
-                                <button type="submit" id="" class="btn btn-primary">
-                                    <span class="indicator-label">إضافة</span>
-                                    <span class="indicator-progress">الرجاء الإنتظار...
-                                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+
+                            <div class="d-flex justify-content-center gap-4">
+
+                                <!-- إضافة كمسودة -->
+                                <button type="submit" name="status" value="0" class="btn btn-light me-5"
+                                    style="background-color: #ffb822; border-color: #ffb822; color: #111;">
+                                    إضافة كمسودة
                                 </button>
+
+                                <!-- إضافة المنتج -->
+                                <button type="submit" name="status" value="1" class="btn btn-primary">
+                                    <span class="indicator-label">إضافة</span>
+                                    <span class="indicator-progress">
+                                        الرجاء الإنتظار...
+                                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                    </span>
+                                </button>
+
                             </div>
+
                         </div>
                     </form>
                     <script>
-                        document.addEventListener('DOMContentLoaded', function () {
+                        document.addEventListener('DOMContentLoaded', function() {
 
                             const productType = document.getElementById(
                                 'kt_ecommerce_add_product_store_template'
@@ -597,11 +611,11 @@
                                 // ============================
                                 if (productType.value === '2') {
 
-                                    multipleTabs.forEach(function (item) {
+                                    multipleTabs.forEach(function(item) {
                                         item.classList.remove('d-none');
                                     });
 
-                                    multiplePanes.forEach(function (item) {
+                                    multiplePanes.forEach(function(item) {
                                         item.classList.remove('d-none');
                                     });
 
@@ -618,7 +632,7 @@
 
                                     // نتحقق هل المستخدم موجود حالياً داخل
                                     // إحدى نوافذ المنتج المتعدد
-                                    multiplePanes.forEach(function (item) {
+                                    multiplePanes.forEach(function(item) {
 
                                         if (item.classList.contains('active')) {
                                             wasMultipleTabActive = true;
@@ -628,13 +642,13 @@
 
 
                                     // نخفي أزرار المنتج المتعدد
-                                    multipleTabs.forEach(function (item) {
+                                    multipleTabs.forEach(function(item) {
                                         item.classList.add('d-none');
                                     });
 
 
                                     // نخفي محتوى المنتج المتعدد
-                                    multiplePanes.forEach(function (item) {
+                                    multiplePanes.forEach(function(item) {
 
                                         item.classList.add('d-none');
                                         item.classList.remove('show');
@@ -684,7 +698,7 @@
 
 
                             // عند تغيير نوع المنتج
-                            productType.addEventListener('change', function () {
+                            productType.addEventListener('change', function() {
 
                                 changeProductType();
 
@@ -699,8 +713,7 @@
 @endsection
 @section('script')
     <script>
-
-        $('#has_discount').change(function () {
+        $('#has_discount').change(function() {
 
             if ($(this).is(':checked')) {
 
@@ -713,10 +726,9 @@
             }
 
         });
-
     </script>
     <script>
-        @if(session('success'))
+        @if (session('success'))
             Swal.fire({
                 text: "{{ session('success') }}",
                 icon: "success",
@@ -724,7 +736,7 @@
             });
         @endif
 
-        @if(session('error'))
+        @if (session('error'))
             Swal.fire({
                 text: "{{ session('error') }}",
                 icon: "error",
@@ -733,7 +745,7 @@
         @endif
     </script>
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", function() {
 
             console.log("Dropzone type:", typeof Dropzone);
 
@@ -780,31 +792,31 @@
                     "X-CSRF-TOKEN": "{{ csrf_token() }}"
                 },
 
-                init: function () {
+                init: function() {
 
                     console.log("Dropzone initialized successfully");
 
-                    this.on("addedfile", function (file) {
+                    this.on("addedfile", function(file) {
 
                         console.log("File selected:");
                         console.log(file);
 
                     });
 
-                    this.on("sending", function (file, xhr, formData) {
+                    this.on("sending", function(file, xhr, formData) {
 
                         console.log("Sending image...");
 
                     });
 
-                    this.on("success", function (file, response) {
+                    this.on("success", function(file, response) {
 
                         console.log("Upload success:");
                         console.log(response);
 
                     });
 
-                    this.on("error", function (file, response) {
+                    this.on("error", function(file, response) {
 
                         console.error("Upload error:");
                         console.log(response);
@@ -818,13 +830,13 @@
         });
     </script>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
 
             const area = document.getElementById('product_media_area');
             const input = document.getElementById('product_images');
             const preview = document.getElementById('images_preview');
 
-            area.addEventListener('click', function (e) {
+            area.addEventListener('click', function(e) {
 
                 if (e.target.closest('.remove-image')) {
                     return;
@@ -834,7 +846,7 @@
             });
 
 
-            input.addEventListener('change', function () {
+            input.addEventListener('change', function() {
 
                 preview.innerHTML = '';
 
@@ -846,7 +858,7 @@
                     return;
                 }
 
-                files.forEach(function (file) {
+                files.forEach(function(file) {
 
                     if (!file.type.startsWith('image/')) {
                         return;
@@ -854,13 +866,14 @@
 
                     const reader = new FileReader();
 
-                    reader.onload = function (e) {
+                    reader.onload = function(e) {
 
                         const item = document.createElement('div');
 
                         item.style.position = 'relative';
 
-                        item.innerHTML = `
+                        item.innerHTML =
+                            `
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         <img src="${e.target.result}"
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              style="
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 width:100px;
@@ -882,8 +895,8 @@
         });
     </script>
     <script>
-        $(document).ready(function () {
-            $('#has_color').on('change', function () {
+        $(document).ready(function() {
+            $('#has_color').on('change', function() {
                 if ($(this).is(':checked')) {
                     $('#color_select_box').removeClass('d-none');
                 } else {
@@ -894,10 +907,10 @@
         });
     </script>
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
 
             // اللون
-            $('#has_color').on('change', function () {
+            $('#has_color').on('change', function() {
                 if ($(this).is(':checked')) {
                     $('#color_select_box').removeClass('d-none');
                 } else {
@@ -907,7 +920,7 @@
             });
 
             // الحجم
-            $('#has_size').on('change', function () {
+            $('#has_size').on('change', function() {
                 if ($(this).is(':checked')) {
                     $('#size_select_box').removeClass('d-none');
                 } else {
@@ -918,7 +931,7 @@
 
         });
 
-        $('#has_engraving').on('change', function () {
+        $('#has_engraving').on('change', function() {
             if ($(this).is(':checked')) {
                 $('#engraving_select_box').removeClass('d-none');
             } else {
@@ -927,18 +940,16 @@
             }
         });
 
-        $(document).ready(function () {
+        $(document).ready(function() {
             $('[data-control="select2"]').select2();
         });
 
-        $(document).on('shown.bs.modal', function () {
+        $(document).on('shown.bs.modal', function() {
             $('[data-control="select2"]').select2();
         });
-
-
     </script>
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
 
             let modal = $('#kt_modal_add_category'); // ← عدل هذا حسب id المودال عندك
 
@@ -951,7 +962,7 @@
             });
 
             // اللون
-            $('#has_color').on('change', function () {
+            $('#has_color').on('change', function() {
                 if ($(this).is(':checked')) {
                     $('#color_box').removeClass('d-none');
                 } else {
@@ -961,7 +972,7 @@
             });
 
             // الحجم
-            $('#has_size').on('change', function () {
+            $('#has_size').on('change', function() {
                 if ($(this).is(':checked')) {
                     $('#size_box').removeClass('d-none');
                 } else {
@@ -971,7 +982,7 @@
             });
 
             // النقش
-            $('#has_engraving').on('change', function () {
+            $('#has_engraving').on('change', function() {
                 if ($(this).is(':checked')) {
                     $('#engraving_box').removeClass('d-none');
                 } else {
@@ -983,11 +994,12 @@
         });
     </script>
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             const relatedSelect = $('#related_select');
             if (relatedSelect.hasClass('select2-hidden-accessible')) {
                 relatedSelect.select2('destroy');
             }
+
             function formatProduct(product) {
                 if (!product.id) {
                     return product.text;
@@ -997,7 +1009,8 @@
                     return product.text;
                 }
 
-                return $(`
+                return $(
+                    `
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     <div class="d-flex align-items-center gap-3">
 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         <img src="${image}"
@@ -1012,7 +1025,8 @@
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         <span>${product.text}</span>
 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                `);
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                `
+                );
             }
 
 
@@ -1030,7 +1044,7 @@
                 // شكل المنتج بعد الاختيار
                 templateSelection: formatProduct,
 
-                escapeMarkup: function (markup) {
+                escapeMarkup: function(markup) {
                     return markup;
                 }
 
@@ -1039,7 +1053,7 @@
         });
     </script>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             const addButton = document.getElementById('add_feature_btn');
             const featureSelect = document.getElementById(
                 'kt_ecommerce_add_features_store_template'
@@ -1048,7 +1062,7 @@
                 'selected_features_container'
             );
             const originalFeatures = [];
-            Array.from(featureSelect.options).forEach(function (option) {
+            Array.from(featureSelect.options).forEach(function(option) {
                 if (option.value !== '') {
                     originalFeatures.push({
                         id: option.value,
@@ -1056,11 +1070,12 @@
                     });
                 }
             });
+
             function refreshFeatureSelect() {
                 const usedFeatureIds = [];
                 container
                     .querySelectorAll('.feature-item')
-                    .forEach(function (row) {
+                    .forEach(function(row) {
                         usedFeatureIds.push(
                             String(row.dataset.featureId)
                         );
@@ -1073,7 +1088,7 @@
                 emptyOption.value = '';
                 emptyOption.textContent = '';
                 featureSelect.appendChild(emptyOption);
-                originalFeatures.forEach(function (feature) {
+                originalFeatures.forEach(function(feature) {
                     if (!usedFeatureIds.includes(String(feature.id))) {
                         const option = document.createElement('option');
                         option.value = feature.id;
@@ -1088,14 +1103,14 @@
                     allowClear: true
                 });
             }
-            addButton.addEventListener('click', function () {
+            addButton.addEventListener('click', function() {
                 const featureId = featureSelect.value;
                 if (!featureId) {
                     alert('اختر سمة أولاً');
                     return;
                 }
                 const selectedFeature = originalFeatures.find(
-                    function (feature) {
+                    function(feature) {
                         return String(feature.id) === String(featureId);
                     }
                 );
@@ -1106,18 +1121,19 @@
                     url: "{{ route('merchant.products.feature-values', ':id') }}"
                         .replace(':id', featureId),
                     type: "GET",
-                    success: function (response) {
+                    success: function(response) {
                         if (!response.status) {
                             alert('لم يتم العثور على قيم السمة');
                             return;
                         }
-                        let options = `
+                        let options =
+                            `
                                                                                                                                                                                                                                                                                                                                                     <option value="">
                                                                                                                                                                                                                                                                                                                                                         اختر القيمة
                                                                                                                                                                                                                                                                                                                                                     </option>
                                                                                                                                                                                                                                                                                                                                                 `;
 
-                        response.values.forEach(function (item) {
+                        response.values.forEach(function(item) {
 
                             let extraData = '';
 
@@ -1131,7 +1147,8 @@
                                 extraData = `data-avatar="${item.avatar ?? ''}"`;
                             }
 
-                            options += `
+                            options +=
+                                `
                                                                                                                                                                                                                                                                                                                                                         <option
                                                                                                                                                                                                                                                                                                                                                             value="${item.id}"
                                                                                                                                                                                                                                                                                                                                                             ${extraData}
@@ -1148,7 +1165,8 @@
                             'feature-item border-top py-5';
                         featureRow.dataset.featureId =
                             featureId;
-                        featureRow.innerHTML = `
+                        featureRow.innerHTML =
+                            `
                                                                                                                                                                                                                                                                                                                                                                                         <div class="row align-items-center">
                                                                                                                                                                                                                                                                                                                                                                                             <div class="col-md-2">
                                                                                                                                                                                                                                                                                                                                                                                                 <label class="form-label mb-0">
@@ -1189,7 +1207,7 @@
                             width: '100%',
                             dir: 'rtl',
                             allowClear: true,
-                            templateResult: function (state) {
+                            templateResult: function(state) {
                                 if (!state.id) {
                                     return state.text;
                                 }
@@ -1197,7 +1215,8 @@
                                 const color = option.dataset.color;
                                 const avatar = option.dataset.avatar;
                                 if (color) {
-                                    return $(`
+                                    return $(
+                                        `
                                                                                                                                                                                                                                                                                                                                                             <div
                                                                                                                                                                                                                                                                                                                                                                 style="
                                                                                                                                                                                                                                                                                                                                                                     display:flex;
@@ -1221,11 +1240,13 @@
                                                                                                                                                                                                                                                                                                                                                                     ${state.text}
                                                                                                                                                                                                                                                                                                                                                                 </span>
                                                                                                                                                                                                                                                                                                                                                             </div>
-                                                                                                                                                                                                                                                                                                                                                        `);
+                                                                                                                                                                                                                                                                                                                                                        `
+                                    );
                                 }
                                 if (avatar) {
 
-                                    return $(`
+                                    return $(
+                                        `
                                                                                                                                                                                                                                                                                                                                                             <div
                                                                                                                                                                                                                                                                                                                                                                 style="
                                                                                                                                                                                                                                                                                                                                                                     display:flex;
@@ -1247,11 +1268,12 @@
                                                                                                                                                                                                                                                                                                                                                                     ${state.text}
                                                                                                                                                                                                                                                                                                                                                                 </span>
                                                                                                                                                                                                                                                                                                                                                             </div>
-                                                                                                                                                                                                                                                                                                                                                        `);
+                                                                                                                                                                                                                                                                                                                                                        `
+                                    );
                                 }
                                 return state.text;
                             },
-                            templateSelection: function (state) {
+                            templateSelection: function(state) {
                                 if (!state.id) {
                                     return state.text;
                                 }
@@ -1259,7 +1281,8 @@
                                 const color = option.dataset.color;
                                 const avatar = option.dataset.avatar;
                                 if (color) {
-                                    return $(`
+                                    return $(
+                                        `
                                                                                                                                                                                                                                                                                                                                                             <div
                                                                                                                                                                                                                                                                                                                                                                 style="
                                                                                                                                                                                                                                                                                                                                                                     display:flex;
@@ -1282,10 +1305,12 @@
                                                                                                                                                                                                                                                                                                                                                                     ${state.text}
                                                                                                                                                                                                                                                                                                                                                                 </span>
                                                                                                                                                                                                                                                                                                                                                             </div>
-                                                                                                                                                                                                                                                                                                                                                        `);
+                                                                                                                                                                                                                                                                                                                                                        `
+                                    );
                                 }
                                 if (avatar) {
-                                    return $(`
+                                    return $(
+                                        `
                                                                                                                                                                                                                                                                                                                                                             <div
                                                                                                                                                                                                                                                                                                                                                                 style="
                                                                                                                                                                                                                                                                                                                                                                     display:flex;
@@ -1307,23 +1332,24 @@
                                                                                                                                                                                                                                                                                                                                                                     ${state.text}
                                                                                                                                                                                                                                                                                                                                                                 </span>
                                                                                                                                                                                                                                                                                                                                                             </div>
-                                                                                                                                                                                                                                                                                                                                                        `);
+                                                                                                                                                                                                                                                                                                                                                        `
+                                    );
                                 }
                                 return state.text;
                             },
-                            escapeMarkup: function (markup) {
+                            escapeMarkup: function(markup) {
                                 return markup;
                             }
                         });
                         refreshFeatureSelect();
                     },
-                    error: function (xhr) {
+                    error: function(xhr) {
                         console.log(xhr.responseText);
                         alert('حدث خطأ أثناء جلب قيم السمة');
                     }
                 });
             });
-            container.addEventListener('click', function (e) {
+            container.addEventListener('click', function(e) {
                 const button =
                     e.target.closest('.remove-feature');
                 if (!button) {
@@ -1349,7 +1375,7 @@
         });
     </script>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
 
             const featuresContainer =
                 document.getElementById('selected_features_container');
@@ -1368,12 +1394,13 @@
             ) {
                 return;
             }
+
             function refreshVariants() {
                 variantsCheckboxes.innerHTML = '';
                 const features = [];
                 featuresContainer
                     .querySelectorAll('.feature-item')
-                    .forEach(function (row) {
+                    .forEach(function(row) {
                         const select =
                             row.querySelector(
                                 '.feature-values-select'
@@ -1386,9 +1413,9 @@
                                 'label strong'
                             );
                         const featureName =
-                            featureNameElement
-                                ? featureNameElement.textContent.trim()
-                                : '';
+                            featureNameElement ?
+                            featureNameElement.textContent.trim() :
+                            '';
                         let selectedOptions = [];
                         if (select.multiple) {
                             selectedOptions =
@@ -1398,7 +1425,7 @@
                         } else {
                             const selectedOption =
                                 select.options[
-                                select.selectedIndex
+                                    select.selectedIndex
                                 ];
                             if (
                                 selectedOption &&
@@ -1413,15 +1440,12 @@
                             return;
                         }
                         const values =
-                            selectedOptions.map(function (option) {
+                            selectedOptions.map(function(option) {
                                 return {
                                     id: option.value,
-                                    name:
-                                        option.textContent.trim(),
-                                    color:
-                                        option.dataset.color || '',
-                                    avatar:
-                                        option.dataset.avatar || ''
+                                    name: option.textContent.trim(),
+                                    color: option.dataset.color || '',
+                                    avatar: option.dataset.avatar || ''
                                 };
                             });
                         features.push({
@@ -1454,7 +1478,7 @@
                 */
 
                 combinations.forEach(
-                    function (combination, index) {
+                    function(combination, index) {
 
                         const checkboxItem =
                             document.createElement('div');
@@ -1473,17 +1497,16 @@
                             combination.map(
                                 item => {
                                     return {
-                                        feature_id:
-                                            item.feature.id,
+                                        feature_id: item.feature.id,
 
-                                        value_id:
-                                            item.value.id
+                                        value_id: item.value.id
                                     };
                                 }
                             );
 
 
-                        checkboxItem.innerHTML = `
+                        checkboxItem.innerHTML =
+                            `
 
                                                                                                                                                                                                                                                                                                                     <label
                                                                                                                                                                                                                                                                                                                         class="
@@ -1561,31 +1584,31 @@
 
             function createCombinations(features) {
 
-                let result = [[]];
+                let result = [
+                    []
+                ];
 
 
                 features.forEach(
-                    function (feature) {
+                    function(feature) {
 
                         const temp = [];
 
 
                         result.forEach(
-                            function (current) {
+                            function(current) {
 
                                 feature.values.forEach(
-                                    function (value) {
+                                    function(value) {
 
                                         temp.push([
 
                                             ...current,
 
                                             {
-                                                feature:
-                                                    feature,
+                                                feature: feature,
 
-                                                value:
-                                                    value
+                                                value: value
                                             }
 
                                         ]);
@@ -1622,7 +1645,7 @@
 
 
                 combination.forEach(
-                    function (item) {
+                    function(item) {
 
                         /*
                         |--------------------------------------------------------------------------
@@ -1632,7 +1655,8 @@
 
                         if (item.value.color) {
 
-                            html += `
+                            html +=
+                                `
 
                                                                                                                                                                                                                                                                                                                         <span
                                                                                                                                                                                                                                                                                                                             title="${item.value.name}"
@@ -1660,7 +1684,8 @@
 
                         if (item.value.avatar) {
 
-                            html += `
+                            html +=
+                                `
 
                                                                                                                                                                                                                                                                                                                         <img
                                                                                                                                                                                                                                                                                                                             src="${item.value.avatar}"
@@ -1696,7 +1721,7 @@
             $(document).on(
                 'change',
                 '.feature-values-select',
-                function () {
+                function() {
 
                     refreshVariants();
 
@@ -1712,7 +1737,7 @@
 
             document.addEventListener(
                 'click',
-                function (e) {
+                function(e) {
 
                     if (
                         e.target.closest(
@@ -1721,7 +1746,7 @@
                     ) {
 
                         setTimeout(
-                            function () {
+                            function() {
 
                                 refreshVariants();
 
@@ -1746,7 +1771,7 @@
         });
     </script>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
 
             const featuresContainer =
                 document.getElementById('selected_features_container');
@@ -1813,7 +1838,7 @@
                 const availableFeatures = [];
 
 
-                featureRows.forEach(function (row) {
+                featureRows.forEach(function(row) {
 
                     const featureId =
                         String(row.dataset.featureId);
@@ -1826,9 +1851,9 @@
 
 
                     const featureName =
-                        nameElement
-                            ? nameElement.textContent.trim()
-                            : '';
+                        nameElement ?
+                        nameElement.textContent.trim() :
+                        '';
 
 
                     const select =
@@ -1843,7 +1868,7 @@
                     const selectedOptions =
                         Array.from(
                             select.selectedOptions
-                        ).filter(function (option) {
+                        ).filter(function(option) {
 
                             return option.value !== '';
 
@@ -1856,23 +1881,19 @@
 
                     const values =
                         selectedOptions.map(
-                            function (option) {
+                            function(option) {
 
                                 return {
 
-                                    id:
-                                        String(
-                                            option.value
-                                        ),
+                                    id: String(
+                                        option.value
+                                    ),
 
-                                    name:
-                                        option.textContent.trim(),
+                                    name: option.textContent.trim(),
 
-                                    color:
-                                        option.dataset.color || '',
+                                    color: option.dataset.color || '',
 
-                                    avatar:
-                                        option.dataset.avatar || ''
+                                    avatar: option.dataset.avatar || ''
 
                                 };
 
@@ -1882,14 +1903,11 @@
 
                     availableFeatures.push({
 
-                        id:
-                            featureId,
+                        id: featureId,
 
-                        name:
-                            featureName,
+                        name: featureName,
 
-                        values:
-                            values
+                        values: values
 
                     });
 
@@ -1913,10 +1931,10 @@
 
                 enabledFeatures =
                     enabledFeatures.filter(
-                        function (id) {
+                        function(id) {
 
                             return availableFeatures.some(
-                                function (feature) {
+                                function(feature) {
 
                                     return String(
                                         feature.id
@@ -1929,7 +1947,7 @@
                     );
 
                 availableFeatures.forEach(
-                    function (feature) {
+                    function(feature) {
 
                         const wrapper =
                             document.createElement('div');
@@ -1945,7 +1963,8 @@
                             );
 
 
-                        wrapper.innerHTML = `
+                        wrapper.innerHTML =
+                            `
 
                                                                                                                                                                                                                                                                         <input
                                                                                                                                                                                                                                                                             class="
@@ -1986,7 +2005,7 @@
             }
             variantsCheckboxes.addEventListener(
                 'change',
-                function (e) {
+                function(e) {
 
                     if (
                         !e.target.classList.contains(
@@ -2019,7 +2038,7 @@
 
                         enabledFeatures =
                             enabledFeatures.filter(
-                                function (id) {
+                                function(id) {
 
                                     return String(id) !==
                                         featureId;
@@ -2054,7 +2073,7 @@
                 }
                 const selectedFeatures =
                     availableFeatures.filter(
-                        function (feature) {
+                        function(feature) {
 
                             return enabledFeatures.includes(
                                 String(feature.id)
@@ -2076,7 +2095,7 @@
 
 
                 combinations.forEach(
-                    function (
+                    function(
                         combination,
                         index
                     ) {
@@ -2091,26 +2110,29 @@
                 );
 
             }
+
             function createCombinations(
                 features
             ) {
 
-                let result = [[]];
+                let result = [
+                    []
+                ];
 
 
                 features.forEach(
-                    function (feature) {
+                    function(feature) {
 
                         const temp = [];
 
 
                         result.forEach(
-                            function (
+                            function(
                                 currentCombination
                             ) {
 
                                 feature.values.forEach(
-                                    function (value) {
+                                    function(value) {
 
                                         temp.push([
 
@@ -2118,11 +2140,9 @@
 
                                             {
 
-                                                feature:
-                                                    feature,
+                                                feature: feature,
 
-                                                value:
-                                                    value
+                                                value: value
 
                                             }
 
@@ -2144,13 +2164,14 @@
                 return result;
 
             }
+
             function getVariantKey(
                 combination
             ) {
 
                 return combination
                     .map(
-                        function (item) {
+                        function(item) {
 
                             return (
                                 item.feature.id +
@@ -2164,6 +2185,7 @@
                     .join('|');
 
             }
+
             function createVariantCard(
                 combination,
                 index,
@@ -2178,22 +2200,20 @@
 
                 const title =
                     combination
-                        .map(
-                            function (item) {
+                    .map(
+                        function(item) {
 
-                                return item.value.name;
+                            return item.value.name;
 
-                            }
-                        )
-                        .join(' - ');
+                        }
+                    )
+                    .join(' - ');
                 const valuesData =
                     combination.map(
-                        function (item) {
+                        function(item) {
                             return {
-                                feature_id:
-                                    item.feature.id,
-                                value_id:
-                                    item.value.id
+                                feature_id: item.feature.id,
+                                value_id: item.value.id
                             };
                         }
                     );
@@ -2205,7 +2225,8 @@
                     'variant-card mb-5';
                 card.dataset.variantKey =
                     key;
-                card.innerHTML = `
+                card.innerHTML =
+                    `
 
                                                                                                                                                                                                                                                                 <!-- ========================================================= -->
                                                                                                                                                                                                                                                                 <!-- Header -->
@@ -2419,17 +2440,19 @@
                     card
                 );
             }
+
             function createHiddenFeatureValues(
                 combination,
                 variantIndex
             ) {
                 let html = '';
                 combination.forEach(
-                    function (
+                    function(
                         item,
                         featureIndex
                     ) {
-                        html += `
+                        html +=
+                            `
                                                                                                                                                                                                                                                                         <input
                                                                                                                                                                                                                                                                             type="hidden"
                                                                                                                                                                                                                                                                             name="
@@ -2457,14 +2480,16 @@
                 );
                 return html;
             }
+
             function createVariantPreview(
                 combination
             ) {
                 let html = '';
                 combination.forEach(
-                    function (item) {
+                    function(item) {
                         if (item.value.color) {
-                            html += `
+                            html +=
+                                `
                                                                                                                                                                                                                                                                             <span
                                                                                                                                                                                                                                                                                 title="${item.value.name}"
                                                                                                                                                                                                                                                                                 style="
@@ -2480,7 +2505,8 @@
                                                                                                                                                                                                                                                                         `;
                         }
                         if (item.value.avatar) {
-                            html += `
+                            html +=
+                                `
                                                                                                                                                                                                                                                                             <img
                                                                                                                                                                                                                                                                                 src="{{ asset('img/${item.value.avatar}') }}"
                                                                                                                                                                                                                                                                                 title="${item.value.name}"
@@ -2503,7 +2529,7 @@
             }
             variantsContainer.addEventListener(
                 'click',
-                function (e) {
+                function(e) {
                     const header =
                         e.target.closest(
                             '.variant-header'
@@ -2541,8 +2567,7 @@
                         }
                         header.style.borderRadius =
                             '6px 6px 0 0';
-                    }
-                    else {
+                    } else {
                         body.style.display =
                             'none';
                         if (arrow) {
@@ -2554,6 +2579,7 @@
                     }
                 }
             );
+
             function collectExistingVariantValues() {
                 const data = {};
                 variantsContainer
@@ -2561,7 +2587,7 @@
                         '.variant-card'
                     )
                     .forEach(
-                        function (card) {
+                        function(card) {
                             const key =
                                 card.dataset.variantKey;
                             if (!key) {
@@ -2573,7 +2599,7 @@
                                     'input, select, textarea'
                                 )
                                 .forEach(
-                                    function (field) {
+                                    function(field) {
                                         const name =
                                             field.name;
                                         if (!name) {
@@ -2596,6 +2622,7 @@
                     );
                 return data;
             }
+
             function escapeValue(value) {
                 if (
                     value === undefined ||
@@ -2612,33 +2639,32 @@
             $(document).on(
                 'change',
                 '.feature-values-select',
-                function () {
+                function() {
                     refreshFeatureCheckboxes();
                 }
             );
             const observer =
                 new MutationObserver(
-                    function () {
+                    function() {
                         refreshFeatureCheckboxes();
                     }
                 );
             observer.observe(
-                featuresContainer,
-                {
+                featuresContainer, {
                     childList: true,
                     subtree: false
                 }
             );
             document.addEventListener(
                 'click',
-                function (e) {
+                function(e) {
                     if (
                         e.target.closest(
                             '.remove-feature'
                         )
                     ) {
                         setTimeout(
-                            function () {
+                            function() {
                                 refreshFeatureCheckboxes();
                             },
                             100
