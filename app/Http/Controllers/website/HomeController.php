@@ -5,6 +5,7 @@ namespace App\Http\Controllers\website;
 use App\Http\Controllers\Controller;
 use App\Models\category;
 use App\Models\feature;
+use App\Models\intro;
 use App\Models\product;
 use App\Models\role;
 use App\Models\User;
@@ -28,6 +29,7 @@ class HomeController extends Controller
         $data['all_users'] = User::where('role_id', role::RoleName['User'])->get();
         $data['all_merchants'] = User::where('role_id', role::RoleName['Merchant'])->get();
         $data['all_categories'] = category::all();
+        $data['intros'] = intro::all();
 
         return view('website.index', $data);
     }

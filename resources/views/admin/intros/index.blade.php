@@ -1,7 +1,7 @@
-@extends("admin.layout._layout")
+@extends('admin.layout._layout')
 @section('title', 'ايدي ستور')
 @section('breadcrumb')
-    <h1 class="d-flex text-dark fw-bolder fs-3 align-items-center my-1">{{__('app.' . $title)}}</h1>
+    <h1 class="d-flex text-dark fw-bolder fs-3 align-items-center my-1">{{ __('app.' . $title) }}</h1>
     <!--end::Title-->
     <!--begin::Separator-->
     <span class="h-20px border-gray-300 border-start mx-4"></span>
@@ -10,7 +10,7 @@
     <ul class="breadcrumb breadcrumb-separatorless fw-bold fs-7 my-1">
         <!--begin::Item-->
         <li class="breadcrumb-item text-muted">
-            <a href="{{route('admin.Dashboard.index')}}" class="text-muted text-hover-primary">{{__('app.Dashboard')}}</a>
+            <a href="{{ route('admin.Dashboard.index') }}" class="text-muted text-hover-primary">{{ __('app.Dashboard') }}</a>
         </li>
         <!--end::Item-->
         <!--begin::Item-->
@@ -19,19 +19,10 @@
         </li>
         <!--end::Item-->
         <!--begin::Item-->
-        <li class="breadcrumb-item text-muted">{{__('app.' . $title)}}</li>
-        <!--end::Item-->
-        <!--begin::Item-->
-        <li class="breadcrumb-item">
-            <span class="bullet bg-gray-300 w-5px h-2px"></span>
-        </li>
-        <!--end::Item-->
-        <!--begin::Item-->
-        <li class="breadcrumb-item text-dark">تصنيفاتي</li>
-        <!--end::Item-->
+        <li class="breadcrumb-item text-dark">{{ __('app.' . $title) }}</li>
     </ul>
 @endsection
-@section("body")
+@section('body')
     <div class="card">
         <!--begin::Card header-->
         <div class="card-header border-0 pt-6">
@@ -41,7 +32,8 @@
                 <div class="d-flex align-items-center position-relative my-1">
                     <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
                     <span class="svg-icon svg-icon-1 position-absolute ms-6">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                            fill="none">
                             <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1"
                                 transform="rotate(45 17.0365 15.1223)" fill="currentColor" />
                             <path
@@ -51,7 +43,7 @@
                     </span>
                     <!--end::Svg Icon-->
                     <input type="text" data-kt-user-table-filter="search"
-                        class="form-control form-control-solid w-250px ps-14" placeholder="البحث عن تصنيف" />
+                        class="form-control form-control-solid w-250px ps-14" placeholder="البحث عن مقدمات" />
                 </div>
                 <!--end::Search-->
             </div>
@@ -65,10 +57,12 @@
                         data-bs-target="#kt_modal_add_user">
                         <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
                         <span class="svg-icon svg-icon-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none">
                                 <rect opacity="0.5" x="11.364" y="20.364" width="16" height="2" rx="1"
                                     transform="rotate(-90 11.364 20.364)" fill="currentColor" />
-                                <rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="currentColor" />
+                                <rect x="4.36396" y="11.364" width="16" height="2" rx="1"
+                                    fill="currentColor" />
                             </svg>
                         </span>
                         إضافة
@@ -105,10 +99,10 @@
                                     id="btnClose">
                                     <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
                                     <span class="svg-icon svg-icon-1">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                            fill="none">
-                                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1"
-                                                transform="rotate(-45 6 17.3137)" fill="currentColor" />
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none">
+                                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2"
+                                                rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
                                             <rect x="7.41422" y="6" width="16" height="2" rx="1"
                                                 transform="rotate(45 7.41422 6)" fill="currentColor" />
                                         </svg>
@@ -121,7 +115,8 @@
                             <!--begin::Modal body-->
                             <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
                                 <!--begin::Form-->
-                                <form id="kt_modal_add_category" method="post" action="#" enctype="multipart/form-data">
+                                <form id="kt_modal_add_category" method="post" action="#"
+                                    enctype="multipart/form-data">
                                     @csrf
                                     <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_category_scroll"
                                         data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}"
@@ -192,11 +187,11 @@
                         <!--begin::Table body-->
                         <tbody class="text-gray-600 fw-bold">
                             <!--begin::Table row-->
-                            @foreach($records as $key => $record)
+                            @foreach ($records as $key => $record)
                                 <tr>
                                     <!--begin::Checkbox-->
                                     <td>
-                                        {{($key + 1)}}
+                                        {{ $key + 1 }}
                                     </td>
                                     <!--end::Checkbox-->
                                     <!--begin::User=-->
@@ -205,7 +200,7 @@
                                         <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
                                             <a href="">
                                                 <div class="symbol-label">
-                                                    <img src="{{asset('img/' . $record->category->photo_cover)}}"
+                                                    <img src="{{ asset('img/' . $record->category->photo_cover) }}"
                                                         alt="Emma Smith" class="w-100" />
                                                 </div>
                                             </a>
@@ -214,15 +209,13 @@
                                         <!--begin::User details-->
                                         <div class="d-flex flex-column">
                                             <a href=""
-                                                class="text-gray-800 text-hover-primary mb-1">{{$record->category->category_name}}</a>
+                                                class="text-gray-800 text-hover-primary mb-1">{{ $record->category->category_name }}</a>
                                         </div>
                                         <!--begin::User details-->
                                     </td>
-                                    <!--end::User=-->
-                                    <td></td>
-                                    <!--end::Two step=-->
+                                    <td>{{ $record->category->description }}</td>
                                     <!--begin::Joined-->
-                                    <td>{{$record->created_at->translatedFormat('d/m/Y H:i')}}</td>
+                                    <td>{{ $record->created_at->translatedFormat('d/m/Y H:i') }}</td>
                                     <!--begin::Joined-->
                                     <!--begin::Action=-->
                                     <td class="text-end">
@@ -243,7 +236,7 @@
                                             data-kt-menu="true">
                                             <!--begin::Menu item-->
                                             <div class="menu-item px-3">
-                                                <a href="{{route('admin.Categories.edit', $record->category->id)}}"
+                                                <a href="{{ route('admin.Categories.edit', $record->category->id) }}"
                                                     class="menu-link px-3">تعديل</a>
                                             </div>
                                             <!--end::Menu item-->
@@ -287,7 +280,7 @@
 @endsection
 @section('script')
     <script>
-        $(document).on('submit', '#kt_modal_add_category', function (e) {
+        $(document).on('submit', '#kt_modal_add_category', function(e) {
 
             e.preventDefault();
             e.stopPropagation();
@@ -296,19 +289,20 @@
 
             jQuery.ajax({
                 type: "POST",
-                url: "{{\Illuminate\Support\Facades\URL::to('admin/intros/store')}}",
+                url: "{{ \Illuminate\Support\Facades\URL::to('admin/intros/store') }}",
                 data: formData,
                 processData: false,
                 contentType: false,
-                headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-                success: function (data, status, xhr) {
-                    if (data.status === 'error') {
-                    } else {
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(data, status, xhr) {
+                    if (data.status === 'error') {} else {
                         $('#kt_modal_add_category')[0].reset();
                     }
                     console.log(status);
                 },
-                error: function (xhr, status, error) {
+                error: function(xhr, status, error) {
                     console.log(error);
                     console.log(xhr.responseText);
                     console.log("error");
@@ -316,16 +310,20 @@
             })
         });
 
-        $('#btnClose').on('click', function () {
+        $('#btnClose').on('click', function() {
             var modal = bootstrap.Modal.getInstance(document.getElementById('kt_modal_add_user'));
             modal.hide();
-            $('#kt_modal_add_user').hide().removeClass('show').removeAttr('role').removeAttr('aria-modal').attr('aria-hidden', 'true').modal('hide');
+            $('#kt_modal_add_user').hide().removeClass('show').removeAttr('role').removeAttr('aria-modal').attr(
+                'aria-hidden', 'true').modal('hide');
             $('.modal-backdrop').remove();
-            $('body').removeClass('modal-open').css({ 'overflow': '', 'padding': '' });
+            $('body').removeClass('modal-open').css({
+                'overflow': '',
+                'padding': ''
+            });
 
         });
 
-        $('#kt_modal_add_user').on('click', function () {
+        $('#kt_modal_add_user').on('click', function() {
             $('.modal-backdrop').addClass('show');
         });
     </script>
