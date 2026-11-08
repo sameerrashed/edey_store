@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name', 255);
             $table->string('color', 255);
             $table->enum('status', ['0', '1'])->default('0');
+            $table->foreignId('store_id')->nullable()->constrained('stores')->onDelete('cascade');
             $table->timestamps();
         });
     }

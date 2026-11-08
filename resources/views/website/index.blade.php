@@ -47,8 +47,8 @@
                 <div class="sec_services">
                     @include('website.partial.sections.features_section')
                 </div>
-                @foreach($product_category as $category)
-                    @if($category->products->count() > 0)
+                @foreach ($product_category as $category)
+                    @if ($category->products->count() > 0)
                         <div class="sec_block_products">
                             <div class="container">
                                 <div class="head_sec_pro d-flex align-items-center clearfix wow fadeInUp"
@@ -57,13 +57,14 @@
                                 </div>
                                 <div class="sc_warpper wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="0.2s">
                                     <div class="owl-carousel dots_owl owl_products">
-                                        @foreach($category->products as $record)
+                                        @foreach ($category->products as $record)
                                             <div class="item">
                                                 <div class="product_item">
                                                     <div class="cn_product_thumb">
                                                         <a href="{{ route('product.details', $record->id) }}"
                                                             class="thumb_pro img-hover">
-                                                            <img src="{{ asset('img/' . $record->avatar) }}" alt=""
+                                                            <img src="{{ asset('img/' . $record->avatar) }}"
+                                                                alt=""
                                                                 style="width: 220px;height: 220px;object-fit: cover;">
                                                         </a>
                                                         <div class="label_pro">50%</div>
@@ -71,13 +72,13 @@
                                                     <div class="cn_product_txt">
                                                         <h2><a href="#">{{ $record->product_name }}</a></h2>
                                                         <div class="seller_info">
-                                                            <img src="{{asset('img/' . $record->user->image)  }}" alt="...">
+                                                            <img src="{{ asset('img/' . $record->user->image) }}"
+                                                                alt="...">
                                                             <span
-                                                                class="seller_name">{{ $record->user->first_name . ' ' . $record->user->first_name}}</span>
+                                                                class="seller_name">{{ $record->user->first_name . ' ' . $record->user->first_name }}</span>
                                                         </div>
                                                         <div class="d-flex justify-content-between">
                                                             <div class="pro_evaluate">
-
                                                                 <i class="fas fa-star checked"></i>
                                                                 <p class="ev_rate">4.7</p>
                                                             </div>
@@ -87,7 +88,8 @@
                                                                         <p><span>{{ $record->price }}</span>ر.س</p>
                                                                     </div>
                                                                     <div class="sale_new">
-                                                                        <p><span>{{ $record->price_after }}</span>ر.س</p>
+                                                                        <p><span>{{ $record->price_after }}</span>ر.س
+                                                                        </p>
                                                                     </div>
                                                                 @else
                                                                     <div class="sale_new">
@@ -105,24 +107,24 @@
                                 </div>
                     @endif
                 @endforeach
-                    </div>
-                </div>
             </div>
         </div>
-        <div class="special_products">
-            @include('website.partial.sections.special_products_section')
-        </div>
-        <div class="sec_statistic">
-            @include('website.partial.sections.statistic_section')
-        </div>
+    </div>
+    </div>
+    <div class="special_products">
+        @include('website.partial.sections.special_products_section')
+    </div>
+    <div class="sec_statistic">
+        @include('website.partial.sections.statistic_section')
+    </div>
 
-        <div class="subscribe">
-            @include('website.partial.sections.subscribe_section')
-        </div>
+    <div class="subscribe">
+        @include('website.partial.sections.subscribe_section')
+    </div>
 
-        <footer>
-            @include('website.partial.footer')
-        </footer>
+    <footer>
+        @include('website.partial.footer')
+    </footer>
 
     </div>
 
@@ -131,14 +133,14 @@
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+    </script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
-    <script src="{{asset('js/owl.carousel.min.js')}}"></script>
-    <script src="{{asset('js/wow.min.js')}}"></script>
-    <script src="{{asset('js/script.js')}}"></script>
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    </script>
+    <script src="{{ asset('js/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('js/wow.min.js') }}"></script>
+    <script src="{{ asset('js/script.js') }}"></script>
 </body>
 
 </html>

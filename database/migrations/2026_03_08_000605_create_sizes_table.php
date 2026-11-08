@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('sizes', function (Blueprint $table) {
             $table->id()->unsigned();
             $table->string('name');
+            $table->foreignId('store_id')->nullable()->constrained('stores')->onDelete('cascade');
             $table->timestamps();
         });
     }
